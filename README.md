@@ -1,50 +1,58 @@
-# Welcome to your Expo app 👋
+# Nigel Financial Literacy Frontend
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+This repository contains the official frontend application for **Nigel Financial Literacy**, a ring-fenced educational mobile app designed for UK secondary school students (ages 11–16) to learn practical money skills in a safe, engaging, and gamified way.
 
-## Get started
+The app is built with **React Native + Expo** and styled using **NativeWind (Tailwind CSS)**, delivering a modern, accessible, and mobile-first experience that aligns with the 2028 UK curriculum readiness goals.
 
-1. Install dependencies
+## Implemented Features
+
+- **Role-based Entry**: Student and Teacher paths with secure onboarding
+- **Personalized Onboarding**: Name, year group, emotional worries survey, learning style selection
+- **Gamified Learning Journey**: Island-based map with progressive unlocks, interactive lessons, quizzes, and badges
+- **Payslip Simulator (Core MVP)**: Realistic job selection, payslip breakdown, budget builder, random "Real Life Happens" events, and 3-month results with compound interest teaser
+- **Progress & Achievements**: Skills tree, streak tracking, activity calendar, badge gallery
+- **Teacher Dashboard**: Class overview, anonymized student progress, export reports
+- **Parent Engagement**: "Family Money Talks" – non-shameful conversation starters with shareable packs
+- **Accessibility & Inclusivity**: Dark mode, dyslexia-friendly font, high contrast, large touch targets, WCAG AA compliance
+- **Additional Tools**: Daily money tips, scam awareness database, debt & credit basics education
+
+## Tech Stack
+
+This project is built using the following technologies:
+
+- **Framework**: React Native with Expo SDK
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS via NativeWind
+- **Navigation**: React Navigation (Stack + Bottom Tabs)
+- **State Management**: Context API
+- **Form Validation**: Zod + React Hook Form
+- **Icons**: lucide-react-native
+- **Animations**: Framer Motion / Reanimated
+- **Charts**: react-native-chart-kit
+- **Haptics**: expo-haptics
+- **Utilities**: expo-linear-gradient
+
+## Project Structure
+
+The project follows a clean, scalable structure:
+
+- `app/` – Expo Router screens and navigation logic (if using Expo Router)
+- `src/`
+  - `assets/` – images, fonts, icons, animations
+  - `components/` – reusable UI (atoms, molecules, organisms)
+  - `navigation/` – AppNavigator, screen types
+  - `screens/` – all feature screens (onboarding, dashboard, simulator, etc.)
+  - `features/` – domain logic slices (auth, progress, simulator, etc.)
+  - `hooks/` – custom hooks (useTheme, useProgress, etc.)
+  - `store/` – Zustand global state stores
+  - `lib/` – constants, theme, utils
+  - `types/` – shared TypeScript types
+
+## Installation
+
+Follow these steps to get the project running locally.
+
+1. Clone the repository
 
    ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+   git clone https://github.com/danielsauuce/nigel-financial-literacy-frontend
