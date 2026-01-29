@@ -1,5 +1,5 @@
-import { Text, View } from "react-native";
-import "../global.css"
+import { Text, View } from 'react-native';
+import '../global.css';
 
 export default function Index() {
   return (
@@ -7,5 +7,4 @@ export default function Index() {
       <Text className="text-black bg-white text-lg">Edit app/index.tsx to edit this screen.</Text>
     </View>
   );
-  
 }
