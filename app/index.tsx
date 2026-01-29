@@ -1,10 +1,9 @@
-import { Text, View } from 'react-native';
-import '../global.css';
+import { View, Text } from 'react-native';
 
-export default function Index() {
+export default function Home() {
   return (
-    <View className="bg-blue-300 flex-1 justify-center items-center">
-      <Text className="text-black bg-white text-lg">Edit app/index.tsx to edit this screen.</Text>
+    <View className="flex-1 items-center justify-center bg-blue-500">
+      <Text className="text-4xl font-bold text-white">No more red</Text>
     </View>
   );
 }
