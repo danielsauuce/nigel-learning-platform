@@ -14,8 +14,8 @@ export default function SplashPage() {
   useEffect(() => {
     const iconTimer = setTimeout(() => setShowFinalIcon(true), 1000);
     const navTimer = setTimeout(() => {
-      router.replace('/(auth)/role-selection');
-    }, 50000);
+      router.replace('/(auth)/welcome');
+    }, 2500);
 
     return () => {
       clearTimeout(iconTimer);
