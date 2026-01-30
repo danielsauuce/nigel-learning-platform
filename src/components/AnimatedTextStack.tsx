@@ -17,7 +17,7 @@ export function AnimatedTextStack({ items }: AnimatedTextStackProps) {
       {items.map((item, index) => (
         <Animated.Text
           key={`${item.text}-${index}`}
-          entering={FadeInUp.duration(500).delay(item.delay)} // y: 20 offset animation
+          entering={FadeInUp.duration(500).delay(item.delay)}
           className={item.className}
         >
           {item.text}

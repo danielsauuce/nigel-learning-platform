@@ -16,7 +16,7 @@ export default function SplashPage() {
     const iconTimer = setTimeout(() => setShowFinalIcon(true), 1000);
     const navTimer = setTimeout(() => {
       router.replace('/(auth)/welcome');
-    }, 50000);
+    }, 3000);
 
     return () => {
       clearTimeout(iconTimer);

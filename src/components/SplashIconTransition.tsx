@@ -1,12 +1,6 @@
-import { View, Text } from 'react-native';
-import Animated, {
-  FadeIn,
-  FadeOut,
-  useAnimatedStyle,
-  withTiming,
-  withDelay,
-} from 'react-native-reanimated';
-import { ReactNode, useEffect } from 'react';
+import { View } from 'react-native';
+import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
+import { ReactNode } from 'react';
 import { StyleSheet } from 'react-native';
 
 interface SplashIconTransitionProps {
