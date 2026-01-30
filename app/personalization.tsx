@@ -5,7 +5,7 @@ import Animated, { FadeInDown } from 'react-native-reanimated';
 import { ArrowLeft, User } from 'lucide-react-native';
 import { IconButton } from '@/src/components/IconButton';
 import { YearGroupCard } from '@/src/components/YearGroupCard';
-import { OnboardingProgress } from '@/src/components/OnboardingProgress';
+import { OnboardingProgress } from '@/src/components/ProgressBar.tsx';
 import { InputField } from '@/src/components/InputField';
 
 const yearGroups = [

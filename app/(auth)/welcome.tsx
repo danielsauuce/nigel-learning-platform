@@ -2,7 +2,7 @@ import { ScrollView, TouchableOpacity, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { GraduationCap, TrendingUp, PoundSterling, ChevronRight } from 'lucide-react-native';
 import { useRouter } from 'expo-router';
-import { WelcomeHeader } from '@/src/components/WelcomeHeader';
+import { WelcomeHeader } from '@/src/components/Header';
 import { StatsCarousel } from '@/src/components/StatsCarousel';
 import { IconButton } from '@/src/components/IconButton';
 
