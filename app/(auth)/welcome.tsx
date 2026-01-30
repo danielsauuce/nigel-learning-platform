@@ -2,7 +2,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { GraduationCap, TrendingUp, PoundSterling, ChevronRight } from 'lucide-react-native';
 import { useRouter } from 'expo-router';
-import { WelcomeHeader } from '@/src/components/Header';
+import { Header } from '@/src/components/Header';
 import { StatsCarousel } from '@/src/components/StatsCarousel';
 import { IconButton } from '@/src/components/IconButton';
 
@@ -41,7 +41,7 @@ export default function WelcomePage() {
         <Text className="text-xl text-muted-foreground font-medium no-underline">Skip</Text>
       </TouchableOpacity>
 
-      <WelcomeHeader />
+      <Header />
 
       <StatsCarousel stats={stats} />
 

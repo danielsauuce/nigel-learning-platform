@@ -5,8 +5,9 @@ import Animated, { FadeInDown } from 'react-native-reanimated';
 import { ArrowLeft, User } from 'lucide-react-native';
 import { IconButton } from '@/src/components/IconButton';
 import { YearGroupCard } from '@/src/components/YearGroupCard';
-import { OnboardingProgress } from '@/src/components/ProgressBar.tsx';
+import { ProgressBar } from '@/src/components/ProgressBar.tsx';
 import { InputField } from '@/src/components/InputField';
+import { useRouter } from 'expo-router';
 
 const yearGroups = [
   { year: 'Year 7', age: 'Age 11-12', icon: '🌱' },
@@ -21,6 +22,8 @@ export default function PersonalizationScreen() {
   const [yearGroup, setYearGroup] = useState('');
   const [screen, setScreen] = useState(1);
 
+  const router = useRouter();
+
   // the button is diable if the input field is empty
   const canContinue = name.trim().length > 0 && yearGroup !== '';
 
@@ -34,7 +37,7 @@ export default function PersonalizationScreen() {
             icon={<ArrowLeft size={24} />}
           />
 
-          <OnboardingProgress step={1} total={3} />
+          <ProgressBar step={1} total={3} />
         </View>
 
         <ScrollView showsVerticalScrollIndicator={false}>
@@ -82,7 +85,7 @@ export default function PersonalizationScreen() {
 
         <Animated.View entering={FadeInDown.duration(700).delay(400)} className="mt-auto pt-8">
           <IconButton
-            onPress={canContinue ? () => setScreen(3) : undefined}
+            onPress={canContinue ? () => router.push('/worries') : undefined}
             accessibilityLabel="Continue"
             positionClassName={`w-full h-14 rounded-2xl items-center justify-center ${
               canContinue ? 'bg-primary' : 'bg-primary/50'

@@ -30,7 +30,7 @@ export function Card({
     <Container
       {...(onPress && { onPress, activeOpacity: 0.85 })}
       className={`
-        w-full rounded-2xl border p-6 flex-row gap-4
+        w-full rounded-2xl border p-6 flex-row gap-4 mb-4
         ${
           variant === 'selectable'
             ? selected

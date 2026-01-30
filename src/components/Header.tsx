@@ -41,7 +41,7 @@ const messages = [
   },
 ];
 
-export function WelcomeHeader({
+export function Header({
   title = 'Welcome to Nigel 👋',
   messages = defaultMessages,
 }: WelcomeHeaderProps) {

@@ -12,7 +12,7 @@ interface OnboardingProgressProps {
   total: number;
 }
 
-export function OnboardingProgress({ step, total }: OnboardingProgressProps) {
+export function ProgressBar({ step, total }: OnboardingProgressProps) {
   const progress = useSharedValue(step / total);
 
   useEffect(() => {
