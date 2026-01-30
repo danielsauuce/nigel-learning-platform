@@ -1,4 +1,4 @@
-import { ScrollView, TouchableOpacity, Text, View } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { GraduationCap, TrendingUp, PoundSterling, ChevronRight } from 'lucide-react-native';
 import { useRouter } from 'expo-router';
@@ -31,27 +31,24 @@ export default function WelcomePage() {
   const router = useRouter();
 
   return (
-    <SafeAreaView className="flex-1 bg-background">
-      <ScrollView
-        contentContainerStyle={{ flexGrow: 1, paddingHorizontal: 24, paddingBottom: 40 }}
-        showsVerticalScrollIndicator={false}
+    <SafeAreaView className="flex-1 bg-background px-6 pb-6">
+      <TouchableOpacity
+        onPress={() => router.push('/personalization')}
+        className="self-end mb-8"
+        accessibilityLabel="Skip introduction"
+        accessibilityHint="Proceed directly to personalization"
       >
-        <TouchableOpacity
-          onPress={() => router.push('/personalization')}
-          className="self-end mb-8"
-          accessibilityLabel="Skip introduction"
-          accessibilityHint="Proceed directly to personalization"
-        >
-          <Text className="text-xl text-muted-foreground font-medium no-underline">Skip</Text>
-        </TouchableOpacity>
+        <Text className="text-xl text-muted-foreground font-medium no-underline">Skip</Text>
+      </TouchableOpacity>
 
-        <WelcomeHeader />
+      <WelcomeHeader />
 
-        <StatsCarousel stats={stats} />
+      <StatsCarousel stats={stats} />
 
+      <View className="mt-auto">
         <IconButton
           onPress={() => router.push('/personalization')}
-          positionClassName="mt-auto bg-primary rounded-2xl py-5 px-8 items-center justify-center shadow-2xl"
+          positionClassName="bg-primary rounded-2xl py-5 px-8 items-center justify-center shadow-2xl"
           accessibilityLabel="Start using Nigel"
           icon={
             <View className="flex-row items-center">
@@ -60,7 +57,7 @@ export default function WelcomePage() {
             </View>
           }
         />
-      </ScrollView>
+      </View>
     </SafeAreaView>
   );
 }
