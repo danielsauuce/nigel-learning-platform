@@ -18,7 +18,8 @@ export function IconButton({
     <TouchableOpacity
       onPress={onPress}
       accessibilityLabel={accessibilityLabel}
-      className={`p-3 rounded-full hover:bg-secondary active:bg-secondary/80 transition-colors ${positionClassName ?? ''}`}
+      activeOpacity={0.4}
+      className={`p-3 rounded-full ${positionClassName ?? ''}`}
     >
       <View>{icon}</View>
     </TouchableOpacity>

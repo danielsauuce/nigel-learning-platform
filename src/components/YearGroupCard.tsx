@@ -14,27 +14,33 @@ export function YearGroupCard({ year, age, icon, isSelected, onSelect }: YearGro
   return (
     <TouchableOpacity
       onPress={onSelect}
-      activeOpacity={0.8}
-      className={`flex-1 p-5 rounded-2xl border-2 transition-all ${
-        isSelected
-          ? 'border-primary bg-primary/10'
-          : 'border-border bg-card hover:border-primary/50'
-      }`}
+      activeOpacity={0.85}
+      className={`
+        w-full aspect-[4/3] max-w-[160px] rounded-2xl border-2 p-5 relative
+        bg-card shadow-sm
+        ${isSelected ? 'border-primary bg-primary/5' : 'border-border'}
+      `}
       accessibilityLabel={`Select ${year}`}
+      accessibilityRole="button"
+      accessibilityState={{ selected: isSelected }}
     >
-      <Animated.View entering={FadeInDown.duration(500)}>
-        <View className="flex-row items-center justify-between mb-3">
-          <Text className="text-4xl">{icon}</Text>
-          {isSelected && (
-            <View className="w-7 h-7 rounded-full bg-primary items-center justify-center">
-              <Check size={18} color="#FFFFFF" />
-            </View>
-          )}
-        </View>
+      <Animated.View
+        entering={FadeInDown.duration(500)}
+        className="flex-1 justify-between items-center"
+      >
+        <Text className="text-5xl mb-4">{icon}</Text>
 
-        <Text className="text-lg font-semibold text-foreground">{year}</Text>
-        <Text className="text-sm text-muted-foreground">{age}</Text>
+        <View className="items-center">
+          <Text className="text-xl font-bold text-foreground">{year}</Text>
+          <Text className="text-sm text-muted-foreground mt-1">{age}</Text>
+        </View>
       </Animated.View>
+
+      {isSelected && (
+        <View className="absolute top-3 right-3 w-8 h-8 rounded-full bg-primary items-center justify-center shadow-md">
+          <Check size={20} color="#FFFFFF" />
+        </View>
+      )}
     </TouchableOpacity>
   );
 }
