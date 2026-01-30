@@ -6,6 +6,7 @@ import { SplashIconTransition } from '@/src/components/SplashIconTransition';
 import { SplashVersion } from '@/src/components/SplashVersion';
 import { IconButton } from '@/src/components/IconButton';
 import { AnimatedTextStack } from '@/src/components/AnimatedTextStack';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function SplashPage() {
   const router = useRouter();
@@ -15,7 +16,7 @@ export default function SplashPage() {
     const iconTimer = setTimeout(() => setShowFinalIcon(true), 1000);
     const navTimer = setTimeout(() => {
       router.replace('/(auth)/welcome');
-    }, 2500);
+    }, 50000);
 
     return () => {
       clearTimeout(iconTimer);
@@ -24,7 +25,7 @@ export default function SplashPage() {
   }, []);
 
   return (
-    <View className="flex-1 bg-[#F8F9FA]">
+    <SafeAreaView className="flex-1 bg-[#F8F9FA]">
       <View className="flex-1 items-center justify-center px-6">
         <IconButton
           icon={<Accessibility size={24} color="rgb(161, 161, 170)" />}
@@ -59,6 +60,6 @@ export default function SplashPage() {
 
         <SplashVersion label="v1.0" />
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
