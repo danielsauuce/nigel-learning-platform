@@ -1,4 +1,5 @@
-import { View, TouchableOpacity, Text } from 'react-native';
+import { ScrollView, TouchableOpacity, Text, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { WelcomeHeader } from '@/src/components/WelcomeHeader';
 import { StatsCarousel } from '@/src/components/StatsCarousel';
 import { IconButton } from '@/src/components/IconButton';
@@ -30,31 +31,36 @@ export default function WelcomePage() {
   const router = useRouter();
 
   return (
-    <View className="flex-1 bg-background px-6 pt-12 pb-10">
-      <TouchableOpacity
-        onPress={() => router.push('/personalization')}
-        className="self-end mb-8"
-        accessibilityLabel="Skip introduction"
-        accessibilityHint="Proceed directly to personalization"
+    <SafeAreaView className="flex-1 bg-background">
+      <ScrollView
+        contentContainerStyle={{ flexGrow: 1, paddingHorizontal: 24, paddingBottom: 40 }}
+        showsVerticalScrollIndicator={false}
       >
-        <Text className="text-base text-muted-foreground underline font-medium">Skip</Text>
-      </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => router.push('/personalization')}
+          className="self-end mb-8"
+          accessibilityLabel="Skip introduction"
+          accessibilityHint="Proceed directly to personalization"
+        >
+          <Text className="text-xl text-muted-foreground font-medium no-underline">Skip</Text>
+        </TouchableOpacity>
 
-      <WelcomeHeader />
+        <WelcomeHeader />
 
-      <StatsCarousel stats={stats} />
+        <StatsCarousel stats={stats} />
 
-      <IconButton
-        onPress={() => router.push('/personalization')}
-        positionClassName="mt-auto bg-primary rounded-2xl py-5 px-8 items-center justify-center shadow-2xl"
-        accessibilityLabel="Start using Nigel"
-        icon={
-          <View className="flex-row items-center">
-            <Text className="text-white text-xl font-semibold mr-3">Let's Get Started</Text>
-            <ChevronRight size={24} color="#FFFFFF" />
-          </View>
-        }
-      />
-    </View>
+        <IconButton
+          onPress={() => router.push('/personalization')}
+          positionClassName="mt-auto bg-primary rounded-2xl py-5 px-8 items-center justify-center shadow-2xl"
+          accessibilityLabel="Start using Nigel"
+          icon={
+            <View className="flex-row items-center">
+              <Text className="text-white text-xl font-semibold mr-3">Let's Get Started</Text>
+              <ChevronRight size={24} color="#FFFFFF" />
+            </View>
+          }
+        />
+      </ScrollView>
+    </SafeAreaView>
   );
 }
