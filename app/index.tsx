@@ -1,10 +1,5 @@
-import { Text, View } from 'react-native';
-import '../global.css';
+import { Redirect } from 'expo-router';
 
 export default function Index() {
-  return (
-    <View className="bg-blue-300 flex-1 justify-center items-center">
-      <Text className="text-black bg-white text-lg">Edit app/index.tsx to edit this screen.</Text>
-    </View>
-  );
+  return <Redirect href="/(auth)/splash" />;
 }
