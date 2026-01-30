@@ -9,6 +9,9 @@ export default function RootLayout() {
       <Stack.Screen name="personalization" />
       <Stack.Screen name="(student)" />
       <Stack.Screen name="(teacher)" />
+      <Stack.Screen name="privacy" />
+      <Stack.Screen name="worries" />
+      <Stack.Screen name="learning-style" />
     </Stack>
   );
 }
