@@ -26,7 +26,7 @@ export default function SplashPage() {
 
   return (
     <SafeAreaView className="flex-1 bg-[#F8F9FA]">
-      <View className="flex-1 items-center justify-center px-6">
+      <View className="flex-1 items-center justify-center px-6 relative">
         <IconButton
           icon={<Accessibility size={24} color="rgb(161, 161, 170)" />}
           accessibilityLabel="Accessibility options"
