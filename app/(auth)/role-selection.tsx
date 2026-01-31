@@ -53,7 +53,7 @@ export default function RoleSelectionScreen() {
               emoji={role.emoji}
               title={role.title}
               subtitle={role.subtitle}
-              onPress={() => router.push(role.route)}
+              onPress={() => router.push(role.route as any)}
               index={index}
             />
           ))}
