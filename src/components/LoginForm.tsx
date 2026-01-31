@@ -12,8 +12,7 @@ interface LoginFormProps {
 
 // dummy data to login
 const DUMMY_CREDENTIALS = {
-  email: 'teacher@school.ac.uk',
-  password: 'teacher123',
+  // login details taken out for privacy
 };
 
 export function LoginForm({
@@ -51,7 +50,7 @@ export function LoginForm({
           email.toLowerCase() === DUMMY_CREDENTIALS.email.toLowerCase() &&
           password === DUMMY_CREDENTIALS.password
         ) {
-          router.push('/(teacher)/dashboard');
+          router.replace('/(teacher)/dashboard');
         } else {
           throw new Error('Invalid credentials');
         }
