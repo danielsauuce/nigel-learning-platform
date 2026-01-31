@@ -12,7 +12,8 @@ interface LoginFormProps {
 
 // dummy data to login
 const DUMMY_CREDENTIALS = {
-  // login details taken out for privacy
+  email: 'teacher@school.ac.uk',
+  password: 'teacher123',
 };
 
 export function LoginForm({
