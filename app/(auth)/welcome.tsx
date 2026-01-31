@@ -33,7 +33,7 @@ export default function WelcomePage() {
   return (
     <SafeAreaView className="flex-1 bg-background px-6 pb-6">
       <TouchableOpacity
-        onPress={() => router.push('/personalization')}
+        onPress={() => router.push('/(auth)/role-selection')}
         className="self-end mb-8"
         accessibilityLabel="Skip introduction"
         accessibilityHint="Proceed directly to personalization"
@@ -47,7 +47,7 @@ export default function WelcomePage() {
 
       <View className="mt-auto">
         <IconButton
-          onPress={() => router.push('/personalization')}
+          onPress={() => router.push('/(auth)/role-selection')}
           positionClassName="bg-primary rounded-2xl py-5 px-8 items-center justify-center shadow-2xl"
           accessibilityLabel="Start using Nigel"
           icon={
