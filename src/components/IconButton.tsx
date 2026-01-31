@@ -6,6 +6,7 @@ interface IconButtonProps {
   onPress?: () => void;
   accessibilityLabel?: string;
   positionClassName?: string;
+  disabled?: any;
 }
 
 export function IconButton({

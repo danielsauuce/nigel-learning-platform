@@ -5,7 +5,7 @@ import { Header } from '@/src/components/Header';
 import { RoleCard } from '@/src/components/RoleCard';
 
 // routes types
-type AppRoute = '/personalization' | '/teacher' | '/worries';
+type AppRoute = '/personalization' | '/(teacher)/login' | '/worries';
 
 const roles: {
   id: string;
@@ -26,7 +26,7 @@ const roles: {
     emoji: '👨‍🏫',
     title: "I'm a Teacher",
     subtitle: 'View and manage class progress',
-    route: '/teacher',
+    route: '/(teacher)/login',
   },
 ];
 

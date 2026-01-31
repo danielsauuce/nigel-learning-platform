@@ -43,8 +43,8 @@ export function Card({
       {leading && <View className="flex-shrink-0">{leading}</View>}
 
       <View className="flex-1">
-        <Text className="font-semibold text-foreground text-base">{title}</Text>
-        {subtitle && <Text className="text-sm text-muted-foreground mt-1">{subtitle}</Text>}
+        <Text className="font-semibold text-foreground text-xl">{title}</Text>
+        {subtitle && <Text className="text-[16px] text-muted-foreground mt-1">{subtitle}</Text>}
         {children}
       </View>
 
