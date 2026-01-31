@@ -7,6 +7,7 @@ interface IconButtonProps {
   accessibilityLabel?: string;
   positionClassName?: string;
   disabled?: any;
+  accessibilityHint?: any;
 }
 
 export function IconButton({

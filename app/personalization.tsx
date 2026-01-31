@@ -1,13 +1,13 @@
-import { View, Text, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
-import { useState } from 'react';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import Animated, { FadeInDown } from 'react-native-reanimated';
-import { ArrowLeft, User } from 'lucide-react-native';
 import { IconButton } from '@/src/components/IconButton';
-import { YearGroupCard } from '@/src/components/YearGroupCard';
-import { ProgressBar } from '@/src/components/ProgressBar.tsx';
 import { InputField } from '@/src/components/InputField';
+import { ProgressBar } from '@/src/components/ProgressBar';
+import { YearGroupCard } from '@/src/components/YearGroupCard';
 import { useRouter } from 'expo-router';
+import { ArrowLeft, User } from 'lucide-react-native';
+import { useState } from 'react';
+import { KeyboardAvoidingView, Platform, ScrollView, Text, View } from 'react-native';
+import Animated, { FadeInDown } from 'react-native-reanimated';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const yearGroups = [
   { year: 'Year 7', age: 'Age 11-12', icon: '🌱' },
