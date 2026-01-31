@@ -1,3 +1,4 @@
+import { ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { LoginForm } from '@/src/components/LoginForm';
@@ -7,20 +8,32 @@ export default function TeacherLoginScreen() {
   const router = useRouter();
 
   return (
-    <SafeAreaView className="flex-1 bg-background items-center justify-center px-6">
-      <AuthHeader emoji="👨‍🏫" title="Teacher Login" subtitle="Access your class dashboard" />
+    <SafeAreaView className="flex-1 bg-background">
+      <ScrollView
+        contentContainerClassName="flex-1 items-center justify-center px-6"
+        keyboardShouldPersistTaps="handled"
+      >
+        <AuthHeader emoji="👨‍🏫" title="Teacher Login" subtitle="Access your class dashboard" />
 
-      <LoginForm
-        emailPlaceholder="teacher@school.ac.uk"
-        submitLabel="Access Dashboard"
-        onSubmit={async (email, password) => {
-          if (!email || password.length < 8) {
-            throw new Error('Invalid email or password');
-          }
+        <LoginForm
+          emailPlaceholder="teacher@school.ac.uk"
+          submitLabel="Access Dashboard"
+          showSignupLink={true}
+          onSubmit={async (email, password) => {
+            if (!email || !email.includes('@')) {
+              throw new Error('Please enter a valid email address');
+            }
 
-          router.replace('/(teacher)/dashboard');
-        }}
-      />
+            if (!password || password.length < 8) {
+              throw new Error('Password must be at least 8 characters');
+            }
+
+            await new Promise((resolve) => setTimeout(resolve, 500));
+
+            router.replace('/(teacher)/dashboard');
+          }}
+        />
+      </ScrollView>
     </SafeAreaView>
   );
 }

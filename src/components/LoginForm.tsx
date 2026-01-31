@@ -1,41 +1,81 @@
 import { useState } from 'react';
-import { View, Text, TextInput } from 'react-native';
-import Animated, { FadeInDown } from 'react-native-reanimated';
+import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
 import { Mail, Lock, Eye, EyeOff, CheckCircle2, ArrowRight } from 'lucide-react-native';
-import { IconButton } from './IconButton';
+import { useRouter } from 'expo-router';
 
 interface LoginFormProps {
   emailPlaceholder: string;
   submitLabel?: string;
-  onSignupPress?: () => void;
+  showSignupLink?: boolean;
+  onSubmit?: (email: string, password: string) => Promise<void>;
 }
+
+// dummy data to login
+const DUMMY_CREDENTIALS = {
+  email: 'teacher@school.ac.uk',
+  password: 'teacher123',
+};
 
 export function LoginForm({
   emailPlaceholder,
   submitLabel = 'Continue',
-  onSignupPress,
+  showSignupLink = true,
+  onSubmit,
 }: LoginFormProps) {
+  const router = useRouter();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const isValidEmail =
     email.includes('@') &&
     (email.endsWith('.ac.uk') || email.endsWith('.edu') || email.includes('school'));
 
-  // disable button unless field are filled
+  // Disable button if fields are empty
   const isButtonDisabled = () => {
-    return email.trim() === '' || password.trim() === '';
+    return email.trim() === '' || password.trim() === '' || isLoading;
+  };
+
+  const onSubmitForm = async () => {
+    setIsLoading(true);
+
+    try {
+      if (onSubmit) {
+        await onSubmit(email, password);
+      } else {
+        await new Promise((resolve) => setTimeout(resolve, 500));
+
+        if (
+          email.toLowerCase() === DUMMY_CREDENTIALS.email.toLowerCase() &&
+          password === DUMMY_CREDENTIALS.password
+        ) {
+          router.push('/(teacher)/dashboard');
+        } else {
+          throw new Error('Invalid credentials');
+        }
+      }
+    } catch (error) {
+      Alert.alert('Login Failed', error instanceof Error ? error.message : 'Invalid credentials', [
+        { text: 'OK' },
+      ]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const onSignupPress = () => {
+    router.push('/(teacher)/register');
   };
 
   return (
-    <View className="w-full max-w-sm space-y-6">
-      {/* Email */}
-      <View>
+    <View className="w-full max-w-sm">
+      <View className="mb-6">
         <Text className="text-sm font-medium text-foreground mb-2">Email</Text>
 
         <View className="relative">
-          <View className="absolute left-4 top-1/2 -translate-y-1/2 z-10">
+          <View className="absolute left-4 top-4 z-10">
             <Mail size={20} color="#71717A" />
           </View>
 
@@ -47,23 +87,23 @@ export function LoginForm({
             keyboardType="email-address"
             autoCapitalize="none"
             autoCorrect={false}
-            className="bg-card border border-border rounded-xl py-4 px-12 text-foreground"
+            editable={!isLoading}
+            className="bg-card border border-border rounded-xl py-4 pl-12 pr-12 text-foreground"
           />
 
           {isValidEmail && (
-            <View className="absolute right-4 top-1/2 -translate-y-1/2 z-10">
+            <View className="absolute right-4 top-4 z-10">
               <CheckCircle2 size={20} color="#10B981" />
             </View>
           )}
         </View>
       </View>
 
-      {/* Password */}
-      <View>
+      <View className="mb-6">
         <Text className="text-sm font-medium text-foreground mb-2">Password</Text>
 
         <View className="relative">
-          <View className="absolute left-4 top-1/2 -translate-y-1/2 z-10">
+          <View className="absolute left-4 top-4 z-10">
             <Lock size={20} color="#71717A" />
           </View>
 
@@ -74,44 +114,48 @@ export function LoginForm({
             onChangeText={setPassword}
             secureTextEntry={!showPassword}
             autoCapitalize="none"
-            className="bg-card border border-border rounded-xl py-4 px-12 text-foreground"
+            editable={!isLoading}
+            className="bg-card border border-border rounded-xl py-4 pl-12 pr-12 text-foreground"
           />
 
-          <IconButton
+          <TouchableOpacity
             onPress={() => setShowPassword((v) => !v)}
-            positionClassName="absolute right-2 top-1/2 -translate-y-1/2 bg-transparent"
-            icon={
-              showPassword ? (
-                <EyeOff size={20} color="#71717A" />
-              ) : (
-                <Eye size={20} color="#71717A" />
-              )
-            }
-          />
+            className="absolute right-4 top-4 z-10"
+            disabled={isLoading}
+          >
+            {showPassword ? (
+              <EyeOff size={20} color="#71717A" />
+            ) : (
+              <Eye size={20} color="#71717A" />
+            )}
+          </TouchableOpacity>
         </View>
       </View>
 
-      <IconButton
+      <TouchableOpacity
+        onPress={onSubmitForm}
         disabled={isButtonDisabled()}
-        positionClassName={`
-          w-full h-14 rounded-xl items-center justify-center mt-5
-          ${isButtonDisabled() ? 'bg-primary/60' : 'bg-primary'}
+        className={`
+          w-full h-14 rounded-xl items-center justify-center flex-row gap-2
+          ${isButtonDisabled() ? 'bg-primary/60' : 'bg-primary active:bg-primary/90'}
         `}
-        icon={
-          <View className="flex-row items-center gap-2">
-            <Text className="text-lg font-semibold text-primary-foreground">{submitLabel}</Text>
-            <ArrowRight size={20} color="#FFFFFF" />
-          </View>
-        }
-      />
-
-      {onSignupPress && (
-        <Text className="text-center text-sm text-muted-foreground">
-          Don't have an account?{' '}
-          <Text onPress={onSignupPress} className="text-primary font-medium">
-            Sign up
-          </Text>
+        activeOpacity={0.8}
+      >
+        <Text className="text-lg font-semibold text-primary-foreground">
+          {isLoading ? 'Signing in...' : submitLabel}
         </Text>
+        {!isLoading && <ArrowRight size={20} color="#FFFFFF" />}
+      </TouchableOpacity>
+
+      {showSignupLink && (
+        <View className="mt-6">
+          <Text className="text-center text-sm text-muted-foreground">
+            Don't have an account?{' '}
+            <Text onPress={onSignupPress} className="text-primary font-medium">
+              Sign up
+            </Text>
+          </Text>
+        </View>
       )}
     </View>
   );
