@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { GraduationCap, TrendingUp, PoundSterling, ChevronRight } from 'lucide-react-native';
 import { useRouter } from 'expo-router';
@@ -31,33 +31,43 @@ export default function WelcomePage() {
   const router = useRouter();
 
   return (
-    <SafeAreaView className="flex-1 bg-background px-6 pb-6">
-      <TouchableOpacity
-        onPress={() => router.push('/(auth)/role-selection')}
-        className="self-end mb-8"
-        accessibilityLabel="Skip introduction"
-        accessibilityHint="Proceed directly to personalization"
+    <SafeAreaView className="flex-1 bg-background" edges={['top']}>
+      <ScrollView
+        className="flex-1"
+        contentContainerStyle={{ flexGrow: 1 }}
+        showsVerticalScrollIndicator={false}
       >
-        <Text className="text-xl text-muted-foreground font-medium no-underline">Skip</Text>
-      </TouchableOpacity>
+        <View className="flex-1 px-6 pb-6">
+          <TouchableOpacity
+            onPress={() => router.push('/(auth)/role-selection')}
+            className="self-end mb-6 mt-2"
+            accessibilityLabel="Skip introduction"
+            accessibilityHint="Proceed directly to personalization"
+          >
+            <Text className="text-base text-muted-foreground font-medium">Skip</Text>
+          </TouchableOpacity>
 
-      <Header />
+          <Header />
 
-      <StatsCarousel stats={stats} />
+          <View className="flex-shrink">
+            <StatsCarousel stats={stats} />
+          </View>
 
-      <View className="mt-auto">
-        <IconButton
-          onPress={() => router.push('/(auth)/role-selection')}
-          positionClassName="bg-primary rounded-2xl py-5 px-8 items-center justify-center shadow-2xl"
-          accessibilityLabel="Start using Nigel"
-          icon={
-            <View className="flex-row items-center">
-              <Text className="text-white text-xl font-semibold mr-3">Let's Get Started</Text>
-              <ChevronRight size={24} color="#FFFFFF" />
-            </View>
-          }
-        />
-      </View>
+          <View className="mt-auto pt-6">
+            <IconButton
+              onPress={() => router.push('/(auth)/role-selection')}
+              positionClassName="bg-primary rounded-2xl py-4 px-6 items-center justify-center shadow-lg"
+              accessibilityLabel="Start using Nigel"
+              icon={
+                <View className="flex-row items-center">
+                  <Text className="text-white text-lg font-semibold mr-3">Let's Get Started</Text>
+                  <ChevronRight size={22} color="#FFFFFF" />
+                </View>
+              }
+            />
+          </View>
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
