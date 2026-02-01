@@ -1,10 +1,10 @@
-import { ScrollView, TouchableOpacity, Text, View } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { GraduationCap, TrendingUp, PoundSterling, ChevronRight } from 'lucide-react-native';
 import { useRouter } from 'expo-router';
-import { WelcomeHeader } from '@/src/components/WelcomeHeader';
+import { Header } from '@/src/components/Header';
 import { StatsCarousel } from '@/src/components/StatsCarousel';
-import { IconButton } from '@/src/components/IconButton';
+import { PrimaryButton } from '@/src/components/PrimaryButton';
 
 const stats = [
   {
@@ -31,35 +31,37 @@ export default function WelcomePage() {
   const router = useRouter();
 
   return (
-    <SafeAreaView className="flex-1 bg-background">
+    <SafeAreaView className="flex-1 bg-background" edges={['top']}>
       <ScrollView
-        contentContainerStyle={{ flexGrow: 1, paddingHorizontal: 24, paddingBottom: 40 }}
+        className="flex-1"
+        contentContainerStyle={{ flexGrow: 1 }}
         showsVerticalScrollIndicator={false}
       >
-        <TouchableOpacity
-          onPress={() => router.push('/personalization')}
-          className="self-end mb-8"
-          accessibilityLabel="Skip introduction"
-          accessibilityHint="Proceed directly to personalization"
-        >
-          <Text className="text-xl text-muted-foreground font-medium no-underline">Skip</Text>
-        </TouchableOpacity>
+        <View className="flex-1 px-6 pb-6">
+          <TouchableOpacity
+            onPress={() => router.push('/(auth)/role-selection')}
+            className="self-end mb-6 mt-2"
+            accessibilityLabel="Skip introduction"
+            accessibilityHint="Proceed directly to personalization"
+          >
+            <Text className="text-base text-muted-foreground font-medium">Skip</Text>
+          </TouchableOpacity>
 
-        <WelcomeHeader />
+          <Header />
 
-        <StatsCarousel stats={stats} />
+          <View className="flex-shrink">
+            <StatsCarousel stats={stats} />
+          </View>
 
-        <IconButton
-          onPress={() => router.push('/personalization')}
-          positionClassName="mt-auto bg-primary rounded-2xl py-5 px-8 items-center justify-center shadow-2xl"
-          accessibilityLabel="Start using Nigel"
-          icon={
-            <View className="flex-row items-center">
-              <Text className="text-white text-xl font-semibold mr-3">Let's Get Started</Text>
-              <ChevronRight size={24} color="#FFFFFF" />
-            </View>
-          }
-        />
+          <View className="mt-auto pt-6">
+            <PrimaryButton
+              onPress={() => router.push('/(auth)/role-selection')}
+              title="Let's Get Started"
+              icon={<ChevronRight size={22} color="#FFFFFF" />}
+              accessibilityLabel="Start using Nigel"
+            />
+          </View>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
