@@ -1,41 +1,5 @@
 import { z } from 'zod';
 
-export const teacherSignupSchema = z
-  .object({
-    fullName: z.string().min(3, 'Name must be at least 3 characters').trim(),
-
-    email: z
-      .string()
-      .trim()
-      .email('Invalid email address')
-      .refine((email) => email.endsWith('.ac.uk') || email.endsWith('.edu'), {
-        message: 'Use your official school email',
-      }),
-
-    school: z.string().min(1, 'School is required').trim(),
-
-    subject: z.string().trim().optional(),
-
-    password: z
-      .string()
-      .min(8, 'Password must be at least 8 characters')
-      .regex(/[A-Z]/, 'Password must include an uppercase letter')
-      .regex(/\d/, 'Password must include a number')
-      .regex(/[!@#$%^&*]/, 'Password must include a special character'),
-
-    confirmPassword: z.string(),
-
-    termsAccepted: z.boolean().refine((val) => val === true, {
-      message: 'You must accept the terms and conditions',
-    }),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: 'Passwords do not match',
-    path: ['confirmPassword'],
-  });
-
-export type TeacherSignupData = z.infer<typeof teacherSignupSchema>;
-
 export const teacherLoginSchema = z.object({
   email: z
     .string()
@@ -47,11 +11,45 @@ export const teacherLoginSchema = z.object({
         email.toLowerCase().endsWith('.edu') ||
         email.toLowerCase().includes('school'),
       {
-        message: 'Use your official school email',
+        message: 'Use your official school email (.ac.uk or .edu)',
       },
     ),
 
-  password: z.string().min(1, 'Password is required'),
+  password: z
+    .string()
+    .min(1, 'Password is required')
+    .min(8, 'Password must be at least 8 characters'),
 });
 
 export type TeacherLoginData = z.infer<typeof teacherLoginSchema>;
+
+export const signupSchema = z.object({
+  fullName: z
+    .string()
+    .trim()
+    .min(3, 'Full name must be at least 3 characters')
+    .max(100, 'Full name is too long')
+    .regex(/^[a-zA-Z\s.'-]+$/, 'Full name contains invalid characters'),
+
+  email: z
+    .string()
+    .trim()
+    .email('Enter a valid email address')
+    .refine(
+      (email) => email.toLowerCase().endsWith('.ac.uk') || email.toLowerCase().endsWith('.edu'),
+      {
+        message: 'Use a school email (.ac.uk or .edu)',
+      },
+    ),
+
+  school: z
+    .string()
+    .trim()
+    .min(1, 'School name is required')
+    .min(3, 'School name must be at least 3 characters')
+    .max(200, 'School name is too long'),
+
+  subject: z.string().trim().max(100, 'Subject is too long').optional().or(z.literal('')),
+});
+
+export type SignupFormData = z.infer<typeof signupSchema>;

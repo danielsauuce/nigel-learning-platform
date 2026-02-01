@@ -1,17 +1,25 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, Alert } from 'react-native';
-import { ArrowRight } from 'lucide-react-native';
+import { useState } from 'react';
+import { View, Text, Alert } from 'react-native';
+import { User, Mail, Building, Book, ArrowRight } from 'lucide-react-native';
 import { useRouter } from 'expo-router';
-import { SIGNUP_FIELDS, SignupFormData } from '@/src/components/SignUpField';
-
-type SignupErrors = Partial<Record<keyof SignupFormData, string>>;
+import { signupSchema, SignupFormData } from '@/src/schema/teacherSchema';
+import { InputField } from '@/src/components/InputField';
+import { PrimaryButton } from '@/src/components/PrimaryButton';
 
 interface SignupFormProps {
+  onSuccess?: (data: SignupFormData) => void;
   submitLabel?: string;
-  onSubmit?: (data: SignupFormData) => Promise<void>;
+  showLoginLink?: boolean;
 }
 
-export function SignupForm({ submitLabel = 'Create account', onSubmit }: SignupFormProps) {
+// Dummy validation - accept any valid school email
+const MOCK_SIGNUP = true; // Set to false when you have real backend
+
+export function SignupForm({
+  onSuccess,
+  submitLabel = 'Create Account',
+  showLoginLink = true,
+}: SignupFormProps) {
   const router = useRouter();
 
   const [form, setForm] = useState<SignupFormData>({
@@ -21,108 +29,159 @@ export function SignupForm({ submitLabel = 'Create account', onSubmit }: SignupF
     subject: '',
   });
 
-  const [errors, setErrors] = useState<SignupErrors>({});
-  const [isLoading, setIsLoading] = useState(false);
+  const [errors, setErrors] = useState<Partial<Record<keyof SignupFormData, string>>>({});
+  const [loading, setLoading] = useState(false);
 
-  const update = (key: keyof SignupFormData, value: string) => {
+  const updateField = <K extends keyof SignupFormData>(key: K, value: SignupFormData[K]) => {
     setForm((prev) => ({ ...prev, [key]: value }));
-    setErrors((prev) => ({ ...prev, [key]: undefined }));
+
+    if (errors[key]) {
+      setErrors((prev) => ({ ...prev, [key]: undefined }));
+    }
   };
 
-  const validate = (): boolean => {
-    const nextErrors: SignupErrors = {};
+  // Validate form with Zod
+  const validateForm = (): boolean => {
+    const result = signupSchema.safeParse(form);
 
-    const fullName = form.fullName.trim();
-    const email = form.email.trim().toLowerCase();
-    const school = form.school.trim();
-
-    if (!fullName) {
-      nextErrors.fullName = 'Full name is required';
+    if (result.success) {
+      setErrors({});
+      return true;
     }
 
-    if (!email) {
-      nextErrors.email = 'Email is required';
-    } else if (!email.includes('@') || (!email.endsWith('.ac.uk') && !email.endsWith('.edu'))) {
-      nextErrors.email = 'Use a valid school email';
-    }
+    const fieldErrors: Partial<Record<keyof SignupFormData, string>> = {};
+    result.error.issues.forEach((issue) => {
+      const field = issue.path[0] as keyof SignupFormData;
+      if (!fieldErrors[field]) {
+        fieldErrors[field] = issue.message;
+      }
+    });
 
-    if (!school) {
-      nextErrors.school = 'School is required';
-    }
-
-    setErrors(nextErrors);
-    return Object.keys(nextErrors).length === 0;
+    setErrors(fieldErrors);
+    return false;
   };
 
   const handleSubmit = async () => {
-    if (!validate()) return;
+    if (!validateForm()) {
+      Alert.alert('Validation Error', 'Please fix the errors before continuing');
+      return;
+    }
 
-    setIsLoading(true);
+    setLoading(true);
 
     try {
-      // Clean payload: optional subject is undefined if empty
-      const payload: SignupFormData = {
-        ...form,
-        subject: form.subject?.trim() || undefined,
-      };
+      if (onSuccess) {
+        await new Promise((resolve) => setTimeout(resolve, 800));
+        onSuccess(form);
+      } else if (MOCK_SIGNUP) {
+        await new Promise((resolve) => setTimeout(resolve, 800));
 
-      if (onSubmit) {
-        await onSubmit(payload);
+        Alert.alert('Success!', `Account created for ${form.fullName}. You can now log in.`, [
+          {
+            text: 'Go to Login',
+            onPress: () => router.replace('/(teacher)/login'),
+          },
+        ]);
       } else {
-        await new Promise((r) => setTimeout(r, 700));
-        router.push('/(teacher)/dashboard');
+        throw new Error('Backend not implemented yet');
       }
-    } catch (err) {
-      Alert.alert('Signup failed', err instanceof Error ? err.message : 'Something went wrong');
+    } catch (error) {
+      Alert.alert(
+        'Signup Failed',
+        error instanceof Error ? error.message : 'Something went wrong',
+        [{ text: 'OK' }],
+      );
     } finally {
-      setIsLoading(false);
+      setLoading(false);
     }
   };
 
-  const isDisabled =
-    isLoading || !form.fullName.trim() || !form.email.trim() || !form.school.trim();
+  const goToLogin = () => {
+    router.push('/(teacher)/login');
+  };
+
+  const hasAnyData = Object.values(form).some((value) => value && value.trim().length > 0);
+  const hasErrors = Object.keys(errors).length > 0;
 
   return (
     <View className="w-full max-w-sm">
-      <View className="gap-6">
-        {SIGNUP_FIELDS.map((field) => (
-          <Field
-            key={field.key}
-            label={`${field.label}${field.required ? ' *' : ''}`}
-            icon={field.icon}
-            value={form[field.key] ?? ''}
-            onChange={(v) => update(field.key, v)}
-            error={errors[field.key]}
-            placeholder={field.placeholder}
-            keyboardType={field.keyboardType}
-            editable={!isLoading}
-            autoCapitalize={field.keyboardType === 'email-address' ? 'none' : 'sentences'}
-            autoCorrect={false}
-          />
-        ))}
+      <View className="mb-6">
+        <InputField
+          label="Full Name *"
+          placeholder="Ms. Sarah Johnson"
+          value={form.fullName}
+          onChangeText={(value) => updateField('fullName', value)}
+          icon={<User size={20} color="#71717A" />}
+          autoCapitalize="words"
+          editable={!loading}
+          helperText={errors.fullName}
+        />
       </View>
 
-      <TouchableOpacity
-        onPress={handleSubmit}
-        disabled={isDisabled}
-        activeOpacity={0.85}
-        className={`
-          mt-8 h-14 rounded-xl flex-row items-center justify-center gap-2
-          ${isDisabled ? 'bg-primary/60' : 'bg-primary'}
-        `}
-      >
-        <Text className="text-lg font-semibold text-primary-foreground">
-          {isLoading ? 'Creating account…' : submitLabel}
-        </Text>
-        {!isLoading && <ArrowRight size={20} color="#fff" />}
-      </TouchableOpacity>
+      <View className="mb-6">
+        <InputField
+          label="School Email *"
+          placeholder="teacher@school.ac.uk"
+          value={form.email}
+          onChangeText={(value) => updateField('email', value)}
+          icon={<Mail size={20} color="#71717A" />}
+          keyboardType="email-address"
+          autoCapitalize="none"
+          autoCorrect={false}
+          editable={!loading}
+          helperText={errors.email}
+        />
+      </View>
 
-      <Text className="text-center text-sm text-muted-foreground mt-6">
-        Already have an account?{' '}
-        <Text className="text-primary font-medium" onPress={() => router.push('/(teacher)/login')}>
-          Sign in
+      <View className="mb-6">
+        <InputField
+          label="School / Institution *"
+          placeholder="Riverside Academy"
+          value={form.school}
+          onChangeText={(value) => updateField('school', value)}
+          icon={<Building size={20} color="#71717A" />}
+          autoCapitalize="words"
+          editable={!loading}
+          helperText={errors.school}
+        />
+      </View>
+
+      <View className="mb-6">
+        <InputField
+          label="Subject / Department (Optional)"
+          placeholder="e.g., Business Studies"
+          value={form.subject ?? ''}
+          onChangeText={(value) => updateField('subject', value)}
+          icon={<Book size={20} color="#71717A" />}
+          autoCapitalize="words"
+          editable={!loading}
+        />
+      </View>
+
+      <PrimaryButton
+        title={loading ? 'Creating account...' : submitLabel}
+        icon={!loading ? <ArrowRight size={20} color="#FFFFFF" /> : null}
+        onPress={handleSubmit}
+        disabled={loading || hasErrors || !hasAnyData}
+        accessibilityLabel="Create teacher account"
+      />
+
+      {showLoginLink && (
+        <View className="mt-6">
+          <Text className="text-center text-sm text-muted-foreground">
+            Already have an account?{' '}
+            <Text onPress={goToLogin} className="text-primary font-medium underline">
+              Log in
+            </Text>
+          </Text>
+        </View>
+      )}
+
+      <View className="mt-4 p-3 bg-muted/50 rounded-lg">
+        <Text className="text-xs text-muted-foreground text-center">
+          💡 Your school email must end with .ac.uk or .edu
         </Text>
-      </Text>
+      </View>
     </View>
   );
 }
