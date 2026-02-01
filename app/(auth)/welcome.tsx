@@ -4,7 +4,7 @@ import { GraduationCap, TrendingUp, PoundSterling, ChevronRight } from 'lucide-r
 import { useRouter } from 'expo-router';
 import { Header } from '@/src/components/Header';
 import { StatsCarousel } from '@/src/components/StatsCarousel';
-import { IconButton } from '@/src/components/IconButton';
+import { PrimaryButton } from '@/src/components/PrimaryButton';
 
 const stats = [
   {
@@ -54,16 +54,11 @@ export default function WelcomePage() {
           </View>
 
           <View className="mt-auto pt-6">
-            <IconButton
+            <PrimaryButton
               onPress={() => router.push('/(auth)/role-selection')}
-              positionClassName="bg-primary rounded-2xl py-4 px-6 items-center justify-center shadow-lg"
+              title="Let's Get Started"
+              icon={<ChevronRight size={22} color="#FFFFFF" />}
               accessibilityLabel="Start using Nigel"
-              icon={
-                <View className="flex-row items-center">
-                  <Text className="text-white text-lg font-semibold mr-3">Let's Get Started</Text>
-                  <ChevronRight size={22} color="#FFFFFF" />
-                </View>
-              }
             />
           </View>
         </View>
