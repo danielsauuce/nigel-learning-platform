@@ -9,7 +9,8 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.dayv-exe.nigel-financial-literacy-frontend"
     },
     "android": {
       "adaptiveIcon": {
