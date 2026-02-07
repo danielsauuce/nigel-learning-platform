@@ -1,23 +1,24 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
-import { Animated, View } from 'react-native';
+import { Animated, StyleSheet, View } from 'react-native';
 import { Path, Svg } from 'react-native-svg';
 
 import { SCREEN_HEIGHT, SCREEN_WIDTH } from '@/constants/app';
 import { useFloatAnimation, useWaveAnimation } from '@/hooks/use-animations';
 
+// ─── Gradient background ────────────────────────────────────────────
 export function GradientBackground() {
   return (
     <LinearGradient
       colors={['#1A1B4B', '#2D3A8C', '#4158D0']}
       start={{ x: 0.2, y: 0 }}
       end={{ x: 0.8, y: 1 }}
-      className="absolute inset-0"
+      style={StyleSheet.absoluteFillObject}
     />
   );
 }
 
-
+// ─── Star field ─────────────────────────────────────────────────────
 interface StarFieldProps {
   count?: number;
   seed?: number;
@@ -46,7 +47,7 @@ export function StarField({ count = 10, seed = 83 }: StarFieldProps) {
   );
 }
 
-
+// ─── Floating sparkle ───────────────────────────────────────────────
 interface FloatingSparkleProps {
   delay: number;
   x: number;
@@ -75,7 +76,7 @@ export function FloatingSparkle({ delay, x, y, size, color }: FloatingSparklePro
   );
 }
 
-
+// ─── Default sparkle layout ─────────────────────────────────────────
 export function DefaultSparkles() {
   return (
     <>
@@ -87,15 +88,21 @@ export function DefaultSparkles() {
   );
 }
 
-
+// ─── Animated wave decoration ───────────────────────────────────────
 export function WaveDecoration() {
   const { translateX } = useWaveAnimation();
   const w = SCREEN_WIDTH + 50;
 
   return (
     <Animated.View
-      className="absolute bottom-0 h-[120px]"
-      style={{ left: -25, right: -25, transform: [{ translateX }] }}
+      style={{
+        position: 'absolute',
+        bottom: 0,
+        left: -25,
+        right: -25,
+        height: 120,
+        transform: [{ translateX }],
+      }}
     >
       <Svg
         width={w}
@@ -119,9 +126,6 @@ export function WaveDecoration() {
 }
 
 // ─── Composed screen background ─────────────────────────────────────
-/**
- * Drop-in background layer with gradient, stars, sparkles, and waves.
- */
 export function ScreenBackground() {
   return (
     <>

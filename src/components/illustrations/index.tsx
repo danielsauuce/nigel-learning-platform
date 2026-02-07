@@ -1,4 +1,5 @@
 import React from 'react';
+import { Animated } from 'react-native';
 import {
   Circle,
   Defs,
@@ -10,6 +11,9 @@ import {
   LinearGradient as SvgLinearGradient,
   Text as SvgText,
 } from 'react-native-svg';
+
+import type { SlideIcon } from '@/constants/app';
+import { useFloatAnimation } from '@/hooks/use-animations';
 
 // ─── Island (Onboarding slide 1) ────────────────────────────────────
 export function IslandIllustration() {
@@ -62,7 +66,9 @@ export function PiggyIllustration() {
         </Defs>
         <Circle cx="72" cy="28" r="12" fill="url(#piggyCoinGrad)" />
         <Circle cx="72" cy="28" r="8.5" fill="none" stroke="#E8960C" strokeWidth="1" />
-        <SvgText x="72" y="33" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#B8760A">£</SvgText>
+        <SvgText x="72" y="33" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#B8760A">
+          £
+        </SvgText>
       </G>
       <Circle cx="28" cy="65" r="2.5" fill="#FFD700" opacity={0.6} />
       <Circle cx="130" cy="48" r="2" fill="#FFD700" opacity={0.5} />
@@ -94,7 +100,9 @@ export function TrophyIllustration() {
       <Rect x="70" y="95" width="20" height="8" rx="2" fill="#E8960C" />
       <Rect x="62" y="103" width="36" height="8" rx="3" fill="#D4A056" />
       <Rect x="62" y="103" width="36" height="8" rx="3" fill="none" stroke="#C6893A" strokeWidth="1.5" />
-      <SvgText x="80" y="115" textAnchor="middle" fontSize="6" fontWeight="bold" fill="#8D6E63">#1</SvgText>
+      <SvgText x="80" y="115" textAnchor="middle" fontSize="6" fontWeight="bold" fill="#8D6E63">
+        #1
+      </SvgText>
     </Svg>
   );
 }
@@ -126,7 +134,9 @@ export function StudentIllustration() {
         </Defs>
         <Circle cx="96" cy="18" r="10" fill="url(#sCoinGrad)" />
         <Circle cx="96" cy="18" r="7" fill="none" stroke="#E8960C" strokeWidth="1" />
-        <SvgText x="96" y="22" textAnchor="middle" fontSize="10" fontWeight="bold" fill="#B8760A">£</SvgText>
+        <SvgText x="96" y="22" textAnchor="middle" fontSize="10" fontWeight="bold" fill="#B8760A">
+          £
+        </SvgText>
       </G>
       <Circle cx="22" cy="44" r="3" fill="#FFD700" opacity={0.6} />
     </Svg>
@@ -184,9 +194,6 @@ export function IslandIcon() {
 }
 
 // ─── Floating coin (splash screen) ─────────────────────────────────
-import { Animated } from 'react-native';
-import { useFloatAnimation } from '@/hooks/use-animations';
-
 interface FloatingCoinProps {
   delay: number;
   startX: number;
@@ -217,15 +224,15 @@ export function FloatingCoin({ delay, startX, startY, size, opacity }: FloatingC
         </Defs>
         <Circle cx="20" cy="20" r="18" fill={`url(#coinGrad${delay})`} />
         <Circle cx="20" cy="20" r="14" fill="none" stroke="#E8960C" strokeWidth="1.5" />
-        <SvgText x="20" y="26" textAnchor="middle" fontSize="16" fontWeight="bold" fill="#B8760A">£</SvgText>
+        <SvgText x="20" y="26" textAnchor="middle" fontSize="16" fontWeight="bold" fill="#B8760A">
+          £
+        </SvgText>
       </Svg>
     </Animated.View>
   );
 }
 
 // ─── Lookup helper ──────────────────────────────────────────────────
-import type { SlideIcon } from '@/constants/app';
-
 const ILLUSTRATION_MAP: Record<SlideIcon, React.FC> = {
   island: IslandIllustration,
   piggy: PiggyIllustration,

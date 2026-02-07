@@ -5,7 +5,7 @@ interface FadeSlideConfig {
   delay?: number;
   duration?: number;
   fromY?: number;
-  useSpring?: boolean;
+  spring?: boolean;
 }
 
 /**
@@ -16,19 +16,32 @@ export function useFadeSlide({
   delay = 0,
   duration = 450,
   fromY = 30,
-  useSpring = false,
+  spring = false,
 }: FadeSlideConfig = {}) {
   const opacity = useRef(new Animated.Value(0)).current;
   const translateY = useRef(new Animated.Value(fromY)).current;
 
   const start = () => {
-    const slideAnim = useSpring
-      ? Animated.spring(translateY, { toValue: 0, friction: 6, tension: 50, useNativeDriver: true })
-      : Animated.timing(translateY, { toValue: 0, duration, useNativeDriver: true });
+    const slideAnim = spring
+      ? Animated.spring(translateY, {
+          toValue: 0,
+          friction: 6,
+          tension: 50,
+          useNativeDriver: true,
+        })
+      : Animated.timing(translateY, {
+          toValue: 0,
+          duration,
+          useNativeDriver: true,
+        });
 
     return Animated.parallel([
-      Animated.timing(opacity, { toValue: 1, duration, delay, useNativeDriver: true }),
-      Animated.delay(delay),
+      Animated.timing(opacity, {
+        toValue: 1,
+        duration,
+        delay,
+        useNativeDriver: true,
+      }),
       slideAnim,
     ]);
   };
@@ -37,7 +50,7 @@ export function useFadeSlide({
 }
 
 /**
- * Looping wave translate animation. Returns Animated.Value that interpolates X offset.
+ * Looping wave translate animation.
  */
 export function useWaveAnimation(duration = 3500) {
   const waveOffset = useRef(new Animated.Value(0)).current;
@@ -45,8 +58,16 @@ export function useWaveAnimation(duration = 3500) {
   useEffect(() => {
     Animated.loop(
       Animated.sequence([
-        Animated.timing(waveOffset, { toValue: 1, duration, useNativeDriver: true }),
-        Animated.timing(waveOffset, { toValue: 0, duration, useNativeDriver: true }),
+        Animated.timing(waveOffset, {
+          toValue: 1,
+          duration,
+          useNativeDriver: true,
+        }),
+        Animated.timing(waveOffset, {
+          toValue: 0,
+          duration,
+          useNativeDriver: true,
+        }),
       ]),
     ).start();
   }, []);
@@ -106,13 +127,26 @@ export function usePulse() {
 
   const pulse = () => {
     Animated.sequence([
-      Animated.timing(scale, { toValue: 0.95, duration: 100, useNativeDriver: true }),
-      Animated.spring(scale, { toValue: 1, friction: 3, tension: 100, useNativeDriver: true }),
+      Animated.timing(scale, {
+        toValue: 0.95,
+        duration: 100,
+        useNativeDriver: true,
+      }),
+      Animated.spring(scale, {
+        toValue: 1,
+        friction: 3,
+        tension: 100,
+        useNativeDriver: true,
+      }),
     ]).start();
   };
 
   const reset = () => {
-    Animated.timing(scale, { toValue: 1, duration: 150, useNativeDriver: true }).start();
+    Animated.timing(scale, {
+      toValue: 1,
+      duration: 150,
+      useNativeDriver: true,
+    }).start();
   };
 
   return { scale, pulse, reset };
