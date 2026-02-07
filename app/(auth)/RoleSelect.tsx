@@ -1,14 +1,15 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import React, { useEffect, useRef, useState } from 'react';
-import { Animated, Platform, StatusBar, Text, TouchableOpacity, View } from 'react-native';
+import { Animated, StatusBar, Text, TouchableOpacity, View } from 'react-native';
 
-import { StudentIllustration, TeacherIllustration } from '@/components/ui/illustrations';
+import { StudentIllustration, TeacherIllustration } from '@/components/illustrations';
 import { GoldButton } from '@/components/ui/gold-button';
 import { ScreenBackground } from '@/components/ui/screen-background';
 import type { RoleType } from '@/constants/app';
 import { useAppFonts } from '@/hooks/use-app-fonts';
 import { usePulse } from '@/hooks/use-animations';
+import { SAFE_BOTTOM, SAFE_TOP } from '@/lib/safe-area';
 
 // ─── Role card config ───────────────────────────────────────────────
 const ROLES = [
@@ -37,35 +38,69 @@ export default function RoleSelectScreen() {
   const [fontsLoaded] = useAppFonts();
   const [selectedRole, setSelectedRole] = useState<RoleType | null>(null);
 
-  // Entrance animations
+  // Entrance animations — refs created at top level (not inside map)
   const headerOpacity = useRef(new Animated.Value(0)).current;
   const headerSlide = useRef(new Animated.Value(-20)).current;
-  const cardAnims = ROLES.map(() => ({
-    opacity: useRef(new Animated.Value(0)).current,
-    slide: useRef(new Animated.Value(50)).current,
-  }));
+
+  const card0Opacity = useRef(new Animated.Value(0)).current;
+  const card0Slide = useRef(new Animated.Value(50)).current;
+  const card1Opacity = useRef(new Animated.Value(0)).current;
+  const card1Slide = useRef(new Animated.Value(50)).current;
+  const cardAnims = [
+    { opacity: card0Opacity, slide: card0Slide },
+    { opacity: card1Opacity, slide: card1Slide },
+  ];
+
   const footerOpacity = useRef(new Animated.Value(0)).current;
   const footerSlide = useRef(new Animated.Value(30)).current;
 
   const studentPulse = usePulse();
   const teacherPulse = usePulse();
-  const pulseMap = { student: studentPulse, teacher: teacherPulse };
+  const pulseMap: Record<RoleType, ReturnType<typeof usePulse>> = {
+    student: studentPulse,
+    teacher: teacherPulse,
+  };
 
   useEffect(() => {
     Animated.sequence([
       Animated.parallel([
-        Animated.timing(headerOpacity, { toValue: 1, duration: 450, useNativeDriver: true }),
-        Animated.timing(headerSlide, { toValue: 0, duration: 450, useNativeDriver: true }),
+        Animated.timing(headerOpacity, {
+          toValue: 1,
+          duration: 450,
+          useNativeDriver: true,
+        }),
+        Animated.timing(headerSlide, {
+          toValue: 0,
+          duration: 450,
+          useNativeDriver: true,
+        }),
       ]),
       ...cardAnims.map(({ opacity, slide }) =>
         Animated.parallel([
-          Animated.timing(opacity, { toValue: 1, duration: 400, useNativeDriver: true }),
-          Animated.spring(slide, { toValue: 0, friction: 6, tension: 50, useNativeDriver: true }),
+          Animated.timing(opacity, {
+            toValue: 1,
+            duration: 400,
+            useNativeDriver: true,
+          }),
+          Animated.spring(slide, {
+            toValue: 0,
+            friction: 6,
+            tension: 50,
+            useNativeDriver: true,
+          }),
         ]),
       ),
       Animated.parallel([
-        Animated.timing(footerOpacity, { toValue: 1, duration: 350, useNativeDriver: true }),
-        Animated.timing(footerSlide, { toValue: 0, duration: 350, useNativeDriver: true }),
+        Animated.timing(footerOpacity, {
+          toValue: 1,
+          duration: 350,
+          useNativeDriver: true,
+        }),
+        Animated.timing(footerSlide, {
+          toValue: 0,
+          duration: 350,
+          useNativeDriver: true,
+        }),
       ]),
     ]).start();
   }, []);
@@ -79,6 +114,7 @@ export default function RoleSelectScreen() {
 
   const handleContinue = () => {
     if (!selectedRole) return;
+    // TODO: route to next screen
     // router.push(selectedRole === 'student' ? '/(onboarding)/personalization' : '/(auth)/teacher-login');
   };
 
@@ -90,33 +126,49 @@ export default function RoleSelectScreen() {
       <ScreenBackground />
 
       <View
-        className="flex-1 px-6"
+        className="flex-1"
         style={{
-          paddingTop: Platform.OS === 'android' ? (StatusBar.currentHeight ?? 0) + 20 : 64,
-          paddingBottom: Platform.OS === 'android' ? 24 : 40,
+          paddingTop: SAFE_TOP,
+          paddingBottom: SAFE_BOTTOM,
+          paddingHorizontal: 24,
         }}
       >
         {/* Header */}
         <Animated.View
-          className="mb-4 px-2"
-          style={{ opacity: headerOpacity, transform: [{ translateY: headerSlide }] }}
+          style={{
+            marginBottom: 16,
+            paddingHorizontal: 8,
+            opacity: headerOpacity,
+            transform: [{ translateY: headerSlide }],
+          }}
         >
-          <Text className="font-poppins-medium text-sm uppercase tracking-wide text-white/50">
+          <Text
+            className="font-poppins-medium text-sm uppercase"
+            style={{ color: 'rgba(255,255,255,0.5)', letterSpacing: 0.5 }}
+          >
             Choose your role
           </Text>
           <Text
-            className="mt-1 font-fredoka text-[34px] leading-10 text-white"
-            style={{ textShadowColor: 'rgba(0,0,0,0.2)', textShadowOffset: { width: 0, height: 2 }, textShadowRadius: 6 }}
+            className="font-fredoka text-[34px] leading-10 text-white"
+            style={{
+              marginTop: 4,
+              textShadowColor: 'rgba(0,0,0,0.2)',
+              textShadowOffset: { width: 0, height: 2 },
+              textShadowRadius: 6,
+            }}
           >
             Who are you?
           </Text>
-          <Text className="mt-1.5 font-poppins-regular text-sm text-white/55">
+          <Text
+            className="font-poppins-regular text-sm"
+            style={{ color: 'rgba(255,255,255,0.55)', marginTop: 6 }}
+          >
             Pick how you'll use Money Islands
           </Text>
         </Animated.View>
 
         {/* Role cards */}
-        <View className="flex-1 justify-center gap-4">
+        <View className="flex-1 justify-center" style={{ gap: 16 }}>
           {ROLES.map((role, index) => {
             const isSelected = selectedRole === role.key;
             const anim = cardAnims[index];
@@ -130,41 +182,69 @@ export default function RoleSelectScreen() {
                   transform: [{ translateY: anim.slide }, { scale: pulse.scale }],
                 }}
               >
-                <TouchableOpacity activeOpacity={0.8} onPress={() => handleSelect(role.key)} className="rounded-[20px]">
+                <TouchableOpacity
+                  activeOpacity={0.8}
+                  onPress={() => handleSelect(role.key)}
+                  style={{ borderRadius: 20 }}
+                >
                   <LinearGradient
                     colors={isSelected ? [...role.selectedGradient] : [...DEFAULT_GRADIENT]}
                     start={{ x: 0, y: 0 }}
                     end={{ x: 0, y: 1 }}
-                    className="flex-row items-center gap-3.5 rounded-[20px] border-[1.5px] px-4 py-5"
-                    style={{ borderColor: isSelected ? role.accentColor : 'rgba(255,255,255,0.1)', borderWidth: isSelected ? 2 : 1.5 }}
+                    style={{
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      borderRadius: 20,
+                      borderWidth: isSelected ? 2 : 1.5,
+                      borderColor: isSelected ? role.accentColor : 'rgba(255,255,255,0.1)',
+                      paddingVertical: 20,
+                      paddingHorizontal: 16,
+                      gap: 14,
+                    }}
                   >
                     {/* Illustration */}
-                    <View className="h-[90px] w-[90px] items-center justify-center">
+                    <View className="items-center justify-center" style={{ width: 90, height: 90 }}>
                       <role.Illustration />
                     </View>
 
                     {/* Text */}
                     <View className="flex-1">
-                      <Text className="font-fredoka text-[22px] text-white" style={{ letterSpacing: -0.3 }}>
+                      <Text
+                        className="font-fredoka text-[22px] text-white"
+                        style={{ letterSpacing: -0.3 }}
+                      >
                         {role.title}
                       </Text>
-                      <Text className="mt-1 font-poppins-regular text-[13px] leading-[19px] text-white/60">
+                      <Text
+                        className="font-poppins-regular text-[13px] leading-[19px]"
+                        style={{
+                          color: 'rgba(255,255,255,0.6)',
+                          marginTop: 4,
+                        }}
+                      >
                         {role.description}
                       </Text>
                     </View>
 
-                    {/* Radio */}
+                    {/* Radio indicator */}
                     <View
-                      className="h-[26px] w-[26px] items-center justify-center rounded-full border-2"
+                      className="items-center justify-center rounded-full"
                       style={{
+                        width: 26,
+                        height: 26,
+                        borderWidth: 2,
                         borderColor: isSelected ? role.accentColor : 'rgba(255,255,255,0.2)',
                         backgroundColor: isSelected ? `${role.accentColor}26` : 'transparent',
                       }}
                     >
                       {isSelected && (
                         <View
-                          className="h-3 w-3 rounded-full"
-                          style={{ backgroundColor: role.accentColor }}
+                          style={{
+                            width: 12,
+                            height: 12,
+                            borderRadius: 6,
+                            backgroundColor: role.accentColor,
+                          }}
                         />
                       )}
                     </View>
@@ -177,14 +257,13 @@ export default function RoleSelectScreen() {
 
         {/* Continue */}
         <Animated.View
-          className="pt-2"
-          style={{ opacity: footerOpacity, transform: [{ translateY: footerSlide }] }}
+          style={{
+            paddingTop: 8,
+            opacity: footerOpacity,
+            transform: [{ translateY: footerSlide }],
+          }}
         >
-          <GoldButton
-            label="Continue"
-            onPress={handleContinue}
-            disabled={!selectedRole}
-          />
+          <GoldButton label="Continue" onPress={handleContinue} disabled={!selectedRole} />
         </Animated.View>
       </View>
     </View>

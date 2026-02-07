@@ -40,23 +40,22 @@ export function GoldButton({
     >
       <LinearGradient
         colors={
-          disabled
-            ? ['rgba(255,255,255,0.12)', 'rgba(255,255,255,0.06)']
-            : ['#FFD700', '#F5A623']
+          disabled ? ['rgba(255,255,255,0.12)', 'rgba(255,255,255,0.06)'] : ['#FFD700', '#F5A623']
         }
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
-        className="flex-row items-center justify-center gap-2.5 py-[16px]"
+        className="flex-row items-center justify-center py-[16px]"
       >
         <Text
-          className="font-poppins-bold text-lg tracking-wide"
+          className="p-2 font-poppins-bold text-lg tracking-wide"
           style={{ color: disabled ? 'rgba(255,255,255,0.3)' : '#1A1B4B' }}
         >
           {label}
         </Text>
+
         {showArrow && (
           <Text
-            className="font-poppins-bold text-xl"
+            className="ml-2 font-poppins-bold text-lg leading-[22px]"
             style={{ color: disabled ? 'rgba(255,255,255,0.3)' : '#1A1B4B' }}
           >
             →
