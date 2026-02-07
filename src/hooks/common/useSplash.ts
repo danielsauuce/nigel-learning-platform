@@ -18,10 +18,10 @@ export function useSplash() {
         // - Load cached user data
         // - Check authentication status
         // - Initialize services
-        
+
         // Simulate initialization
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+
         setIsReady(true);
       } catch (e) {
         console.warn('Error during splash preparation:', e);
@@ -36,7 +36,7 @@ export function useSplash() {
     if (isReady && animationComplete) {
       // Hide the native splash screen
       SplashScreen.hideAsync();
-      
+
       // Navigate to welcome screen after a brief delay
       setTimeout(() => {
         //router.replace('/(auth)/welcome');
