@@ -4,7 +4,6 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 
 import '../global.css';
-
 import { useColorScheme } from '@/hooks/use-color-scheme';
 
 export default function RootLayout() {

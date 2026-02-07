@@ -67,7 +67,7 @@ export default function WelcomeScreen() {
         {/* Header */}
         <Animated.View style={{ paddingHorizontal: 32, marginBottom: 8, ...header.style }}>
           <Text
-            className="font-poppins-medium text-base"
+            className="mt-8 font-poppins-medium text-base"
             style={{ color: 'rgba(255,255,255,0.6)', letterSpacing: 0.5 }}
           >
             Welcome to

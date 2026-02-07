@@ -7,9 +7,6 @@ import {
 } from '@expo-google-fonts/poppins';
 import { useFonts } from 'expo-font';
 
-/**
- * Loads all app fonts. Returns [fontsLoaded] boolean.
- */
 export function useAppFonts() {
   return useFonts({
     Poppins_700Bold,

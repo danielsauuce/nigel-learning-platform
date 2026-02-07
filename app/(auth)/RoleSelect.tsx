@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Animated, StatusBar, Text, TouchableOpacity, View } from 'react-native';
 import { useRouter } from 'expo-router';
-
 import { StudentIllustration, TeacherIllustration } from '@/components/illustrations';
 import { GlassCard } from '@/components/ui/glass-card';
 import { GoldButton } from '@/components/ui/gold-button';
@@ -12,8 +11,6 @@ import { useAppFonts } from '@/hooks/use-app-fonts';
 import { usePulse } from '@/hooks/use-animations';
 import { useStaggeredEntrance } from '@/hooks/use-staggered-entrance';
 import { SAFE_BOTTOM, SAFE_TOP } from '@/lib/safe-area';
-
-// ─── Role card configuration ────────────────────────────────────────
 
 const ROLES = [
   {
@@ -36,14 +33,12 @@ const ROLES = [
 
 const DEFAULT_GRADIENT: [string, string] = ['rgba(255,255,255,0.1)', 'rgba(255,255,255,0.04)'];
 
-// ─── Screen ─────────────────────────────────────────────────────────
-
 export default function RoleSelectScreen() {
   const router = useRouter();
   const [fontsLoaded] = useAppFonts();
   const [selectedRole, setSelectedRole] = useState<RoleType | null>(null);
 
-  // Entrance animations: header + 2 cards + footer = 4 stages
+  // Entrance animations
   const [header, card0, card1, footer] = useStaggeredEntrance([
     { fromY: -20, duration: 450 },
     { fromY: 50, spring: true, friction: 6, tension: 50 },
@@ -61,8 +56,6 @@ export default function RoleSelectScreen() {
     teacher: teacherPulse,
   };
 
-  // ─── Handlers ───────────────────────────────────────────────────
-
   const handleSelect = (role: RoleType) => {
     setSelectedRole(role);
     pulseMap[role].pulse();
@@ -73,8 +66,9 @@ export default function RoleSelectScreen() {
 
   const handleContinue = () => {
     if (!selectedRole) return;
-    // TODO: route to next screen based on role
-    // router.push(selectedRole === 'student' ? '/(onboarding)/personalization' : '/(auth)/teacher-login');
+    router.push(
+      selectedRole === 'student' ? '/(onboarding)/personalization' : '/(auth)/teacher-login',
+    );
   };
 
   if (!fontsLoaded) return null;
@@ -91,7 +85,7 @@ export default function RoleSelectScreen() {
         {/* Header */}
         <Animated.View style={{ marginBottom: 16, paddingHorizontal: 8, ...header.style }}>
           <Text
-            className="font-poppins-medium text-sm uppercase"
+            className="mt-8 font-poppins-medium text-sm uppercase"
             style={{ color: 'rgba(255,255,255,0.5)', letterSpacing: 0.5 }}
           >
             Choose your role
