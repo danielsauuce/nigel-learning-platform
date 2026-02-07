@@ -6,7 +6,7 @@ export default function ModalScreen() {
   return (
     <View className="flex-1 items-center justify-center bg-background p-5">
       <Text className="font-poppins-bold text-2xl text-foreground">This is a modal</Text>
-      <Link href="/" dismissTo className="mt-4 py-4">
+      <Link href="/" dismissTo style={{ marginTop: 16, paddingVertical: 16 }}>
         <Text className="font-poppins-semibold text-base text-primary">Go to home screen</Text>
       </Link>
     </View>

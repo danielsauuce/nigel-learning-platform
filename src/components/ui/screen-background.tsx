@@ -80,10 +80,34 @@ export function FloatingSparkle({ delay, x, y, size, color }: FloatingSparklePro
 export function DefaultSparkles() {
   return (
     <>
-      <FloatingSparkle delay={0} x={SCREEN_WIDTH * 0.06} y={SCREEN_HEIGHT * 0.15} size={6} color="#FFD700" />
-      <FloatingSparkle delay={300} x={SCREEN_WIDTH * 0.85} y={SCREEN_HEIGHT * 0.1} size={5} color="#4FC3F7" />
-      <FloatingSparkle delay={150} x={SCREEN_WIDTH * 0.72} y={SCREEN_HEIGHT * 0.25} size={4} color="#FF2E91" />
-      <FloatingSparkle delay={500} x={SCREEN_WIDTH * 0.15} y={SCREEN_HEIGHT * 0.32} size={5} color="#10B981" />
+      <FloatingSparkle
+        delay={0}
+        x={SCREEN_WIDTH * 0.06}
+        y={SCREEN_HEIGHT * 0.15}
+        size={6}
+        color="#FFD700"
+      />
+      <FloatingSparkle
+        delay={300}
+        x={SCREEN_WIDTH * 0.85}
+        y={SCREEN_HEIGHT * 0.1}
+        size={5}
+        color="#4FC3F7"
+      />
+      <FloatingSparkle
+        delay={150}
+        x={SCREEN_WIDTH * 0.72}
+        y={SCREEN_HEIGHT * 0.25}
+        size={4}
+        color="#FF2E91"
+      />
+      <FloatingSparkle
+        delay={500}
+        x={SCREEN_WIDTH * 0.15}
+        y={SCREEN_HEIGHT * 0.32}
+        size={5}
+        color="#10B981"
+      />
     </>
   );
 }

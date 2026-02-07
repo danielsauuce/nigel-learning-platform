@@ -5,7 +5,6 @@ import {
   Animated,
   NativeScrollEvent,
   NativeSyntheticEvent,
-  Platform,
   ScrollView,
   StatusBar,
   Text,
@@ -13,11 +12,12 @@ import {
   View,
 } from 'react-native';
 
-import { SlideIllustration } from '@/components/ui/illustrations';
+import { SlideIllustration } from '@/components/illustrations';
 import { GoldButton } from '@/components/ui/gold-button';
 import { ScreenBackground } from '@/components/ui/screen-background';
 import { ONBOARDING_SLIDES, SCREEN_WIDTH } from '@/constants/app';
 import { useAppFonts } from '@/hooks/use-app-fonts';
+import { SAFE_BOTTOM, SAFE_TOP } from '@/lib/safe-area';
 
 const CARD_WIDTH = SCREEN_WIDTH - 64;
 
@@ -60,7 +60,10 @@ export default function WelcomeScreen() {
 
   const handleNext = () => {
     if (activeSlide < ONBOARDING_SLIDES.length - 1) {
-      scrollRef.current?.scrollTo({ x: (activeSlide + 1) * CARD_WIDTH, animated: true });
+      scrollRef.current?.scrollTo({
+        x: (activeSlide + 1) * CARD_WIDTH,
+        animated: true,
+      });
     } else {
       handleGetStarted();
     }
@@ -75,31 +78,49 @@ export default function WelcomeScreen() {
       <StatusBar barStyle="light-content" translucent backgroundColor="transparent" />
       <ScreenBackground />
 
-      <View
-        className="flex-1 pb-10"
-        style={{ paddingTop: Platform.OS === 'android' ? (StatusBar.currentHeight ?? 0) + 16 : 60 }}
-      >
+      <View className="flex-1" style={{ paddingTop: SAFE_TOP, paddingBottom: SAFE_BOTTOM }}>
         {/* Header */}
         <Animated.View
-          className="mb-2 px-8"
-          style={{ opacity: headerOpacity, transform: [{ translateY: headerSlide }] }}
+          style={{
+            paddingHorizontal: 32,
+            marginBottom: 8,
+            opacity: headerOpacity,
+            transform: [{ translateY: headerSlide }],
+          }}
         >
-          <Text className="font-poppins-medium text-base tracking-wide text-white/60">Welcome to</Text>
-          <View className="mt-0.5 flex-row items-baseline">
+          <Text
+            className="font-poppins-medium text-base"
+            style={{ color: 'rgba(255,255,255,0.6)', letterSpacing: 0.5 }}
+          >
+            Welcome to
+          </Text>
+          <View className="flex-row items-baseline" style={{ marginTop: 2 }}>
             <Text
               className="font-fredoka text-4xl leading-[42px] text-white"
-              style={{ textShadowColor: 'rgba(0,0,0,0.2)', textShadowOffset: { width: 0, height: 2 }, textShadowRadius: 6 }}
+              style={{
+                textShadowColor: 'rgba(0,0,0,0.2)',
+                textShadowOffset: { width: 0, height: 2 },
+                textShadowRadius: 6,
+              }}
             >
               Money{' '}
             </Text>
             <Text
-              className="font-fredoka text-4xl leading-[42px] text-gold"
-              style={{ textShadowColor: 'rgba(245,166,35,0.35)', textShadowOffset: { width: 0, height: 2 }, textShadowRadius: 10 }}
+              className="font-fredoka text-4xl leading-[42px]"
+              style={{
+                color: '#FFD700',
+                textShadowColor: 'rgba(245,166,35,0.35)',
+                textShadowOffset: { width: 0, height: 2 },
+                textShadowRadius: 10,
+              }}
             >
               Islands
             </Text>
           </View>
-          <Text className="mt-1.5 font-poppins-regular text-sm text-white/55">
+          <Text
+            className="font-poppins-regular text-sm"
+            style={{ color: 'rgba(255,255,255,0.55)', marginTop: 6, letterSpacing: 0.2 }}
+          >
             Your adventure in financial literacy starts here
           </Text>
         </Animated.View>
@@ -117,7 +138,7 @@ export default function WelcomeScreen() {
             onMomentumScrollEnd={handleScroll}
             snapToInterval={CARD_WIDTH}
             decelerationRate="fast"
-            contentContainerStyle={{ paddingHorizontal: 32, marginTop: 50 }}
+            contentContainerStyle={{ paddingHorizontal: 32 }}
           >
             {ONBOARDING_SLIDES.map((slide, index) => (
               <View key={index} style={{ width: CARD_WIDTH, paddingHorizontal: 4 }}>
@@ -125,18 +146,41 @@ export default function WelcomeScreen() {
                   colors={['rgba(255,255,255,0.12)', 'rgba(255,255,255,0.05)']}
                   start={{ x: 0, y: 0 }}
                   end={{ x: 0, y: 1 }}
-                  className="items-center rounded-3xl border border-white/10 px-6 py-7"
+                  style={{
+                    borderRadius: 24,
+                    borderWidth: 1,
+                    borderColor: 'rgba(255,255,255,0.12)',
+                    paddingVertical: 28,
+                    paddingHorizontal: 24,
+                    alignItems: 'center',
+                  }}
                 >
-                  <View className="mb-5 h-[140px] w-[160px] items-center justify-center">
+                  <View
+                    className="items-center justify-center"
+                    style={{ marginBottom: 20, width: 160, height: 140 }}
+                  >
                     <SlideIllustration icon={slide.icon} />
                   </View>
                   <Text
                     className="text-center font-fredoka text-[26px] leading-8 text-white"
-                    style={{ letterSpacing: -0.5, textShadowColor: 'rgba(0,0,0,0.15)', textShadowOffset: { width: 0, height: 1 }, textShadowRadius: 4 }}
+                    style={{
+                      letterSpacing: -0.5,
+                      textShadowColor: 'rgba(0,0,0,0.15)',
+                      textShadowOffset: { width: 0, height: 1 },
+                      textShadowRadius: 4,
+                    }}
                   >
                     {slide.title}
                   </Text>
-                  <Text className="mt-3 px-2 text-center font-poppins-regular text-sm leading-[21px] text-white/70">
+                  <Text
+                    className="text-center font-poppins-regular text-sm leading-[21px]"
+                    style={{
+                      color: 'rgba(255,255,255,0.7)',
+                      marginTop: 12,
+                      letterSpacing: 0.2,
+                      paddingHorizontal: 8,
+                    }}
+                  >
                     {slide.subtitle}
                   </Text>
                 </LinearGradient>
@@ -145,13 +189,15 @@ export default function WelcomeScreen() {
           </ScrollView>
 
           {/* Dot indicators */}
-          <View className="mt-6 flex-row items-center justify-center gap-2">
+          <View className="flex-row items-center justify-center" style={{ marginTop: 24, gap: 8 }}>
             {ONBOARDING_SLIDES.map((slide, index) => (
               <View
                 key={index}
-                className="h-2 rounded-full"
                 style={{
-                  backgroundColor: index === activeSlide ? slide.accentColor : 'rgba(255,255,255,0.25)',
+                  height: 8,
+                  borderRadius: 4,
+                  backgroundColor:
+                    index === activeSlide ? slide.accentColor : 'rgba(255,255,255,0.25)',
                   width: index === activeSlide ? 24 : 8,
                 }}
               />
@@ -161,16 +207,26 @@ export default function WelcomeScreen() {
 
         {/* Footer CTA */}
         <Animated.View
-          className="items-center px-8 pt-2"
-          style={{ opacity: footerOpacity, transform: [{ translateY: footerSlide }] }}
+          className="items-center"
+          style={{
+            paddingHorizontal: 32,
+            paddingTop: 8,
+            opacity: footerOpacity,
+            transform: [{ translateY: footerSlide }],
+          }}
         >
-          <GoldButton
-            label={isLastSlide ? 'Get Started' : 'Next'}
-            onPress={handleNext}
-          />
+          <GoldButton label={isLastSlide ? 'Get Started' : 'Next'} onPress={handleNext} />
           {!isLastSlide && (
-            <TouchableOpacity className="mt-4 px-6 py-2" onPress={handleGetStarted}>
-              <Text className="font-poppins-medium text-sm tracking-wide text-white/50">Skip</Text>
+            <TouchableOpacity
+              style={{ marginTop: 16, paddingVertical: 8, paddingHorizontal: 24 }}
+              onPress={handleGetStarted}
+            >
+              <Text
+                className="font-poppins-medium text-sm"
+                style={{ color: 'rgba(255,255,255,0.5)', letterSpacing: 0.3 }}
+              >
+                Skip
+              </Text>
             </TouchableOpacity>
           )}
         </Animated.View>
