@@ -1,0 +1,74 @@
+import { LinearGradient } from 'expo-linear-gradient';
+import React from 'react';
+import { Platform, Text, TouchableOpacity, View } from 'react-native';
+import { ArrowRight } from 'lucide-react-native';
+
+interface GoldButtonProps {
+  label: string;
+  onPress: () => void;
+  disabled?: boolean;
+  showArrow?: boolean;
+}
+
+export function GoldButton({
+  label,
+  onPress,
+  disabled = false,
+  showArrow = true,
+}: GoldButtonProps) {
+  const shadowStyle = !disabled
+    ? Platform.select({
+        ios: {
+          shadowColor: '#F5A623',
+          shadowOffset: { width: 0, height: 6 },
+          shadowOpacity: 0.35,
+          shadowRadius: 14,
+        },
+        android: { elevation: 8 },
+      })
+    : Platform.select({
+        ios: { shadowOpacity: 0 },
+        android: { elevation: 0 },
+      });
+
+  return (
+    <TouchableOpacity
+      className="w-full overflow-hidden rounded-[28px]"
+      style={shadowStyle}
+      activeOpacity={disabled ? 1 : 0.85}
+      onPress={disabled ? undefined : onPress}
+      disabled={disabled}
+    >
+      <LinearGradient
+        colors={
+          disabled ? ['rgba(255,255,255,0.12)', 'rgba(255,255,255,0.06)'] : ['#FFD700', '#F5A623']
+        }
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'center',
+          paddingVertical: 16,
+          paddingHorizontal: 24,
+        }}
+      >
+        <Text
+          className={`font-poppins-bold text-lg tracking-wide ${disabled ? 'text-white/30' : 'text-navy'} `}
+        >
+          {label}
+        </Text>
+
+        {showArrow && (
+          <View className="ml-2.5">
+            <ArrowRight
+              size={20}
+              color={disabled ? 'rgba(255,255,255,0.3)' : '#1A1B4B'}
+              strokeWidth={2.5}
+            />
+          </View>
+        )}
+      </LinearGradient>
+    </TouchableOpacity>
+  );
+}
