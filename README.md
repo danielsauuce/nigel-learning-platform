@@ -1,50 +1,109 @@
-# Welcome to your Expo app 👋
+# Nigel Junior | Financial Literacy Module
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+[![Beyond Encryption](https://img.shields.io/badge/Project%20Sponsor-Beyond%20Encryption-blue)](https://www.beyondencryption.com/)
+[![Target Curriculum](https://img.shields.io/badge/Curriculum%20Ready-2028-green)](#)
+[![Tech Stack](https://img.shields.io/badge/Stack-React%20Native%20%7C%20FastAPI-orange)](#)
 
-## Get started
+> **Nigel Junior** is a ring-fenced, student-centric extension of the Nigel Smart Data agent. Developed as a Student Sprint Project, this MVP empowers secondary school students (ages 11–16) to master real-world financial concepts through gamified learning and interactive simulation.
 
-1. Install dependencies
+---
 
+## 📖 Project Overview
+Financial literacy is a critical life skill often missing from traditional education. This module provides a safe, "ring-fenced" environment where students can fail safely and learn effectively before they handle real money.
+
+### Core Objectives:
+* **Engaging & Simple:** Visual-first learning designed for short attention spans.
+* **Relevant:** Scenarios based on first jobs, payslips, and realistic "life shocks."
+* **Measurable:** Real-time progress tracking for both students and teachers.
+* **Safe-by-Design:** No real financial data; purely educational simulations.
+
+---
+
+## 🛠 Tech Stack
+
+### Frontend (Mobile-First)
+* **Framework:** [React Native](https://reactnative.dev/) (Expo)
+* **Language:** [TypeScript](https://www.typescriptlang.org/)
+* **Styling:** [NativeWind](https://www.nativewind.dev/) (Tailwind CSS for React Native)
+* **Navigation:** [Expo Router](https://docs.expo.dev/router/introduction/) (File-based)
+* **Animations:** [React Native Reanimated](https://docs.swmansion.com/react-native-reanimated/)
+
+### Backend
+* **Framework:** [FastAPI](https://fastapi.tiangolo.com/) (Python)
+* **Database:** PostgreSQL with SQLAlchemy ORM
+* **Auth:** JWT-based role separation (Student vs. Teacher)
+
+---
+
+## 🗺 User Journey & Architecture
+
+### 1. Onboarding & Empathy
+Unlike standard banking apps, we start with a **Personalization Flow** (Screens 2-4) that asks students about their "Money Worries." This aligns with the Nigel mission of supporting vulnerable households.
+
+### 2. The Islands (Learning Map)
+The curriculum is visualized as a map. Each island represents a module:
+* **Budgeting Basics:** Needs vs. Wants.
+* **The Tax Jungle:** Understanding Gross vs. Net pay.
+* **Scam Reef:** Identifying fraud and digital safety.
+
+### 3. The MVP Simulator
+The "Life Simulator" (Screens 12-16) is the project's centerpiece. Students:
+1.  **Choose a Role:** Apprentice, Retail, or Office Entry-level.
+2.  **Analyze a Payslip:** Visual breakdown of Tax and National Insurance.
+3.  **Build a Budget:** Distribute "Take-home pay" across food, rent, and savings.
+4.  **Survive Random Events:** Unexpected costs (broken phone, birthday gifts) test their resilience.
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+* Node.js (v18+)
+* Python 3.10+
+* Expo Go App (for mobile testing)
+
+### Installation
+
+1. **Clone the repository**
    ```bash
-   npm install
-   ```
+   git clone [https://github.com/your-username/nigel-financial-literacy.git](https://github.com/your-username/nigel-financial-literacy.git)
+   cd nigel-financial-literacy
 
-2. Start the app
+2. **cd frontend**
+    npm install
+    npx expo start
 
-   ```bash
-   npx expo start
-   ```
+## 🛡️ Security & Ring-Fencing
 
-In the output, you'll find options to open the app in a
+This project strictly adheres to the "Ring-Fenced" requirement, ensuring the student environment is isolated and secure:
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+* **Data Isolation:** Student data is stored in separate database schemas or tables, physically and logically isolated from core Nigel production users.
+* **Zero-Risk Environment:** The app uses simulated balances only. There is **no connection** to real banking APIs, Open Banking protocols, or payment gateways.
+* **Anonymity & Privacy:** We collect minimal personal data. Teacher assessment is facilitated through unique **Classroom Codes**, allowing progress tracking without compromising Student PII (Personally Identifiable Information).
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
 
-## Get a fresh project
 
-When you're ready, run:
+---
 
-```bash
-npm run reset-project
-```
+## 📈 Future Roadmap
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+* **AI Mentorship:** Integration of the core **Nigel "Smart Data Agent"** to provide proactive, automated budgeting tips based on simulated spending habits.
+* **Parent Mode:** A dedicated portal for guided "Conversation Starters" to help bridge the gap between school learning and home finances without social stigma.
+* **Accessibility First:** Implementation of **OpenDyslexic** font support and multi-language localization to ensure no student is left behind.
 
-## Learn more
+---
 
-To learn more about developing your project with Expo, look at the following resources:
+## 🤝 Project Sponsor
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+**Beyond Encryption** **Project Sponsor:** Emily Plummer – Marketing Director  
+**Contact:** [emily.plummer@beyondencryption.com](mailto:emily.plummer@beyondencryption.com)  
 
-## Join the community
+> *Nigel: Converting fragmented information into proactive, money-saving actions.*
 
-Join our community of developers creating universal apps.
+---
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+*This project is part of a Student Sprint Project. The "Nigel" name and associated branding are trademarks of Beyond Encryption.*
+
+
+
+
