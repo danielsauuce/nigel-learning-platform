@@ -41,13 +41,10 @@ module.exports = {
         'chart-5': 'rgb(var(--chart-5) / <alpha-value>)',
 
         /* ── App-specific brand colors ── */
-
-        // Background gradient
         'gradient-start': 'rgb(var(--gradient-start) / <alpha-value>)',
         'gradient-mid': 'rgb(var(--gradient-mid) / <alpha-value>)',
         'gradient-end': 'rgb(var(--gradient-end) / <alpha-value>)',
 
-        // Gold (CTAs, coins, rewards)
         gold: {
           DEFAULT: 'rgb(var(--gold) / <alpha-value>)',
           dark: 'rgb(var(--gold-dark) / <alpha-value>)',
@@ -55,33 +52,28 @@ module.exports = {
           deep: 'rgb(var(--gold-deep) / <alpha-value>)',
         },
 
-        // Student accent (sky blue)
         student: {
           DEFAULT: 'rgb(var(--student) / <alpha-value>)',
           dark: 'rgb(var(--student-dark) / <alpha-value>)',
         },
 
-        // Teacher accent (purple)
         teacher: {
           DEFAULT: 'rgb(var(--teacher) / <alpha-value>)',
           dark: 'rgb(var(--teacher-dark) / <alpha-value>)',
           darker: 'rgb(var(--teacher-darker) / <alpha-value>)',
         },
 
-        // Pink (piggy, confetti)
         pink: {
           DEFAULT: 'rgb(var(--pink) / <alpha-value>)',
           light: 'rgb(var(--pink-light) / <alpha-value>)',
           dark: 'rgb(var(--pink-dark) / <alpha-value>)',
         },
 
-        // Greens (nature, success)
         success: 'rgb(var(--success) / <alpha-value>)',
         'green-light': 'rgb(var(--green-light) / <alpha-value>)',
         'green-mid': 'rgb(var(--green-mid) / <alpha-value>)',
         'green-leaf': 'rgb(var(--green-leaf) / <alpha-value>)',
 
-        // Sand & earth
         sand: {
           DEFAULT: 'rgb(var(--sand) / <alpha-value>)',
           dark: 'rgb(var(--sand-dark) / <alpha-value>)',
@@ -91,15 +83,28 @@ module.exports = {
           dark: 'rgb(var(--brown-dark) / <alpha-value>)',
         },
 
-        // Skin tones (SVG characters)
         skin: {
           DEFAULT: 'rgb(var(--skin) / <alpha-value>)',
           dark: 'rgb(var(--skin-dark) / <alpha-value>)',
           blush: 'rgb(var(--skin-blush) / <alpha-value>)',
         },
 
-        // Navy (used as foreground on gold buttons)
         navy: '#1A1B4B',
+
+        // ── White with opacity levels (very useful for light overlays on dark backgrounds) ──
+        'white-alpha': {
+          5: 'rgba(255, 255, 255, 0.05)',
+          10: 'rgba(255, 255, 255, 0.10)',
+          15: 'rgba(255, 255, 255, 0.15)',
+          20: 'rgba(255, 255, 255, 0.20)',
+          30: 'rgba(255, 255, 255, 0.30)',
+          40: 'rgba(255, 255, 255, 0.40)',
+          50: 'rgba(255, 255, 255, 0.50)',
+          60: 'rgba(255, 255, 255, 0.60)',
+          75: 'rgba(255, 255, 255, 0.75)',
+          85: 'rgba(255, 255, 255, 0.85)',
+          90: 'rgba(255, 255, 255, 0.90)',
+        },
       },
       borderRadius: {
         lg: 'var(--radius)',
