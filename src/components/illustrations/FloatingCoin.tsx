@@ -12,13 +12,7 @@ interface FloatingCoinProps {
   opacity: number;
 }
 
-export function FloatingCoin({
-  delay,
-  startX,
-  startY,
-  size,
-  opacity,
-}: FloatingCoinProps) {
+export function FloatingCoin({ delay, startX, startY, size, opacity }: FloatingCoinProps) {
   const { fadeIn, translateY } = useFloatAnimation(delay, 18);
 
   return (
