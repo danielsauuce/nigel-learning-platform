@@ -1,18 +1,12 @@
+import { Stack } from 'expo-router';
 import React from 'react';
 
-import { useColorScheme } from '@/hooks/use-color-scheme';
-import { Stack } from 'expo-router';
-
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
+export default function AuthLayout() {
   return (
-    <>
-      <Stack screenOptions={{
-        headerShown: false
-      }}>
-        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-      </Stack>
-    </>
+    <Stack screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="index" />
+      <Stack.Screen name="welcome" />
+      <Stack.Screen name="RoleSelect" />
+    </Stack>
   );
 }

@@ -1,67 +1,153 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 @custom-variant dark (&:is(.dark *));
 
 :root {
+  /* ── Core surfaces ── */
   --background: 248 249 250;
-  --foreground: 24 24 27;
+  --foreground: 26 27 75;
   --card: 255 255 255;
-  --card-foreground: 24 24 27;
+  --card-foreground: 26 27 75;
   --popover: 255 255 255;
-  --popover-foreground: 24 24 27;
-  --primary: 112 0 224;
+  --popover-foreground: 26 27 75;
+
+  /* ── Primary – deep navy/indigo (main brand) ── */
+  --primary: 65 88 208;
   --primary-foreground: 255 255 255;
-  --secondary: 243 244 246;
-  --secondary-foreground: 24 24 27;
+
+  /* ── Secondary – sky blue (student accent, water) ── */
+  --secondary: 79 195 247;
+  --secondary-foreground: 26 27 75;
+
+  /* ── Muted ── */
   --muted: 243 244 246;
   --muted-foreground: 113 113 122;
-  --accent: 255 46 145;
-  --accent-foreground: 255 255 255;
+
+  /* ── Accent – gold (CTAs, coins, rewards) ── */
+  --accent: 255 215 0;
+  --accent-foreground: 26 27 75;
+
+  /* ── Destructive ── */
   --destructive: 239 68 68;
   --destructive-foreground: 255 255 255;
+
+  /* ── Borders & inputs ── */
   --border: 228 228 231;
   --input: 228 228 231;
-  --ring: 112 0 224;
+  --ring: 65 88 208;
+
+  /* ── Radius ── */
   --radius: 0.625rem;
 
-  --chart-1: 112 0 224;
+  /* ── Chart palette (matches brand colors) ── */
+  --chart-1: 65 88 208;
   --chart-2: 255 46 145;
   --chart-3: 16 185 129;
-  --chart-4: 245 158 11;
-  --chart-5: 59 130 246;
+  --chart-4: 245 166 35;
+  --chart-5: 79 195 247;
+
+  /* ─── App-specific semantic tokens ─── */
+
+  /* Gradient stops for the deep-space background */
+  --gradient-start: 26 27 75;
+  --gradient-mid: 45 58 140;
+  --gradient-end: 65 88 208;
+
+  /* Gold CTA gradient */
+  --gold: 255 215 0;
+  --gold-dark: 245 166 35;
+  --gold-darker: 232 150 12;
+  --gold-deep: 184 118 10;
+
+  /* Student (sky-blue) */
+  --student: 79 195 247;
+  --student-dark: 33 150 243;
+
+  /* Teacher (purple) */
+  --teacher: 168 85 247;
+  --teacher-dark: 112 0 224;
+  --teacher-darker: 91 0 184;
+
+  /* Pink accent (piggy, confetti) */
+  --pink: 255 46 145;
+  --pink-light: 255 143 171;
+  --pink-dark: 232 114 138;
+
+  /* Success / nature greens */
+  --success: 16 185 129;
+  --green-light: 139 195 74;
+  --green-mid: 76 175 80;
+  --green-leaf: 102 187 106;
+
+  /* Sand & earth tones (island, trophy) */
+  --sand: 255 224 130;
+  --sand-dark: 212 160 86;
+  --brown: 141 110 99;
+  --brown-trunk: 141 110 99;
+  --brown-dark: 198 137 58;
+
+  /* Skin tones (character SVGs) */
+  --skin: 255 211 182;
+  --skin-dark: 240 184 152;
+  --skin-blush: 212 131 106;
+
+  /* Hair (character SVGs) */
+  --hair-dark: 62 39 35;
+  --hair-mid: 93 64 55;
 }
 
 .dark {
-  --background: 18 18 20;
+  /* ── Core surfaces ── */
+  --background: 18 18 24;
   --foreground: 255 255 255;
-  --card: 28 28 30;
+  --card: 26 27 48;
   --card-foreground: 255 255 255;
-  --popover: 28 28 30;
+  --popover: 26 27 48;
   --popover-foreground: 255 255 255;
+
+  /* ── Primary ── */
   --primary: 168 85 247;
   --primary-foreground: 255 255 255;
-  --secondary: 39 39 42;
+
+  /* ── Secondary ── */
+  --secondary: 79 195 247;
   --secondary-foreground: 255 255 255;
-  --muted: 39 39 42;
+
+  /* ── Muted ── */
+  --muted: 39 39 50;
   --muted-foreground: 161 161 170;
-  --accent: 255 46 145;
-  --accent-foreground: 255 255 255;
+
+  /* ── Accent ── */
+  --accent: 255 215 0;
+  --accent-foreground: 26 27 75;
+
+  /* ── Destructive ── */
   --destructive: 248 113 113;
   --destructive-foreground: 255 255 255;
-  --border: 44 44 46;
-  --input: 44 44 46;
+
+  /* ── Borders & inputs ── */
+  --border: 44 44 56;
+  --input: 44 44 56;
   --ring: 168 85 247;
 
+  /* ── Charts ── */
   --chart-1: 168 85 247;
   --chart-2: 255 46 145;
   --chart-3: 16 185 129;
   --chart-4: 251 191 36;
   --chart-5: 96 165 250;
+
+  /* ─── App-specific (dark overrides where needed) ─── */
+  --gradient-start: 12 12 18;
+  --gradient-mid: 26 27 75;
+  --gradient-end: 45 58 140;
+
+  --teacher: 168 85 247;
+  --teacher-dark: 138 60 220;
+  --teacher-darker: 112 0 224;
 }
 
-/* Optional: Make sure body gets the right bg/fg */
 @layer base {
   body {
     @apply bg-background text-foreground;
