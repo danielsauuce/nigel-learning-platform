@@ -1,55 +1,36 @@
-import { LinearGradient } from 'expo-linear-gradient';
+import React from 'react';
+import { Animated, Platform, StatusBar, Text, View } from 'react-native';
 import { router } from 'expo-router';
-import React, { useEffect, useRef } from 'react';
-import { Animated, Platform, StatusBar, Text, TouchableOpacity, View } from 'react-native';
 
 import { FloatingCoin, IslandIcon } from '@/components/illustrations';
+import { GoldButton } from '@/components/ui/gold-button';
 import { GradientBackground, StarField, WaveDecoration } from '@/components/ui/screen-background';
 import { SCREEN_HEIGHT, SCREEN_WIDTH } from '@/constants/app';
 import { useAppFonts } from '@/hooks/use-app-fonts';
+import { useStaggeredEntrance } from '@/hooks/use-staggered-entrance';
 import { SAFE_BOTTOM, SAFE_TOP } from '@/lib/safe-area';
+
+// ─── Floating coin positions ────────────────────────────────────────
+
+const COIN_POSITIONS = [
+  { delay: 0, startX: SCREEN_WIDTH * 0.08, startY: SCREEN_HEIGHT * 0.12, size: 32, opacity: 0.6 },
+  { delay: 400, startX: SCREEN_WIDTH * 0.78, startY: SCREEN_HEIGHT * 0.08, size: 26, opacity: 0.5 },
+  { delay: 200, startX: SCREEN_WIDTH * 0.62, startY: SCREEN_HEIGHT * 0.22, size: 22, opacity: 0.4 },
+  { delay: 600, startX: SCREEN_WIDTH * 0.2, startY: SCREEN_HEIGHT * 0.28, size: 20, opacity: 0.35 },
+  { delay: 300, startX: SCREEN_WIDTH * 0.88, startY: SCREEN_HEIGHT * 0.3, size: 28, opacity: 0.45 },
+] as const;
+
+// ─── Screen ─────────────────────────────────────────────────────────
 
 export default function SplashScreen() {
   const [fontsLoaded] = useAppFonts();
 
-  const logoScale = useRef(new Animated.Value(0.3)).current;
-  const logoOpacity = useRef(new Animated.Value(0)).current;
-  const titleSlide = useRef(new Animated.Value(30)).current;
-  const titleOpacity = useRef(new Animated.Value(0)).current;
-  const subtitleSlide = useRef(new Animated.Value(20)).current;
-  const subtitleOpacity = useRef(new Animated.Value(0)).current;
-  const buttonSlide = useRef(new Animated.Value(40)).current;
-  const buttonOpacity = useRef(new Animated.Value(0)).current;
-
-  useEffect(() => {
-    Animated.sequence([
-      Animated.parallel([
-        Animated.spring(logoScale, {
-          toValue: 1,
-          friction: 4,
-          tension: 60,
-          useNativeDriver: true,
-        }),
-        Animated.timing(logoOpacity, {
-          toValue: 1,
-          duration: 600,
-          useNativeDriver: true,
-        }),
-      ]),
-      Animated.parallel([
-        Animated.timing(titleSlide, { toValue: 0, duration: 500, useNativeDriver: true }),
-        Animated.timing(titleOpacity, { toValue: 1, duration: 500, useNativeDriver: true }),
-      ]),
-      Animated.parallel([
-        Animated.timing(subtitleSlide, { toValue: 0, duration: 400, useNativeDriver: true }),
-        Animated.timing(subtitleOpacity, { toValue: 1, duration: 400, useNativeDriver: true }),
-      ]),
-      Animated.parallel([
-        Animated.timing(buttonSlide, { toValue: 0, duration: 400, useNativeDriver: true }),
-        Animated.timing(buttonOpacity, { toValue: 1, duration: 400, useNativeDriver: true }),
-      ]),
-    ]).start();
-  }, []);
+  const [logo, title, subtitle, cta] = useStaggeredEntrance([
+    { fromScale: 0.3, spring: true, friction: 4, tension: 60, duration: 600 },
+    { fromY: 30, duration: 500 },
+    { fromY: 20, duration: 400 },
+    { fromY: 40, duration: 400 },
+  ]);
 
   if (!fontsLoaded) return null;
 
@@ -57,56 +38,21 @@ export default function SplashScreen() {
     <View className="flex-1 overflow-hidden">
       <StatusBar barStyle="light-content" translucent backgroundColor="transparent" />
 
+      {/* Background layers */}
       <GradientBackground />
       <StarField count={12} seed={97} />
-
-      <FloatingCoin
-        delay={0}
-        startX={SCREEN_WIDTH * 0.08}
-        startY={SCREEN_HEIGHT * 0.12}
-        size={32}
-        opacity={0.6}
-      />
-      <FloatingCoin
-        delay={400}
-        startX={SCREEN_WIDTH * 0.78}
-        startY={SCREEN_HEIGHT * 0.08}
-        size={26}
-        opacity={0.5}
-      />
-      <FloatingCoin
-        delay={200}
-        startX={SCREEN_WIDTH * 0.62}
-        startY={SCREEN_HEIGHT * 0.22}
-        size={22}
-        opacity={0.4}
-      />
-      <FloatingCoin
-        delay={600}
-        startX={SCREEN_WIDTH * 0.2}
-        startY={SCREEN_HEIGHT * 0.28}
-        size={20}
-        opacity={0.35}
-      />
-      <FloatingCoin
-        delay={300}
-        startX={SCREEN_WIDTH * 0.88}
-        startY={SCREEN_HEIGHT * 0.3}
-        size={28}
-        opacity={0.45}
-      />
-
+      {COIN_POSITIONS.map((coin) => (
+        <FloatingCoin key={coin.delay} {...coin} />
+      ))}
       <WaveDecoration />
 
+      {/* Content */}
       <View
         className="flex-1 items-center justify-center px-8"
         style={{ paddingTop: SAFE_TOP, paddingBottom: SAFE_BOTTOM }}
       >
         {/* Logo */}
-        <Animated.View
-          className="mb-7"
-          style={{ opacity: logoOpacity, transform: [{ scale: logoScale }] }}
-        >
+        <Animated.View className="mb-7" style={logo.style}>
           <View
             className="h-40 w-40 items-center justify-center rounded-full"
             style={{
@@ -129,7 +75,7 @@ export default function SplashScreen() {
         </Animated.View>
 
         {/* Title */}
-        <Animated.View style={{ opacity: titleOpacity, transform: [{ translateY: titleSlide }] }}>
+        <Animated.View style={title.style}>
           <Text
             className="text-center font-fredoka text-[52px] leading-[56px] text-white"
             style={{
@@ -157,9 +103,7 @@ export default function SplashScreen() {
         </Animated.View>
 
         {/* Tagline */}
-        <Animated.View
-          style={{ opacity: subtitleOpacity, transform: [{ translateY: subtitleSlide }] }}
-        >
+        <Animated.View style={subtitle.style}>
           <Text
             className="text-center font-poppins-regular text-base leading-6"
             style={{ color: 'rgba(255,255,255,0.75)', marginTop: 16, letterSpacing: 0.3 }}
@@ -169,46 +113,11 @@ export default function SplashScreen() {
         </Animated.View>
 
         {/* CTA */}
-        <Animated.View
-          className="w-full items-center"
-          style={{
-            marginTop: 48,
-            opacity: buttonOpacity,
-            transform: [{ translateY: buttonSlide }],
-          }}
-        >
-          <TouchableOpacity
-            className="w-full overflow-hidden rounded-[28px]"
-            style={Platform.select({
-              ios: {
-                shadowColor: '#F5A623',
-                shadowOffset: { width: 0, height: 6 },
-                shadowOpacity: 0.4,
-                shadowRadius: 16,
-              },
-              android: { elevation: 8 },
-            })}
-            activeOpacity={0.85}
+        <Animated.View className="w-full items-center" style={{ marginTop: 48, ...cta.style }}>
+          <GoldButton
+            label="Start Your Adventure"
             onPress={() => router.replace('/(auth)/welcome')}
-          >
-            <LinearGradient
-              colors={['#FFD700', '#F5A623']}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 1 }}
-              className="flex-row items-center justify-center gap-2.5"
-              style={{ paddingVertical: 16, paddingHorizontal: 36 }}
-            >
-              <Text
-                className="font-poppins-bold text-lg"
-                style={{ color: '#1A1B4B', letterSpacing: 0.5 }}
-              >
-                Start Your Adventure
-              </Text>
-              <Text className="font-poppins-bold text-xl" style={{ color: '#1A1B4B' }}>
-                →
-              </Text>
-            </LinearGradient>
-          </TouchableOpacity>
+          />
 
           <Text
             className="font-poppins-regular text-xs"

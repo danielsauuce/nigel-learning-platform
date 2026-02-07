@@ -1,17 +1,20 @@
-import { LinearGradient } from 'expo-linear-gradient';
-import { useRouter } from 'expo-router';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { Animated, StatusBar, Text, TouchableOpacity, View } from 'react-native';
+import { useRouter } from 'expo-router';
 
 import { StudentIllustration, TeacherIllustration } from '@/components/illustrations';
+import { GlassCard } from '@/components/ui/glass-card';
 import { GoldButton } from '@/components/ui/gold-button';
+import { RadioIndicator } from '@/components/ui/radio-indicator';
 import { ScreenBackground } from '@/components/ui/screen-background';
 import type { RoleType } from '@/constants/app';
 import { useAppFonts } from '@/hooks/use-app-fonts';
 import { usePulse } from '@/hooks/use-animations';
+import { useStaggeredEntrance } from '@/hooks/use-staggered-entrance';
 import { SAFE_BOTTOM, SAFE_TOP } from '@/lib/safe-area';
 
-// ─── Role card config ───────────────────────────────────────────────
+// ─── Role card configuration ────────────────────────────────────────
+
 const ROLES = [
   {
     key: 'student' as RoleType,
@@ -33,27 +36,24 @@ const ROLES = [
 
 const DEFAULT_GRADIENT: [string, string] = ['rgba(255,255,255,0.1)', 'rgba(255,255,255,0.04)'];
 
+// ─── Screen ─────────────────────────────────────────────────────────
+
 export default function RoleSelectScreen() {
   const router = useRouter();
   const [fontsLoaded] = useAppFonts();
   const [selectedRole, setSelectedRole] = useState<RoleType | null>(null);
 
-  // Entrance animations — refs created at top level (not inside map)
-  const headerOpacity = useRef(new Animated.Value(0)).current;
-  const headerSlide = useRef(new Animated.Value(-20)).current;
+  // Entrance animations: header + 2 cards + footer = 4 stages
+  const [header, card0, card1, footer] = useStaggeredEntrance([
+    { fromY: -20, duration: 450 },
+    { fromY: 50, spring: true, friction: 6, tension: 50 },
+    { fromY: 50, spring: true, friction: 6, tension: 50 },
+    { fromY: 30, duration: 350 },
+  ]);
 
-  const card0Opacity = useRef(new Animated.Value(0)).current;
-  const card0Slide = useRef(new Animated.Value(50)).current;
-  const card1Opacity = useRef(new Animated.Value(0)).current;
-  const card1Slide = useRef(new Animated.Value(50)).current;
-  const cardAnims = [
-    { opacity: card0Opacity, slide: card0Slide },
-    { opacity: card1Opacity, slide: card1Slide },
-  ];
+  const cardStages = [card0, card1];
 
-  const footerOpacity = useRef(new Animated.Value(0)).current;
-  const footerSlide = useRef(new Animated.Value(30)).current;
-
+  // Pulse animations for selection feedback
   const studentPulse = usePulse();
   const teacherPulse = usePulse();
   const pulseMap: Record<RoleType, ReturnType<typeof usePulse>> = {
@@ -61,60 +61,19 @@ export default function RoleSelectScreen() {
     teacher: teacherPulse,
   };
 
-  useEffect(() => {
-    Animated.sequence([
-      Animated.parallel([
-        Animated.timing(headerOpacity, {
-          toValue: 1,
-          duration: 450,
-          useNativeDriver: true,
-        }),
-        Animated.timing(headerSlide, {
-          toValue: 0,
-          duration: 450,
-          useNativeDriver: true,
-        }),
-      ]),
-      ...cardAnims.map(({ opacity, slide }) =>
-        Animated.parallel([
-          Animated.timing(opacity, {
-            toValue: 1,
-            duration: 400,
-            useNativeDriver: true,
-          }),
-          Animated.spring(slide, {
-            toValue: 0,
-            friction: 6,
-            tension: 50,
-            useNativeDriver: true,
-          }),
-        ]),
-      ),
-      Animated.parallel([
-        Animated.timing(footerOpacity, {
-          toValue: 1,
-          duration: 350,
-          useNativeDriver: true,
-        }),
-        Animated.timing(footerSlide, {
-          toValue: 0,
-          duration: 350,
-          useNativeDriver: true,
-        }),
-      ]),
-    ]).start();
-  }, []);
+  // ─── Handlers ───────────────────────────────────────────────────
 
   const handleSelect = (role: RoleType) => {
     setSelectedRole(role);
     pulseMap[role].pulse();
+
     const otherRole: RoleType = role === 'student' ? 'teacher' : 'student';
     pulseMap[otherRole].reset();
   };
 
   const handleContinue = () => {
     if (!selectedRole) return;
-    // TODO: route to next screen
+    // TODO: route to next screen based on role
     // router.push(selectedRole === 'student' ? '/(onboarding)/personalization' : '/(auth)/teacher-login');
   };
 
@@ -127,21 +86,10 @@ export default function RoleSelectScreen() {
 
       <View
         className="flex-1"
-        style={{
-          paddingTop: SAFE_TOP,
-          paddingBottom: SAFE_BOTTOM,
-          paddingHorizontal: 24,
-        }}
+        style={{ paddingTop: SAFE_TOP, paddingBottom: SAFE_BOTTOM, paddingHorizontal: 24 }}
       >
         {/* Header */}
-        <Animated.View
-          style={{
-            marginBottom: 16,
-            paddingHorizontal: 8,
-            opacity: headerOpacity,
-            transform: [{ translateY: headerSlide }],
-          }}
-        >
+        <Animated.View style={{ marginBottom: 16, paddingHorizontal: 8, ...header.style }}>
           <Text
             className="font-poppins-medium text-sm uppercase"
             style={{ color: 'rgba(255,255,255,0.5)', letterSpacing: 0.5 }}
@@ -171,15 +119,15 @@ export default function RoleSelectScreen() {
         <View className="flex-1 justify-center" style={{ gap: 16 }}>
           {ROLES.map((role, index) => {
             const isSelected = selectedRole === role.key;
-            const anim = cardAnims[index];
+            const stage = cardStages[index];
             const pulse = pulseMap[role.key];
 
             return (
               <Animated.View
                 key={role.key}
                 style={{
-                  opacity: anim.opacity,
-                  transform: [{ translateY: anim.slide }, { scale: pulse.scale }],
+                  ...stage.style,
+                  transform: [...(stage.style.transform || []), { scale: pulse.scale }],
                 }}
               >
                 <TouchableOpacity
@@ -187,16 +135,14 @@ export default function RoleSelectScreen() {
                   onPress={() => handleSelect(role.key)}
                   style={{ borderRadius: 20 }}
                 >
-                  <LinearGradient
+                  <GlassCard
                     colors={isSelected ? [...role.selectedGradient] : [...DEFAULT_GRADIENT]}
-                    start={{ x: 0, y: 0 }}
-                    end={{ x: 0, y: 1 }}
+                    borderWidth={isSelected ? 2 : 1.5}
+                    borderColor={isSelected ? role.accentColor : 'rgba(255,255,255,0.1)'}
+                    borderRadius={20}
                     style={{
                       flexDirection: 'row',
                       alignItems: 'center',
-                      borderRadius: 20,
-                      borderWidth: isSelected ? 2 : 1.5,
-                      borderColor: isSelected ? role.accentColor : 'rgba(255,255,255,0.1)',
                       paddingVertical: 20,
                       paddingHorizontal: 16,
                       gap: 14,
@@ -207,7 +153,7 @@ export default function RoleSelectScreen() {
                       <role.Illustration />
                     </View>
 
-                    {/* Text */}
+                    {/* Text content */}
                     <View className="flex-1">
                       <Text
                         className="font-fredoka text-[22px] text-white"
@@ -217,52 +163,23 @@ export default function RoleSelectScreen() {
                       </Text>
                       <Text
                         className="font-poppins-regular text-[13px] leading-[19px]"
-                        style={{
-                          color: 'rgba(255,255,255,0.6)',
-                          marginTop: 4,
-                        }}
+                        style={{ color: 'rgba(255,255,255,0.6)', marginTop: 4 }}
                       >
                         {role.description}
                       </Text>
                     </View>
 
-                    {/* Radio indicator */}
-                    <View
-                      className="items-center justify-center rounded-full"
-                      style={{
-                        width: 26,
-                        height: 26,
-                        borderWidth: 2,
-                        borderColor: isSelected ? role.accentColor : 'rgba(255,255,255,0.2)',
-                        backgroundColor: isSelected ? `${role.accentColor}26` : 'transparent',
-                      }}
-                    >
-                      {isSelected && (
-                        <View
-                          style={{
-                            width: 12,
-                            height: 12,
-                            borderRadius: 6,
-                            backgroundColor: role.accentColor,
-                          }}
-                        />
-                      )}
-                    </View>
-                  </LinearGradient>
+                    {/* Selection indicator */}
+                    <RadioIndicator selected={isSelected} color={role.accentColor} />
+                  </GlassCard>
                 </TouchableOpacity>
               </Animated.View>
             );
           })}
         </View>
 
-        {/* Continue */}
-        <Animated.View
-          style={{
-            paddingTop: 8,
-            opacity: footerOpacity,
-            transform: [{ translateY: footerSlide }],
-          }}
-        >
+        {/* Continue button */}
+        <Animated.View style={{ paddingTop: 8, ...footer.style }}>
           <GoldButton label="Continue" onPress={handleContinue} disabled={!selectedRole} />
         </Animated.View>
       </View>

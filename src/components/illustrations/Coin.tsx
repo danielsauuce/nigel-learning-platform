@@ -9,6 +9,10 @@ interface CoinProps {
   symbol?: string;
 }
 
+/**
+ * Reusable gold coin SVG element with gradient fill and currency symbol.
+ * Must be rendered inside an `<Svg>` parent.
+ */
 export function Coin({ cx, cy, r, gradientId, symbol = '£' }: CoinProps) {
   return (
     <>

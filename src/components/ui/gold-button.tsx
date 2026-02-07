@@ -3,12 +3,20 @@ import React from 'react';
 import { Platform, Text, TouchableOpacity } from 'react-native';
 
 interface GoldButtonProps {
+  /** Button label text. */
   label: string;
+  /** Press handler. Ignored when disabled. */
   onPress: () => void;
+  /** Visually dims the button and disables interaction. */
   disabled?: boolean;
+  /** Show a right-arrow indicator. Defaults to true. */
   showArrow?: boolean;
 }
 
+/**
+ * Primary CTA button with a gold gradient.
+ * Used across splash, welcome, role select, and onboarding screens.
+ */
 export function GoldButton({
   label,
   onPress,
