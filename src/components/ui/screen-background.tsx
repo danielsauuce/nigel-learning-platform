@@ -7,6 +7,11 @@ import { SCREEN_HEIGHT, SCREEN_WIDTH } from '@/constants/app';
 import { useFloatAnimation, useWaveAnimation } from '@/hooks/use-animations';
 
 // ─── Gradient background ────────────────────────────────────────────
+
+/**
+ * Full-screen gradient backdrop used across all auth screens.
+ * Positioned absolutely to sit behind all content.
+ */
 export function GradientBackground() {
   return (
     <LinearGradient
@@ -19,11 +24,17 @@ export function GradientBackground() {
 }
 
 // ─── Star field ─────────────────────────────────────────────────────
+
 interface StarFieldProps {
+  /** Number of stars to render. */
   count?: number;
+  /** Seed for deterministic positioning. */
   seed?: number;
 }
 
+/**
+ * Pseudo-random star field rendered in the upper portion of the screen.
+ */
 export function StarField({ count = 10, seed = 83 }: StarFieldProps) {
   return (
     <>
@@ -48,6 +59,7 @@ export function StarField({ count = 10, seed = 83 }: StarFieldProps) {
 }
 
 // ─── Floating sparkle ───────────────────────────────────────────────
+
 interface FloatingSparkleProps {
   delay: number;
   x: number;
@@ -56,6 +68,9 @@ interface FloatingSparkleProps {
   color: string;
 }
 
+/**
+ * Small colored dot that fades in and floats vertically.
+ */
 export function FloatingSparkle({ delay, x, y, size, color }: FloatingSparkleProps) {
   const { fadeIn, translateY } = useFloatAnimation(delay);
 
@@ -77,6 +92,10 @@ export function FloatingSparkle({ delay, x, y, size, color }: FloatingSparklePro
 }
 
 // ─── Default sparkle layout ─────────────────────────────────────────
+
+/**
+ * Pre-configured set of floating sparkles used on most auth screens.
+ */
 export function DefaultSparkles() {
   return (
     <>
@@ -113,9 +132,13 @@ export function DefaultSparkles() {
 }
 
 // ─── Animated wave decoration ───────────────────────────────────────
+
+/**
+ * Subtle animated wave SVG anchored to the bottom of the screen.
+ */
 export function WaveDecoration() {
   const { translateX } = useWaveAnimation();
-  const w = SCREEN_WIDTH + 50;
+  const waveWidth = SCREEN_WIDTH + 50;
 
   return (
     <Animated.View
@@ -129,18 +152,18 @@ export function WaveDecoration() {
       }}
     >
       <Svg
-        width={w}
+        width={waveWidth}
         height={120}
-        viewBox={`0 0 ${w} 120`}
+        viewBox={`0 0 ${waveWidth} 120`}
         style={{ position: 'absolute', bottom: 0 }}
       >
         <Path
-          d={`M0 50 Q${SCREEN_WIDTH * 0.15} 25 ${SCREEN_WIDTH * 0.3} 45 Q${SCREEN_WIDTH * 0.45} 65 ${SCREEN_WIDTH * 0.6} 40 Q${SCREEN_WIDTH * 0.75} 15 ${SCREEN_WIDTH * 0.9} 45 Q${SCREEN_WIDTH * 1.05} 75 ${w} 40 L${w} 120 L0 120 Z`}
+          d={`M0 50 Q${SCREEN_WIDTH * 0.15} 25 ${SCREEN_WIDTH * 0.3} 45 Q${SCREEN_WIDTH * 0.45} 65 ${SCREEN_WIDTH * 0.6} 40 Q${SCREEN_WIDTH * 0.75} 15 ${SCREEN_WIDTH * 0.9} 45 Q${SCREEN_WIDTH * 1.05} 75 ${waveWidth} 40 L${waveWidth} 120 L0 120 Z`}
           fill="#4FC3F7"
           opacity={0.12}
         />
         <Path
-          d={`M0 70 Q${SCREEN_WIDTH * 0.2} 50 ${SCREEN_WIDTH * 0.35} 65 Q${SCREEN_WIDTH * 0.5} 80 ${SCREEN_WIDTH * 0.65} 60 Q${SCREEN_WIDTH * 0.8} 40 ${SCREEN_WIDTH * 0.95} 65 L${w} 55 L${w} 120 L0 120 Z`}
+          d={`M0 70 Q${SCREEN_WIDTH * 0.2} 50 ${SCREEN_WIDTH * 0.35} 65 Q${SCREEN_WIDTH * 0.5} 80 ${SCREEN_WIDTH * 0.65} 60 Q${SCREEN_WIDTH * 0.8} 40 ${SCREEN_WIDTH * 0.95} 65 L${waveWidth} 55 L${waveWidth} 120 L0 120 Z`}
           fill="#4FC3F7"
           opacity={0.08}
         />
@@ -150,6 +173,14 @@ export function WaveDecoration() {
 }
 
 // ─── Composed screen background ─────────────────────────────────────
+
+/**
+ * Convenience component that renders the full background stack:
+ * gradient + stars + sparkles + wave.
+ *
+ * Used on welcome and role-select screens. The splash screen composes
+ * its own background with FloatingCoins instead of sparkles.
+ */
 export function ScreenBackground() {
   return (
     <>

@@ -1,8 +1,10 @@
 import React from 'react';
 import { Animated } from 'react-native';
+
+import { useFloatAnimation } from '@/hooks/use-animations';
+
 import { BaseSvg } from './BaseSvg';
 import { Coin } from './Coin';
-import { useFloatAnimation } from '@/hooks/use-animations';
 
 interface FloatingCoinProps {
   delay: number;
@@ -12,6 +14,10 @@ interface FloatingCoinProps {
   opacity: number;
 }
 
+/**
+ * Animated floating coin positioned absolutely on screen.
+ * Fades in and bobs up/down in an infinite loop.
+ */
 export function FloatingCoin({ delay, startX, startY, size, opacity }: FloatingCoinProps) {
   const { fadeIn, translateY } = useFloatAnimation(delay, 18);
 

@@ -8,6 +8,9 @@ interface BaseSvgProps {
   children: React.ReactNode;
 }
 
+/**
+ * Thin wrapper around `Svg` that auto-generates a viewBox from width/height.
+ */
 export function BaseSvg({
   width,
   height,
