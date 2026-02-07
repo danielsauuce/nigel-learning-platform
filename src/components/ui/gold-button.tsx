@@ -1,22 +1,15 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
-import { Platform, Text, TouchableOpacity } from 'react-native';
+import { Platform, Text, TouchableOpacity, View } from 'react-native';
+import { ArrowRight } from 'lucide-react-native';
 
 interface GoldButtonProps {
-  /** Button label text. */
   label: string;
-  /** Press handler. Ignored when disabled. */
   onPress: () => void;
-  /** Visually dims the button and disables interaction. */
   disabled?: boolean;
-  /** Show a right-arrow indicator. Defaults to true. */
   showArrow?: boolean;
 }
 
-/**
- * Primary CTA button with a gold gradient.
- * Used across splash, welcome, role select, and onboarding screens.
- */
 export function GoldButton({
   label,
   onPress,
@@ -52,22 +45,28 @@ export function GoldButton({
         }
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
-        className="flex-row items-center justify-center py-[16px]"
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'center',
+          paddingVertical: 16,
+          paddingHorizontal: 24,
+        }}
       >
         <Text
-          className="p-2 font-poppins-bold text-lg tracking-wide"
-          style={{ color: disabled ? 'rgba(255,255,255,0.3)' : '#1A1B4B' }}
+          className={`font-poppins-bold text-lg tracking-wide ${disabled ? 'text-white/30' : 'text-navy'} `}
         >
           {label}
         </Text>
 
         {showArrow && (
-          <Text
-            className="ml-2 font-poppins-bold text-lg leading-[22px]"
-            style={{ color: disabled ? 'rgba(255,255,255,0.3)' : '#1A1B4B' }}
-          >
-            →
-          </Text>
+          <View className="ml-2.5">
+            <ArrowRight
+              size={20}
+              color={disabled ? 'rgba(255,255,255,0.3)' : '#1A1B4B'}
+              strokeWidth={2.5}
+            />
+          </View>
         )}
       </LinearGradient>
     </TouchableOpacity>
