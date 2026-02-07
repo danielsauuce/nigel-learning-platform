@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  Circle,
-  Defs,
-  LinearGradient,
-  Stop,
-  Text as SvgText,
-} from 'react-native-svg';
+import { Circle, Defs, LinearGradient, Stop, Text as SvgText } from 'react-native-svg';
 
 interface CoinProps {
   cx: number;
@@ -15,13 +9,7 @@ interface CoinProps {
   symbol?: string;
 }
 
-export function Coin({
-  cx,
-  cy,
-  r,
-  gradientId,
-  symbol = '£',
-}: CoinProps) {
+export function Coin({ cx, cy, r, gradientId, symbol = '£' }: CoinProps) {
   return (
     <>
       <Defs>
@@ -32,14 +20,7 @@ export function Coin({
       </Defs>
 
       <Circle cx={cx} cy={cy} r={r} fill={`url(#${gradientId})`} />
-      <Circle
-        cx={cx}
-        cy={cy}
-        r={r * 0.72}
-        fill="none"
-        stroke="#E8960C"
-        strokeWidth={r * 0.12}
-      />
+      <Circle cx={cx} cy={cy} r={r * 0.72} fill="none" stroke="#E8960C" strokeWidth={r * 0.12} />
       <SvgText
         x={cx}
         y={cy + r * 0.35}
