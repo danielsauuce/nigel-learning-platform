@@ -288,7 +288,7 @@ export default function StudentPrivacyConsentScreen() {
   const handleAgree = () => {
     if (!allRequiredAccepted) return;
     // TODO: Store consent state in onboardingStore
-    // router.replace("/(student)/(tabs)/dashboard");
+    router.replace("/(student)/(tabs)/Dashboard");
   };
 
   if (!fontsLoaded) return null;
