@@ -1,17 +1,16 @@
+import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import { Animated, StatusBar, View } from 'react-native';
-import { useRouter } from 'expo-router';
 
-import { GoldButton } from '@/components/ui/gold-button';
-import { ScreenBackground } from '@/components/ui/screen-background';
+import { StudentIllustration, TeacherIllustration } from '@/components/illustrations';
 import { RoleCard } from '@/components/role-cards';
 import { RoleSelectHeader } from '@/components/role-select-header';
+import { GoldButton } from '@/components/ui/gold-button';
+import { ScreenBackground } from '@/components/ui/screen-background';
 import type { RoleType } from '@/constants/app';
 import { useAppFonts } from '@/hooks/use-app-fonts';
 import { useStaggeredEntrance } from '@/hooks/use-staggered-entrance';
 import { SAFE_BOTTOM, SAFE_TOP } from '@/lib/safe-area';
-
-import { StudentIllustration, TeacherIllustration } from '@/components/illustrations';
 
 const ROLES = [
   {
@@ -56,6 +55,7 @@ export default function RoleSelectScreen() {
     // router.push(
     //   selectedRole === 'student' ? '/(onboarding)/personalization' : '/(auth)/teacher-login',
     // );
+    router.push('/(student)/Personalization')
   };
 
   if (!fontsLoaded) return null;
