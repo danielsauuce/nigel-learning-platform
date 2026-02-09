@@ -424,7 +424,7 @@ export default function StudentDashboard() {
           <TouchableOpacity
             activeOpacity={0.85}
             onPress={() => {
-              // router.push("/(student)/(tabs)/daily-challenge")
+              router.push("/DailyChallenge")
             }}
           >
             <LinearGradient
