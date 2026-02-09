@@ -491,7 +491,7 @@ export default function StudentDashboard() {
               style={styles.quickAccessCard}
               activeOpacity={0.85}
               onPress={() => {
-                // router.push("/(student)/simulator")
+                router.push("/BudgetSimulator")
               }}
             >
               <LinearGradient
