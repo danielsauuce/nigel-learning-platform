@@ -52,10 +52,10 @@ export default function RoleSelectScreen() {
 
   const handleContinue = () => {
     if (!selectedRole) return;
-    // router.push(
-    //   selectedRole === 'student' ? '/(onboarding)/personalization' : '/(auth)/teacher-login',
-    // );
-    router.push('/(student)/Personalization')
+    router.push(
+      selectedRole === 'student' ? '/(student)/Personalization' : '/(auth)/teacher-login',
+    );
+    // router.push('/(student)/Personalization')
   };
 
   if (!fontsLoaded) return null;
