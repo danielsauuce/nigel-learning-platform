@@ -1,5 +1,5 @@
 import React from 'react';
-import { Circle, G, Path, Rect } from 'react-native-svg';
+import Svg, { Circle, Defs, G, Path, Rect, Stop } from 'react-native-svg';
 
 import { BaseSvg } from './BaseSvg';
 
@@ -7,10 +7,6 @@ interface TeacherIllustrationProps {
   size?: number;
 }
 
-/**
- * Teacher character illustration for the role selection screen.
- * Features a person with glasses, a purple top, and a clipboard.
- */
 export function TeacherIllustration({ size = 120 }: TeacherIllustrationProps) {
   return (
     <BaseSvg width={size} height={size} viewBox="0 0 120 120">

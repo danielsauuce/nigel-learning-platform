@@ -1,12 +1,5 @@
 import React, { useRef, useState } from 'react';
-import {
-  Animated,
-  NativeScrollEvent,
-  NativeSyntheticEvent,
-  ScrollView,
-  StatusBar,
-  View,
-} from 'react-native';
+import { NativeScrollEvent, NativeSyntheticEvent, ScrollView, StatusBar, View } from 'react-native';
 import { useRouter } from 'expo-router';
 
 import { ScreenBackground } from '@/components/ui/screen-background';

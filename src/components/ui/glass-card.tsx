@@ -4,22 +4,13 @@ import type { ViewStyle } from 'react-native';
 
 interface GlassCardProps {
   children: React.ReactNode;
-  /** Gradient color stops. Defaults to a subtle white frosted glass. */
   colors?: [string, string];
-  /** Border color. Defaults to semi-transparent white. */
   borderColor?: string;
-  /** Border width. */
   borderWidth?: number;
-  /** Border radius. Defaults to 24. */
   borderRadius?: number;
-  /** Additional style overrides. */
   style?: ViewStyle;
 }
 
-/**
- * Semi-transparent gradient card with a glass-like appearance.
- * Used for onboarding slide cards, role selection cards, and similar UI.
- */
 export function GlassCard({
   children,
   colors = ['rgba(255,255,255,0.12)', 'rgba(255,255,255,0.05)'],

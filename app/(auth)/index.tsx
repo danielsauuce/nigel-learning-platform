@@ -108,7 +108,7 @@ export default function SplashScreen() {
           />
 
           <Text
-            className="mt-4 font-poppins-regular text-xs text-white/40"
+            className="mt-4 font-poppins-regular text-[16px] text-white/40"
             style={{ letterSpacing: 0.5 }}
           >
             Made for learners aged 11-16

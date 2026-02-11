@@ -1,14 +1,14 @@
-import { Fredoka_700Bold } from "@expo-google-fonts/fredoka";
+import { Fredoka_700Bold } from '@expo-google-fonts/fredoka';
 import {
   Poppins_400Regular,
   Poppins_500Medium,
   Poppins_600SemiBold,
   Poppins_700Bold,
-} from "@expo-google-fonts/poppins";
-import { useFonts } from "expo-font";
-import { LinearGradient } from "expo-linear-gradient";
-import { useRouter } from "expo-router";
-import React, { useEffect, useRef, useState } from "react";
+} from '@expo-google-fonts/poppins';
+import { useFonts } from 'expo-font';
+import { LinearGradient } from 'expo-linear-gradient';
+import { useRouter } from 'expo-router';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   Animated,
   Dimensions,
@@ -18,56 +18,63 @@ import {
   Text,
   TouchableOpacity,
   View,
-} from "react-native";
+} from 'react-native';
 import {
   Circle,
   Defs,
   Path,
   Stop,
   Svg,
-  LinearGradient as SvgLinearGradient
-} from "react-native-svg";
+  LinearGradient as SvgLinearGradient,
+} from 'react-native-svg';
 
-const { width, height } = Dimensions.get("window");
+const { width, height } = Dimensions.get('window');
 
 // ─── Question Data ─────────────────────────────────────────────────
 const QUESTIONS = [
   {
-    id: "worry",
-    question: "What worries you most\nabout money right now?",
-    subtitle: "Pick the one that feels most like you",
+    id: 'worry',
+    question: 'What worries you most\nabout money right now?',
+    subtitle: 'Pick the one that feels most like you',
     options: [
-      { id: "not-enough", emoji: "😟", label: "Not having enough" },
-      { id: "understanding", emoji: "🤔", label: "Not understanding it" },
-      { id: "spending", emoji: "💸", label: "Spending too much" },
-      { id: "future", emoji: "🔮", label: "What happens when I'm older" },
+      { id: 'not-enough', emoji: '😟', label: 'Not having enough' },
+      { id: 'understanding', emoji: '🤔', label: 'Not understanding it' },
+      { id: 'spending', emoji: '💸', label: 'Spending too much' },
+      { id: 'future', emoji: '🔮', label: "What happens when I'm older" },
     ],
   },
   {
-    id: "improve",
-    question: "What would you like\nto get better at?",
-    subtitle: "This helps us personalise your journey",
+    id: 'improve',
+    question: 'What would you like\nto get better at?',
+    subtitle: 'This helps us personalise your journey',
     options: [
-      { id: "saving", emoji: "🐷", label: "Saving money" },
-      { id: "budgeting", emoji: "📊", label: "Budgeting & planning" },
-      { id: "earning", emoji: "💰", label: "Understanding earning" },
-      { id: "smart-spending", emoji: "🛒", label: "Spending wisely" },
+      { id: 'saving', emoji: '🐷', label: 'Saving money' },
+      { id: 'budgeting', emoji: '📊', label: 'Budgeting & planning' },
+      { id: 'earning', emoji: '💰', label: 'Understanding earning' },
+      { id: 'smart-spending', emoji: '🛒', label: 'Spending wisely' },
     ],
   },
 ];
 
 // ─── Option icon backgrounds ───────────────────────────────────────
 const OPTION_COLORS = [
-  { bg: "rgba(79,195,247,0.15)", border: "rgba(79,195,247,0.3)", selected: "#4FC3F7" },
-  { bg: "rgba(255,215,0,0.12)", border: "rgba(255,215,0,0.3)", selected: "#FFD700" },
-  { bg: "rgba(255,46,145,0.12)", border: "rgba(255,46,145,0.3)", selected: "#FF2E91" },
-  { bg: "rgba(16,185,129,0.12)", border: "rgba(16,185,129,0.3)", selected: "#10B981" },
+  { bg: 'rgba(79,195,247,0.15)', border: 'rgba(79,195,247,0.3)', selected: '#4FC3F7' },
+  { bg: 'rgba(255,215,0,0.12)', border: 'rgba(255,215,0,0.3)', selected: '#FFD700' },
+  { bg: 'rgba(255,46,145,0.12)', border: 'rgba(255,46,145,0.3)', selected: '#FF2E91' },
+  { bg: 'rgba(16,185,129,0.12)', border: 'rgba(16,185,129,0.3)', selected: '#10B981' },
 ];
 
 // ─── Compass SVG (question 1 illustration) ─────────────────────────
 const CompassIcon = () => (
   <Svg width={56} height={56} viewBox="0 0 56 56">
-    <Circle cx="28" cy="28" r="26" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.15)" strokeWidth="1.5" />
+    <Circle
+      cx="28"
+      cy="28"
+      r="26"
+      fill="rgba(255,255,255,0.08)"
+      stroke="rgba(255,255,255,0.15)"
+      strokeWidth="1.5"
+    />
     <Circle cx="28" cy="28" r="18" fill="none" stroke="rgba(255,255,255,0.2)" strokeWidth="1" />
     <Path d="M28 10 L31 26 L28 28 L25 26 Z" fill="#4FC3F7" />
     <Path d="M28 46 L31 30 L28 28 L25 30 Z" fill="#FF2E91" opacity={0.7} />
@@ -78,7 +85,14 @@ const CompassIcon = () => (
 // ─── Target SVG (question 2 illustration) ──────────────────────────
 const TargetIcon = () => (
   <Svg width={56} height={56} viewBox="0 0 56 56">
-    <Circle cx="28" cy="28" r="26" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.15)" strokeWidth="1.5" />
+    <Circle
+      cx="28"
+      cy="28"
+      r="26"
+      fill="rgba(255,255,255,0.08)"
+      stroke="rgba(255,255,255,0.15)"
+      strokeWidth="1.5"
+    />
     <Circle cx="28" cy="28" r="20" fill="none" stroke="rgba(255,215,0,0.3)" strokeWidth="2" />
     <Circle cx="28" cy="28" r="13" fill="none" stroke="rgba(255,215,0,0.4)" strokeWidth="2" />
     <Circle cx="28" cy="28" r="6" fill="#FFD700" opacity={0.8} />
@@ -120,9 +134,17 @@ const FloatingSparkle = ({
 
     Animated.loop(
       Animated.sequence([
-        Animated.timing(floatAnim, { toValue: 1, duration: 2200 + delay * 0.4, useNativeDriver: true }),
-        Animated.timing(floatAnim, { toValue: 0, duration: 2200 + delay * 0.4, useNativeDriver: true }),
-      ])
+        Animated.timing(floatAnim, {
+          toValue: 1,
+          duration: 2200 + delay * 0.4,
+          useNativeDriver: true,
+        }),
+        Animated.timing(floatAnim, {
+          toValue: 0,
+          duration: 2200 + delay * 0.4,
+          useNativeDriver: true,
+        }),
+      ]),
     ).start();
   }, []);
 
@@ -134,7 +156,7 @@ const FloatingSparkle = ({
   return (
     <Animated.View
       style={{
-        position: "absolute",
+        position: 'absolute',
         left: x,
         top: y,
         width: size,
@@ -175,9 +197,7 @@ export default function StudentPersonalizationScreen() {
   const waveOffset = useRef(new Animated.Value(0)).current;
 
   // Option pulse animations
-  const optionScales = useRef(
-    QUESTIONS[0].options.map(() => new Animated.Value(1))
-  ).current;
+  const optionScales = useRef(QUESTIONS[0].options.map(() => new Animated.Value(1))).current;
 
   const runEntrance = () => {
     // Reset
@@ -201,7 +221,12 @@ export default function StudentPersonalizationScreen() {
       ]),
       Animated.parallel([
         Animated.timing(optionsOpacity, { toValue: 1, duration: 350, useNativeDriver: true }),
-        Animated.spring(optionsSlide, { toValue: 0, friction: 6, tension: 50, useNativeDriver: true }),
+        Animated.spring(optionsSlide, {
+          toValue: 0,
+          friction: 6,
+          tension: 50,
+          useNativeDriver: true,
+        }),
       ]),
       Animated.parallel([
         Animated.timing(footerOpacity, { toValue: 1, duration: 300, useNativeDriver: true }),
@@ -217,7 +242,7 @@ export default function StudentPersonalizationScreen() {
       Animated.sequence([
         Animated.timing(waveOffset, { toValue: 1, duration: 3500, useNativeDriver: true }),
         Animated.timing(waveOffset, { toValue: 0, duration: 3500, useNativeDriver: true }),
-      ])
+      ]),
     ).start();
   }, []);
 
@@ -234,7 +259,12 @@ export default function StudentPersonalizationScreen() {
     // Bounce animation
     Animated.sequence([
       Animated.timing(optionScales[index], { toValue: 0.95, duration: 80, useNativeDriver: true }),
-      Animated.spring(optionScales[index], { toValue: 1, friction: 3, tension: 120, useNativeDriver: true }),
+      Animated.spring(optionScales[index], {
+        toValue: 1,
+        friction: 3,
+        tension: 120,
+        useNativeDriver: true,
+      }),
     ]).start();
   };
 
@@ -260,7 +290,7 @@ export default function StudentPersonalizationScreen() {
       });
     } else {
       // TODO: Store newAnswers in onboardingStore for island ordering
-      router.push("/(student)/PrivacyConsent");
+      router.push('/(student)/PrivacyConsent');
     }
   };
 
@@ -271,7 +301,7 @@ export default function StudentPersonalizationScreen() {
       <StatusBar barStyle="light-content" translucent backgroundColor="transparent" />
 
       <LinearGradient
-        colors={["#1A1B4B", "#2D3A8C", "#4158D0"]}
+        colors={['#1A1B4B', '#2D3A8C', '#4158D0']}
         start={{ x: 0.2, y: 0 }}
         end={{ x: 0.8, y: 1 }}
         style={StyleSheet.absoluteFillObject}
@@ -308,7 +338,7 @@ export default function StudentPersonalizationScreen() {
           width={width + 50}
           height={110}
           viewBox={`0 0 ${width + 50} 110`}
-          style={{ position: "absolute", bottom: 0 }}
+          style={{ position: 'absolute', bottom: 0 }}
         >
           <Path
             d={`M0 45 Q${width * 0.15} 22 ${width * 0.3} 40 Q${width * 0.45} 58 ${width * 0.6} 36 Q${width * 0.75} 14 ${width * 0.9} 40 Q${width * 1.05} 66 ${width + 50} 36 L${width + 50} 110 L0 110 Z`}
@@ -385,8 +415,8 @@ export default function StudentPersonalizationScreen() {
                     style={[
                       styles.optionCard,
                       {
-                        backgroundColor: isSelected ? colors.bg : "rgba(255,255,255,0.06)",
-                        borderColor: isSelected ? colors.selected : "rgba(255,255,255,0.1)",
+                        backgroundColor: isSelected ? colors.bg : 'rgba(255,255,255,0.06)',
+                        borderColor: isSelected ? colors.selected : 'rgba(255,255,255,0.1)',
                         borderWidth: isSelected ? 2 : 1.5,
                       },
                     ]}
@@ -394,17 +424,12 @@ export default function StudentPersonalizationScreen() {
                     <View
                       style={[
                         styles.emojiContainer,
-                        { backgroundColor: isSelected ? colors.bg : "rgba(255,255,255,0.06)" },
+                        { backgroundColor: isSelected ? colors.bg : 'rgba(255,255,255,0.06)' },
                       ]}
                     >
                       <Text style={styles.emoji}>{option.emoji}</Text>
                     </View>
-                    <Text
-                      style={[
-                        styles.optionLabel,
-                        isSelected && { color: "#FFFFFF" },
-                      ]}
-                    >
+                    <Text style={[styles.optionLabel, isSelected && { color: '#FFFFFF' }]}>
                       {option.label}
                     </Text>
                     {/* Tick */}
@@ -452,29 +477,17 @@ export default function StudentPersonalizationScreen() {
             <LinearGradient
               colors={
                 selectedOption
-                  ? ["#FFD700", "#F5A623"]
-                  : ["rgba(255,255,255,0.12)", "rgba(255,255,255,0.06)"]
+                  ? ['#FFD700', '#F5A623']
+                  : ['rgba(255,255,255,0.12)', 'rgba(255,255,255,0.06)']
               }
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 1 }}
               style={styles.ctaGradient}
             >
-              <Text
-                style={[
-                  styles.ctaText,
-                  !selectedOption && styles.ctaTextDisabled,
-                ]}
-              >
-                {currentQuestion < QUESTIONS.length - 1 ? "Next" : "Continue"}
+              <Text style={[styles.ctaText, !selectedOption && styles.ctaTextDisabled]}>
+                {currentQuestion < QUESTIONS.length - 1 ? 'Next' : 'Continue'}
               </Text>
-              <Text
-                style={[
-                  styles.ctaArrow,
-                  !selectedOption && styles.ctaTextDisabled,
-                ]}
-              >
-                →
-              </Text>
+              <Text style={[styles.ctaArrow, !selectedOption && styles.ctaTextDisabled]}>→</Text>
             </LinearGradient>
           </TouchableOpacity>
         </Animated.View>
@@ -487,15 +500,15 @@ export default function StudentPersonalizationScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    overflow: "hidden",
+    overflow: 'hidden',
   },
   star: {
-    position: "absolute",
+    position: 'absolute',
     borderRadius: 4,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: '#FFFFFF',
   },
   waveContainer: {
-    position: "absolute",
+    position: 'absolute',
     bottom: 0,
     left: -25,
     right: -25,
@@ -503,8 +516,8 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    paddingTop: Platform.OS === "android" ? (StatusBar.currentHeight ?? 0) + 16 : 60,
-    paddingBottom: Platform.OS === "android" ? 24 : 40,
+    paddingTop: Platform.OS === 'android' ? (StatusBar.currentHeight ?? 0) + 16 : 60,
+    paddingBottom: Platform.OS === 'android' ? 24 : 40,
     paddingHorizontal: 24,
   },
 
@@ -516,26 +529,26 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   stepLabel: {
-    fontFamily: "Poppins_500Medium",
+    fontFamily: 'Poppins_500Medium',
     fontSize: 13,
-    color: "rgba(255,255,255,0.5)",
+    color: 'rgba(255,255,255,0.5)',
     letterSpacing: 0.3,
   },
   progressTrack: {
     height: 6,
     borderRadius: 3,
-    backgroundColor: "rgba(255,255,255,0.1)",
-    overflow: "hidden",
+    backgroundColor: 'rgba(255,255,255,0.1)',
+    overflow: 'hidden',
   },
   progressFill: {
-    height: "100%",
+    height: '100%',
     borderRadius: 3,
-    backgroundColor: "#FFD700",
+    backgroundColor: '#FFD700',
   },
 
   // ── Question ──
   questionSection: {
-    alignItems: "center",
+    alignItems: 'center',
     marginTop: 8,
     marginBottom: 20,
   },
@@ -543,21 +556,21 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   questionTitle: {
-    fontFamily: "Fredoka_700Bold",
+    fontFamily: 'Fredoka_700Bold',
     fontSize: 28,
-    color: "#FFFFFF",
-    textAlign: "center",
+    color: '#FFFFFF',
+    textAlign: 'center',
     lineHeight: 34,
     letterSpacing: -0.5,
-    textShadowColor: "rgba(0,0,0,0.15)",
+    textShadowColor: 'rgba(0,0,0,0.15)',
     textShadowOffset: { width: 0, height: 1 },
     textShadowRadius: 4,
   },
   questionSubtitle: {
-    fontFamily: "Poppins_400Regular",
+    fontFamily: 'Poppins_400Regular',
     fontSize: 14,
-    color: "rgba(255,255,255,0.55)",
-    textAlign: "center",
+    color: 'rgba(255,255,255,0.55)',
+    textAlign: 'center',
     marginTop: 8,
     letterSpacing: 0.2,
   },
@@ -565,12 +578,12 @@ const styles = StyleSheet.create({
   // ── Options ──
   optionsSection: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: 'center',
     gap: 12,
   },
   optionCard: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     borderRadius: 16,
     paddingVertical: 14,
     paddingHorizontal: 14,
@@ -580,17 +593,17 @@ const styles = StyleSheet.create({
     width: 44,
     height: 44,
     borderRadius: 12,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   emoji: {
     fontSize: 22,
   },
   optionLabel: {
     flex: 1,
-    fontFamily: "Poppins_600SemiBold",
+    fontFamily: 'Poppins_600SemiBold',
     fontSize: 15,
-    color: "rgba(255,255,255,0.75)",
+    color: 'rgba(255,255,255,0.75)',
     letterSpacing: 0.1,
   },
   checkOuter: {
@@ -598,10 +611,10 @@ const styles = StyleSheet.create({
     height: 24,
     borderRadius: 12,
     borderWidth: 2,
-    borderColor: "rgba(255,255,255,0.15)",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "transparent",
+    borderColor: 'rgba(255,255,255,0.15)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'transparent',
   },
 
   // ── Footer ──
@@ -610,10 +623,10 @@ const styles = StyleSheet.create({
   },
   ctaButton: {
     borderRadius: 28,
-    overflow: "hidden",
+    overflow: 'hidden',
     ...Platform.select({
       ios: {
-        shadowColor: "#F5A623",
+        shadowColor: '#F5A623',
         shadowOffset: { width: 0, height: 6 },
         shadowOpacity: 0.35,
         shadowRadius: 14,
@@ -630,25 +643,25 @@ const styles = StyleSheet.create({
     }),
   },
   ctaGradient: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
     paddingVertical: 16,
     paddingHorizontal: 32,
     gap: 10,
   },
   ctaText: {
-    fontFamily: "Poppins_700Bold",
+    fontFamily: 'Poppins_700Bold',
     fontSize: 18,
-    color: "#1A1B4B",
+    color: '#1A1B4B',
     letterSpacing: 0.3,
   },
   ctaTextDisabled: {
-    color: "rgba(255,255,255,0.3)",
+    color: 'rgba(255,255,255,0.3)',
   },
   ctaArrow: {
-    fontFamily: "Poppins_700Bold",
+    fontFamily: 'Poppins_700Bold',
     fontSize: 20,
-    color: "#1A1B4B",
+    color: '#1A1B4B',
   },
 });
