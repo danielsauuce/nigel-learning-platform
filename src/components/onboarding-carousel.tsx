@@ -72,7 +72,7 @@ export function OnboardingCarousel({
 
               {/* Description */}
               <Text
-                className="text-center font-poppins-regular text-sm leading-[21px]"
+                className="text-center font-poppins-regular text-[16px] leading-[21px]"
                 style={{
                   color: 'rgba(255,255,255,0.7)',
                   marginTop: 12,

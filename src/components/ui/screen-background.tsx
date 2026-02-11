@@ -6,12 +6,6 @@ import { Path, Svg } from 'react-native-svg';
 import { SCREEN_HEIGHT, SCREEN_WIDTH } from '@/constants/app';
 import { useFloatAnimation, useWaveAnimation } from '@/hooks/use-animations';
 
-// ─── Gradient background ────────────────────────────────────────────
-
-/**
- * Full-screen gradient backdrop used across all auth screens.
- * Positioned absolutely to sit behind all content.
- */
 export function GradientBackground() {
   return (
     <LinearGradient
@@ -23,18 +17,11 @@ export function GradientBackground() {
   );
 }
 
-// ─── Star field ─────────────────────────────────────────────────────
-
 interface StarFieldProps {
-  /** Number of stars to render. */
   count?: number;
-  /** Seed for deterministic positioning. */
   seed?: number;
 }
 
-/**
- * Pseudo-random star field rendered in the upper portion of the screen.
- */
 export function StarField({ count = 10, seed = 83 }: StarFieldProps) {
   return (
     <>
@@ -58,8 +45,6 @@ export function StarField({ count = 10, seed = 83 }: StarFieldProps) {
   );
 }
 
-// ─── Floating sparkle ───────────────────────────────────────────────
-
 interface FloatingSparkleProps {
   delay: number;
   x: number;
@@ -68,9 +53,6 @@ interface FloatingSparkleProps {
   color: string;
 }
 
-/**
- * Small colored dot that fades in and floats vertically.
- */
 export function FloatingSparkle({ delay, x, y, size, color }: FloatingSparkleProps) {
   const { fadeIn, translateY } = useFloatAnimation(delay);
 
@@ -91,11 +73,6 @@ export function FloatingSparkle({ delay, x, y, size, color }: FloatingSparklePro
   );
 }
 
-// ─── Default sparkle layout ─────────────────────────────────────────
-
-/**
- * Pre-configured set of floating sparkles used on most auth screens.
- */
 export function DefaultSparkles() {
   return (
     <>
@@ -131,11 +108,6 @@ export function DefaultSparkles() {
   );
 }
 
-// ─── Animated wave decoration ───────────────────────────────────────
-
-/**
- * Subtle animated wave SVG anchored to the bottom of the screen.
- */
 export function WaveDecoration() {
   const { translateX } = useWaveAnimation();
   const waveWidth = SCREEN_WIDTH + 50;
@@ -172,15 +144,6 @@ export function WaveDecoration() {
   );
 }
 
-// ─── Composed screen background ─────────────────────────────────────
-
-/**
- * Convenience component that renders the full background stack:
- * gradient + stars + sparkles + wave.
- *
- * Used on welcome and role-select screens. The splash screen composes
- * its own background with FloatingCoins instead of sparkles.
- */
 export function ScreenBackground() {
   return (
     <>

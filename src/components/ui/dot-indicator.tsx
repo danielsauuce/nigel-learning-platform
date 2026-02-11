@@ -2,20 +2,11 @@ import React from 'react';
 import { View } from 'react-native';
 
 interface DotIndicatorProps {
-  /** Total number of dots. */
   count: number;
-  /** Index of the currently active dot. */
   activeIndex: number;
-  /** Color for each dot when active. Can be a single color or array per dot. */
   colors: string | string[];
-  /** Inactive dot color. */
   inactiveColor?: string;
 }
-
-/**
- * Horizontal row of pagination dots.
- * The active dot stretches wider; inactive dots are small circles.
- */
 export function DotIndicator({
   count,
   activeIndex,

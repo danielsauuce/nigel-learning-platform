@@ -1,14 +1,14 @@
-import { Fredoka_700Bold } from "@expo-google-fonts/fredoka";
+import { Fredoka_700Bold } from '@expo-google-fonts/fredoka';
 import {
   Poppins_400Regular,
   Poppins_500Medium,
   Poppins_600SemiBold,
   Poppins_700Bold,
-} from "@expo-google-fonts/poppins";
-import { useFonts } from "expo-font";
-import { LinearGradient } from "expo-linear-gradient";
-import { useRouter } from "expo-router";
-import React, { useEffect, useRef } from "react";
+} from '@expo-google-fonts/poppins';
+import { useFonts } from 'expo-font';
+import { LinearGradient } from 'expo-linear-gradient';
+import { useRouter } from 'expo-router';
+import React, { useEffect, useRef } from 'react';
 import {
   Animated,
   Dimensions,
@@ -19,7 +19,7 @@ import {
   Text,
   TouchableOpacity,
   View,
-} from "react-native";
+} from 'react-native';
 import {
   Circle,
   Defs,
@@ -29,14 +29,14 @@ import {
   Svg,
   LinearGradient as SvgLinearGradient,
   Text as SvgText,
-} from "react-native-svg";
+} from 'react-native-svg';
 
-const { width, height } = Dimensions.get("window");
+const { width, height } = Dimensions.get('window');
 const CARD_GAP = 12;
 
 // ─── Mock Data ─────────────────────────────────────────────────────
 const STUDENT = {
-  nickname: "Explorer",
+  nickname: 'Explorer',
   overallProgress: 0.35,
   missionsCompleted: 7,
   totalMissions: 20,
@@ -45,32 +45,32 @@ const STUDENT = {
 };
 
 const DAILY_CHALLENGE = {
-  title: "Quick Quiz: Needs vs Wants",
-  description: "Can you sort these 5 items correctly?",
+  title: 'Quick Quiz: Needs vs Wants',
+  description: 'Can you sort these 5 items correctly?',
   xpReward: 25,
   completed: false,
 };
 
 const NEXT_MISSION = {
-  islandName: "Saving Goals",
-  islandEmoji: "🎯",
-  missionTitle: "Mission 3: The 50/30/20 Rule",
-  islandColor: "#10B981",
+  islandName: 'Saving Goals',
+  islandEmoji: '🎯',
+  missionTitle: 'Mission 3: The 50/30/20 Rule',
+  islandColor: '#10B981',
   progress: 0.6,
 };
 
 const RECENT_BADGES = [
-  { id: "1", emoji: "🌟", label: "First Steps", color: "#FFD700" },
-  { id: "2", emoji: "📊", label: "Budget Boss", color: "#4FC3F7" },
-  { id: "3", emoji: "🧠", label: "Quiz Whiz", color: "#A855F7" },
+  { id: '1', emoji: '🌟', label: 'First Steps', color: '#FFD700' },
+  { id: '2', emoji: '📊', label: 'Budget Boss', color: '#4FC3F7' },
+  { id: '3', emoji: '🧠', label: 'Quiz Whiz', color: '#A855F7' },
 ];
 
 const ISLANDS_PREVIEW = [
-  { id: "budgeting", name: "Budgeting Basics", emoji: "💰", color: "#4FC3F7", progress: 1.0 },
-  { id: "needs-wants", name: "Needs vs Wants", emoji: "⚖️", color: "#FF2E91", progress: 0.75 },
-  { id: "saving", name: "Saving Goals", emoji: "🎯", color: "#10B981", progress: 0.6 },
-  { id: "banking", name: "Banking & Cards", emoji: "💳", color: "#A855F7", progress: 0.0 },
-  { id: "interest", name: "Interest", emoji: "📈", color: "#F59E0B", progress: 0.0 },
+  { id: 'budgeting', name: 'Budgeting Basics', emoji: '💰', color: '#4FC3F7', progress: 1.0 },
+  { id: 'needs-wants', name: 'Needs vs Wants', emoji: '⚖️', color: '#FF2E91', progress: 0.75 },
+  { id: 'saving', name: 'Saving Goals', emoji: '🎯', color: '#10B981', progress: 0.6 },
+  { id: 'banking', name: 'Banking & Cards', emoji: '💳', color: '#A855F7', progress: 0.0 },
+  { id: 'interest', name: 'Interest', emoji: '📈', color: '#F59E0B', progress: 0.0 },
 ];
 
 // ─── Floating Coin (matches splash aesthetic) ──────────────────────
@@ -110,7 +110,7 @@ const FloatingCoin = ({
           duration: 2400 + delay * 0.5,
           useNativeDriver: true,
         }),
-      ])
+      ]),
     ).start();
   }, []);
 
@@ -122,7 +122,7 @@ const FloatingCoin = ({
   return (
     <Animated.View
       style={{
-        position: "absolute",
+        position: 'absolute',
         left: startX,
         top: startY,
         opacity: Animated.multiply(fadeIn, opacity),
@@ -139,14 +139,7 @@ const FloatingCoin = ({
         </Defs>
         <Circle cx="20" cy="20" r="18" fill={`url(#coinGrad-${delay})`} />
         <Circle cx="20" cy="20" r="14" fill="none" stroke="#E8960C" strokeWidth="1.5" />
-        <SvgText
-          x="20"
-          y="26"
-          textAnchor="middle"
-          fontSize="16"
-          fontWeight="bold"
-          fill="#B8760A"
-        >
+        <SvgText x="20" y="26" textAnchor="middle" fontSize="16" fontWeight="bold" fill="#B8760A">
           £
         </SvgText>
       </Svg>
@@ -171,7 +164,7 @@ const BottomWave = () => {
           duration: 3000,
           useNativeDriver: true,
         }),
-      ])
+      ]),
     ).start();
   }, []);
 
@@ -182,17 +175,14 @@ const BottomWave = () => {
 
   return (
     <Animated.View
-      style={[
-        styles.waveContainer,
-        { transform: [{ translateX: waveTranslateX }] },
-      ]}
+      style={[styles.waveContainer, { transform: [{ translateX: waveTranslateX }] }]}
       pointerEvents="none"
     >
       <Svg
         width={width + 60}
         height={140}
         viewBox={`0 0 ${width + 60} 140`}
-        style={{ position: "absolute", bottom: 0 }}
+        style={{ position: 'absolute', bottom: 0 }}
       >
         <Path
           d={`M0 60 Q${width * 0.15} 30 ${width * 0.3} 55 Q${width * 0.45} 80 ${width * 0.6} 50 Q${width * 0.75} 20 ${width * 0.9} 55 Q${width * 1.05} 90 ${width + 60} 50 L${width + 60} 140 L0 140 Z`}
@@ -226,7 +216,7 @@ const ProgressRing = ({
   const strokeDashoffset = circumference * (1 - progress);
 
   return (
-    <Svg width={size} height={size} style={{ transform: [{ rotate: "-90deg" }] }}>
+    <Svg width={size} height={size} style={{ transform: [{ rotate: '-90deg' }] }}>
       <Circle
         cx={size / 2}
         cy={size / 2}
@@ -253,7 +243,9 @@ const ProgressRing = ({
 // ─── Small inline progress bar ─────────────────────────────────────
 const MiniProgressBar = ({ progress, color }: { progress: number; color: string }) => (
   <View style={styles.miniProgressTrack}>
-    <View style={[styles.miniProgressFill, { width: `${progress * 100}%`, backgroundColor: color }]} />
+    <View
+      style={[styles.miniProgressFill, { width: `${progress * 100}%`, backgroundColor: color }]}
+    />
   </View>
 );
 
@@ -265,7 +257,9 @@ const SimulatorIcon = () => (
     <Rect x="8" y="19" width="8" height="3" rx="1" fill="#FFD700" opacity={0.6} />
     <Rect x="8" y="24" width="12" height="3" rx="1" fill="#FFD700" opacity={0.4} />
     <Circle cx="27" cy="23" r="3.5" fill="#FFD700" opacity={0.7} />
-    <SvgText x="27" y="25.5" textAnchor="middle" fontSize="5" fontWeight="bold" fill="#1A1B4B">£</SvgText>
+    <SvgText x="27" y="25.5" textAnchor="middle" fontSize="5" fontWeight="bold" fill="#1A1B4B">
+      £
+    </SvgText>
   </Svg>
 );
 
@@ -290,8 +284,20 @@ const FamilyIcon = () => (
   <Svg width={36} height={36} viewBox="0 0 36 36">
     <Circle cx="12" cy="12" r="5" fill="none" stroke="#10B981" strokeWidth="2" />
     <Circle cx="24" cy="12" r="5" fill="none" stroke="#10B981" strokeWidth="2" />
-    <Path d="M4 30 Q4 22 12 20 Q16 19 18 20" fill="none" stroke="#10B981" strokeWidth="2" strokeLinecap="round" />
-    <Path d="M32 30 Q32 22 24 20 Q20 19 18 20" fill="none" stroke="#10B981" strokeWidth="2" strokeLinecap="round" />
+    <Path
+      d="M4 30 Q4 22 12 20 Q16 19 18 20"
+      fill="none"
+      stroke="#10B981"
+      strokeWidth="2"
+      strokeLinecap="round"
+    />
+    <Path
+      d="M32 30 Q32 22 24 20 Q20 19 18 20"
+      fill="none"
+      stroke="#10B981"
+      strokeWidth="2"
+      strokeLinecap="round"
+    />
     <Circle cx="18" cy="26" r="3" fill="#10B981" opacity={0.4} />
   </Svg>
 );
@@ -308,19 +314,20 @@ export default function StudentDashboard() {
   });
 
   // Staggered entrance
-  const fadeAnims = useRef(
-    Array.from({ length: 6 }, () => new Animated.Value(0))
-  ).current;
-  const slideAnims = useRef(
-    Array.from({ length: 6 }, () => new Animated.Value(25))
-  ).current;
+  const fadeAnims = useRef(Array.from({ length: 6 }, () => new Animated.Value(0))).current;
+  const slideAnims = useRef(Array.from({ length: 6 }, () => new Animated.Value(25))).current;
 
   useEffect(() => {
     const animations = fadeAnims.map((fade, i) =>
       Animated.parallel([
         Animated.timing(fade, { toValue: 1, duration: 350, delay: i * 100, useNativeDriver: true }),
-        Animated.timing(slideAnims[i], { toValue: 0, duration: 350, delay: i * 100, useNativeDriver: true }),
-      ])
+        Animated.timing(slideAnims[i], {
+          toValue: 0,
+          duration: 350,
+          delay: i * 100,
+          useNativeDriver: true,
+        }),
+      ]),
     );
     Animated.stagger(80, animations).start();
   }, []);
@@ -338,7 +345,7 @@ export default function StudentDashboard() {
 
       {/* ── Full-screen gradient background (matches splash) ── */}
       <LinearGradient
-        colors={["#1A1B4B", "#2D3A8C", "#4158D0"]}
+        colors={['#1A1B4B', '#2D3A8C', '#4158D0']}
         start={{ x: 0.2, y: 0 }}
         end={{ x: 0.8, y: 1 }}
         style={StyleSheet.absoluteFillObject}
@@ -362,9 +369,27 @@ export default function StudentDashboard() {
       ))}
 
       {/* ── Floating coins (subtle, behind content) ── */}
-      <FloatingCoin delay={0} startX={width * 0.05} startY={height * 0.06} size={22} opacity={0.3} />
-      <FloatingCoin delay={400} startX={width * 0.82} startY={height * 0.04} size={18} opacity={0.25} />
-      <FloatingCoin delay={200} startX={width * 0.7} startY={height * 0.15} size={16} opacity={0.2} />
+      <FloatingCoin
+        delay={0}
+        startX={width * 0.05}
+        startY={height * 0.06}
+        size={22}
+        opacity={0.3}
+      />
+      <FloatingCoin
+        delay={400}
+        startX={width * 0.82}
+        startY={height * 0.04}
+        size={18}
+        opacity={0.25}
+      />
+      <FloatingCoin
+        delay={200}
+        startX={width * 0.7}
+        startY={height * 0.15}
+        size={16}
+        opacity={0.2}
+      />
 
       {/* ── Bottom wave decoration ── */}
       <BottomWave />
@@ -380,9 +405,7 @@ export default function StudentDashboard() {
             <View style={styles.greetingText}>
               <Text style={styles.greetingLabel}>Welcome back,</Text>
               <Text style={styles.greetingName}>{STUDENT.nickname} 👋</Text>
-              <Text style={styles.streakBadge}>
-                🔥 {STUDENT.currentStreak} day streak
-              </Text>
+              <Text style={styles.streakBadge}>🔥 {STUDENT.currentStreak} day streak</Text>
             </View>
             <View style={styles.progressRingContainer}>
               <ProgressRing
@@ -403,7 +426,9 @@ export default function StudentDashboard() {
           {/* Quick stats row */}
           <View style={styles.quickStats}>
             <View style={styles.statPill}>
-              <Text style={styles.statValue}>{STUDENT.missionsCompleted}/{STUDENT.totalMissions}</Text>
+              <Text style={styles.statValue}>
+                {STUDENT.missionsCompleted}/{STUDENT.totalMissions}
+              </Text>
               <Text style={styles.statLabel}>Missions</Text>
             </View>
             <View style={styles.statDivider} />
@@ -424,11 +449,11 @@ export default function StudentDashboard() {
           <TouchableOpacity
             activeOpacity={0.85}
             onPress={() => {
-              router.push("/DailyChallenge")
+              router.push('/DailyChallenge');
             }}
           >
             <LinearGradient
-              colors={["rgba(255,215,0,0.18)", "rgba(245,166,35,0.06)"]}
+              colors={['rgba(255,215,0,0.18)', 'rgba(245,166,35,0.06)']}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 1 }}
               style={styles.dailyChallengeCard}
@@ -463,13 +488,21 @@ export default function StudentDashboard() {
               end={{ x: 1, y: 1 }}
               style={styles.continueLearningCard}
             >
-              <View style={[styles.islandEmojiCircle, { backgroundColor: `${NEXT_MISSION.islandColor}25` }]}>
+              <View
+                style={[
+                  styles.islandEmojiCircle,
+                  { backgroundColor: `${NEXT_MISSION.islandColor}25` },
+                ]}
+              >
                 <Text style={{ fontSize: 30 }}>{NEXT_MISSION.islandEmoji}</Text>
               </View>
               <View style={styles.continueLearningText}>
                 <Text style={styles.continueIslandName}>{NEXT_MISSION.islandName}</Text>
                 <Text style={styles.continueMissionTitle}>{NEXT_MISSION.missionTitle}</Text>
-                <MiniProgressBar progress={NEXT_MISSION.progress} color={NEXT_MISSION.islandColor} />
+                <MiniProgressBar
+                  progress={NEXT_MISSION.progress}
+                  color={NEXT_MISSION.islandColor}
+                />
               </View>
               <View style={styles.playButton}>
                 <LinearGradient
@@ -491,15 +524,15 @@ export default function StudentDashboard() {
               style={styles.quickAccessCard}
               activeOpacity={0.85}
               onPress={() => {
-                router.push("/BudgetSimulator")
+                router.push('/BudgetSimulator');
               }}
             >
               <LinearGradient
-                colors={["rgba(255,215,0,0.15)", "rgba(255,215,0,0.04)"]}
+                colors={['rgba(255,215,0,0.15)', 'rgba(255,215,0,0.04)']}
                 style={styles.quickAccessGradient}
               >
                 <SimulatorIcon />
-                <Text style={styles.quickAccessLabel}>Budget{"\n"}Simulator</Text>
+                <Text style={styles.quickAccessLabel}>Budget{'\n'}Simulator</Text>
               </LinearGradient>
             </TouchableOpacity>
 
@@ -507,15 +540,15 @@ export default function StudentDashboard() {
               style={styles.quickAccessCard}
               activeOpacity={0.85}
               onPress={() => {
-                router.push("/(student)/Progress")
+                router.push('/(student)/Progress');
               }}
             >
               <LinearGradient
-                colors={["rgba(255,46,145,0.15)", "rgba(255,46,145,0.04)"]}
+                colors={['rgba(255,46,145,0.15)', 'rgba(255,46,145,0.04)']}
                 style={styles.quickAccessGradient}
               >
                 <AchievementsIcon />
-                <Text style={styles.quickAccessLabel}>My{"\n"}Achievements</Text>
+                <Text style={styles.quickAccessLabel}>My{'\n'}Achievements</Text>
               </LinearGradient>
             </TouchableOpacity>
 
@@ -523,15 +556,15 @@ export default function StudentDashboard() {
               style={styles.quickAccessCard}
               activeOpacity={0.85}
               onPress={() => {
-                router.push("/(student)/FamilyShare")
+                router.push('/(student)/FamilyShare');
               }}
             >
               <LinearGradient
-                colors={["rgba(16,185,129,0.15)", "rgba(16,185,129,0.04)"]}
+                colors={['rgba(16,185,129,0.15)', 'rgba(16,185,129,0.04)']}
                 style={styles.quickAccessGradient}
               >
                 <FamilyIcon />
-                <Text style={styles.quickAccessLabel}>Share with{"\n"}Family</Text>
+                <Text style={styles.quickAccessLabel}>Share with{'\n'}Family</Text>
               </LinearGradient>
             </TouchableOpacity>
           </View>
@@ -541,9 +574,11 @@ export default function StudentDashboard() {
         <Animated.View style={anim(4)}>
           <View style={styles.sectionHeader}>
             <Text style={styles.sectionTitle}>Your Islands</Text>
-            <TouchableOpacity onPress={() => {
-              // router.push("/(student)/(tabs)/islands")
-            }}>
+            <TouchableOpacity
+              onPress={() => {
+                // router.push("/(student)/(tabs)/islands")
+              }}
+            >
               <Text style={styles.seeAllText}>See all →</Text>
             </TouchableOpacity>
           </View>
@@ -572,10 +607,10 @@ export default function StudentDashboard() {
                     <MiniProgressBar progress={island.progress} color={island.color} />
                     <Text style={styles.islandMiniPercent}>
                       {island.progress === 1
-                        ? "✅ Complete"
+                        ? '✅ Complete'
                         : island.progress === 0
-                        ? "🔒 Locked"
-                        : `${Math.round(island.progress * 100)}%`}
+                          ? '🔒 Locked'
+                          : `${Math.round(island.progress * 100)}%`}
                     </Text>
                   </LinearGradient>
                 </View>
@@ -588,9 +623,11 @@ export default function StudentDashboard() {
         <Animated.View style={anim(5)}>
           <View style={styles.sectionHeader}>
             <Text style={styles.sectionTitle}>Recent Badges</Text>
-            <TouchableOpacity onPress={() => {
-              // router.push("/(student)/achievements")
-            }}>
+            <TouchableOpacity
+              onPress={() => {
+                // router.push("/(student)/achievements")
+              }}
+            >
               <Text style={styles.seeAllText}>View all →</Text>
             </TouchableOpacity>
           </View>
@@ -617,16 +654,16 @@ export default function StudentDashboard() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    overflow: "hidden",
+    overflow: 'hidden',
   },
   star: {
-    position: "absolute",
+    position: 'absolute',
     borderRadius: 4,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: '#FFFFFF',
     zIndex: 0,
   },
   waveContainer: {
-    position: "absolute",
+    position: 'absolute',
     bottom: 0,
     left: -30,
     right: -30,
@@ -638,7 +675,7 @@ const styles = StyleSheet.create({
     zIndex: 1,
   },
   scrollContent: {
-    paddingTop: Platform.OS === "android" ? (StatusBar.currentHeight ?? 0) + 16 : 60,
+    paddingTop: Platform.OS === 'android' ? (StatusBar.currentHeight ?? 0) + 16 : 60,
     paddingHorizontal: 20,
   },
 
@@ -647,95 +684,95 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   greetingRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   greetingText: {
     flex: 1,
   },
   greetingLabel: {
-    fontFamily: "Poppins_400Regular",
+    fontFamily: 'Poppins_400Regular',
     fontSize: 14,
-    color: "rgba(255,255,255,0.55)",
+    color: 'rgba(255,255,255,0.55)',
   },
   greetingName: {
-    fontFamily: "Fredoka_700Bold",
+    fontFamily: 'Fredoka_700Bold',
     fontSize: 28,
-    color: "#FFFFFF",
+    color: '#FFFFFF',
     lineHeight: 34,
     marginTop: 2,
-    textShadowColor: "rgba(0, 0, 0, 0.2)",
+    textShadowColor: 'rgba(0, 0, 0, 0.2)',
     textShadowOffset: { width: 0, height: 1 },
     textShadowRadius: 4,
   },
   streakBadge: {
-    fontFamily: "Poppins_500Medium",
+    fontFamily: 'Poppins_500Medium',
     fontSize: 13,
-    color: "#FFD700",
+    color: '#FFD700',
     marginTop: 6,
   },
   progressRingContainer: {
     width: 76,
     height: 76,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   progressRingLabel: {
-    position: "absolute",
-    alignItems: "center",
+    position: 'absolute',
+    alignItems: 'center',
   },
   progressPercent: {
-    fontFamily: "Poppins_700Bold",
+    fontFamily: 'Poppins_700Bold',
     fontSize: 16,
-    color: "#FFFFFF",
+    color: '#FFFFFF',
     lineHeight: 20,
   },
   progressCaption: {
-    fontFamily: "Poppins_400Regular",
+    fontFamily: 'Poppins_400Regular',
     fontSize: 10,
-    color: "rgba(255,255,255,0.45)",
+    color: 'rgba(255,255,255,0.45)',
     marginTop: -2,
   },
   quickStats: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "rgba(255,255,255,0.08)",
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'rgba(255,255,255,0.08)',
     borderRadius: 16,
     paddingVertical: 14,
     paddingHorizontal: 8,
     marginTop: 18,
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.08)",
+    borderColor: 'rgba(255,255,255,0.08)',
   },
   statPill: {
     flex: 1,
-    alignItems: "center",
+    alignItems: 'center',
   },
   statValue: {
-    fontFamily: "Poppins_700Bold",
+    fontFamily: 'Poppins_700Bold',
     fontSize: 17,
-    color: "#FFFFFF",
+    color: '#FFFFFF',
   },
   statLabel: {
-    fontFamily: "Poppins_400Regular",
+    fontFamily: 'Poppins_400Regular',
     fontSize: 11,
-    color: "rgba(255,255,255,0.45)",
+    color: 'rgba(255,255,255,0.45)',
     marginTop: 2,
   },
   statDivider: {
     width: 1,
     height: 28,
-    backgroundColor: "rgba(255,255,255,0.1)",
+    backgroundColor: 'rgba(255,255,255,0.1)',
   },
 
   // ── Daily Challenge ──
   dailyChallengeCard: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     borderRadius: 18,
     borderWidth: 1,
-    borderColor: "rgba(255,215,0,0.15)",
+    borderColor: 'rgba(255,215,0,0.15)',
     paddingVertical: 16,
     paddingHorizontal: 16,
     gap: 14,
@@ -745,51 +782,51 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     borderRadius: 14,
-    backgroundColor: "rgba(255,215,0,0.12)",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: 'rgba(255,215,0,0.12)',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   dailyChallengeText: {
     flex: 1,
   },
   dailyChallengeLabel: {
-    fontFamily: "Poppins_600SemiBold",
+    fontFamily: 'Poppins_600SemiBold',
     fontSize: 11,
-    color: "#FFD700",
+    color: '#FFD700',
     letterSpacing: 0.5,
-    textTransform: "uppercase",
+    textTransform: 'uppercase',
   },
   dailyChallengeTitle: {
-    fontFamily: "Poppins_600SemiBold",
+    fontFamily: 'Poppins_600SemiBold',
     fontSize: 14,
-    color: "#FFFFFF",
+    color: '#FFFFFF',
     marginTop: 2,
   },
   dailyChallengeDesc: {
-    fontFamily: "Poppins_400Regular",
+    fontFamily: 'Poppins_400Regular',
     fontSize: 12,
-    color: "rgba(255,255,255,0.5)",
+    color: 'rgba(255,255,255,0.5)',
     marginTop: 2,
   },
   xpBadge: {
-    backgroundColor: "rgba(255,215,0,0.18)",
+    backgroundColor: 'rgba(255,215,0,0.18)',
     paddingHorizontal: 10,
     paddingVertical: 5,
     borderRadius: 10,
   },
   xpText: {
-    fontFamily: "Poppins_700Bold",
+    fontFamily: 'Poppins_700Bold',
     fontSize: 12,
-    color: "#FFD700",
+    color: '#FFD700',
   },
 
   // ── Continue Learning ──
   continueLearningCard: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     borderRadius: 18,
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.08)",
+    borderColor: 'rgba(255,255,255,0.08)',
     paddingVertical: 16,
     paddingHorizontal: 16,
     gap: 14,
@@ -799,91 +836,91 @@ const styles = StyleSheet.create({
     width: 56,
     height: 56,
     borderRadius: 16,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   continueLearningText: {
     flex: 1,
   },
   continueIslandName: {
-    fontFamily: "Poppins_500Medium",
+    fontFamily: 'Poppins_500Medium',
     fontSize: 12,
-    color: "rgba(255,255,255,0.5)",
+    color: 'rgba(255,255,255,0.5)',
     letterSpacing: 0.3,
   },
   continueMissionTitle: {
-    fontFamily: "Poppins_600SemiBold",
+    fontFamily: 'Poppins_600SemiBold',
     fontSize: 14,
-    color: "#FFFFFF",
+    color: '#FFFFFF',
     marginTop: 2,
     marginBottom: 8,
   },
   playButton: {
     borderRadius: 14,
-    overflow: "hidden",
+    overflow: 'hidden',
   },
   playButtonGradient: {
     width: 42,
     height: 42,
     borderRadius: 14,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   playArrow: {
     fontSize: 14,
-    color: "#FFFFFF",
+    color: '#FFFFFF',
     marginLeft: 2,
   },
 
   // ── Section titles ──
   sectionTitle: {
-    fontFamily: "Fredoka_700Bold",
+    fontFamily: 'Fredoka_700Bold',
     fontSize: 20,
-    color: "#FFFFFF",
+    color: '#FFFFFF',
     marginBottom: 12,
-    textShadowColor: "rgba(0, 0, 0, 0.15)",
+    textShadowColor: 'rgba(0, 0, 0, 0.15)',
     textShadowOffset: { width: 0, height: 1 },
     textShadowRadius: 3,
   },
   sectionHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     marginBottom: 12,
   },
   seeAllText: {
-    fontFamily: "Poppins_500Medium",
+    fontFamily: 'Poppins_500Medium',
     fontSize: 13,
-    color: "#4FC3F7",
+    color: '#4FC3F7',
   },
 
   // ── Quick Access Grid ──
   quickAccessGrid: {
-    flexDirection: "row",
+    flexDirection: 'row',
     gap: CARD_GAP,
     marginBottom: 24,
   },
   quickAccessCard: {
     flex: 1,
     borderRadius: 18,
-    overflow: "hidden",
+    overflow: 'hidden',
   },
   quickAccessGradient: {
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     paddingVertical: 20,
     paddingHorizontal: 8,
     borderRadius: 18,
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.06)",
+    borderColor: 'rgba(255,255,255,0.06)',
     gap: 10,
     minHeight: 120,
   },
   quickAccessLabel: {
-    fontFamily: "Poppins_600SemiBold",
+    fontFamily: 'Poppins_600SemiBold',
     fontSize: 12,
-    color: "rgba(255,255,255,0.75)",
-    textAlign: "center",
+    color: 'rgba(255,255,255,0.75)',
+    textAlign: 'center',
     lineHeight: 16,
   },
 
@@ -896,30 +933,30 @@ const styles = StyleSheet.create({
   islandMiniCard: {
     width: 130,
     borderRadius: 16,
-    overflow: "hidden",
+    overflow: 'hidden',
   },
   islandMiniGradient: {
     paddingVertical: 16,
     paddingHorizontal: 14,
     borderRadius: 16,
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.06)",
-    alignItems: "center",
+    borderColor: 'rgba(255,255,255,0.06)',
+    alignItems: 'center',
     gap: 6,
   },
   islandMiniEmoji: {
     fontSize: 28,
   },
   islandMiniName: {
-    fontFamily: "Poppins_600SemiBold",
+    fontFamily: 'Poppins_600SemiBold',
     fontSize: 12,
-    color: "#FFFFFF",
-    textAlign: "center",
+    color: '#FFFFFF',
+    textAlign: 'center',
   },
   islandMiniPercent: {
-    fontFamily: "Poppins_400Regular",
+    fontFamily: 'Poppins_400Regular',
     fontSize: 11,
-    color: "rgba(255,255,255,0.45)",
+    color: 'rgba(255,255,255,0.45)',
     marginTop: 2,
   },
 
@@ -927,41 +964,41 @@ const styles = StyleSheet.create({
   miniProgressTrack: {
     height: 5,
     borderRadius: 3,
-    backgroundColor: "rgba(255,255,255,0.08)",
-    overflow: "hidden",
-    width: "100%",
+    backgroundColor: 'rgba(255,255,255,0.08)',
+    overflow: 'hidden',
+    width: '100%',
   },
   miniProgressFill: {
-    height: "100%",
+    height: '100%',
     borderRadius: 3,
   },
 
   // ── Recent Badges ──
   badgesRow: {
-    flexDirection: "row",
+    flexDirection: 'row',
     gap: 16,
     marginBottom: 8,
   },
   badgeItem: {
-    alignItems: "center",
+    alignItems: 'center',
     gap: 6,
   },
   badgeCircle: {
     width: 56,
     height: 56,
     borderRadius: 28,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.06)",
+    borderColor: 'rgba(255,255,255,0.06)',
   },
   badgeEmoji: {
     fontSize: 24,
   },
   badgeLabel: {
-    fontFamily: "Poppins_500Medium",
+    fontFamily: 'Poppins_500Medium',
     fontSize: 11,
-    color: "rgba(255,255,255,0.55)",
-    textAlign: "center",
+    color: 'rgba(255,255,255,0.55)',
+    textAlign: 'center',
   },
 });

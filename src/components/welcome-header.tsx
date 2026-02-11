@@ -15,7 +15,7 @@ export function WelcomeHeader({ animatedStyle }: WelcomeHeaderProps) {
       }}
     >
       <Text
-        className="mt-8 font-poppins-medium text-base"
+        className="mt-8 font-poppins-medium text-[16px]"
         style={{ color: 'rgba(255,255,255,0.6)', letterSpacing: 0.5 }}
       >
         Welcome to
@@ -30,7 +30,7 @@ export function WelcomeHeader({ animatedStyle }: WelcomeHeaderProps) {
             textShadowRadius: 6,
           }}
         >
-          Money{' '}
+          NIGEL{' '}
         </Text>
         <Text
           className="font-fredoka text-4xl leading-[42px] text-gold"
@@ -40,12 +40,12 @@ export function WelcomeHeader({ animatedStyle }: WelcomeHeaderProps) {
             textShadowRadius: 10,
           }}
         >
-          Islands
+          Beyond Encryption
         </Text>
       </View>
 
       <Text
-        className="font-poppins-regular text-sm"
+        className="font-poppins-regular text-[16px]"
         style={{ color: 'rgba(255,255,255,0.55)', marginTop: 6, letterSpacing: 0.2 }}
       >
         Your adventure in financial literacy starts here

@@ -1,14 +1,14 @@
-import { Fredoka_700Bold } from "@expo-google-fonts/fredoka";
+import { Fredoka_700Bold } from '@expo-google-fonts/fredoka';
 import {
   Poppins_400Regular,
   Poppins_500Medium,
   Poppins_600SemiBold,
   Poppins_700Bold,
-} from "@expo-google-fonts/poppins";
-import { useFonts } from "expo-font";
-import { LinearGradient } from "expo-linear-gradient";
-import { useRouter } from "expo-router";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+} from '@expo-google-fonts/poppins';
+import { useFonts } from 'expo-font';
+import { LinearGradient } from 'expo-linear-gradient';
+import { useRouter } from 'expo-router';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import {
   Animated,
   Dimensions,
@@ -19,7 +19,7 @@ import {
   Text,
   TouchableOpacity,
   View,
-} from "react-native";
+} from 'react-native';
 import {
   Circle,
   Defs,
@@ -29,18 +29,18 @@ import {
   Svg,
   LinearGradient as SvgLinearGradient,
   Text as SvgText,
-} from "react-native-svg";
+} from 'react-native-svg';
 
-const { width, height } = Dimensions.get("window");
+const { width, height } = Dimensions.get('window');
 
 // ─── Types ─────────────────────────────────────────────────────────
-type ChallengeType = "sort" | "true-false" | "pick-one" | "slider";
+type ChallengeType = 'sort' | 'true-false' | 'pick-one' | 'slider';
 
 interface ChallengeOption {
   id: string;
   text: string;
   emoji?: string;
-  category?: "need" | "want"; // for sort challenges
+  category?: 'need' | 'want'; // for sort challenges
 }
 
 interface DailyChallenge {
@@ -60,25 +60,25 @@ interface DailyChallenge {
 
 // ─── Mock Data ─────────────────────────────────────────────────────
 const CHALLENGE: DailyChallenge = {
-  id: "dc-2026-02-09",
-  type: "sort",
-  title: "Needs vs Wants",
-  subtitle: "Daily Challenge",
+  id: 'dc-2026-02-09',
+  type: 'sort',
+  title: 'Needs vs Wants',
+  subtitle: 'Daily Challenge',
   description:
-    "Sort these items into the right category. Which are things you need, and which are things you want?",
+    'Sort these items into the right category. Which are things you need, and which are things you want?',
   xpReward: 25,
   streakBonus: 10,
-  timeEstimate: "~2 min",
+  timeEstimate: '~2 min',
   options: [
-    { id: "o1", text: "School lunch", emoji: "🍱", category: "need" },
-    { id: "o2", text: "New trainers", emoji: "👟", category: "want" },
-    { id: "o3", text: "Bus pass", emoji: "🚌", category: "need" },
-    { id: "o4", text: "Streaming sub", emoji: "📺", category: "want" },
-    { id: "o5", text: "Winter coat", emoji: "🧥", category: "need" },
+    { id: 'o1', text: 'School lunch', emoji: '🍱', category: 'need' },
+    { id: 'o2', text: 'New trainers', emoji: '👟', category: 'want' },
+    { id: 'o3', text: 'Bus pass', emoji: '🚌', category: 'need' },
+    { id: 'o4', text: 'Streaming sub', emoji: '📺', category: 'want' },
+    { id: 'o5', text: 'Winter coat', emoji: '🧥', category: 'need' },
   ],
-  correctAnswers: ["o1", "o3", "o5"], // these are "needs"
+  correctAnswers: ['o1', 'o3', 'o5'], // these are "needs"
   explanation:
-    "Needs are things you must have to stay safe, healthy, and able to get to school. Wants are nice extras — you can live without them even if they feel important!",
+    'Needs are things you must have to stay safe, healthy, and able to get to school. Wants are nice extras — you can live without them even if they feel important!',
   tip: "A good trick: ask yourself 'Could I survive and stay well without this?' If yes, it's probably a want.",
 };
 
@@ -86,20 +86,20 @@ const STREAK_DATA = {
   current: 3,
   best: 7,
   weekDays: [
-    { day: "M", completed: true },
-    { day: "T", completed: true },
-    { day: "W", completed: true },
-    { day: "T", completed: false },
-    { day: "F", completed: false },
-    { day: "S", completed: false },
-    { day: "S", completed: false },
+    { day: 'M', completed: true },
+    { day: 'T', completed: true },
+    { day: 'W', completed: true },
+    { day: 'T', completed: false },
+    { day: 'F', completed: false },
+    { day: 'S', completed: false },
+    { day: 'S', completed: false },
   ],
 };
 
 const PAST_CHALLENGES = [
-  { id: "1", title: "Budget Buster", emoji: "💰", xp: 25, completed: true },
-  { id: "2", title: "Saving Sprint", emoji: "🏃", xp: 25, completed: true },
-  { id: "3", title: "Scam Spotter", emoji: "🔍", xp: 30, completed: true },
+  { id: '1', title: 'Budget Buster', emoji: '💰', xp: 25, completed: true },
+  { id: '2', title: 'Saving Sprint', emoji: '🏃', xp: 25, completed: true },
+  { id: '3', title: 'Scam Spotter', emoji: '🔍', xp: 30, completed: true },
 ];
 
 // ─── Floating Coin ─────────────────────────────────────────────────
@@ -139,7 +139,7 @@ const FloatingCoin = ({
           duration: 2400 + delay * 0.5,
           useNativeDriver: true,
         }),
-      ])
+      ]),
     ).start();
   }, []);
 
@@ -151,7 +151,7 @@ const FloatingCoin = ({
   return (
     <Animated.View
       style={{
-        position: "absolute",
+        position: 'absolute',
         left: startX,
         top: startY,
         opacity: Animated.multiply(fadeIn, opacity),
@@ -185,7 +185,7 @@ const BottomWave = () => {
       Animated.sequence([
         Animated.timing(waveOffset, { toValue: 1, duration: 3000, useNativeDriver: true }),
         Animated.timing(waveOffset, { toValue: 0, duration: 3000, useNativeDriver: true }),
-      ])
+      ]),
     ).start();
   }, []);
 
@@ -218,7 +218,9 @@ const BottomWave = () => {
 // ─── Mini Progress Bar ─────────────────────────────────────────────
 const MiniProgressBar = ({ progress, color }: { progress: number; color: string }) => (
   <View style={styles.miniProgressTrack}>
-    <View style={[styles.miniProgressFill, { width: `${progress * 100}%`, backgroundColor: color }]} />
+    <View
+      style={[styles.miniProgressFill, { width: `${progress * 100}%`, backgroundColor: color }]}
+    />
   </View>
 );
 
@@ -234,22 +236,45 @@ const TrophyIcon = ({ size = 48 }: { size?: number }) => (
     {/* Cup body */}
     <Path d="M14 8 L34 8 L31 26 Q30 30 24 32 Q18 30 17 26 Z" fill="url(#trophyGrad)" />
     {/* Handles */}
-    <Path d="M14 12 Q6 12 6 20 Q6 24 12 24" fill="none" stroke="#F5A623" strokeWidth="2.5" strokeLinecap="round" />
-    <Path d="M34 12 Q42 12 42 20 Q42 24 36 24" fill="none" stroke="#F5A623" strokeWidth="2.5" strokeLinecap="round" />
+    <Path
+      d="M14 12 Q6 12 6 20 Q6 24 12 24"
+      fill="none"
+      stroke="#F5A623"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+    />
+    <Path
+      d="M34 12 Q42 12 42 20 Q42 24 36 24"
+      fill="none"
+      stroke="#F5A623"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+    />
     {/* Stem */}
     <Rect x="21" y="32" width="6" height="6" fill="#E8960C" />
     {/* Base */}
     <Rect x="16" y="38" width="16" height="4" rx="2" fill="#F5A623" />
     {/* Star */}
-    <Path d="M24 14 L25.5 18 L30 18 L26.5 21 L28 25 L24 22 L20 25 L21.5 21 L18 18 L22.5 18 Z" fill="#FFFFFF" opacity={0.8} />
+    <Path
+      d="M24 14 L25.5 18 L30 18 L26.5 21 L28 25 L24 22 L20 25 L21.5 21 L18 18 L22.5 18 Z"
+      fill="#FFFFFF"
+      opacity={0.8}
+    />
   </Svg>
 );
 
 // ─── Checkmark Icon SVG ────────────────────────────────────────────
-const CheckIcon = ({ size = 20, color = "#10B981" }: { size?: number; color?: string }) => (
+const CheckIcon = ({ size = 20, color = '#10B981' }: { size?: number; color?: string }) => (
   <Svg width={size} height={size} viewBox="0 0 24 24">
     <Circle cx="12" cy="12" r="10" fill={color} />
-    <Path d="M7 12.5 L10.5 16 L17 9" fill="none" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+    <Path
+      d="M7 12.5 L10.5 16 L17 9"
+      fill="none"
+      stroke="#FFFFFF"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
   </Svg>
 );
 
@@ -269,14 +294,14 @@ const SortItem = ({
   isCorrect,
 }: {
   option: ChallengeOption;
-  onSort: (id: string, category: "need" | "want") => void;
-  sortedAs: "need" | "want" | null;
+  onSort: (id: string, category: 'need' | 'want') => void;
+  sortedAs: 'need' | 'want' | null;
   isRevealed: boolean;
   isCorrect: boolean;
 }) => {
   const scaleAnim = useRef(new Animated.Value(1)).current;
 
-  const handlePress = (category: "need" | "want") => {
+  const handlePress = (category: 'need' | 'want') => {
     if (isRevealed) return;
     Animated.sequence([
       Animated.timing(scaleAnim, { toValue: 0.95, duration: 80, useNativeDriver: true }),
@@ -287,26 +312,31 @@ const SortItem = ({
 
   const borderColor = isRevealed
     ? isCorrect
-      ? "rgba(16, 185, 129, 0.5)"
-      : "rgba(239, 68, 68, 0.5)"
+      ? 'rgba(16, 185, 129, 0.5)'
+      : 'rgba(239, 68, 68, 0.5)'
     : sortedAs
-    ? sortedAs === "need"
-      ? "rgba(79, 195, 247, 0.35)"
-      : "rgba(255, 46, 145, 0.35)"
-    : "rgba(255,255,255,0.08)";
+      ? sortedAs === 'need'
+        ? 'rgba(79, 195, 247, 0.35)'
+        : 'rgba(255, 46, 145, 0.35)'
+      : 'rgba(255,255,255,0.08)';
 
   const bgColor = isRevealed
     ? isCorrect
-      ? "rgba(16, 185, 129, 0.12)"
-      : "rgba(239, 68, 68, 0.10)"
+      ? 'rgba(16, 185, 129, 0.12)'
+      : 'rgba(239, 68, 68, 0.10)'
     : sortedAs
-    ? sortedAs === "need"
-      ? "rgba(79, 195, 247, 0.08)"
-      : "rgba(255, 46, 145, 0.08)"
-    : "rgba(255,255,255,0.04)";
+      ? sortedAs === 'need'
+        ? 'rgba(79, 195, 247, 0.08)'
+        : 'rgba(255, 46, 145, 0.08)'
+      : 'rgba(255,255,255,0.04)';
 
   return (
-    <Animated.View style={[styles.sortItem, { borderColor, backgroundColor: bgColor, transform: [{ scale: scaleAnim }] }]}>
+    <Animated.View
+      style={[
+        styles.sortItem,
+        { borderColor, backgroundColor: bgColor, transform: [{ scale: scaleAnim }] },
+      ]}
+    >
       <View style={styles.sortItemLeft}>
         <Text style={styles.sortItemEmoji}>{option.emoji}</Text>
         <Text style={styles.sortItemText}>{option.text}</Text>
@@ -325,40 +355,36 @@ const SortItem = ({
       ) : (
         <View style={styles.sortButtons}>
           <TouchableOpacity
-            onPress={() => handlePress("need")}
+            onPress={() => handlePress('need')}
             style={[
               styles.sortBtn,
               styles.needBtn,
-              sortedAs === "need" && styles.sortBtnActive,
-              sortedAs === "need" && { backgroundColor: "rgba(79, 195, 247, 0.25)", borderColor: "#4FC3F7" },
+              sortedAs === 'need' && styles.sortBtnActive,
+              sortedAs === 'need' && {
+                backgroundColor: 'rgba(79, 195, 247, 0.25)',
+                borderColor: '#4FC3F7',
+              },
             ]}
             activeOpacity={0.7}
           >
-            <Text
-              style={[
-                styles.sortBtnText,
-                sortedAs === "need" && { color: "#4FC3F7" },
-              ]}
-            >
+            <Text style={[styles.sortBtnText, sortedAs === 'need' && { color: '#4FC3F7' }]}>
               Need
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => handlePress("want")}
+            onPress={() => handlePress('want')}
             style={[
               styles.sortBtn,
               styles.wantBtn,
-              sortedAs === "want" && styles.sortBtnActive,
-              sortedAs === "want" && { backgroundColor: "rgba(255, 46, 145, 0.25)", borderColor: "#FF2E91" },
+              sortedAs === 'want' && styles.sortBtnActive,
+              sortedAs === 'want' && {
+                backgroundColor: 'rgba(255, 46, 145, 0.25)',
+                borderColor: '#FF2E91',
+              },
             ]}
             activeOpacity={0.7}
           >
-            <Text
-              style={[
-                styles.sortBtnText,
-                sortedAs === "want" && { color: "#FF2E91" },
-              ]}
-            >
+            <Text style={[styles.sortBtnText, sortedAs === 'want' && { color: '#FF2E91' }]}>
               Want
             </Text>
           </TouchableOpacity>
@@ -392,14 +418,7 @@ const StreakDay = ({
         <Text style={styles.streakDotNow}>!</Text>
       ) : null}
     </View>
-    <Text
-      style={[
-        styles.streakDayLabel,
-        isToday && { color: "#FFD700" },
-      ]}
-    >
-      {day}
-    </Text>
+    <Text style={[styles.streakDayLabel, isToday && { color: '#FFD700' }]}>{day}</Text>
   </View>
 );
 
@@ -417,7 +436,7 @@ export default function DailyChallengeScreen() {
   });
 
   // ── State ──
-  const [sortAnswers, setSortAnswers] = useState<Record<string, "need" | "want">>({});
+  const [sortAnswers, setSortAnswers] = useState<Record<string, 'need' | 'want'>>({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [showResults, setShowResults] = useState(false);
   const [score, setScore] = useState(0);
@@ -433,8 +452,13 @@ export default function DailyChallengeScreen() {
     const animations = fadeAnims.map((fade, i) =>
       Animated.parallel([
         Animated.timing(fade, { toValue: 1, duration: 400, delay: i * 90, useNativeDriver: true }),
-        Animated.timing(slideAnims[i], { toValue: 0, duration: 400, delay: i * 90, useNativeDriver: true }),
-      ])
+        Animated.timing(slideAnims[i], {
+          toValue: 0,
+          duration: 400,
+          delay: i * 90,
+          useNativeDriver: true,
+        }),
+      ]),
     );
     Animated.stagger(60, animations).start();
   }, []);
@@ -446,11 +470,11 @@ export default function DailyChallengeScreen() {
 
   // ── Handlers ──
   const handleSort = useCallback(
-    (id: string, category: "need" | "want") => {
+    (id: string, category: 'need' | 'want') => {
       if (isSubmitted) return;
       setSortAnswers((prev) => ({ ...prev, [id]: category }));
     },
-    [isSubmitted]
+    [isSubmitted],
   );
 
   const allAnswered = CHALLENGE.options.every((opt) => sortAnswers[opt.id]);
@@ -463,7 +487,7 @@ export default function DailyChallengeScreen() {
     CHALLENGE.options.forEach((opt) => {
       const userAnswer = sortAnswers[opt.id];
       const isNeed = CHALLENGE.correctAnswers.includes(opt.id);
-      if ((isNeed && userAnswer === "need") || (!isNeed && userAnswer === "want")) {
+      if ((isNeed && userAnswer === 'need') || (!isNeed && userAnswer === 'want')) {
         correct++;
       }
     });
@@ -475,7 +499,12 @@ export default function DailyChallengeScreen() {
       setShowResults(true);
       // Animate results card
       Animated.parallel([
-        Animated.spring(resultScale, { toValue: 1, friction: 5, tension: 60, useNativeDriver: true }),
+        Animated.spring(resultScale, {
+          toValue: 1,
+          friction: 5,
+          tension: 60,
+          useNativeDriver: true,
+        }),
         Animated.timing(resultOpacity, { toValue: 1, duration: 400, useNativeDriver: true }),
       ]).start();
 
@@ -492,9 +521,7 @@ export default function DailyChallengeScreen() {
   };
 
   const isPerfect = score === CHALLENGE.options.length;
-  const totalXP = isPerfect
-    ? CHALLENGE.xpReward + CHALLENGE.streakBonus
-    : CHALLENGE.xpReward;
+  const totalXP = isPerfect ? CHALLENGE.xpReward + CHALLENGE.streakBonus : CHALLENGE.xpReward;
 
   if (!fontsLoaded) return null;
 
@@ -504,7 +531,7 @@ export default function DailyChallengeScreen() {
 
       {/* ── Full-screen gradient background ── */}
       <LinearGradient
-        colors={["#1A1B4B", "#2D3A8C", "#4158D0"]}
+        colors={['#1A1B4B', '#2D3A8C', '#4158D0']}
         start={{ x: 0.2, y: 0 }}
         end={{ x: 0.8, y: 1 }}
         style={StyleSheet.absoluteFillObject}
@@ -528,9 +555,27 @@ export default function DailyChallengeScreen() {
       ))}
 
       {/* ── Floating coins ── */}
-      <FloatingCoin delay={100} startX={width * 0.06} startY={height * 0.05} size={20} opacity={0.25} />
-      <FloatingCoin delay={500} startX={width * 0.85} startY={height * 0.08} size={16} opacity={0.2} />
-      <FloatingCoin delay={300} startX={width * 0.72} startY={height * 0.18} size={14} opacity={0.18} />
+      <FloatingCoin
+        delay={100}
+        startX={width * 0.06}
+        startY={height * 0.05}
+        size={20}
+        opacity={0.25}
+      />
+      <FloatingCoin
+        delay={500}
+        startX={width * 0.85}
+        startY={height * 0.08}
+        size={16}
+        opacity={0.2}
+      />
+      <FloatingCoin
+        delay={300}
+        startX={width * 0.72}
+        startY={height * 0.18}
+        size={14}
+        opacity={0.18}
+      />
 
       {/* ── Bottom wave ── */}
       <BottomWave />
@@ -553,13 +598,22 @@ export default function DailyChallengeScreen() {
             inputRange: [0, 0.7, 1],
             outputRange: [1, 1, 0],
           });
-          const colors = ["#FFD700", "#FF2E91", "#4FC3F7", "#10B981", "#A855F7", "#F59E0B", "#FF6B6B", "#70E0A0"];
+          const colors = [
+            '#FFD700',
+            '#FF2E91',
+            '#4FC3F7',
+            '#10B981',
+            '#A855F7',
+            '#F59E0B',
+            '#FF6B6B',
+            '#70E0A0',
+          ];
           return (
             <Animated.View
               key={`confetti-${i}`}
               pointerEvents="none"
               style={{
-                position: "absolute",
+                position: 'absolute',
                 left: width / 2 - 4,
                 top: height * 0.28,
                 width: 8,
@@ -591,10 +645,10 @@ export default function DailyChallengeScreen() {
           <View style={styles.topBarCenter}>
             <Text style={styles.topBarLabel}>Daily Challenge</Text>
             <Text style={styles.topBarDate}>
-              {new Date().toLocaleDateString("en-GB", {
-                weekday: "long",
-                day: "numeric",
-                month: "short",
+              {new Date().toLocaleDateString('en-GB', {
+                weekday: 'long',
+                day: 'numeric',
+                month: 'short',
               })}
             </Text>
           </View>
@@ -607,7 +661,7 @@ export default function DailyChallengeScreen() {
         {/* ── Streak Tracker ────────────────────────────────── */}
         <Animated.View style={anim(1)}>
           <LinearGradient
-            colors={["rgba(255,215,0,0.14)", "rgba(245,166,35,0.04)"]}
+            colors={['rgba(255,215,0,0.14)', 'rgba(245,166,35,0.04)']}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 1 }}
             style={styles.streakCard}
@@ -650,9 +704,7 @@ export default function DailyChallengeScreen() {
               <View style={styles.challengeMeta}>
                 <Text style={styles.challengeMetaText}>🕐 {CHALLENGE.timeEstimate}</Text>
                 <View style={styles.metaDot} />
-                <Text style={styles.challengeMetaText}>
-                  {CHALLENGE.options.length} items
-                </Text>
+                <Text style={styles.challengeMetaText}>{CHALLENGE.options.length} items</Text>
               </View>
             </View>
           </View>
@@ -663,11 +715,11 @@ export default function DailyChallengeScreen() {
         <Animated.View style={anim(3)}>
           <View style={styles.sortLegend}>
             <View style={styles.legendItem}>
-              <View style={[styles.legendDot, { backgroundColor: "#4FC3F7" }]} />
+              <View style={[styles.legendDot, { backgroundColor: '#4FC3F7' }]} />
               <Text style={styles.legendText}>Need — Must have</Text>
             </View>
             <View style={styles.legendItem}>
-              <View style={[styles.legendDot, { backgroundColor: "#FF2E91" }]} />
+              <View style={[styles.legendDot, { backgroundColor: '#FF2E91' }]} />
               <Text style={styles.legendText}>Want — Nice to have</Text>
             </View>
           </View>
@@ -676,7 +728,7 @@ export default function DailyChallengeScreen() {
             const isNeed = CHALLENGE.correctAnswers.includes(option.id);
             const userAnswer = sortAnswers[option.id];
             const isCorrectAnswer = isSubmitted
-              ? (isNeed && userAnswer === "need") || (!isNeed && userAnswer === "want")
+              ? (isNeed && userAnswer === 'need') || (!isNeed && userAnswer === 'want')
               : false;
 
             return (
@@ -699,9 +751,7 @@ export default function DailyChallengeScreen() {
               <Text style={styles.progressLabel}>
                 {Object.keys(sortAnswers).length} of {CHALLENGE.options.length} sorted
               </Text>
-              <Text style={styles.progressLabel}>
-                {allAnswered ? "Ready!" : "Keep going..."}
-              </Text>
+              <Text style={styles.progressLabel}>{allAnswered ? 'Ready!' : 'Keep going...'}</Text>
             </View>
             <MiniProgressBar
               progress={Object.keys(sortAnswers).length / CHALLENGE.options.length}
@@ -722,23 +772,21 @@ export default function DailyChallengeScreen() {
               <LinearGradient
                 colors={
                   allAnswered && !isSubmitted
-                    ? ["#FFD700", "#F5A623"]
-                    : ["rgba(255,215,0,0.25)", "rgba(245,166,35,0.15)"]
+                    ? ['#FFD700', '#F5A623']
+                    : ['rgba(255,215,0,0.25)', 'rgba(245,166,35,0.15)']
                 }
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 1 }}
-                style={[
-                  styles.submitButton,
-                  (!allAnswered || isSubmitted) && { opacity: 0.5 },
-                ]}
+                style={[styles.submitButton, (!allAnswered || isSubmitted) && { opacity: 0.5 }]}
               >
                 <Text
-                  style={[
-                    styles.submitText,
-                    allAnswered && !isSubmitted && { color: "#1A1B4B" },
-                  ]}
+                  style={[styles.submitText, allAnswered && !isSubmitted && { color: '#1A1B4B' }]}
                 >
-                  {isSubmitted ? "Checking..." : allAnswered ? "Check My Answers" : "Sort all items first"}
+                  {isSubmitted
+                    ? 'Checking...'
+                    : allAnswered
+                      ? 'Check My Answers'
+                      : 'Sort all items first'}
                 </Text>
               </LinearGradient>
             </TouchableOpacity>
@@ -759,8 +807,8 @@ export default function DailyChallengeScreen() {
             <LinearGradient
               colors={
                 isPerfect
-                  ? ["rgba(255,215,0,0.20)", "rgba(16,185,129,0.10)"]
-                  : ["rgba(79,195,247,0.15)", "rgba(168,85,247,0.08)"]
+                  ? ['rgba(255,215,0,0.20)', 'rgba(16,185,129,0.10)']
+                  : ['rgba(79,195,247,0.15)', 'rgba(168,85,247,0.08)']
               }
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 1 }}
@@ -779,10 +827,10 @@ export default function DailyChallengeScreen() {
                 )}
                 <Text style={styles.resultsTitle}>
                   {isPerfect
-                    ? "Perfect Score! 🎉"
+                    ? 'Perfect Score! 🎉'
                     : score >= CHALLENGE.options.length * 0.6
-                    ? "Nice work! 👏"
-                    : "Good try! 💪"}
+                      ? 'Nice work! 👏'
+                      : 'Good try! 💪'}
                 </Text>
                 <Text style={styles.resultsSubtitle}>
                   You got {score} out of {CHALLENGE.options.length} correct
@@ -802,7 +850,7 @@ export default function DailyChallengeScreen() {
                     <View style={styles.xpEarnedItem}>
                       <Text style={{ fontSize: 18 }}>🔥</Text>
                       <Text style={styles.xpEarnedLabel}>Streak Bonus</Text>
-                      <Text style={[styles.xpEarnedValue, { color: "#FF2E91" }]}>
+                      <Text style={[styles.xpEarnedValue, { color: '#FF2E91' }]}>
                         +{CHALLENGE.streakBonus}
                       </Text>
                     </View>
@@ -834,14 +882,12 @@ export default function DailyChallengeScreen() {
                 style={{ marginTop: 16 }}
               >
                 <LinearGradient
-                  colors={["#FFD700", "#F5A623"]}
+                  colors={['#FFD700', '#F5A623']}
                   start={{ x: 0, y: 0 }}
                   end={{ x: 1, y: 1 }}
                   style={styles.submitButton}
                 >
-                  <Text style={[styles.submitText, { color: "#1A1B4B" }]}>
-                    Back to Dashboard
-                  </Text>
+                  <Text style={[styles.submitText, { color: '#1A1B4B' }]}>Back to Dashboard</Text>
                 </LinearGradient>
               </TouchableOpacity>
             </LinearGradient>
@@ -880,16 +926,16 @@ export default function DailyChallengeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    overflow: "hidden",
+    overflow: 'hidden',
   },
   star: {
-    position: "absolute",
+    position: 'absolute',
     borderRadius: 4,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: '#FFFFFF',
     zIndex: 0,
   },
   waveContainer: {
-    position: "absolute",
+    position: 'absolute',
     bottom: 0,
     left: -30,
     right: -30,
@@ -901,14 +947,14 @@ const styles = StyleSheet.create({
     zIndex: 1,
   },
   scrollContent: {
-    paddingTop: Platform.OS === "android" ? (StatusBar.currentHeight ?? 0) + 12 : 56,
+    paddingTop: Platform.OS === 'android' ? (StatusBar.currentHeight ?? 0) + 12 : 56,
     paddingHorizontal: 20,
   },
 
   // ── Top Bar ──
   topBar: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     marginBottom: 20,
     gap: 12,
   },
@@ -916,142 +962,142 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 14,
-    backgroundColor: "rgba(255,255,255,0.08)",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: 'rgba(255,255,255,0.08)',
+    alignItems: 'center',
+    justifyContent: 'center',
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.06)",
+    borderColor: 'rgba(255,255,255,0.06)',
   },
   backArrow: {
-    fontFamily: "Poppins_600SemiBold",
+    fontFamily: 'Poppins_600SemiBold',
     fontSize: 20,
-    color: "#FFFFFF",
+    color: '#FFFFFF',
     marginTop: -2,
   },
   topBarCenter: {
     flex: 1,
   },
   topBarLabel: {
-    fontFamily: "Fredoka_700Bold",
+    fontFamily: 'Fredoka_700Bold',
     fontSize: 22,
-    color: "#FFFFFF",
-    textShadowColor: "rgba(0,0,0,0.2)",
+    color: '#FFFFFF',
+    textShadowColor: 'rgba(0,0,0,0.2)',
     textShadowOffset: { width: 0, height: 1 },
     textShadowRadius: 4,
   },
   topBarDate: {
-    fontFamily: "Poppins_400Regular",
+    fontFamily: 'Poppins_400Regular',
     fontSize: 12,
-    color: "rgba(255,255,255,0.45)",
+    color: 'rgba(255,255,255,0.45)',
     marginTop: 1,
   },
   xpPill: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     gap: 4,
-    backgroundColor: "rgba(255,215,0,0.15)",
+    backgroundColor: 'rgba(255,215,0,0.15)',
     paddingHorizontal: 12,
     paddingVertical: 6,
     borderRadius: 12,
     borderWidth: 1,
-    borderColor: "rgba(255,215,0,0.2)",
+    borderColor: 'rgba(255,215,0,0.2)',
   },
   xpPillText: {
-    fontFamily: "Poppins_700Bold",
+    fontFamily: 'Poppins_700Bold',
     fontSize: 13,
-    color: "#FFD700",
+    color: '#FFD700',
   },
 
   // ── Streak Card ──
   streakCard: {
     borderRadius: 18,
     borderWidth: 1,
-    borderColor: "rgba(255,215,0,0.12)",
+    borderColor: 'rgba(255,215,0,0.12)',
     padding: 16,
     marginBottom: 24,
   },
   streakHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     marginBottom: 14,
   },
   streakLeft: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     gap: 10,
   },
   streakEmoji: {
     fontSize: 28,
   },
   streakCount: {
-    fontFamily: "Poppins_700Bold",
+    fontFamily: 'Poppins_700Bold',
     fontSize: 16,
-    color: "#FFFFFF",
+    color: '#FFFFFF',
   },
   streakBest: {
-    fontFamily: "Poppins_400Regular",
+    fontFamily: 'Poppins_400Regular',
     fontSize: 11,
-    color: "rgba(255,255,255,0.4)",
+    color: 'rgba(255,255,255,0.4)',
     marginTop: 1,
   },
   bonusPill: {
-    backgroundColor: "rgba(255, 46, 145, 0.18)",
+    backgroundColor: 'rgba(255, 46, 145, 0.18)',
     paddingHorizontal: 10,
     paddingVertical: 4,
     borderRadius: 10,
   },
   bonusText: {
-    fontFamily: "Poppins_600SemiBold",
+    fontFamily: 'Poppins_600SemiBold',
     fontSize: 11,
-    color: "#FF2E91",
+    color: '#FF2E91',
   },
   streakDays: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   streakDayContainer: {
-    alignItems: "center",
+    alignItems: 'center',
     gap: 5,
   },
   streakDot: {
     width: 32,
     height: 32,
     borderRadius: 16,
-    backgroundColor: "rgba(255,255,255,0.06)",
+    backgroundColor: 'rgba(255,255,255,0.06)',
     borderWidth: 1.5,
-    borderColor: "rgba(255,255,255,0.1)",
-    alignItems: "center",
-    justifyContent: "center",
+    borderColor: 'rgba(255,255,255,0.1)',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   streakDotCompleted: {
-    backgroundColor: "rgba(255,215,0,0.2)",
-    borderColor: "#FFD700",
+    backgroundColor: 'rgba(255,215,0,0.2)',
+    borderColor: '#FFD700',
   },
   streakDotToday: {
-    borderColor: "rgba(255,215,0,0.5)",
-    borderStyle: "dashed",
+    borderColor: 'rgba(255,215,0,0.5)',
+    borderStyle: 'dashed',
   },
   streakDotCheck: {
-    fontFamily: "Poppins_700Bold",
+    fontFamily: 'Poppins_700Bold',
     fontSize: 14,
-    color: "#FFD700",
+    color: '#FFD700',
   },
   streakDotNow: {
-    fontFamily: "Poppins_700Bold",
+    fontFamily: 'Poppins_700Bold',
     fontSize: 14,
-    color: "#FFD700",
+    color: '#FFD700',
   },
   streakDayLabel: {
-    fontFamily: "Poppins_500Medium",
+    fontFamily: 'Poppins_500Medium',
     fontSize: 11,
-    color: "rgba(255,255,255,0.35)",
+    color: 'rgba(255,255,255,0.35)',
   },
 
   // ── Challenge Header ──
   challengeHeader: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     gap: 14,
     marginBottom: 12,
   },
@@ -1059,57 +1105,57 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 18,
-    backgroundColor: "rgba(255,215,0,0.12)",
+    backgroundColor: 'rgba(255,215,0,0.12)',
     borderWidth: 1,
-    borderColor: "rgba(255,215,0,0.15)",
-    alignItems: "center",
-    justifyContent: "center",
+    borderColor: 'rgba(255,215,0,0.15)',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   challengeHeaderText: {
     flex: 1,
   },
   challengeTitle: {
-    fontFamily: "Fredoka_700Bold",
+    fontFamily: 'Fredoka_700Bold',
     fontSize: 24,
-    color: "#FFFFFF",
-    textShadowColor: "rgba(0,0,0,0.15)",
+    color: '#FFFFFF',
+    textShadowColor: 'rgba(0,0,0,0.15)',
     textShadowOffset: { width: 0, height: 1 },
     textShadowRadius: 3,
   },
   challengeMeta: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     gap: 8,
     marginTop: 4,
   },
   challengeMetaText: {
-    fontFamily: "Poppins_400Regular",
+    fontFamily: 'Poppins_400Regular',
     fontSize: 12,
-    color: "rgba(255,255,255,0.45)",
+    color: 'rgba(255,255,255,0.45)',
   },
   metaDot: {
     width: 3,
     height: 3,
     borderRadius: 1.5,
-    backgroundColor: "rgba(255,255,255,0.2)",
+    backgroundColor: 'rgba(255,255,255,0.2)',
   },
   challengeDescription: {
-    fontFamily: "Poppins_400Regular",
+    fontFamily: 'Poppins_400Regular',
     fontSize: 14,
-    color: "rgba(255,255,255,0.65)",
+    color: 'rgba(255,255,255,0.65)',
     lineHeight: 22,
     marginBottom: 20,
   },
 
   // ── Sort Legend ──
   sortLegend: {
-    flexDirection: "row",
+    flexDirection: 'row',
     gap: 20,
     marginBottom: 14,
   },
   legendItem: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     gap: 6,
   },
   legendDot: {
@@ -1118,16 +1164,16 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   legendText: {
-    fontFamily: "Poppins_500Medium",
+    fontFamily: 'Poppins_500Medium',
     fontSize: 12,
-    color: "rgba(255,255,255,0.5)",
+    color: 'rgba(255,255,255,0.5)',
   },
 
   // ── Sort Item ──
   sortItem: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     borderRadius: 16,
     borderWidth: 1,
     paddingVertical: 14,
@@ -1135,8 +1181,8 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   sortItemLeft: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     gap: 12,
     flex: 1,
   },
@@ -1144,12 +1190,12 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
   sortItemText: {
-    fontFamily: "Poppins_600SemiBold",
+    fontFamily: 'Poppins_600SemiBold',
     fontSize: 15,
-    color: "#FFFFFF",
+    color: '#FFFFFF',
   },
   sortButtons: {
-    flexDirection: "row",
+    flexDirection: 'row',
     gap: 8,
   },
   sortBtn: {
@@ -1157,16 +1203,16 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     borderRadius: 10,
     borderWidth: 1.5,
-    borderColor: "rgba(255,255,255,0.12)",
-    backgroundColor: "rgba(255,255,255,0.04)",
+    borderColor: 'rgba(255,255,255,0.12)',
+    backgroundColor: 'rgba(255,255,255,0.04)',
   },
   needBtn: {},
   wantBtn: {},
   sortBtnActive: {},
   sortBtnText: {
-    fontFamily: "Poppins_600SemiBold",
+    fontFamily: 'Poppins_600SemiBold',
     fontSize: 12,
-    color: "rgba(255,255,255,0.6)",
+    color: 'rgba(255,255,255,0.6)',
   },
   sortRevealBadge: {
     marginLeft: 12,
@@ -1175,14 +1221,14 @@ const styles = StyleSheet.create({
     width: 22,
     height: 22,
     borderRadius: 11,
-    backgroundColor: "rgba(239,68,68,0.8)",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: 'rgba(239,68,68,0.8)',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   wrongX: {
-    fontFamily: "Poppins_700Bold",
+    fontFamily: 'Poppins_700Bold',
     fontSize: 12,
-    color: "#FFFFFF",
+    color: '#FFFFFF',
     marginTop: -1,
   },
 
@@ -1192,26 +1238,26 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   progressRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     marginBottom: 8,
   },
   progressLabel: {
-    fontFamily: "Poppins_500Medium",
+    fontFamily: 'Poppins_500Medium',
     fontSize: 12,
-    color: "rgba(255,255,255,0.45)",
+    color: 'rgba(255,255,255,0.45)',
   },
 
   // ── Mini Progress Bar ──
   miniProgressTrack: {
     height: 6,
     borderRadius: 3,
-    backgroundColor: "rgba(255,255,255,0.08)",
-    overflow: "hidden",
-    width: "100%",
+    backgroundColor: 'rgba(255,255,255,0.08)',
+    overflow: 'hidden',
+    width: '100%',
   },
   miniProgressFill: {
-    height: "100%",
+    height: '100%',
     borderRadius: 3,
   },
 
@@ -1219,11 +1265,11 @@ const styles = StyleSheet.create({
   submitButton: {
     borderRadius: 20,
     paddingVertical: 16,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     ...Platform.select({
       ios: {
-        shadowColor: "#F5A623",
+        shadowColor: '#F5A623',
         shadowOffset: { width: 0, height: 4 },
         shadowOpacity: 0.3,
         shadowRadius: 12,
@@ -1234,9 +1280,9 @@ const styles = StyleSheet.create({
     }),
   },
   submitText: {
-    fontFamily: "Poppins_700Bold",
+    fontFamily: 'Poppins_700Bold',
     fontSize: 16,
-    color: "rgba(255,255,255,0.5)",
+    color: 'rgba(255,255,255,0.5)',
     letterSpacing: 0.3,
   },
 
@@ -1244,193 +1290,193 @@ const styles = StyleSheet.create({
   resultsCard: {
     marginTop: 16,
     borderRadius: 22,
-    overflow: "hidden",
+    overflow: 'hidden',
   },
   resultsGradient: {
     borderRadius: 22,
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.1)",
+    borderColor: 'rgba(255,255,255,0.1)',
     padding: 24,
   },
   resultsHeader: {
-    alignItems: "center",
+    alignItems: 'center',
     marginBottom: 20,
   },
   resultsTitle: {
-    fontFamily: "Fredoka_700Bold",
+    fontFamily: 'Fredoka_700Bold',
     fontSize: 26,
-    color: "#FFFFFF",
+    color: '#FFFFFF',
     marginTop: 12,
-    textAlign: "center",
-    textShadowColor: "rgba(0,0,0,0.15)",
+    textAlign: 'center',
+    textShadowColor: 'rgba(0,0,0,0.15)',
     textShadowOffset: { width: 0, height: 1 },
     textShadowRadius: 3,
   },
   resultsSubtitle: {
-    fontFamily: "Poppins_400Regular",
+    fontFamily: 'Poppins_400Regular',
     fontSize: 14,
-    color: "rgba(255,255,255,0.55)",
+    color: 'rgba(255,255,255,0.55)',
     marginTop: 4,
-    textAlign: "center",
+    textAlign: 'center',
   },
   scoreCircle: {
     width: 64,
     height: 64,
     borderRadius: 32,
-    backgroundColor: "rgba(79,195,247,0.15)",
+    backgroundColor: 'rgba(79,195,247,0.15)',
     borderWidth: 2,
-    borderColor: "#4FC3F7",
-    alignItems: "center",
-    justifyContent: "center",
+    borderColor: '#4FC3F7',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   scoreNumber: {
-    fontFamily: "Poppins_700Bold",
+    fontFamily: 'Poppins_700Bold',
     fontSize: 20,
-    color: "#4FC3F7",
+    color: '#4FC3F7',
   },
 
   // ── XP Earned ──
   xpEarnedRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "rgba(255,255,255,0.05)",
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'rgba(255,255,255,0.05)',
     borderRadius: 16,
     paddingVertical: 14,
     paddingHorizontal: 16,
     marginBottom: 14,
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.06)",
+    borderColor: 'rgba(255,255,255,0.06)',
   },
   xpEarnedItem: {
     flex: 1,
-    alignItems: "center",
+    alignItems: 'center',
     gap: 4,
   },
   xpEarnedLabel: {
-    fontFamily: "Poppins_400Regular",
+    fontFamily: 'Poppins_400Regular',
     fontSize: 11,
-    color: "rgba(255,255,255,0.45)",
+    color: 'rgba(255,255,255,0.45)',
   },
   xpEarnedValue: {
-    fontFamily: "Poppins_700Bold",
+    fontFamily: 'Poppins_700Bold',
     fontSize: 18,
-    color: "#FFD700",
+    color: '#FFD700',
   },
   xpDivider: {
     width: 1,
     height: 36,
-    backgroundColor: "rgba(255,255,255,0.08)",
+    backgroundColor: 'rgba(255,255,255,0.08)',
   },
   totalXPBar: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    backgroundColor: "rgba(255,215,0,0.1)",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: 'rgba(255,215,0,0.1)',
     borderRadius: 12,
     paddingVertical: 12,
     paddingHorizontal: 16,
     marginBottom: 20,
     borderWidth: 1,
-    borderColor: "rgba(255,215,0,0.15)",
+    borderColor: 'rgba(255,215,0,0.15)',
   },
   totalXPLabel: {
-    fontFamily: "Poppins_600SemiBold",
+    fontFamily: 'Poppins_600SemiBold',
     fontSize: 13,
-    color: "rgba(255,255,255,0.6)",
+    color: 'rgba(255,255,255,0.6)',
   },
   totalXPValue: {
-    fontFamily: "Poppins_700Bold",
+    fontFamily: 'Poppins_700Bold',
     fontSize: 18,
-    color: "#FFD700",
+    color: '#FFD700',
   },
 
   // ── Explanation & Tip ──
   explanationBox: {
-    backgroundColor: "rgba(79,195,247,0.08)",
+    backgroundColor: 'rgba(79,195,247,0.08)',
     borderRadius: 14,
     padding: 16,
     marginBottom: 12,
     borderWidth: 1,
-    borderColor: "rgba(79,195,247,0.12)",
+    borderColor: 'rgba(79,195,247,0.12)',
   },
   explanationTitle: {
-    fontFamily: "Poppins_600SemiBold",
+    fontFamily: 'Poppins_600SemiBold',
     fontSize: 14,
-    color: "#4FC3F7",
+    color: '#4FC3F7',
     marginBottom: 6,
   },
   explanationText: {
-    fontFamily: "Poppins_400Regular",
+    fontFamily: 'Poppins_400Regular',
     fontSize: 13,
-    color: "rgba(255,255,255,0.65)",
+    color: 'rgba(255,255,255,0.65)',
     lineHeight: 20,
   },
   tipBox: {
-    backgroundColor: "rgba(168,85,247,0.08)",
+    backgroundColor: 'rgba(168,85,247,0.08)',
     borderRadius: 14,
     padding: 16,
     borderWidth: 1,
-    borderColor: "rgba(168,85,247,0.12)",
+    borderColor: 'rgba(168,85,247,0.12)',
   },
   tipTitle: {
-    fontFamily: "Poppins_600SemiBold",
+    fontFamily: 'Poppins_600SemiBold',
     fontSize: 14,
-    color: "#A855F7",
+    color: '#A855F7',
     marginBottom: 6,
   },
   tipText: {
-    fontFamily: "Poppins_400Regular",
+    fontFamily: 'Poppins_400Regular',
     fontSize: 13,
-    color: "rgba(255,255,255,0.65)",
+    color: 'rgba(255,255,255,0.65)',
     lineHeight: 20,
   },
 
   // ── Section Title ──
   sectionTitle: {
-    fontFamily: "Fredoka_700Bold",
+    fontFamily: 'Fredoka_700Bold',
     fontSize: 20,
-    color: "#FFFFFF",
+    color: '#FFFFFF',
     marginBottom: 14,
     marginTop: 28,
-    textShadowColor: "rgba(0,0,0,0.15)",
+    textShadowColor: 'rgba(0,0,0,0.15)',
     textShadowOffset: { width: 0, height: 1 },
     textShadowRadius: 3,
   },
 
   // ── Past Challenges ──
   pastChallengeRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    backgroundColor: "rgba(255,255,255,0.04)",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: 'rgba(255,255,255,0.04)',
     borderRadius: 14,
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.06)",
+    borderColor: 'rgba(255,255,255,0.06)',
     paddingVertical: 14,
     paddingHorizontal: 16,
     marginBottom: 8,
   },
   pastChallengeLeft: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     gap: 12,
   },
   pastChallengeEmoji: {
     fontSize: 22,
   },
   pastChallengeTitle: {
-    fontFamily: "Poppins_600SemiBold",
+    fontFamily: 'Poppins_600SemiBold',
     fontSize: 14,
-    color: "rgba(255,255,255,0.75)",
+    color: 'rgba(255,255,255,0.75)',
   },
   pastChallengeRight: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     gap: 8,
   },
   pastChallengeXP: {
-    fontFamily: "Poppins_600SemiBold",
+    fontFamily: 'Poppins_600SemiBold',
     fontSize: 13,
-    color: "#FFD700",
+    color: '#FFD700',
   },
 });

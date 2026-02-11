@@ -2,18 +2,11 @@ import React from 'react';
 import { View } from 'react-native';
 
 interface RadioIndicatorProps {
-  /** Whether this option is currently selected. */
   selected: boolean;
-  /** Accent color for the selected state. */
   color: string;
-  /** Outer circle diameter. Defaults to 26. */
   size?: number;
 }
 
-/**
- * Circular radio indicator that shows a filled dot when selected.
- * Used in role selection cards and any future single-choice selectors.
- */
 export function RadioIndicator({ selected, color, size = 26 }: RadioIndicatorProps) {
   const innerSize = Math.round(size * 0.46);
 

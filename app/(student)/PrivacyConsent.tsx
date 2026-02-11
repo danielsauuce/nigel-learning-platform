@@ -1,14 +1,14 @@
-import { Fredoka_700Bold } from "@expo-google-fonts/fredoka";
+import { Fredoka_700Bold } from '@expo-google-fonts/fredoka';
 import {
   Poppins_400Regular,
   Poppins_500Medium,
   Poppins_600SemiBold,
   Poppins_700Bold,
-} from "@expo-google-fonts/poppins";
-import { useFonts } from "expo-font";
-import { LinearGradient } from "expo-linear-gradient";
-import { useRouter } from "expo-router";
-import React, { useEffect, useRef, useState } from "react";
+} from '@expo-google-fonts/poppins';
+import { useFonts } from 'expo-font';
+import { LinearGradient } from 'expo-linear-gradient';
+import { useRouter } from 'expo-router';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   Animated,
   Dimensions,
@@ -19,48 +19,48 @@ import {
   Text,
   TouchableOpacity,
   View,
-} from "react-native";
+} from 'react-native';
 import {
   Circle,
   Defs,
   Path,
   Stop,
   Svg,
-  LinearGradient as SvgLinearGradient
-} from "react-native-svg";
+  LinearGradient as SvgLinearGradient,
+} from 'react-native-svg';
 
-const { width, height } = Dimensions.get("window");
+const { width, height } = Dimensions.get('window');
 
 // ─── Consent items ─────────────────────────────────────────────────
 const CONSENT_ITEMS = [
   {
-    id: "data-use",
-    emoji: "📊",
-    title: "How we use your info",
+    id: 'data-use',
+    emoji: '📊',
+    title: 'How we use your info',
     description:
-      "We only save your nickname, progress, and quiz scores. Nothing personal like your real name or address.",
+      'We only save your nickname, progress, and quiz scores. Nothing personal like your real name or address.',
     required: true,
   },
   {
-    id: "no-real-money",
-    emoji: "🔒",
-    title: "No real money involved",
+    id: 'no-real-money',
+    emoji: '🔒',
+    title: 'No real money involved',
     description:
-      "Everything in Money Islands uses pretend money. We never ask for bank details or real payments.",
+      'Everything in Money Islands uses pretend money. We never ask for bank details or real payments.',
     required: true,
   },
   {
-    id: "teacher-visibility",
-    emoji: "👩‍🏫",
-    title: "Your teacher can see progress",
+    id: 'teacher-visibility',
+    emoji: '👩‍🏫',
+    title: 'Your teacher can see progress',
     description:
       "Your teacher can view which missions you've completed and your quiz scores to help support your learning.",
     required: true,
   },
   {
-    id: "family-sharing",
-    emoji: "👨‍👩‍👧",
-    title: "Family sharing is your choice",
+    id: 'family-sharing',
+    emoji: '👨‍👩‍👧',
+    title: 'Family sharing is your choice',
     description:
       "You can choose to share a summary of your achievements with family. You're always in control and can stop sharing at any time.",
     required: false,
@@ -81,10 +81,7 @@ const ShieldIcon = () => (
       </SvgLinearGradient>
     </Defs>
     {/* Shield body */}
-    <Path
-      d="M36 4 L66 18 L66 40 Q66 62 36 76 Q6 62 6 40 L6 18 Z"
-      fill="url(#shieldGrad)"
-    />
+    <Path d="M36 4 L66 18 L66 40 Q66 62 36 76 Q6 62 6 40 L6 18 Z" fill="url(#shieldGrad)" />
     <Path
       d="M36 4 L66 18 L66 40 Q66 62 36 76 Q6 62 6 40 L6 18 Z"
       fill="none"
@@ -137,8 +134,8 @@ const ConsentToggle = ({
         style={[
           styles.toggleOuter,
           {
-            backgroundColor: checked ? accentColor : "transparent",
-            borderColor: checked ? accentColor : "rgba(255,255,255,0.2)",
+            backgroundColor: checked ? accentColor : 'transparent',
+            borderColor: checked ? accentColor : 'rgba(255,255,255,0.2)',
             transform: [{ scale }],
           },
         ]}
@@ -187,9 +184,17 @@ const FloatingSparkle = ({
 
     Animated.loop(
       Animated.sequence([
-        Animated.timing(floatAnim, { toValue: 1, duration: 2200 + delay * 0.4, useNativeDriver: true }),
-        Animated.timing(floatAnim, { toValue: 0, duration: 2200 + delay * 0.4, useNativeDriver: true }),
-      ])
+        Animated.timing(floatAnim, {
+          toValue: 1,
+          duration: 2200 + delay * 0.4,
+          useNativeDriver: true,
+        }),
+        Animated.timing(floatAnim, {
+          toValue: 0,
+          duration: 2200 + delay * 0.4,
+          useNativeDriver: true,
+        }),
+      ]),
     ).start();
   }, []);
 
@@ -201,7 +206,7 @@ const FloatingSparkle = ({
   return (
     <Animated.View
       style={{
-        position: "absolute",
+        position: 'absolute',
         left: x,
         top: y,
         width: size,
@@ -227,10 +232,10 @@ export default function StudentPrivacyConsentScreen() {
   });
 
   const [consents, setConsents] = useState<Record<string, boolean>>({
-    "data-use": false,
-    "no-real-money": false,
-    "teacher-visibility": false,
-    "family-sharing": false,
+    'data-use': false,
+    'no-real-money': false,
+    'teacher-visibility': false,
+    'family-sharing': false,
   });
 
   // Entrance animations
@@ -252,7 +257,12 @@ export default function StudentPrivacyConsentScreen() {
       ]),
       Animated.parallel([
         Animated.timing(shieldOpacity, { toValue: 1, duration: 400, useNativeDriver: true }),
-        Animated.spring(shieldScale, { toValue: 1, friction: 4, tension: 60, useNativeDriver: true }),
+        Animated.spring(shieldScale, {
+          toValue: 1,
+          friction: 4,
+          tension: 60,
+          useNativeDriver: true,
+        }),
       ]),
       Animated.parallel([
         Animated.timing(listOpacity, { toValue: 1, duration: 400, useNativeDriver: true }),
@@ -268,7 +278,7 @@ export default function StudentPrivacyConsentScreen() {
       Animated.sequence([
         Animated.timing(waveOffset, { toValue: 1, duration: 3500, useNativeDriver: true }),
         Animated.timing(waveOffset, { toValue: 0, duration: 3500, useNativeDriver: true }),
-      ])
+      ]),
     ).start();
   }, []);
 
@@ -288,7 +298,7 @@ export default function StudentPrivacyConsentScreen() {
   const handleAgree = () => {
     if (!allRequiredAccepted) return;
     // TODO: Store consent state in onboardingStore
-    router.replace("/(student)/(tabs)/Dashboard");
+    router.replace('/(student)/(tabs)/Dashboard');
   };
 
   if (!fontsLoaded) return null;
@@ -298,7 +308,7 @@ export default function StudentPrivacyConsentScreen() {
       <StatusBar barStyle="light-content" translucent backgroundColor="transparent" />
 
       <LinearGradient
-        colors={["#1A1B4B", "#2D3A8C", "#4158D0"]}
+        colors={['#1A1B4B', '#2D3A8C', '#4158D0']}
         start={{ x: 0.2, y: 0 }}
         end={{ x: 0.8, y: 1 }}
         style={StyleSheet.absoluteFillObject}
@@ -335,7 +345,7 @@ export default function StudentPrivacyConsentScreen() {
           width={width + 50}
           height={100}
           viewBox={`0 0 ${width + 50} 100`}
-          style={{ position: "absolute", bottom: 0 }}
+          style={{ position: 'absolute', bottom: 0 }}
         >
           <Path
             d={`M0 40 Q${width * 0.15} 20 ${width * 0.3} 36 Q${width * 0.45} 52 ${width * 0.6} 32 Q${width * 0.75} 12 ${width * 0.9} 36 Q${width * 1.05} 60 ${width + 50} 32 L${width + 50} 100 L0 100 Z`}
@@ -375,7 +385,7 @@ export default function StudentPrivacyConsentScreen() {
         >
           <ShieldIcon />
           <Text style={styles.shieldCaption}>
-            Money Islands is a safe space.{"\n"}Here's what you need to know:
+            Money Islands is a safe space.{'\n'}Here's what you need to know:
           </Text>
         </Animated.View>
 
@@ -392,7 +402,7 @@ export default function StudentPrivacyConsentScreen() {
           >
             {CONSENT_ITEMS.map((item, index) => {
               const isChecked = consents[item.id];
-              const accentColor = ["#4FC3F7", "#10B981", "#A855F7", "#FFD700"][index % 4];
+              const accentColor = ['#4FC3F7', '#10B981', '#A855F7', '#FFD700'][index % 4];
 
               return (
                 <TouchableOpacity
@@ -402,10 +412,10 @@ export default function StudentPrivacyConsentScreen() {
                   style={[
                     styles.consentCard,
                     {
-                      borderColor: isChecked ? accentColor : "rgba(255,255,255,0.08)",
+                      borderColor: isChecked ? accentColor : 'rgba(255,255,255,0.08)',
                       backgroundColor: isChecked
-                        ? `rgba(${accentColor === "#4FC3F7" ? "79,195,247" : accentColor === "#10B981" ? "16,185,129" : accentColor === "#A855F7" ? "168,85,247" : "255,215,0"},0.08)`
-                        : "rgba(255,255,255,0.05)",
+                        ? `rgba(${accentColor === '#4FC3F7' ? '79,195,247' : accentColor === '#10B981' ? '16,185,129' : accentColor === '#A855F7' ? '168,85,247' : '255,215,0'},0.08)`
+                        : 'rgba(255,255,255,0.05)',
                     },
                   ]}
                 >
@@ -451,35 +461,23 @@ export default function StudentPrivacyConsentScreen() {
             <LinearGradient
               colors={
                 allRequiredAccepted
-                  ? ["#FFD700", "#F5A623"]
-                  : ["rgba(255,255,255,0.12)", "rgba(255,255,255,0.06)"]
+                  ? ['#FFD700', '#F5A623']
+                  : ['rgba(255,255,255,0.12)', 'rgba(255,255,255,0.06)']
               }
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 1 }}
               style={styles.ctaGradient}
             >
-              <Text
-                style={[
-                  styles.ctaText,
-                  !allRequiredAccepted && styles.ctaTextDisabled,
-                ]}
-              >
+              <Text style={[styles.ctaText, !allRequiredAccepted && styles.ctaTextDisabled]}>
                 I Agree — Let's Go!
               </Text>
-              <Text
-                style={[
-                  styles.ctaArrow,
-                  !allRequiredAccepted && styles.ctaTextDisabled,
-                ]}
-              >
+              <Text style={[styles.ctaArrow, !allRequiredAccepted && styles.ctaTextDisabled]}>
                 🏝️
               </Text>
             </LinearGradient>
           </TouchableOpacity>
 
-          <Text style={styles.legalNote}>
-            You can change these choices any time in Settings.
-          </Text>
+          <Text style={styles.legalNote}>You can change these choices any time in Settings.</Text>
         </Animated.View>
       </View>
     </View>
@@ -490,15 +488,15 @@ export default function StudentPrivacyConsentScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    overflow: "hidden",
+    overflow: 'hidden',
   },
   star: {
-    position: "absolute",
+    position: 'absolute',
     borderRadius: 4,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: '#FFFFFF',
   },
   waveContainer: {
-    position: "absolute",
+    position: 'absolute',
     bottom: 0,
     left: -25,
     right: -25,
@@ -506,8 +504,8 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    paddingTop: Platform.OS === "android" ? (StatusBar.currentHeight ?? 0) + 16 : 60,
-    paddingBottom: Platform.OS === "android" ? 20 : 34,
+    paddingTop: Platform.OS === 'android' ? (StatusBar.currentHeight ?? 0) + 16 : 60,
+    paddingBottom: Platform.OS === 'android' ? 20 : 34,
     paddingHorizontal: 24,
   },
 
@@ -516,33 +514,33 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   stepLabel: {
-    fontFamily: "Poppins_500Medium",
+    fontFamily: 'Poppins_500Medium',
     fontSize: 14,
-    color: "rgba(255,255,255,0.5)",
+    color: 'rgba(255,255,255,0.5)',
     letterSpacing: 0.3,
-    textTransform: "uppercase",
+    textTransform: 'uppercase',
   },
   headerTitle: {
-    fontFamily: "Fredoka_700Bold",
+    fontFamily: 'Fredoka_700Bold',
     fontSize: 30,
-    color: "#FFFFFF",
+    color: '#FFFFFF',
     lineHeight: 36,
     marginTop: 4,
-    textShadowColor: "rgba(0,0,0,0.2)",
+    textShadowColor: 'rgba(0,0,0,0.2)',
     textShadowOffset: { width: 0, height: 2 },
     textShadowRadius: 6,
   },
 
   // ── Shield ──
   shieldContainer: {
-    alignItems: "center",
+    alignItems: 'center',
     marginBottom: 12,
   },
   shieldCaption: {
-    fontFamily: "Poppins_400Regular",
+    fontFamily: 'Poppins_400Regular',
     fontSize: 14,
-    color: "rgba(255,255,255,0.6)",
-    textAlign: "center",
+    color: 'rgba(255,255,255,0.6)',
+    textAlign: 'center',
     marginTop: 10,
     lineHeight: 20,
   },
@@ -562,17 +560,17 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
   },
   consentRow: {
-    flexDirection: "row",
-    alignItems: "flex-start",
+    flexDirection: 'row',
+    alignItems: 'flex-start',
     gap: 12,
   },
   emojiCircle: {
     width: 40,
     height: 40,
     borderRadius: 12,
-    backgroundColor: "rgba(255,255,255,0.06)",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: 'rgba(255,255,255,0.06)',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   emoji: {
     fontSize: 20,
@@ -581,34 +579,34 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   titleRow: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     gap: 8,
-    flexWrap: "wrap",
+    flexWrap: 'wrap',
   },
   consentTitle: {
-    fontFamily: "Poppins_600SemiBold",
+    fontFamily: 'Poppins_600SemiBold',
     fontSize: 14,
-    color: "#FFFFFF",
+    color: '#FFFFFF',
     letterSpacing: 0.1,
   },
   requiredBadge: {
-    backgroundColor: "rgba(255,46,145,0.2)",
+    backgroundColor: 'rgba(255,46,145,0.2)',
     paddingHorizontal: 7,
     paddingVertical: 2,
     borderRadius: 6,
   },
   requiredText: {
-    fontFamily: "Poppins_500Medium",
+    fontFamily: 'Poppins_500Medium',
     fontSize: 10,
-    color: "#FF2E91",
+    color: '#FF2E91',
     letterSpacing: 0.3,
-    textTransform: "uppercase",
+    textTransform: 'uppercase',
   },
   consentDescription: {
-    fontFamily: "Poppins_400Regular",
+    fontFamily: 'Poppins_400Regular',
     fontSize: 12,
-    color: "rgba(255,255,255,0.5)",
+    color: 'rgba(255,255,255,0.5)',
     marginTop: 4,
     lineHeight: 17,
   },
@@ -619,8 +617,8 @@ const styles = StyleSheet.create({
     height: 26,
     borderRadius: 8,
     borderWidth: 2,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     marginTop: 2,
   },
 
@@ -630,10 +628,10 @@ const styles = StyleSheet.create({
   },
   ctaButton: {
     borderRadius: 28,
-    overflow: "hidden",
+    overflow: 'hidden',
     ...Platform.select({
       ios: {
-        shadowColor: "#F5A623",
+        shadowColor: '#F5A623',
         shadowOffset: { width: 0, height: 6 },
         shadowOpacity: 0.35,
         shadowRadius: 14,
@@ -650,30 +648,30 @@ const styles = StyleSheet.create({
     }),
   },
   ctaGradient: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
     paddingVertical: 16,
     paddingHorizontal: 32,
     gap: 10,
   },
   ctaText: {
-    fontFamily: "Poppins_700Bold",
+    fontFamily: 'Poppins_700Bold',
     fontSize: 18,
-    color: "#1A1B4B",
+    color: '#1A1B4B',
     letterSpacing: 0.3,
   },
   ctaTextDisabled: {
-    color: "rgba(255,255,255,0.3)",
+    color: 'rgba(255,255,255,0.3)',
   },
   ctaArrow: {
     fontSize: 20,
   },
   legalNote: {
-    fontFamily: "Poppins_400Regular",
+    fontFamily: 'Poppins_400Regular',
     fontSize: 12,
-    color: "rgba(255,255,255,0.35)",
-    textAlign: "center",
+    color: 'rgba(255,255,255,0.35)',
+    textAlign: 'center',
     marginTop: 12,
     letterSpacing: 0.2,
   },
