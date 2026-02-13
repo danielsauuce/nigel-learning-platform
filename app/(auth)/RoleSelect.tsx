@@ -53,7 +53,7 @@ export default function RoleSelectScreen() {
   const handleContinue = () => {
     if (!selectedRole) return;
     router.push(
-      selectedRole === 'student' ? '/(student)/Personalization' : '/(auth)/teacher-login',
+      selectedRole === 'student' ? '/(auth)/DetailsPersonalization' : '/(auth)/teacher-login',
     );
     // router.push('/(student)/Personalization')
   };
