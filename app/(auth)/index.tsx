@@ -1,5 +1,5 @@
 import React from 'react';
-import { Animated, Platform, StatusBar, Text, View } from 'react-native';
+import { Animated, Image, Platform, StatusBar, Text, View } from 'react-native';
 import { router } from 'expo-router';
 import { FloatingCoin, IslandIcon } from '@/components/illustrations';
 import { GoldButton } from '@/components/ui/gold-button';
@@ -45,10 +45,9 @@ export default function SplashScreen() {
         className="flex-1 items-center justify-center px-8"
         style={{ paddingTop: SAFE_TOP, paddingBottom: SAFE_BOTTOM }}
       >
-        {/* Logo */}
         <Animated.View className="mb-7" style={logo.style}>
           <View
-            className="h-40 w-40 items-center justify-center rounded-full border-2 border-white/20 bg-white/10"
+            className="h-40 w-40 items-center justify-center overflow-hidden rounded-full border-2 border-white/20 bg-white/10"
             style={Platform.select({
               ios: {
                 shadowColor: '#4FC3F7',
@@ -59,7 +58,11 @@ export default function SplashScreen() {
               android: { elevation: 12 },
             })}
           >
-            <IslandIcon />
+            <Image
+              source={require('../../assets/images/Nigel.png')}
+              className="h-full w-full"
+              resizeMode="cover"
+            />
           </View>
         </Animated.View>
 
@@ -74,10 +77,10 @@ export default function SplashScreen() {
               textShadowRadius: 8,
             }}
           >
-            Money
+            Nigel
           </Text>
           <Text
-            className="text-center font-fredoka text-[52px] leading-[56px] text-gold"
+            className="text-center font-fredoka text-[45px] leading-[56px] text-gold"
             style={{
               letterSpacing: -1,
               marginTop: -4,
@@ -86,7 +89,7 @@ export default function SplashScreen() {
               textShadowRadius: 12,
             }}
           >
-            Islands
+            Beyond Encryption
           </Text>
         </Animated.View>
 
