@@ -181,7 +181,7 @@ export default function PrivacyConsentScreen() {
 
         <Animated.View className="pt-2" style={footer.style}>
           <GoldButton
-            label="I Agree — Let's Go! 🏝️"
+            label="I Agree, Let's Go! 🏝️"
             onPress={handleAgree}
             disabled={!allRequiredAccepted}
             showArrow={false}
