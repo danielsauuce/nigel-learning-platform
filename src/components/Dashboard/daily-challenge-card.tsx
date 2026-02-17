@@ -21,8 +21,16 @@ export function DailyChallengeCard({
         colors={['rgba(255,215,0,0.18)', 'rgba(245,166,35,0.06)']}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
-        className="flex-row items-center gap-3.5 rounded-[18px] px-4 py-4"
-        style={{ borderWidth: 1, borderColor: 'rgba(255,215,0,0.15)' }}
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          gap: 14,
+          borderRadius: 18,
+          paddingHorizontal: 16,
+          paddingVertical: 16,
+          borderWidth: 1,
+          borderColor: 'rgba(255,215,0,0.15)',
+        }}
       >
         {/* Icon */}
         <View

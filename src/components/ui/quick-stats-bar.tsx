@@ -26,9 +26,9 @@ export function QuickStatsBar({ stats }: QuickStatsBarProps) {
             <View className="h-7 w-px" style={{ backgroundColor: 'rgba(255,255,255,0.1)' }} />
           )}
           <View className="flex-1 items-center">
-            <Text className="font-poppins-bold text-[17px] text-white">{stat.value}</Text>
+            <Text className="font-poppins-bold text-[20px] text-white">{stat.value}</Text>
             <Text
-              className="mt-0.5 font-poppins-regular text-[11px]"
+              className="mt-0.5 font-poppins-regular text-[14px]"
               style={{ color: 'rgba(255,255,255,0.45)' }}
             >
               {stat.label}

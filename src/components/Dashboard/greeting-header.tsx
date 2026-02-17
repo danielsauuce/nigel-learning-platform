@@ -13,7 +13,10 @@ export function GreetingHeader({ nickname, streak, progress }: GreetingHeaderPro
   return (
     <View className="flex-row items-center justify-between">
       <View className="flex-1">
-        <Text className="font-poppins-regular text-[18px]" style={{ color: 'rgba(255,255,255,0.55)' }}>
+        <Text
+          className="font-poppins-regular text-[18px]"
+          style={{ color: 'rgba(255,255,255,0.55)' }}
+        >
           Welcome back,
         </Text>
         <Text

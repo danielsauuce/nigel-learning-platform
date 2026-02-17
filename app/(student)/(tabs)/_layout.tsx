@@ -6,7 +6,7 @@ export default function StudentTabLayout() {
   return (
     <Tabs
       screenOptions={{
-        headerShown:false,
+        headerShown: false,
         animation: 'shift',
         tabBarStyle: {
           backgroundColor: '#1A1B4B',
