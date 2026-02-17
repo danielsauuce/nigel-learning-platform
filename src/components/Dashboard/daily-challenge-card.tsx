@@ -42,12 +42,12 @@ export function DailyChallengeCard({
 
         {/* Text */}
         <View className="flex-1">
-          <Text className="font-poppins-semibold text-[11px] uppercase tracking-wider text-gold">
+          <Text className="font-poppins-bold text-[16px] uppercase tracking-wider text-gold">
             Daily Challenge
           </Text>
           <Text className="mt-0.5 font-poppins-semibold text-sm text-white">{title}</Text>
           <Text
-            className="mt-0.5 font-poppins-regular text-xs"
+            className="mt-0.5 font-poppins-regular text-[12px]"
             style={{ color: 'rgba(255,255,255,0.5)' }}
           >
             {description}
@@ -59,7 +59,7 @@ export function DailyChallengeCard({
           className="rounded-[10px] px-2.5 py-1.5"
           style={{ backgroundColor: 'rgba(255,215,0,0.18)' }}
         >
-          <Text className="font-poppins-bold text-xs text-gold">+{xpReward} XP</Text>
+          <Text className="font-poppins-bold text-[13px] text-gold">+{xpReward} XP</Text>
         </View>
       </LinearGradient>
     </TouchableOpacity>
