@@ -13,11 +13,11 @@ export function GreetingHeader({ nickname, streak, progress }: GreetingHeaderPro
   return (
     <View className="flex-row items-center justify-between">
       <View className="flex-1">
-        <Text className="font-poppins-regular text-sm" style={{ color: 'rgba(255,255,255,0.55)' }}>
+        <Text className="font-poppins-regular text-[18px]" style={{ color: 'rgba(255,255,255,0.55)' }}>
           Welcome back,
         </Text>
         <Text
-          className="mt-0.5 font-fredoka text-[28px] leading-[34px] text-white"
+          className="mt-0.5 font-fredoka text-[30px] leading-[34px] text-white"
           style={{
             textShadowColor: 'rgba(0,0,0,0.2)',
             textShadowOffset: { width: 0, height: 1 },
@@ -38,7 +38,7 @@ export function GreetingHeader({ nickname, streak, progress }: GreetingHeaderPro
             {Math.round(progress * 100)}%
           </Text>
           <Text
-            className="-mt-0.5 font-poppins-regular text-[10px]"
+            className="-mt-0.5 font-poppins-regular text-[13px]"
             style={{ color: 'rgba(255,255,255,0.45)' }}
           >
             done
