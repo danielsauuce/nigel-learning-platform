@@ -26,8 +26,12 @@ export function QuickAccessGrid({ items }: QuickAccessGridProps) {
         >
           <LinearGradient
             colors={colors}
-            className="items-center justify-center rounded-[18px] px-2 py-5"
             style={{
+              alignItems: 'center',
+              justifyContent: 'center',
+              borderRadius: 18,
+              paddingHorizontal: 8,
+              paddingVertical: 20,
               borderWidth: 1,
               borderColor: 'rgba(255,255,255,0.06)',
               minHeight: 120,
@@ -36,7 +40,7 @@ export function QuickAccessGrid({ items }: QuickAccessGridProps) {
           >
             <Icon />
             <Text
-              className="text-center font-poppins-semibold text-xs leading-4"
+              className="text-center font-poppins-semibold text-[14px] leading-4"
               style={{ color: 'rgba(255,255,255,0.75)' }}
             >
               {label}
