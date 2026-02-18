@@ -1,7 +1,6 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
-
 import { MiniProgressBar } from '@/components/ui/mini-progress-bar';
 
 interface ContinueLearningCardProps {
