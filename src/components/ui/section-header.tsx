@@ -23,7 +23,7 @@ export function SectionHeader({ title, linkText, onLinkPress }: SectionHeaderPro
 
       {linkText && onLinkPress && (
         <TouchableOpacity onPress={onLinkPress} activeOpacity={0.7}>
-          <Text className="font-poppins-medium text-[13px] text-student">{linkText}</Text>
+          <Text className="font-poppins-medium text-[14px] text-student">{linkText}</Text>
         </TouchableOpacity>
       )}
     </View>

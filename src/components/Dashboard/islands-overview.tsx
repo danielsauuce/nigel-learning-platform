@@ -16,7 +16,7 @@ interface IslandsOverviewProps {
   onIslandPress?: (id: string) => void;
 }
 
-// Helper to get the status label for an island
+/** Helper to get the status label for an island. */
 function getStatusLabel(progress: number): string {
   if (progress === 1) return '✅ Complete';
   if (progress === 0) return '🔒 Locked';
@@ -39,8 +39,11 @@ export function IslandsOverview({ islands, onIslandPress }: IslandsOverviewProps
           <View className="w-[130px] overflow-hidden rounded-2xl">
             <LinearGradient
               colors={[`${island.color}20`, `${island.color}08`]}
-              className="items-center rounded-2xl px-3.5 py-4"
               style={{
+                alignItems: 'center',
+                borderRadius: 16,
+                paddingHorizontal: 14,
+                paddingVertical: 16,
                 borderWidth: 1,
                 borderColor: 'rgba(255,255,255,0.06)',
                 gap: 6,
@@ -48,14 +51,14 @@ export function IslandsOverview({ islands, onIslandPress }: IslandsOverviewProps
             >
               <Text className="text-[28px]">{island.emoji}</Text>
               <Text
-                className="text-center font-poppins-semibold text-xs text-white"
+                className="text-center font-poppins-semibold text-[13.5px] text-white"
                 numberOfLines={1}
               >
                 {island.name}
               </Text>
               <MiniProgressBar progress={island.progress} color={island.color} />
               <Text
-                className="mt-0.5 font-poppins-regular text-[11px]"
+                className="mt-0.5 font-poppins-regular text-[13px]"
                 style={{ color: 'rgba(255,255,255,0.45)' }}
               >
                 {getStatusLabel(island.progress)}
