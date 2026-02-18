@@ -1,6 +1,7 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
+
 import { MiniProgressBar } from '@/components/ui/mini-progress-bar';
 
 interface ContinueLearningCardProps {
@@ -26,8 +27,16 @@ export function ContinueLearningCard({
         colors={[`${islandColor}22`, `${islandColor}08`]}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
-        className="flex-row items-center gap-3.5 rounded-[18px] px-4 py-4"
-        style={{ borderWidth: 1, borderColor: 'rgba(255,255,255,0.08)' }}
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          gap: 14,
+          borderRadius: 18,
+          paddingHorizontal: 16,
+          paddingVertical: 16,
+          borderWidth: 1,
+          borderColor: 'rgba(255,255,255,0.08)',
+        }}
       >
         {/* Island emoji */}
         <View
@@ -40,12 +49,12 @@ export function ContinueLearningCard({
         {/* Info */}
         <View className="flex-1">
           <Text
-            className="font-poppins-medium text-xs tracking-wide"
+            className="font-poppins-medium text-[16px] tracking-wide"
             style={{ color: 'rgba(255,255,255,0.5)' }}
           >
             {islandName}
           </Text>
-          <Text className="mb-2 mt-0.5 font-poppins-semibold text-sm text-white">
+          <Text className="mb-2 mt-0.5 font-poppins-semibold text-[13px] text-white">
             {missionTitle}
           </Text>
           <MiniProgressBar progress={progress} color={islandColor} />
@@ -55,7 +64,13 @@ export function ContinueLearningCard({
         <View className="overflow-hidden rounded-[14px]">
           <LinearGradient
             colors={[islandColor, `${islandColor}CC`]}
-            className="h-[42px] w-[42px] items-center justify-center rounded-[14px]"
+            style={{
+              width: 42,
+              height: 42,
+              borderRadius: 14,
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
           >
             <Text className="ml-0.5 text-sm text-white">▶</Text>
           </LinearGradient>
