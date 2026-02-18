@@ -28,7 +28,7 @@ export function BadgesRow({ badges }: BadgesRowProps) {
             <Text className="text-2xl">{badge.emoji}</Text>
           </View>
           <Text
-            className="text-center font-poppins-medium text-[11px]"
+            className="text-center font-poppins-medium text-[15px]"
             style={{ color: 'rgba(255,255,255,0.55)' }}
           >
             {badge.label}
