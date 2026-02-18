@@ -1,5 +1,11 @@
 import { Tabs } from 'expo-router';
-import { LayoutDashboard } from 'lucide-react-native';
+import {
+  BookOpen,
+  ChartNoAxesCombined,
+  LayoutDashboard,
+  Settings,
+  Wallet,
+} from 'lucide-react-native';
 import React from 'react';
 
 export default function StudentTabLayout() {
@@ -29,6 +35,40 @@ export default function StudentTabLayout() {
           tabBarIcon: ({ color, size }) => (
             <LayoutDashboard size={size} color={color} strokeWidth={1.8} />
           ),
+        }}
+      />
+
+      <Tabs.Screen
+        name="Learn"
+        options={{
+          title: 'Learn',
+          tabBarIcon: ({ color, size }) => <BookOpen size={size} color={color} strokeWidth={1.8} />,
+        }}
+      />
+
+      <Tabs.Screen
+        name="Simulate"
+        options={{
+          title: 'Simulate',
+          tabBarIcon: ({ color, size }) => <Wallet size={size} color={color} strokeWidth={1.8} />,
+        }}
+      />
+
+      <Tabs.Screen
+        name="Progress"
+        options={{
+          title: 'Progress',
+          tabBarIcon: ({ color, size }) => (
+            <ChartNoAxesCombined size={size} color={color} strokeWidth={1.8} />
+          ),
+        }}
+      />
+
+      <Tabs.Screen
+        name="Settings"
+        options={{
+          title: 'Settings',
+          tabBarIcon: ({ color, size }) => <Settings size={size} color={color} strokeWidth={1.8} />,
         }}
       />
     </Tabs>
