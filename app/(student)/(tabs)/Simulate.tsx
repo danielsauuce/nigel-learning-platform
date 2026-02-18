@@ -1,6 +1,5 @@
 import React from 'react';
 import { StatusBar, Text, View } from 'react-native';
-
 import { GradientBackground, StarField } from '@/components/ui/screen-background';
 import { SAFE_TOP } from '@/lib/safe-area';
 
