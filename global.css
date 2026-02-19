@@ -1,151 +1,135 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* ── Core surfaces ── */
-  --background: 248 249 250;
-  --foreground: 26 27 75;
-  --card: 255 255 255;
-  --card-foreground: 26 27 75;
-  --popover: 255 255 255;
-  --popover-foreground: 26 27 75;
+  --background: 244 245 249;
+  --foreground: 31 31 31;
 
-  /* ── Primary – deep navy/indigo (main brand) ── */
-  --primary: 65 88 208;
+  --card: 255 255 255;
+  --card-foreground: 31 31 31;
+
+  --popover: 255 255 255;
+  --popover-foreground: 31 31 31;
+
+  --primary: 108 92 231;
   --primary-foreground: 255 255 255;
 
-  /* ── Secondary – sky blue (student accent, water) ── */
-  --secondary: 79 195 247;
-  --secondary-foreground: 26 27 75;
+  --secondary: 142 124 255;
+  --secondary-foreground: 255 255 255;
 
-  /* ── Muted ── */
-  --muted: 243 244 246;
-  --muted-foreground: 113 113 122;
+  --accent: 142 124 255;
+  --accent-foreground: 255 255 255;
 
-  /* ── Accent – gold (CTAs, coins, rewards) ── */
-  --accent: 255 215 0;
-  --accent-foreground: 26 27 75;
+  --muted: 229 231 235;
+  --muted-foreground: 107 114 128;
 
-  /* ── Destructive ── */
+  --success: 34 197 94;
+  --warning: 245 158 11;
   --destructive: 239 68 68;
   --destructive-foreground: 255 255 255;
+  --info: 59 130 246;
 
-  /* ── Borders & inputs ── */
-  --border: 228 228 231;
-  --input: 228 228 231;
-  --ring: 65 88 208;
+  --border: 229 231 235;
+  --input: 229 231 235;
+  --ring: 108 92 231;
 
-  /* ── Radius ── */
   --radius: 0.625rem;
 
-  /* ── Chart palette (matches brand colors) ── */
-  --chart-1: 65 88 208;
+  --chart-1: 108 92 231;
   --chart-2: 255 46 145;
-  --chart-3: 16 185 129;
-  --chart-4: 245 166 35;
-  --chart-5: 79 195 247;
+  --chart-3: 34 197 94;
+  --chart-4: 245 158 11;
+  --chart-5: 59 130 246;
 
-  /* ─── App-specific semantic tokens ─── */
+  --primary-gradient-start: 108 92 231;
+  --primary-gradient-end: 142 124 255;
 
-  /* Gradient stops for the deep-space background */
-  --gradient-start: 26 27 75;
-  --gradient-mid: 45 58 140;
-  --gradient-end: 65 88 208;
+  --gradient-start: 108 92 231;
+  --gradient-mid: 125 108 255;
+  --gradient-end: 142 124 255;
 
-  /* Gold CTA gradient */
   --gold: 255 215 0;
   --gold-dark: 245 166 35;
   --gold-darker: 232 150 12;
   --gold-deep: 184 118 10;
 
-  /* Student (sky-blue) */
   --student: 79 195 247;
   --student-dark: 33 150 243;
 
-  /* Teacher (purple) */
   --teacher: 168 85 247;
   --teacher-dark: 112 0 224;
   --teacher-darker: 91 0 184;
 
-  /* Pink accent (piggy, confetti) */
   --pink: 255 46 145;
   --pink-light: 255 143 171;
   --pink-dark: 232 114 138;
 
-  /* Success / nature greens */
-  --success: 16 185 129;
   --green-light: 139 195 74;
   --green-mid: 76 175 80;
   --green-leaf: 102 187 106;
 
-  /* Sand & earth tones (island, trophy) */
   --sand: 255 224 130;
   --sand-dark: 212 160 86;
+
   --brown: 141 110 99;
-  --brown-trunk: 141 110 99;
   --brown-dark: 198 137 58;
 
-  /* Skin tones (character SVGs) */
   --skin: 255 211 182;
   --skin-dark: 240 184 152;
   --skin-blush: 212 131 106;
 
-  /* Hair (character SVGs) */
-  --hair-dark: 62 39 35;
-  --hair-mid: 93 64 55;
+  --navy: 26 27 75;
 }
 
 .dark {
-  /* ── Core surfaces ── */
-  --background: 18 18 24;
-  --foreground: 255 255 255;
-  --card: 26 27 48;
-  --card-foreground: 255 255 255;
-  --popover: 26 27 48;
-  --popover-foreground: 255 255 255;
+  --background: 15 23 42;
+  --foreground: 248 250 252;
 
-  /* ── Primary ── */
-  --primary: 168 85 247;
+  --card: 30 41 59;
+  --card-foreground: 248 250 252;
+
+  --popover: 30 41 59;
+  --popover-foreground: 248 250 252;
+
+  --primary: 91 77 227;
   --primary-foreground: 255 255 255;
 
-  /* ── Secondary ── */
-  --secondary: 79 195 247;
+  --secondary: 124 108 255;
   --secondary-foreground: 255 255 255;
 
-  /* ── Muted ── */
-  --muted: 39 39 50;
-  --muted-foreground: 161 161 170;
+  --accent: 124 108 255;
+  --accent-foreground: 255 255 255;
 
-  /* ── Accent ── */
-  --accent: 255 215 0;
-  --accent-foreground: 26 27 75;
+  --muted: 51 65 85;
+  --muted-foreground: 203 213 225;
 
-  /* ── Destructive ── */
-  --destructive: 248 113 113;
+  --success: 22 163 74;
+  --warning: 217 119 6;
+  --destructive: 220 38 38;
   --destructive-foreground: 255 255 255;
+  --info: 96 165 250;
 
-  /* ── Borders & inputs ── */
-  --border: 44 44 56;
-  --input: 44 44 56;
-  --ring: 168 85 247;
+  --border: 51 65 85;
+  --input: 51 65 85;
+  --ring: 91 77 227;
 
-  /* ── Charts ── */
-  --chart-1: 168 85 247;
+  --chart-1: 124 108 255;
   --chart-2: 255 46 145;
-  --chart-3: 16 185 129;
+  --chart-3: 22 163 74;
   --chart-4: 251 191 36;
   --chart-5: 96 165 250;
 
-  /* ─── App-specific (dark overrides where needed) ─── */
-  --gradient-start: 12 12 18;
-  --gradient-mid: 26 27 75;
-  --gradient-end: 45 58 140;
+  --primary-gradient-start: 91 77 227;
+  --primary-gradient-end: 124 108 255;
 
-  --teacher: 168 85 247;
+  --gradient-start: 15 23 42;
+  --gradient-mid: 30 41 59;
+  --gradient-end: 91 77 227;
+
   --teacher-dark: 138 60 220;
-  --teacher-darker: 112 0 224;
 }
 
 @layer base {
