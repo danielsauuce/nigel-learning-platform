@@ -1,85 +1,71 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
+import React, { useCallback } from 'react';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import * as SplashScreen from 'expo-splash-screen';
+import {
+  useFonts,
+  Poppins_400Regular,
+  Poppins_500Medium,
+  Poppins_600SemiBold,
+  Poppins_700Bold,
+} from '@expo-google-fonts/poppins';
+import { Fredoka_700Bold } from '@expo-google-fonts/fredoka';
+import { ThemeProvider, AuthProvider, useTheme } from '@/context';
 import '../global.css';
-import { useColorScheme } from '@/hooks/use-color-scheme';
 
-export default function RootLayout() {
-  const colorScheme = useColorScheme();
+// Prevent the splash screen from auto-hiding
+SplashScreen.preventAutoHideAsync().catch(() => {});
+
+function AppNavigator() {
+  const { theme } = useTheme();
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack screenOptions={{ headerShown: false }}>
+    <>
+      <StatusBar style={theme === 'dark' ? 'light' : 'dark'} />
+
+      <Stack
+        screenOptions={{
+          headerShown: false,
+          animation: 'slide_from_right',
+        }}
+      >
         <Stack.Screen name="(auth)" />
+        {/* Future:
         <Stack.Screen name="(student)" />
-        <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
+        <Stack.Screen name="(teacher)" />
+        */}
       </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+    </>
   );
 }
 
-// import React, { useEffect } from 'react';
-// import { Stack } from 'expo-router';
-// import { StatusBar } from 'expo-status-bar';
-// import { SafeAreaProvider } from 'react-native-safe-area-context';
-// import {
-//   useFonts,
-//   Poppins_400Regular,
-//   Poppins_500Medium,
-//   Poppins_600SemiBold,
-//   Poppins_700Bold,
-// } from '@expo-google-fonts/poppins';
-// import { Fredoka_700Bold } from '@expo-google-fonts/fredoka';
-// import * as SplashScreenExpo from 'expo-splash-screen';
-// import { ThemeProvider, AuthProvider, useTheme } from '@/context';
+export default function RootLayout() {
+  const [fontsLoaded, fontsError] = useFonts({
+    Poppins_400Regular,
+    Poppins_500Medium,
+    Poppins_600SemiBold,
+    Poppins_700Bold,
+    Fredoka_700Bold,
+  });
 
-// import '../global.css';
+  const onLayoutReady = useCallback(async () => {
+    if (fontsLoaded || fontsError) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded, fontsError]);
 
-// SplashScreenExpo.preventAutoHideAsync();
+  if (!fontsLoaded && !fontsError) {
+    return null;
+  }
 
-// function RootInner() {
-//   const { theme } = useTheme();
-
-//   return (
-//     <>
-//       <StatusBar style={theme === 'dark' ? 'light' : 'dark'} />
-//       <Stack
-//         screenOptions={{
-//           headerShown: false,
-//           animation: 'fade',
-//         }}
-//       />
-//     </>
-//   );
-// }
-
-// export default function RootLayout() {
-//   const [fontsLoaded, fontsError] = useFonts({
-//     Poppins_400Regular,
-//     Poppins_500Medium,
-//     Poppins_600SemiBold,
-//     Poppins_700Bold,
-//     Fredoka_700Bold,
-//   });
-
-//   useEffect(() => {
-//     if (fontsLoaded || fontsError) {
-//       SplashScreenExpo.hideAsync();
-//     }
-//   }, [fontsLoaded, fontsError]);
-
-//   if (!fontsLoaded && !fontsError) return null;
-
-//   return (
-//     <SafeAreaProvider>
-//       <ThemeProvider>
-//         <AuthProvider>
-//           <RootInner />
-//         </AuthProvider>
-//       </ThemeProvider>
-//     </SafeAreaProvider>
-//   );
-// }
+  return (
+    <SafeAreaProvider onLayout={onLayoutReady}>
+      <ThemeProvider>
+        <AuthProvider>
+          <AppNavigator />
+        </AuthProvider>
+      </ThemeProvider>
+    </SafeAreaProvider>
+  );
+}
