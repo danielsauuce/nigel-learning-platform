@@ -62,7 +62,7 @@ export function SplashScreen() {
         className="flex-1 items-center justify-center px-6"
         style={{ paddingTop: insets.top, paddingBottom: insets.bottom }}
       >
-        <SplashLogo />
+        {/* <SplashLogo /> */}
         <SplashTagline />
         <SplashMascot />
         <SplashLoader onLoadComplete={handleLoadComplete} />
