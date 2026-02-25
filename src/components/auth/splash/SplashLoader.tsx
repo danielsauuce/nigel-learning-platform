@@ -61,12 +61,12 @@ export function SplashLoader({ onLoadComplete }: SplashLoaderProps) {
           />
         </View>
 
-        <Text
+        {/* <Text
           className="font-poppins-semibold text-muted-foreground"
           style={{ fontSize: 10, letterSpacing: 1.8 }}
         >
           VERSION 1.0.0
-        </Text>
+        </Text> */}
       </View>
     </MotiView>
   );
