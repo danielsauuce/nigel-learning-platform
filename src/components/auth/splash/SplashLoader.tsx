@@ -14,16 +14,24 @@ export function SplashLoader({ onLoadComplete }: SplashLoaderProps) {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    let p = 0;
+    const totalDuration = 4000; // 4 seconds to load completely
+    const intervalTime = 40;
+    const steps = totalDuration / intervalTime; // 100 steps
+    const increment = 100 / steps;
+
+    let progressValue = 0;
+
     const interval = setInterval(() => {
-      p += Math.random() * 18 + 5;
-      if (p >= 100) {
-        p = 100;
+      progressValue += increment;
+
+      if (progressValue >= 100) {
+        progressValue = 100;
         clearInterval(interval);
-        setTimeout(onLoadComplete, 600);
+        onLoadComplete();
       }
-      setProgress(Math.min(p, 100));
-    }, 280);
+
+      setProgress(progressValue);
+    }, intervalTime);
 
     return () => clearInterval(interval);
   }, [onLoadComplete]);
