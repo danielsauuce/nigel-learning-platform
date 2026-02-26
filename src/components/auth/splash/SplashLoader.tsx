@@ -51,7 +51,7 @@ export function SplashLoader({ onLoadComplete }: SplashLoaderProps) {
         transition={{ type: 'timing', duration: 1200, loop: true, repeatReverse: true }}
       >
         <Text className="font-poppins-regular text-[13px] text-muted-foreground">
-          Synchronizing your dashboard…
+          Synchronizing...
         </Text>
       </MotiView>
 
