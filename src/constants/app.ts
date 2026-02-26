@@ -7,7 +7,7 @@ export const ONBOARDING_SLIDES = [
     icon: 'island' as const,
     title: 'Explore Money\nIslands',
     subtitle:
-      'Journey through fun-sized lessons on saving, budgeting, and smart spending — one island at a time.',
+      'Journey through fun-sized lessons on saving, budgeting, and smart spending one island at a time.',
     accentColor: '#4FC3F7',
   },
   {

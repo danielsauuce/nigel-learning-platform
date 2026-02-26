@@ -1,12 +1,12 @@
 import { View, Text } from 'react-native';
 import React from 'react';
 
-const TeacherLoginRoute = () => {
+const PersonalizationRoute = () => {
   return (
     <View>
-      <Text>TeacherLoginRoute</Text>
+      <Text>personalization</Text>
     </View>
   );
 };
 
-export default TeacherLoginRoute;
+export default PersonalizationRoute;

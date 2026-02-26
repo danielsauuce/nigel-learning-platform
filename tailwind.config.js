@@ -7,11 +7,11 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        fredoka: ['Fredoka_700Bold'],
         'poppins-regular': ['Poppins_400Regular'],
         'poppins-medium': ['Poppins_500Medium'],
         'poppins-semibold': ['Poppins_600SemiBold'],
         'poppins-bold': ['Poppins_700Bold'],
+        fredoka: ['Fredoka_700Bold'],
       },
 
       colors: {
@@ -75,6 +75,7 @@ module.exports = {
           end: 'rgb(var(--gradient-end) / <alpha-value>)',
         },
 
+        /* ── Gold CTA ── */
         gold: {
           DEFAULT: 'rgb(var(--gold) / <alpha-value>)',
           dark: 'rgb(var(--gold-dark) / <alpha-value>)',
@@ -82,17 +83,20 @@ module.exports = {
           deep: 'rgb(var(--gold-deep) / <alpha-value>)',
         },
 
+        /* ── Student (sky-blue) ── */
         student: {
           DEFAULT: 'rgb(var(--student) / <alpha-value>)',
           dark: 'rgb(var(--student-dark) / <alpha-value>)',
         },
 
+        /* ── Teacher (purple) ── */
         teacher: {
           DEFAULT: 'rgb(var(--teacher) / <alpha-value>)',
           dark: 'rgb(var(--teacher-dark) / <alpha-value>)',
           darker: 'rgb(var(--teacher-darker) / <alpha-value>)',
         },
 
+        /* ── Pink accent (Nigel brand) ── */
         pink: {
           DEFAULT: 'rgb(var(--pink) / <alpha-value>)',
           light: 'rgb(var(--pink-light) / <alpha-value>)',
@@ -105,6 +109,7 @@ module.exports = {
           leaf: 'rgb(var(--green-leaf) / <alpha-value>)',
         },
 
+        /* ── Earth tones ── */
         sand: {
           DEFAULT: 'rgb(var(--sand) / <alpha-value>)',
           dark: 'rgb(var(--sand-dark) / <alpha-value>)',
@@ -115,13 +120,22 @@ module.exports = {
           dark: 'rgb(var(--brown-dark) / <alpha-value>)',
         },
 
+        /* ── Skin tones ── */
         skin: {
           DEFAULT: 'rgb(var(--skin) / <alpha-value>)',
           dark: 'rgb(var(--skin-dark) / <alpha-value>)',
           blush: 'rgb(var(--skin-blush) / <alpha-value>)',
         },
 
-        navy: '#1A1B4B',
+        /* ── Semantic status ── */
+        info: 'rgb(var(--info) / <alpha-value>)',
+        warning: 'rgb(var(--warning) / <alpha-value>)',
+        error: 'rgb(var(--error) / <alpha-value>)',
+
+        /* ── Stat card accents ── */
+        streak: 'rgb(var(--streak) / <alpha-value>)',
+        balance: 'rgb(var(--balance) / <alpha-value>)',
+        rank: 'rgb(var(--rank) / <alpha-value>)',
 
         'white-alpha': {
           5: 'rgba(255, 255, 255, 0.05)',
