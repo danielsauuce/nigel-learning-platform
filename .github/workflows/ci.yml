@@ -38,4 +38,8 @@ jobs:
         continue-on-error: true
 
       - name: Prettier check
+<<<<<<< HEAD
         run: npm run format:check
+=======
+        run: npm run format:check
+>>>>>>> v5
