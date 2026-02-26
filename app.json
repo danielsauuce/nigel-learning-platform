@@ -1,5 +1,6 @@
 {
   "expo": {
+<<<<<<< HEAD
     "name": "mobile",
     "slug": "mobile",
     "version": "1.0.0",
@@ -10,6 +11,19 @@
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true
+=======
+    "name": "Nigel",
+    "slug": "Nigel",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "nigelfinancialliteracyfrontend",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.dayv-exe.nigel-financial-literacy-frontend"
+>>>>>>> v5
     },
     "android": {
       "adaptiveIcon": {
@@ -25,11 +39,14 @@
       "output": "static",
       "favicon": "./assets/images/favicon.png"
     },
+<<<<<<< HEAD
     "expo": {
       "web": {
         "bundler": "metro"
       }
     },
+=======
+>>>>>>> v5
     "plugins": [
       "expo-router",
       [
@@ -43,7 +60,12 @@
             "backgroundColor": "#000000"
           }
         }
+<<<<<<< HEAD
       ]
+=======
+      ],
+      "expo-font"
+>>>>>>> v5
     ],
     "experiments": {
       "typedRoutes": true,
