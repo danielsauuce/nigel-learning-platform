@@ -4,6 +4,14 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* ══════════════════════════════════════════════════════════════
+   LIGHT THEME (default)
+   Colors extracted from mockup screens:
+   • Primary gradient: #6C5CE7 → #8E7CFF
+   • Nigel brand pink: #E91E8C
+   • Background: #F4F5F9  Card: #FFFFFF
+   • Text: #1F1F1F / #6B7280
+   ══════════════════════════════════════════════════════════════ */
 :root {
   --background: 244 245 249;
   --foreground: 31 31 31;
@@ -84,6 +92,13 @@
   --navy: 26 27 75;
 }
 
+/* ══════════════════════════════════════════════════════════════
+   DARK THEME
+   Colors extracted from mockup dark variants:
+   • Primary gradient: #5B4DE3 → #7C6CFF
+   • Background: #0F172A  Card: #1E293B
+   • Text: #F8FAFC / #CBD5E1
+   ══════════════════════════════════════════════════════════════ */
 .dark {
   --background: 15 23 42;
   --foreground: 248 250 252;
@@ -133,7 +148,7 @@
 }
 
 @layer base {
-  body {
-    @apply bg-background text-foreground;
+  * {
+    @apply border-border;
   }
 }
