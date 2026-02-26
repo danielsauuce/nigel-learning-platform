@@ -15,6 +15,8 @@ module.exports = {
       },
 
       colors: {
+        /* ── Core semantic tokens ── */
+
         background: 'rgb(var(--background) / <alpha-value>)',
         foreground: 'rgb(var(--foreground) / <alpha-value>)',
 
@@ -61,13 +63,12 @@ module.exports = {
         input: 'rgb(var(--input) / <alpha-value>)',
         ring: 'rgb(var(--ring) / <alpha-value>)',
 
-        chart: {
-          1: 'rgb(var(--chart-1) / <alpha-value>)',
-          2: 'rgb(var(--chart-2) / <alpha-value>)',
-          3: 'rgb(var(--chart-3) / <alpha-value>)',
-          4: 'rgb(var(--chart-4) / <alpha-value>)',
-          5: 'rgb(var(--chart-5) / <alpha-value>)',
-        },
+        /* ── Chart colors ── */
+        'chart-1': 'rgb(var(--chart-1) / <alpha-value>)',
+        'chart-2': 'rgb(var(--chart-2) / <alpha-value>)',
+        'chart-3': 'rgb(var(--chart-3) / <alpha-value>)',
+        'chart-4': 'rgb(var(--chart-4) / <alpha-value>)',
+        'chart-5': 'rgb(var(--chart-5) / <alpha-value>)',
 
         gradient: {
           start: 'rgb(var(--gradient-start) / <alpha-value>)',
@@ -150,6 +151,7 @@ module.exports = {
           85: 'rgba(255, 255, 255, 0.85)',
           90: 'rgba(255, 255, 255, 0.90)',
         },
+
       },
 
       borderRadius: {
