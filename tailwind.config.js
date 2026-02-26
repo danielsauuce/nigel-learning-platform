@@ -2,6 +2,8 @@
 module.exports = {
   content: ['./app/**/*.{js,jsx,ts,tsx}', './src/**/*.{js,jsx,ts,tsx}'],
   presets: [require('nativewind/preset')],
+  darkMode: 'class',
+
   theme: {
     extend: {
       fontFamily: {
@@ -11,39 +13,67 @@ module.exports = {
         'poppins-bold': ['Poppins_700Bold'],
         fredoka: ['Fredoka_700Bold'],
       },
+
       colors: {
-        /* ── Core semantic tokens ── */
         background: 'rgb(var(--background) / <alpha-value>)',
         foreground: 'rgb(var(--foreground) / <alpha-value>)',
-        card: 'rgb(var(--card) / <alpha-value>)',
-        'card-foreground': 'rgb(var(--card-foreground) / <alpha-value>)',
-        popover: 'rgb(var(--popover) / <alpha-value>)',
-        'popover-foreground': 'rgb(var(--popover-foreground) / <alpha-value>)',
-        primary: 'rgb(var(--primary) / <alpha-value>)',
-        'primary-foreground': 'rgb(var(--primary-foreground) / <alpha-value>)',
-        secondary: 'rgb(var(--secondary) / <alpha-value>)',
-        'secondary-foreground': 'rgb(var(--secondary-foreground) / <alpha-value>)',
-        muted: 'rgb(var(--muted) / <alpha-value>)',
-        'muted-foreground': 'rgb(var(--muted-foreground) / <alpha-value>)',
-        accent: 'rgb(var(--accent) / <alpha-value>)',
-        'accent-foreground': 'rgb(var(--accent-foreground) / <alpha-value>)',
-        destructive: 'rgb(var(--destructive) / <alpha-value>)',
-        'destructive-foreground': 'rgb(var(--destructive-foreground) / <alpha-value>)',
+
+        card: {
+          DEFAULT: 'rgb(var(--card) / <alpha-value>)',
+          foreground: 'rgb(var(--card-foreground) / <alpha-value>)',
+        },
+
+        popover: {
+          DEFAULT: 'rgb(var(--popover) / <alpha-value>)',
+          foreground: 'rgb(var(--popover-foreground) / <alpha-value>)',
+        },
+
+        primary: {
+          DEFAULT: 'rgb(var(--primary) / <alpha-value>)',
+          foreground: 'rgb(var(--primary-foreground) / <alpha-value>)',
+        },
+
+        secondary: {
+          DEFAULT: 'rgb(var(--secondary) / <alpha-value>)',
+          foreground: 'rgb(var(--secondary-foreground) / <alpha-value>)',
+        },
+
+        muted: {
+          DEFAULT: 'rgb(var(--muted) / <alpha-value>)',
+          foreground: 'rgb(var(--muted-foreground) / <alpha-value>)',
+        },
+
+        accent: {
+          DEFAULT: 'rgb(var(--accent) / <alpha-value>)',
+          foreground: 'rgb(var(--accent-foreground) / <alpha-value>)',
+        },
+
+        destructive: {
+          DEFAULT: 'rgb(var(--destructive) / <alpha-value>)',
+          foreground: 'rgb(var(--destructive-foreground) / <alpha-value>)',
+        },
+
+        success: 'rgb(var(--success) / <alpha-value>)',
+        warning: 'rgb(var(--warning) / <alpha-value>)',
+        info: 'rgb(var(--info) / <alpha-value>)',
+
         border: 'rgb(var(--border) / <alpha-value>)',
         input: 'rgb(var(--input) / <alpha-value>)',
         ring: 'rgb(var(--ring) / <alpha-value>)',
 
-        /* ── Chart colors ── */
-        'chart-1': 'rgb(var(--chart-1) / <alpha-value>)',
-        'chart-2': 'rgb(var(--chart-2) / <alpha-value>)',
-        'chart-3': 'rgb(var(--chart-3) / <alpha-value>)',
-        'chart-4': 'rgb(var(--chart-4) / <alpha-value>)',
-        'chart-5': 'rgb(var(--chart-5) / <alpha-value>)',
+        chart: {
+          1: 'rgb(var(--chart-1) / <alpha-value>)',
+          2: 'rgb(var(--chart-2) / <alpha-value>)',
+          3: 'rgb(var(--chart-3) / <alpha-value>)',
+          4: 'rgb(var(--chart-4) / <alpha-value>)',
+          5: 'rgb(var(--chart-5) / <alpha-value>)',
+        },
 
-        /* ── Gradient stops ── */
-        'gradient-start': 'rgb(var(--gradient-start) / <alpha-value>)',
-        'gradient-mid': 'rgb(var(--gradient-mid) / <alpha-value>)',
-        'gradient-end': 'rgb(var(--gradient-end) / <alpha-value>)',
+        gradient: {
+          start: 'rgb(var(--gradient-start) / <alpha-value>)',
+          mid: 'rgb(var(--gradient-mid) / <alpha-value>)',
+          end: 'rgb(var(--gradient-end) / <alpha-value>)',
+        },
 
         /* ── Gold CTA ── */
         gold: {
@@ -73,17 +103,18 @@ module.exports = {
           dark: 'rgb(var(--pink-dark) / <alpha-value>)',
         },
 
-        /* ── Success / greens ── */
-        success: 'rgb(var(--success) / <alpha-value>)',
-        'green-light': 'rgb(var(--green-light) / <alpha-value>)',
-        'green-mid': 'rgb(var(--green-mid) / <alpha-value>)',
-        'green-leaf': 'rgb(var(--green-leaf) / <alpha-value>)',
+        green: {
+          light: 'rgb(var(--green-light) / <alpha-value>)',
+          mid: 'rgb(var(--green-mid) / <alpha-value>)',
+          leaf: 'rgb(var(--green-leaf) / <alpha-value>)',
+        },
 
         /* ── Earth tones ── */
         sand: {
           DEFAULT: 'rgb(var(--sand) / <alpha-value>)',
           dark: 'rgb(var(--sand-dark) / <alpha-value>)',
         },
+
         brown: {
           DEFAULT: 'rgb(var(--brown) / <alpha-value>)',
           dark: 'rgb(var(--brown-dark) / <alpha-value>)',
@@ -106,7 +137,6 @@ module.exports = {
         balance: 'rgb(var(--balance) / <alpha-value>)',
         rank: 'rgb(var(--rank) / <alpha-value>)',
 
-        /* ── White alpha overlays ── */
         'white-alpha': {
           5: 'rgba(255, 255, 255, 0.05)',
           10: 'rgba(255, 255, 255, 0.10)',
@@ -121,6 +151,7 @@ module.exports = {
           90: 'rgba(255, 255, 255, 0.90)',
         },
       },
+
       borderRadius: {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
@@ -128,5 +159,6 @@ module.exports = {
       },
     },
   },
+
   plugins: [],
 };
