@@ -7,15 +7,10 @@ import { useTheme } from '@/context';
 
 interface ScreenWrapperProps {
   children: React.ReactNode;
-  /** Show the subtle decorative gradient circles in the background */
   showDecoration?: boolean;
-  /** Animate the content in with a fade */
   animate?: boolean;
-  /** Additional padding at the top beyond safe area */
   topPadding?: number;
-  /** Additional padding at the bottom beyond safe area */
   bottomPadding?: number;
-  /** Extra styles for the inner content container */
   contentStyle?: ViewStyle;
 }
 
@@ -37,7 +32,7 @@ export function ScreenWrapper({
         {
           flex: 1,
           paddingTop: insets.top + topPadding,
-          paddingBottom: insets.bottom + bottomPadding,
+          // paddingBottom: insets.bottom + bottomPadding,
         },
         contentStyle,
       ]}
