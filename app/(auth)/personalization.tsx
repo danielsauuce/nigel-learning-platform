@@ -1,12 +1,6 @@
-import { View, Text } from 'react-native';
 import React from 'react';
+import { PersonalizationScreen } from '@/components/auth/personalization/PersonalizationScreen';
 
-const PersonalizationRoute = () => {
-  return (
-    <View>
-      <Text>personalization</Text>
-    </View>
-  );
-};
-
-export default PersonalizationRoute;
+export default function PersonalizationRoute() {
+  return <PersonalizationScreen />;
+}

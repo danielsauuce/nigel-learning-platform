@@ -11,6 +11,9 @@ export default function AuthLayout() {
     >
       <Stack.Screen name="index" />
       <Stack.Screen name="welcome" />
+      <Stack.Screen name="role-select" />
+      <Stack.Screen name="personalization" />
+      <Stack.Screen name="teacher-login" />
     </Stack>
   );
 }
