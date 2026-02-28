@@ -58,7 +58,7 @@ export function useStaggeredEntrance(configs: Stage[]) {
     const sequence = configs.map((cfg, i) => {
       const { opacity, translateY, scale } = animations[i];
       const isScale = 'fromScale' in cfg;
-      const duration = cfg.duration ?? 450;
+      const duration = cfg.duration ?? 300;
 
       const fadeAnim = Animated.timing(opacity, {
         toValue: 1,

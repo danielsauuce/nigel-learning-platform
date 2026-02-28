@@ -38,10 +38,10 @@ export default function RoleSelectScreen() {
 
   // Entrance animations
   const [header, card0, card1, footer] = useStaggeredEntrance([
-    { fromY: -20, duration: 450 },
-    { fromY: 50, spring: true, friction: 6, tension: 50 },
-    { fromY: 50, spring: true, friction: 6, tension: 50 },
-    { fromY: 30, duration: 350 },
+    { fromY: -20, duration: 150 },
+    { fromY: 25, spring: true, friction: 5, tension: 80 },
+    { fromY: 25, spring: true, friction: 5, tension: 90 },
+    { fromY: 20, duration: 150 },
   ]);
 
   const cardStages = [card0, card1];
@@ -52,10 +52,7 @@ export default function RoleSelectScreen() {
 
   const handleContinue = () => {
     if (!selectedRole) return;
-    router.push(
-      selectedRole === 'student' ? '/(auth)/DetailsPersonalization' : '/(auth)/teacher-login',
-    );
-    // router.push('/(student)/Personalization')
+    router.push(selectedRole === 'student' ? '/(auth)/StudentSignin' : '/(auth)/teacher-login');
   };
 
   if (!fontsLoaded) return null;

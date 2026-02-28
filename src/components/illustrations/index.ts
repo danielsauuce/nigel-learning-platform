@@ -1,4 +1,3 @@
-// Primitives
 export { BaseSvg } from './BaseSvg';
 export { Coin } from './Coin';
 export { Sparkle } from './Sparkle';
@@ -21,6 +20,9 @@ export { ShieldIcon } from './ShieldIcon';
 
 // Dashboard icons
 export { AchievementsIcon, FamilyIcon, SimulatorIcon } from './DashboardIcons';
+
+// Quiz / survey icons
+export { CompassIcon, TargetIcon } from './QuizIcons';
 
 // Slide illustration lookup
 export { SlideIllustration } from './SlideIllustration';

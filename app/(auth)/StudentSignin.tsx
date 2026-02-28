@@ -22,9 +22,9 @@ import { SAFE_BOTTOM, SAFE_TOP } from '@/lib/safe-area';
 
 // Constants
 const AGE_RANGES: AgeRange[] = [
-  { id: '11-12', label: '11–12', emoji: '🌱', subtitle: 'Just starting out' },
-  { id: '13-14', label: '13–14', emoji: '🌿', subtitle: 'Growing strong' },
-  { id: '15-16', label: '15–16', emoji: '🌳', subtitle: 'Ready to level up' },
+  { id: '11-12', label: '11-12', emoji: '🌱', subtitle: 'Just starting out' },
+  { id: '13-14', label: '13-14', emoji: '🌿', subtitle: 'Growing strong' },
+  { id: '15-16', label: '15-16', emoji: '🌳', subtitle: 'Ready to level up' },
 ];
 
 const COIN_POSITIONS = [
@@ -73,7 +73,7 @@ export default function PersonalizationScreen() {
 
   const handleContinue = () => {
     if (!isFormValid) return;
-    router.push('/(student)/PrivacyConsent');
+    router.push('/(student)/Personalization');
   };
 
   if (!fontsLoaded) return null;

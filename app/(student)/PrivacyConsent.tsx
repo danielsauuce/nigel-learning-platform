@@ -139,7 +139,7 @@ export default function PrivacyConsentScreen() {
           </Text>
 
           <Text
-            className="mt-1 font-fredoka text-[30px] leading-9 text-white"
+            className="mt-2 font-fredoka text-[30px] leading-9 text-white"
             style={{
               textShadowColor: 'rgba(0,0,0,0.2)',
               textShadowOffset: { width: 0, height: 2 },
@@ -152,9 +152,12 @@ export default function PrivacyConsentScreen() {
 
         {/* Shield illustration */}
         <Animated.View className="mb-3 items-center" style={shield.style}>
-          <ShieldIcon />
+          <View className="mt-3">
+            <ShieldIcon />
+          </View>
+
           <Text
-            className="mt-2.5 text-center font-poppins-regular leading-5"
+            className="mt-2 text-center font-poppins-regular leading-5"
             style={{ color: 'rgba(255,255,255,0.6)' }}
           >
             Money Islands is a safe space.{'\n'}Here's what you need to know:
