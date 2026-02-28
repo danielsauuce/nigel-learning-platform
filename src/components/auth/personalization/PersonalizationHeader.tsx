@@ -44,7 +44,6 @@ export function PersonalizationHeader({
       <StepIndicator
         totalSteps={totalSteps}
         currentStep={currentStep}
-        badge="Student Mode"
         style={{ flex: 1, marginLeft: 8 }}
       />
     </MotiView>
