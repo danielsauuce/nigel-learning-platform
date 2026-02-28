@@ -55,7 +55,7 @@ export function PersonalizationScreen() {
   const handleFinish = useCallback(() => {
     acceptPrivacy();
     completeOnboarding();
-    router.push('/(auth)/privacy-consent' as any);
+    router.replace('/(student)' as any);
   }, [acceptPrivacy, completeOnboarding, router]);
 
   const handleBack = useCallback(() => {
