@@ -28,3 +28,91 @@ export const ONBOARDING_SLIDES = [
 
 export type SlideIcon = (typeof ONBOARDING_SLIDES)[number]['icon'];
 export type RoleType = 'student' | 'teacher';
+
+// Student Personalization
+export interface PersonalizationOption {
+  key: string;
+  title: string;
+  subtitle: string;
+  iconName: string;
+}
+
+export interface PersonalizationQuestion {
+  mascotText: string;
+  title: string;
+  subtitle: string;
+  sectionLabel: string;
+  question: string;
+  options: PersonalizationOption[];
+}
+
+export const PERSONALIZATION_STEPS: PersonalizationQuestion[] = [
+  {
+    mascotText: 'Hi there!',
+    title: 'Money Worries?',
+    subtitle:
+      "Don't worry, every student goes through this! Identifying your stressor is the first step to mastering your cash.",
+    sectionLabel: 'Personalization',
+    question: 'What worries you most about money right now?',
+    options: [
+      {
+        key: 'living_expenses',
+        title: 'Living Expenses',
+        subtitle: 'Rent, groceries, and daily costs',
+        iconName: 'wallet',
+      },
+      {
+        key: 'student_loans',
+        title: 'Student Loans',
+        subtitle: 'Debt management and repayment',
+        iconName: 'graduation-cap',
+      },
+      {
+        key: 'emergency_fund',
+        title: 'Emergency Fund',
+        subtitle: 'Savings for unexpected events',
+        iconName: 'shield',
+      },
+      {
+        key: 'future_wealth',
+        title: 'Future Wealth',
+        subtitle: 'Investing and long-term goals',
+        iconName: 'trending-up',
+      },
+    ],
+  },
+  {
+    mascotText: 'Great pick!',
+    title: 'Learning Style?',
+    subtitle:
+      'Everyone learns differently. This helps us tailor your missions and challenges to your preferred style.',
+    sectionLabel: 'Personalization',
+    question: 'How do you prefer to learn new things?',
+    options: [
+      {
+        key: 'bite_sized',
+        title: 'Bite-Sized Lessons',
+        subtitle: 'Quick 5-minute daily missions',
+        iconName: 'zap',
+      },
+      {
+        key: 'deep_dive',
+        title: 'Deep Dives',
+        subtitle: 'Longer, detailed explorations',
+        iconName: 'book-open',
+      },
+      {
+        key: 'hands_on',
+        title: 'Hands-On Practice',
+        subtitle: 'Simulators and real scenarios',
+        iconName: 'gamepad-2',
+      },
+      {
+        key: 'challenges',
+        title: 'Competitive Challenges',
+        subtitle: 'Quizzes, streaks, and leaderboards',
+        iconName: 'trophy',
+      },
+    ],
+  },
+];
