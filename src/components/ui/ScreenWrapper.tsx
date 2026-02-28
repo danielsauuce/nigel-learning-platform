@@ -19,7 +19,7 @@ export function ScreenWrapper({
   showDecoration = true,
   animate = true,
   topPadding = 20,
-  bottomPadding = 16,
+  bottomPadding = 0.5,
   contentStyle,
 }: ScreenWrapperProps) {
   const insets = useSafeAreaInsets();
@@ -32,7 +32,7 @@ export function ScreenWrapper({
         {
           flex: 1,
           paddingTop: insets.top + topPadding,
-          // paddingBottom: insets.bottom + bottomPadding,
+          paddingBottom: insets.bottom + bottomPadding,
         },
         contentStyle,
       ]}

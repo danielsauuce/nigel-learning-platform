@@ -1,8 +1,6 @@
 import React from 'react';
-import { Platform, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { MotiView } from 'moti';
-import { colors } from '@/constants/colors';
-import { useTheme } from '@/context';
 
 interface Badge {
   key: string;
@@ -26,78 +24,44 @@ export function RecentAchievements({
   badges = DEFAULT_BADGES,
   onViewAll,
 }: RecentAchievementsProps) {
-  const { theme } = useTheme();
-  const c = colors[theme];
-
   return (
     <MotiView
       from={{ opacity: 0, translateY: 14 }}
       animate={{ opacity: 1, translateY: 0 }}
       transition={{ type: 'spring', damping: 16, stiffness: 120, delay: 450 }}
-      style={{ marginBottom: 24 }}
+      className="mb-6"
     >
-      {/* Section header */}
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          paddingHorizontal: 24,
-          marginBottom: 14,
-        }}
-      >
-        <Text style={{ fontFamily: 'Poppins_700Bold', fontSize: 18, color: c.foreground }}>
-          Recent Achievements
-        </Text>
+      {/* Section Header */}
+      <View className="mb-3.5 flex-row items-center justify-between px-6">
+        <Text className="font-poppins-bold text-lg text-foreground">Recent Achievements</Text>
+
         <TouchableOpacity activeOpacity={0.7} onPress={onViewAll}>
-          <Text
-            style={{
-              fontFamily: 'Poppins_600SemiBold',
-              fontSize: 13,
-              color: c.gradientStart,
-            }}
-          >
-            View All
-          </Text>
+          <Text className="font-poppins-semibold text-sm text-gradient-start">View All</Text>
         </TouchableOpacity>
       </View>
 
-      {/* Badge row */}
+      {/* Badge Row */}
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
-        contentContainerStyle={{ paddingHorizontal: 24, gap: 10 }}
+        contentContainerClassName="px-6 gap-2.5"
       >
         {badges.map((badge, index) => (
           <MotiView
             key={badge.key}
             from={{ opacity: 0, scale: 0.85 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ type: 'spring', damping: 14, stiffness: 140, delay: 500 + index * 60 }}
+            transition={{
+              type: 'spring',
+              damping: 14,
+              stiffness: 140,
+              delay: 500 + index * 60,
+            }}
           >
-            <View
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                gap: 6,
-                paddingHorizontal: 14,
-                paddingVertical: 10,
-                borderRadius: 24,
-                backgroundColor: theme === 'dark' ? c.muted : '#F0EDFF',
-                borderWidth: 1,
-                borderColor: theme === 'dark' ? c.border : '#E0DAFF',
-              }}
-            >
-              <Text style={{ fontSize: 15 }}>{badge.emoji}</Text>
-              <Text
-                style={{
-                  fontFamily: 'Poppins_600SemiBold',
-                  fontSize: 13,
-                  color: c.gradientStart,
-                }}
-              >
-                {badge.label}
-              </Text>
+            <View className="flex-row items-center gap-1.5 rounded-full border border-border bg-muted px-3.5 py-2.5 dark:bg-card">
+              <Text className="text-base">{badge.emoji}</Text>
+
+              <Text className="font-poppins-semibold text-sm text-primary">{badge.label}</Text>
             </View>
           </MotiView>
         ))}
