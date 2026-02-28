@@ -4,7 +4,6 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { colors } from '@/constants/colors';
 import { useTheme } from '@/context';
 
-// ─── Types ──────────────────────────────────────────────────────
 type ButtonVariant = 'gold' | 'purple' | 'outline' | 'ghost';
 type ButtonSize = 'sm' | 'md' | 'lg';
 
@@ -20,14 +19,13 @@ interface GradientButtonProps {
   style?: ViewStyle;
 }
 
-// ─── Size presets ───────────────────────────────────────────────
+// Size presets
 const SIZE_MAP: Record<ButtonSize, { py: number; px: number; fontSize: number; radius: number }> = {
   sm: { py: 10, px: 20, fontSize: 14, radius: 20 },
   md: { py: 14, px: 28, fontSize: 16, radius: 26 },
   lg: { py: 16, px: 32, fontSize: 17, radius: 28 },
 };
 
-// ─── Component ──────────────────────────────────────────────────
 export function GradientButton({
   label,
   onPress,
