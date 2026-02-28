@@ -3,8 +3,6 @@ import { TouchableOpacity, View } from 'react-native';
 import { MotiView } from 'moti';
 import { ChevronLeft } from 'lucide-react-native';
 import { StepIndicator } from '@/components/ui';
-import { colors } from '@/constants/colors';
-import { useTheme } from '@/context';
 
 interface PersonalizationHeaderProps {
   currentStep: number;
@@ -17,35 +15,25 @@ export function PersonalizationHeader({
   totalSteps,
   onBack,
 }: PersonalizationHeaderProps) {
-  const { theme } = useTheme();
-  const c = colors[theme];
-
   return (
     <MotiView
       from={{ opacity: 0, translateY: -10 }}
       animate={{ opacity: 1, translateY: 0 }}
       transition={{ type: 'timing', duration: 350 }}
-      style={{
-        flexDirection: 'row',
-        alignItems: 'center',
-        paddingHorizontal: 20,
-        marginBottom: 8,
-      }}
+      className="mb-2 flex-row items-center px-5"
     >
       <TouchableOpacity
         onPress={onBack}
         activeOpacity={0.7}
         hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
-        style={{ padding: 4 }}
+        className="p-1"
       >
-        <ChevronLeft size={24} color={c.foreground} strokeWidth={2.5} />
+        <ChevronLeft size={24} strokeWidth={2.5} className="text-foreground" />
       </TouchableOpacity>
 
-      <StepIndicator
-        totalSteps={totalSteps}
-        currentStep={currentStep}
-        style={{ flex: 1, marginLeft: 8 }}
-      />
+      <View className="ml-2 flex-1">
+        <StepIndicator totalSteps={totalSteps} currentStep={currentStep} />
+      </View>
     </MotiView>
   );
 }
