@@ -2,8 +2,6 @@ import React from 'react';
 import { View, StatusBar, ScrollView } from 'react-native';
 import { MotiView } from 'moti';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useTheme } from '@/context';
-import { colors } from '@/constants/colors';
 
 import { DashboardGreeting } from './DashboardGreeting';
 import { QuickStats } from './QuickStats';
@@ -15,16 +13,10 @@ import { ProTipBanner } from './ProTipBanner';
 
 export function DashboardScreen() {
   const insets = useSafeAreaInsets();
-  const { theme } = useTheme();
-  const c = colors[theme];
 
   return (
-    <View style={{ flex: 1, backgroundColor: c.background }}>
-      <StatusBar
-        barStyle={theme === 'dark' ? 'light-content' : 'dark-content'}
-        backgroundColor="transparent"
-        translucent
-      />
+    <View className="flex-1 bg-background">
+      <StatusBar barStyle="dark-content" translucent backgroundColor="transparent" />
 
       <MotiView
         from={{ opacity: 0 }}
@@ -38,13 +30,7 @@ export function DashboardScreen() {
             paddingTop: insets.top + 16,
           }}
         >
-          <ScrollView
-            contentContainerStyle={{
-              paddingBottom: 24,
-            }}
-            showsVerticalScrollIndicator={false}
-            bounces
-          >
+          <ScrollView showsVerticalScrollIndicator={false} bounces contentContainerClassName="pb-6">
             <DashboardGreeting
               name="Alex Chen"
               level={14}
