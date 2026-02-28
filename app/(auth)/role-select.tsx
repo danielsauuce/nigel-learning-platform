@@ -1,12 +1,10 @@
 import React, { useCallback, useState } from 'react';
-import { View, SafeAreaView, StyleSheet, StatusBar } from 'react-native';
+import { View, SafeAreaView, StatusBar } from 'react-native';
 import { MotiView } from 'moti';
 import { useRouter } from 'expo-router';
 
 import { ScreenHeader, SelectionCard, GradientButton } from '@/components/ui';
 import { useAuth } from '@/context';
-import { useTheme } from '@/context';
-import { colors } from '@/constants/colors';
 import { StudentIllustration, TeacherIllustration } from '@/svg/illustrations';
 import type { RoleType } from '@/constants/app';
 
@@ -27,9 +25,7 @@ const ROLES: { key: RoleType; title: string; subtitle: string; accent: string }[
 
 export default function RoleSelectRoute() {
   const router = useRouter();
-  const { theme } = useTheme();
   const { setRole } = useAuth();
-  const c = colors[theme];
 
   const [selected, setSelected] = useState<RoleType | null>(null);
 
@@ -46,10 +42,10 @@ export default function RoleSelectRoute() {
   }, [selected, setRole, router]);
 
   return (
-    <SafeAreaView style={[styles.safeArea, { backgroundColor: c.background }]}>
+    <SafeAreaView className="flex-1 bg-background">
       <StatusBar barStyle="dark-content" />
 
-      <View style={styles.container}>
+      <View className="flex-1 justify-between px-6">
         {/* Header */}
         <ScreenHeader
           title="Who are you?"
@@ -58,7 +54,7 @@ export default function RoleSelectRoute() {
         />
 
         {/* Role Cards */}
-        <View style={styles.rolesContainer}>
+        <View className="flex-1 justify-center gap-4">
           {ROLES.map((role, index) => (
             <MotiView
               key={role.key}
@@ -94,7 +90,7 @@ export default function RoleSelectRoute() {
           from={{ opacity: 0, translateY: 20 }}
           animate={{ opacity: 1, translateY: 0 }}
           transition={{ type: 'timing', duration: 450, delay: 700 }}
-          style={styles.buttonContainer}
+          className="pb-6"
         >
           <GradientButton
             label="Continue"
@@ -108,22 +104,3 @@ export default function RoleSelectRoute() {
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-  },
-  container: {
-    flex: 1,
-    paddingHorizontal: 24,
-    justifyContent: 'space-between',
-  },
-  rolesContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    gap: 16,
-  },
-  buttonContainer: {
-    paddingBottom: 24,
-  },
-});

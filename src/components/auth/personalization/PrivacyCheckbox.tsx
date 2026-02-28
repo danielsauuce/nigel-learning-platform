@@ -2,8 +2,6 @@ import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { MotiView } from 'moti';
 import { Shield } from 'lucide-react-native';
-import { colors } from '@/constants/colors';
-import { useTheme } from '@/context';
 
 interface PrivacyCheckboxProps {
   checked: boolean;
@@ -11,69 +9,32 @@ interface PrivacyCheckboxProps {
 }
 
 export function PrivacyCheckbox({ checked, onToggle }: PrivacyCheckboxProps) {
-  const { theme } = useTheme();
-  const c = colors[theme];
-
   return (
     <MotiView
       from={{ opacity: 0, translateY: 12 }}
       animate={{ opacity: 1, translateY: 0 }}
       transition={{ type: 'timing', duration: 400, delay: 500 }}
-      style={{
-        flexDirection: 'row',
-        alignItems: 'flex-start',
-        gap: 12,
-        backgroundColor: c.card,
-        padding: 16,
-        borderRadius: 14,
-        borderWidth: 1,
-        borderColor: c.border,
-      }}
+      className="flex-row items-start gap-3 rounded-[14px] border border-border bg-card p-4"
     >
+      {/* Checkbox */}
       <TouchableOpacity
         onPress={onToggle}
         activeOpacity={0.7}
-        style={{
-          width: 22,
-          height: 22,
-          borderRadius: 6,
-          borderWidth: 2,
-          borderColor: checked ? c.gradientStart : c.border,
-          backgroundColor: checked ? c.gradientStart : 'transparent',
-          alignItems: 'center',
-          justifyContent: 'center',
-          marginTop: 1,
-        }}
+        className={`mt-[1px] h-[22px] w-[22px] items-center justify-center rounded-md border-2 ${checked ? 'border-gradient-start bg-gradient-start' : 'border-border'} `}
       >
-        {checked && (
-          <Text style={{ color: '#FFFFFF', fontSize: 12, fontFamily: 'Poppins_700Bold' }}>✓</Text>
-        )}
+        {checked && <Text className="font-poppins-bold text-xs text-white">✓</Text>}
       </TouchableOpacity>
 
-      <View style={{ flex: 1 }}>
-        <Text
-          style={{
-            fontFamily: 'Poppins_500Medium',
-            fontSize: 13,
-            color: c.foreground,
-            lineHeight: 20,
-          }}
-        >
-          I agree to the{' '}
-          <Text style={{ color: c.gradientStart, textDecorationLine: 'underline' }}>
-            Privacy Policy
-          </Text>{' '}
-          and data usage for my personalized experience.
+      {/* Text Content */}
+      <View className="flex-1">
+        <Text className="font-poppins-medium text-sm leading-5 text-foreground">
+          I agree to the <Text className="text-gradient-start underline">Privacy Policy</Text> and
+          data usage for my personalized experience.
         </Text>
-        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6, marginTop: 6 }}>
-          <Shield size={13} color={c.mutedForeground} strokeWidth={2} />
-          <Text
-            style={{
-              fontFamily: 'Poppins_400Regular',
-              fontSize: 11.5,
-              color: c.mutedForeground,
-            }}
-          >
+
+        <View className="mt-1.5 flex-row items-center gap-1.5">
+          <Shield size={13} strokeWidth={2} className="text-muted-foreground" />
+          <Text className="font-poppins-regular text-[11.5px] text-muted-foreground">
             Your data is encrypted and never sold.
           </Text>
         </View>

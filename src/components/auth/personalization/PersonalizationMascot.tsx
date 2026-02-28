@@ -10,8 +10,9 @@ interface PersonalizationMascotProps {
 
 export function PersonalizationMascot({ speechText }: PersonalizationMascotProps) {
   return (
-    <View style={{ alignItems: 'center', marginTop: 8, marginBottom: 4 }}>
+    <View className="mb-1 mt-2 items-center">
       <SpeechBubble text={speechText} delay={200} />
+
       <MotiView
         from={{ opacity: 0, scale: 0.85 }}
         animate={{ opacity: 1, scale: 1 }}

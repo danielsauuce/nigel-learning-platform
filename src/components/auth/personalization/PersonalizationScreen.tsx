@@ -10,7 +10,7 @@ import { PersonalizationQuestion } from './PersonalizationQuestion';
 import { PrivacyCheckbox } from './PrivacyCheckbox';
 import { PersonalizationFooter } from './PersonalizationFooter';
 
-const TOTAL_STEPS = 3; // question 1, question 2, privacy
+const TOTAL_STEPS = 3;
 
 export function PersonalizationScreen() {
   const router = useRouter();
@@ -85,9 +85,9 @@ export function PersonalizationScreen() {
 
       <Animated.View style={{ flex: 1, opacity: fadeAnim }}>
         <ScrollView
-          contentContainerStyle={{ paddingBottom: 32 }}
           showsVerticalScrollIndicator={false}
           bounces={false}
+          contentContainerClassName="pb-8"
         >
           {isQuestionStep && stepData ? (
             <>
@@ -100,7 +100,7 @@ export function PersonalizationScreen() {
               />
 
               {isLastQuestion && (
-                <View style={{ paddingHorizontal: 24, marginTop: 20 }}>
+                <View className="mt-5 px-6">
                   <PrivacyCheckbox
                     checked={privacyAccepted}
                     onToggle={() => setPrivacyAccepted((prev) => !prev)}
@@ -109,7 +109,7 @@ export function PersonalizationScreen() {
               )}
             </>
           ) : (
-            <View style={{ paddingHorizontal: 24, paddingTop: 40 }}>
+            <View className="px-6 pt-10">
               <PrivacyCheckbox
                 checked={privacyAccepted}
                 onToggle={() => setPrivacyAccepted((prev) => !prev)}
