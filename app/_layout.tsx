@@ -31,10 +31,8 @@ function AppNavigator() {
         }}
       >
         <Stack.Screen name="(auth)" />
-        {/* Future:
         <Stack.Screen name="(student)" />
-        <Stack.Screen name="(teacher)" />
-        */}
+        {/* <Stack.Screen name="(teacher)" /> */}
       </Stack>
     </>
   );
