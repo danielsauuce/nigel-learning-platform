@@ -9,7 +9,7 @@ interface StatItem {
   emoji: string;
   label: string;
   value: string;
-  sublabel: string;
+  sublabel?: string;
 }
 
 interface QuickStatsProps {
@@ -34,8 +34,8 @@ export function QuickStats({ streak, balance, rank }: QuickStatsProps) {
       key: 'balance',
       emoji: '💰',
       label: 'BALANCE',
-      value: `$${balance}`,
-      sublabel: 'Sim',
+      value: `£${balance}`,
+      // sublabel: 'Sim',
     },
     {
       key: 'rank',
