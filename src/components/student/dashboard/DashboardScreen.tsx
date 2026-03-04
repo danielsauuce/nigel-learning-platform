@@ -42,7 +42,7 @@ export function DashboardScreen() {
             <QuickStats streak={12} balance={450} rank={4} />
 
             <ProgressCard
-              title="Financial Literacy B1"
+              title="Learning Progress"
               completion={68}
               missionsDone={12}
               totalMissions={18}
