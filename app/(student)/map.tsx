@@ -1,10 +1,6 @@
-import { View, Text } from 'react-native';
 import React from 'react';
+import { IslandMapScreen } from '@/components/student/islands-map/IslandMapScreen';
 
-export default function map() {
-  return (
-    <View>
-      <Text>map</Text>
-    </View>
-  );
+export default function MapRoute() {
+  return <IslandMapScreen />;
 }
