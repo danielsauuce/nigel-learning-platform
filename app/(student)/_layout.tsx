@@ -15,6 +15,10 @@ export default function StudentLayout() {
       <Stack.Screen name="budget-builder" />
       <Stack.Screen name="life-event" />
       <Stack.Screen name="sim-results" />
+      <Stack.Screen name="island-landing" />
+      <Stack.Screen name="lesson" />
+      <Stack.Screen name="quiz" />
+      <Stack.Screen name="lesson-passed" />
     </Stack>
   );
 }
