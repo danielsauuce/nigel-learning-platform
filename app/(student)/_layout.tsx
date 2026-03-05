@@ -13,6 +13,8 @@ export default function StudentLayout() {
       <Stack.Screen name="simulator" />
       <Stack.Screen name="payslip" />
       <Stack.Screen name="budget-builder" />
+      <Stack.Screen name="life-event" />
+      <Stack.Screen name="sim-results" />
     </Stack>
   );
 }

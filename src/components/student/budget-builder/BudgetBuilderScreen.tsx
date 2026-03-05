@@ -9,7 +9,6 @@ import { BudgetBreakdownBar } from './BudgetBreakdownBar';
 import { BudgetSlider, type BudgetCategory } from './BudgetSlider';
 import { BudgetFeedback } from './BudgetFeedback';
 
-// ─── Default categories ─────────────────────────────────────────
 const TAKE_HOME = 2195; // from payslip (£2850 - deductions)
 
 function createCategories(): BudgetCategory[] {
@@ -83,7 +82,6 @@ function createCategories(): BudgetCategory[] {
   ];
 }
 
-// ─── Screen ─────────────────────────────────────────────────────
 export function BudgetBuilderScreen() {
   const router = useRouter();
   const [categories, setCategories] = useState<BudgetCategory[]>(createCategories);
@@ -110,8 +108,8 @@ export function BudgetBuilderScreen() {
   }, []);
 
   const handleConfirm = useCallback(() => {
-    // Navigate to life event / results screen
-  }, []);
+    router.push('/(student)/life-event' as any);
+  }, [router]);
 
   const canConfirm = totalAllocated > 0 && remaining >= 0;
 
