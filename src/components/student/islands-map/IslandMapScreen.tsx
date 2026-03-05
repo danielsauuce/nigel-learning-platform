@@ -1,6 +1,7 @@
 import React from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { MotiView } from 'moti';
+import { useRouter } from 'expo-router';
 import { Sparkles } from 'lucide-react-native';
 import { ScreenWrapper } from '@/components/ui';
 import { colors } from '@/constants/colors';
@@ -65,6 +66,7 @@ const ISLANDS: IslandData[] = [
 export function IslandMapScreen() {
   const { theme } = useTheme();
   const c = colors[theme];
+  const router = useRouter();
 
   return (
     <ScreenWrapper topPadding={16} showDecoration={false}>
@@ -111,7 +113,15 @@ export function IslandMapScreen() {
         <View style={{ paddingHorizontal: 16 }}>
           {ISLANDS.map((island, index) => (
             <React.Fragment key={island.key}>
-              <IslandCard island={island} index={index} onPress={() => {}} />
+              <IslandCard
+                island={island}
+                index={index}
+                onPress={() => {
+                  if (island.status !== 'locked') {
+                    router.push('/(student)/island-landing' as any);
+                  }
+                }}
+              />
               {index < ISLANDS.length - 1 && (
                 <IslandConnector index={index} isCompleted={island.status === 'mastered'} />
               )}
