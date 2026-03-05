@@ -1,10 +1,6 @@
-import { View, Text } from 'react-native';
 import React from 'react';
+import { SettingsScreen } from '@/components/student/settings/SettingsScreen';
 
-export default function settings() {
-  return (
-    <View>
-      <Text>settings</Text>
-    </View>
-  );
+export default function SettingsRoute() {
+  return <SettingsScreen />;
 }

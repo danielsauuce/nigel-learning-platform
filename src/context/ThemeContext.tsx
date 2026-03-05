@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState, useCallback } from 'react';
+import React, { createContext, useContext, useState, useCallback, useEffect } from 'react';
+import { useColorScheme } from 'nativewind';
 
 type ThemeMode = 'light' | 'dark';
 
@@ -15,11 +16,22 @@ const ThemeContext = createContext<ThemeContextValue>({
 });
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<ThemeMode>('light');
+  const { setColorScheme } = useColorScheme();
+  const [theme, setThemeState] = useState<ThemeMode>('light');
+
+  const setTheme = (mode: ThemeMode) => {
+    setThemeState(mode);
+    setColorScheme(mode);
+  };
 
   const toggle = useCallback(() => {
-    setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
-  }, []);
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+  }, [theme]);
+
+  useEffect(() => {
+    setColorScheme(theme);
+  }, [theme]);
 
   return (
     <ThemeContext.Provider value={{ theme, toggle, setTheme }}>{children}</ThemeContext.Provider>
@@ -27,7 +39,5 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 }
 
 export function useTheme() {
-  const ctx = useContext(ThemeContext);
-  if (!ctx) throw new Error('useTheme must be used within ThemeProvider');
-  return ctx;
+  return useContext(ThemeContext);
 }
