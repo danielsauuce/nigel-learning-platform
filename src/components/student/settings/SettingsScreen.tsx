@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ScrollView, Switch } from 'react-native';
 import { settingsConfig } from '@/components/student/settings/config/settings.config';
-import { SettingRow, SettingSection } from '@/components/student/settings/SettingSection';
+import { SettingRow, SettingSection } from '@/components/student/settings';
 
 export function SettingsScreen() {
   const [notifications, setNotifications] = useState(true);
