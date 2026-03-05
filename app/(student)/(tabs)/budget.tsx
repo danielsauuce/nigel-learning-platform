@@ -1,10 +1,6 @@
-import { View, Text } from 'react-native';
 import React from 'react';
+import { SimulatorScreen } from '@/components/student/simulator/SimulatorScreen';
 
-export default function budget() {
-  return (
-    <View>
-      <Text>budget</Text>
-    </View>
-  );
+export default function BudgetRoute() {
+  return <SimulatorScreen />;
 }

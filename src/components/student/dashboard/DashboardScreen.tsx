@@ -52,9 +52,11 @@ export function DashboardScreen() {
 
             <QuickAccessCards
               onMapPress={() => {
-                router.push('/(student)/map');
+                router.push('/(student)/(tabs)/map');
               }}
-              onSimulatorPress={() => {}}
+              onSimulatorPress={() => {
+                router.push('/(student)/simulator');
+              }}
             />
 
             <DailyChallenge
