@@ -55,7 +55,7 @@ export function PersonalizationScreen() {
   const handleFinish = useCallback(() => {
     acceptPrivacy();
     completeOnboarding();
-    router.replace('/(student)' as any);
+    router.replace('/(auth)/student-setup' as any);
   }, [acceptPrivacy, completeOnboarding, router]);
 
   const handleBack = useCallback(() => {
