@@ -10,6 +10,7 @@ import { QuickAccessCards } from './QuickAccessCards';
 import { DailyChallenge } from './DailyChallenge';
 import { RecentAchievements } from './RecentAchievements';
 import { ProTipBanner } from './ProTipBanner';
+import { router } from 'expo-router';
 
 export function DashboardScreen() {
   const insets = useSafeAreaInsets();
@@ -49,7 +50,12 @@ export function DashboardScreen() {
               onDetails={() => {}}
             />
 
-            <QuickAccessCards onMapPress={() => {}} onSimulatorPress={() => {}} />
+            <QuickAccessCards
+              onMapPress={() => {
+                router.push('/(student)/map');
+              }}
+              onSimulatorPress={() => {}}
+            />
 
             <DailyChallenge
               title="Compound Interest Puzzle"
