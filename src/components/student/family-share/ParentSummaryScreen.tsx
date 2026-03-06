@@ -14,6 +14,7 @@ import {
   Clock,
   ChevronRight,
   Heart,
+  X,
 } from 'lucide-react-native';
 import { useTheme } from '@/context';
 import { colors } from '@/constants/colors';
@@ -59,7 +60,7 @@ function ProgressRing({
   );
 }
 
-// ── Mock data (would come from API in production) ──
+// ── Mock data
 const STUDENT = {
   name: 'Alex',
   initial: 'A',
@@ -126,6 +127,23 @@ export function ParentSummaryScreen() {
         showsVerticalScrollIndicator={false}
         bounces
       >
+        {/* Close preview button */}
+        <MotiView
+          from={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ type: 'timing', duration: 300 }}
+          className="mb-2 flex-row justify-end px-5"
+        >
+          <TouchableOpacity
+            onPress={() => router.back()}
+            activeOpacity={0.7}
+            className="flex-row items-center gap-1 rounded-full bg-muted/50 px-3 py-1.5"
+          >
+            <X size={14} className="text-muted-foreground" strokeWidth={2.5} />
+            <Text className="font-poppins-medium text-xs text-muted-foreground">Close Preview</Text>
+          </TouchableOpacity>
+        </MotiView>
+
         {/* Nigel brand header */}
         <MotiView
           from={{ opacity: 0, translateY: -10 }}
