@@ -43,7 +43,9 @@ export function DashboardScreen() {
               level={14}
               streak={12}
               onNotifications={() => {}}
-              onSettings={() => {}}
+              onSettings={() => {
+                router.push('/(student)/(tabs)/settings');
+              }}
             />
 
             <QuickStats streak={12} balance={450} rank={4} />
@@ -53,7 +55,9 @@ export function DashboardScreen() {
               completion={68}
               missionsDone={12}
               totalMissions={18}
-              onDetails={() => {}}
+              onDetails={() => {
+                router.push('/(student)/progress-stats');
+              }}
             />
 
             <QuickAccessCards
@@ -70,7 +74,9 @@ export function DashboardScreen() {
               description="Solve the mystery of how a $100 investment grows over 5 years. Can you find the missing link?"
               duration="5 Mins"
               xpReward={50}
-              onStart={() => {}}
+              onStart={() => {
+                router.push('/(student)/daily-challenge');
+              }}
             />
 
             <RecentAchievements
@@ -80,7 +86,9 @@ export function DashboardScreen() {
                 { key: 'island_king', emoji: '🏆', label: 'Island King' },
                 { key: 'goal_setter', emoji: '⭐', label: 'Goal Setter' },
               ]}
-              onViewAll={() => {}}
+              onViewAll={() => {
+                router.push('/(student)/progress-stats');
+              }}
             />
 
             <ProTipBanner
