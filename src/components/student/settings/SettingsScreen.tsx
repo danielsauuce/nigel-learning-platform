@@ -107,6 +107,11 @@ export function SettingsScreen() {
                 onPress = handleLogout;
               }
 
+              // Wire Share with Family
+              if (item.label === 'Share with Family') {
+                onPress = () => router.push('/(student)/family-consent' as any);
+              }
+
               return (
                 <SettingRow
                   key={item.label}
