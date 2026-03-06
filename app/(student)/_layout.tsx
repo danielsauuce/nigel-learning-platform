@@ -22,6 +22,8 @@ export default function StudentLayout() {
       <Stack.Screen name="family-consent" />
       <Stack.Screen name="family-link" />
       <Stack.Screen name="parent-summary" />
+      <Stack.Screen name="daily-challenge" />
+      <Stack.Screen name="progress-stats" />
     </Stack>
   );
 }
