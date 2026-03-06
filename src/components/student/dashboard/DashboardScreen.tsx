@@ -2,6 +2,7 @@ import React from 'react';
 import { View, StatusBar, ScrollView } from 'react-native';
 import { MotiView } from 'moti';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useTheme } from '@/context';
 
 import { DashboardGreeting } from './DashboardGreeting';
 import { QuickStats } from './QuickStats';
@@ -14,10 +15,15 @@ import { router } from 'expo-router';
 
 export function DashboardScreen() {
   const insets = useSafeAreaInsets();
+  const { theme } = useTheme();
 
   return (
     <View className="flex-1 bg-background">
-      <StatusBar barStyle="dark-content" translucent backgroundColor="transparent" />
+      <StatusBar
+        barStyle={theme === 'dark' ? 'light-content' : 'dark-content'}
+        translucent
+        backgroundColor="transparent"
+      />
 
       <MotiView
         from={{ opacity: 0 }}
