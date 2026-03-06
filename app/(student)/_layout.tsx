@@ -19,6 +19,9 @@ export default function StudentLayout() {
       <Stack.Screen name="lesson" />
       <Stack.Screen name="quiz" />
       <Stack.Screen name="lesson-passed" />
+      <Stack.Screen name="family-consent" />
+      <Stack.Screen name="family-link" />
+      <Stack.Screen name="parent-summary" />
     </Stack>
   );
 }
