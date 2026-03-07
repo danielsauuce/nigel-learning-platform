@@ -15,6 +15,7 @@ export default function AuthLayout() {
       <Stack.Screen name="personalization" />
       <Stack.Screen name="student-setup" />
       <Stack.Screen name="teacher-login" />
+      <Stack.Screen name="teacher-register" />
     </Stack>
   );
 }

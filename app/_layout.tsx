@@ -32,7 +32,7 @@ function AppNavigator() {
       >
         <Stack.Screen name="(auth)" />
         <Stack.Screen name="(student)" />
-        {/* <Stack.Screen name="(teacher)" /> */}
+        <Stack.Screen name="(teacher)" />
       </Stack>
     </>
   );

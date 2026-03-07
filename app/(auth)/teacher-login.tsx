@@ -1,12 +1,8 @@
-import { View, Text } from 'react-native';
 import React from 'react';
+import { TeacherLoginScreen } from '@/components/teacher/TeacherLoginScreen';
 
 const TeacherLoginRoute = () => {
-  return (
-    <View>
-      <Text>TeacherLoginRoute</Text>
-    </View>
-  );
+  return <TeacherLoginScreen />;
 };
 
 export default TeacherLoginRoute;
