@@ -5,14 +5,13 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTheme } from '@/context';
 import { colors } from '@/constants/colors';
 import { Clock, FileQuestion, Send, Zap } from 'lucide-react-native';
-
-import { QuizHeader } from '../components/QuizHeader';
-import { QuizTitleInput } from '../components/QuizTitleInput';
-import { QuizDescriptionInput } from '../components/QuizDescriptionInput';
-import { QuizQuestionCard } from '../components/QuizQuestionCard';
-import { AddQuestionButton } from '../components/AddQuestionButton';
-import { useCreateQuiz } from '../hooks/useCreateQuiz';
-import { TIME_OPTIONS } from '../types/quiz';
+import { QuizHeader } from './QuizHeader';
+import { QuizTitleInput } from './QuizTitleInput';
+import { QuizDescriptionInput } from './QuizDescriptionInput';
+import { QuizQuestionCard } from './QuizQuestionCard';
+import { AddQuestionButton } from './AddQuestionButton';
+import { useCreateQuiz } from './hooks/useCreateQuiz';
+import { TIME_OPTIONS } from './types/quiz';
 
 export function CreateQuizScreen() {
   const insets = useSafeAreaInsets();

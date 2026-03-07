@@ -22,8 +22,6 @@ export interface QuestionTypeConfig {
 
 export const TIME_OPTIONS = [5, 10, 15, 20, 30, 45, 60] as const;
 
-// ── Factories ──
-
 export function makeId(): string {
   return Math.random().toString(36).slice(2, 8);
 }
