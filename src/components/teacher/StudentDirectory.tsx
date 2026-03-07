@@ -74,7 +74,7 @@ export function StudentDirectory() {
               delay: index * 40,
             }}
           >
-            <StudentCard student={student} />
+            <StudentCard student={student} index={index} />
           </MotiView>
         ))}
       </View>
