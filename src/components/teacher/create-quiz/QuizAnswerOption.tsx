@@ -3,7 +3,7 @@ import { TextInput, TouchableOpacity, View } from 'react-native';
 import { CheckCircle, Circle } from 'lucide-react-native';
 import { useTheme } from '@/context';
 import { colors } from '@/constants/colors';
-import type { Answer } from '../types/quiz';
+import type { Answer } from './types/quiz';
 
 interface QuizAnswerOptionProps {
   answer: Answer;

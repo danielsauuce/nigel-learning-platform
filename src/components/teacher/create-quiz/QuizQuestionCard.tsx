@@ -3,7 +3,7 @@ import { Platform, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { GripVertical, Trash2, FileQuestion, ToggleLeft, MessageSquare } from 'lucide-react-native';
 import { useTheme } from '@/context';
 import { colors } from '@/constants/colors';
-import type { Question, QuestionType } from '../types/quiz';
+import type { Question, QuestionType } from './types/quiz';
 import { QuizAnswerOption } from './QuizAnswerOption';
 
 const TYPE_CONFIG: Record<QuestionType, { label: string; icon: any; activeColor: string }> = {
