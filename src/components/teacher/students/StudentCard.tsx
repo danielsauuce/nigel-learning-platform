@@ -84,6 +84,9 @@ export function StudentCard({ student, index }: { student: Student; index: numbe
 
         <View className="flex-1 items-center">
           <SimBadge level={student.simLevel} />
+          <Text className="mt-0.5 font-poppins-medium text-[9px] uppercase tracking-wider text-muted-foreground">
+            Simulator
+          </Text>
         </View>
       </View>
 
