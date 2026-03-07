@@ -4,17 +4,12 @@ import { Award, ChevronRight } from 'lucide-react-native';
 import { useTheme } from '@/context';
 import { colors } from '@/constants/colors';
 import { getInitials } from './utils/getInitials';
+import type { Student } from './data/students';
 
-const AVATAR_COLORS = ['#6C5CE7', '#E91E8C', '#22C55E', '#F59E0B', '#3B82F6'];
+const AVATAR_COLORS = ['#6C5CE7', '#E91E8C', '#22C55E', '#F59E0B', '#3B82F6', '#EF4444'];
 
 interface StudentCardProps {
-  student: {
-    name: string;
-    missions: number;
-    avg: number;
-    badges: number;
-    active: boolean;
-  };
+  student: Student;
   index?: number;
 }
 
