@@ -21,7 +21,7 @@ export function StudentFAB() {
           from={{ opacity: 0, scale: 0.8, translateY: 10 }}
           animate={{ opacity: 1, scale: 1, translateY: 0 }}
           transition={{ type: 'spring', damping: 14, stiffness: 120 }}
-          className="mb-3"
+          className="mb-9"
         >
           <View
             className="overflow-hidden rounded-xl border border-border bg-card"
