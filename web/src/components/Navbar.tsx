@@ -53,11 +53,7 @@ export const Navbar = () => {
           className="md:hidden w-10 h-10 flex items-center justify-center"
           onClick={() => setOpen(!open)}
         >
-          {open ? (
-            <X className="w-5 h-5 text-edulite-navy" />
-          ) : (
-            <Menu className="w-5 h-5 text-edulite-navy" />
-          )}
+          {open ? <X className="w-5 h-5 text-edulite-navy" /> : <Menu className="w-5 h-5 text-edulite-navy" />}
         </button>
       </div>
 
@@ -79,11 +75,7 @@ export const Navbar = () => {
             </Link>
           ))}
           <div className="pt-2 flex flex-col gap-3">
-            <Link
-              to="/login"
-              className="text-edulite-navy font-bold text-sm"
-              onClick={() => setOpen(false)}
-            >
+            <Link to="/login" className="text-edulite-navy font-bold text-sm" onClick={() => setOpen(false)}>
               Login
             </Link>
             <button className="bg-edulite-purple text-white font-bold px-6 py-3 rounded-full text-sm w-full">

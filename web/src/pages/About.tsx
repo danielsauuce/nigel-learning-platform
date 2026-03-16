@@ -1,14 +1,5 @@
 import { motion } from 'motion/react'
-import {
-  Shield,
-  Heart,
-  BookOpen,
-  Target,
-  Users,
-  Globe,
-  Award,
-  ArrowRight,
-} from 'lucide-react'
+import { Shield, Heart, BookOpen, Target, Users, Globe, Award, ArrowRight } from 'lucide-react'
 import { NigelMascot } from '../components/mobile/NigelMascot'
 
 const fadeUp = {
@@ -33,15 +24,13 @@ export const About = () => (
           </span>
 
           <h1 className="text-5xl md:text-6xl font-bold text-edulite-navy leading-tight">
-            Building financial
-            <br />
+            Building financial<br />
             <span className="text-edulite-purple">confidence</span> in kids
           </h1>
 
           <p className="text-edulite-gray text-lg leading-relaxed max-w-lg">
-            Nigel Junior is on a mission to make financial literacy fun,
-            engaging, and accessible for every child — powered by the trusted
-            team at Beyond Encryption.
+            Nigel Junior is on a mission to make financial literacy fun, engaging,
+            and accessible for every child — powered by the trusted team at Beyond Encryption.
           </p>
         </motion.div>
 
@@ -75,33 +64,26 @@ export const About = () => (
                 <Shield className="w-7 h-7 text-white" />
               </div>
               <div>
-                <p className="text-white/50 text-xs font-semibold uppercase tracking-wider">
-                  Powered by
-                </p>
-                <h2 className="text-2xl font-bold text-white">
-                  Beyond Encryption
-                </h2>
+                <p className="text-white/50 text-xs font-semibold uppercase tracking-wider">Powered by</p>
+                <h2 className="text-2xl font-bold text-white">Beyond Encryption</h2>
               </div>
             </div>
 
             <p className="text-white/70 leading-relaxed">
-              Nigel Junior is proudly developed by Beyond Encryption — a leading
-              provider of secure digital communication solutions. With years of
-              experience protecting sensitive data, we bring that same
-              commitment to safety and quality to children's education.
+              Nigel Junior is proudly developed by Beyond Encryption — a leading provider
+              of secure digital communication solutions. With years of experience protecting
+              sensitive data, we bring that same commitment to safety and quality to children's education.
             </p>
 
             <div className="flex flex-wrap gap-4 pt-2">
-              {['Data Security', 'Privacy First', 'Trusted by Businesses'].map(
-                (tag) => (
-                  <span
-                    key={tag}
-                    className="bg-white/10 text-white/80 text-xs font-semibold px-4 py-2 rounded-full"
-                  >
-                    {tag}
-                  </span>
-                )
-              )}
+              {['Data Security', 'Privacy First', 'Trusted by Businesses'].map((tag) => (
+                <span
+                  key={tag}
+                  className="bg-white/10 text-white/80 text-xs font-semibold px-4 py-2 rounded-full"
+                >
+                  {tag}
+                </span>
+              ))}
             </div>
           </div>
 
@@ -120,9 +102,7 @@ export const About = () => (
                 transition={{ duration: 0.4, delay: i * 0.1 }}
                 className="bg-white/5 rounded-2xl p-6 text-center"
               >
-                <p className="text-2xl font-bold text-edulite-purple">
-                  {stat.num}
-                </p>
+                <p className="text-2xl font-bold text-edulite-purple">{stat.num}</p>
                 <p className="text-white/50 text-xs mt-1">{stat.label}</p>
               </motion.div>
             ))}
@@ -135,12 +115,10 @@ export const About = () => (
     <section className="py-20 px-6 bg-edulite-bg rounded-[4rem] mx-4">
       <div className="max-w-7xl mx-auto">
         <motion.div {...fadeUp} className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-edulite-navy mb-4">
-            Our Mission
-          </h2>
+          <h2 className="text-4xl font-bold text-edulite-navy mb-4">Our Mission</h2>
           <p className="text-edulite-gray max-w-2xl mx-auto">
-            We believe every child deserves the tools to understand money, make
-            smart choices, and build a confident financial future.
+            We believe every child deserves the tools to understand money, make smart choices,
+            and build a confident financial future.
           </p>
         </motion.div>
 
@@ -173,15 +151,11 @@ export const About = () => (
               transition={{ duration: 0.5, delay: i * 0.15 }}
               className="bg-white rounded-3xl p-10 space-y-5 shadow-sm"
             >
-              <div
-                className={`w-14 h-14 ${v.color} rounded-2xl flex items-center justify-center`}
-              >
+              <div className={`w-14 h-14 ${v.color} rounded-2xl flex items-center justify-center`}>
                 {v.icon}
               </div>
               <h3 className="text-xl font-bold text-edulite-navy">{v.title}</h3>
-              <p className="text-edulite-gray text-sm leading-relaxed">
-                {v.desc}
-              </p>
+              <p className="text-edulite-gray text-sm leading-relaxed">{v.desc}</p>
             </motion.div>
           ))}
         </div>
@@ -193,35 +167,20 @@ export const About = () => (
       {/* Decorative elements */}
       <div className="absolute top-8 right-12 text-edulite-purple/15">
         <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-          <path
-            d="M5 35 Q 20 5, 35 20"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            fill="none"
-          />
+          <path d="M5 35 Q 20 5, 35 20" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none" />
         </svg>
       </div>
       <div className="absolute bottom-8 left-12 text-edulite-purple/15">
         <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
-          <path
-            d="M5 25 Q 15 5, 25 15"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            fill="none"
-          />
+          <path d="M5 25 Q 15 5, 25 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none" />
         </svg>
       </div>
 
       <div className="max-w-7xl mx-auto text-center space-y-12 relative z-10">
         <motion.div {...fadeUp}>
-          <h2 className="text-4xl font-bold text-edulite-navy mb-3">
-            Meet our teachers
-          </h2>
+          <h2 className="text-4xl font-bold text-edulite-navy mb-3">Meet our teachers</h2>
           <p className="text-edulite-gray max-w-lg mx-auto text-sm">
-            Discover the teachers on Nigel who are ready to accompany children
-            and parents in their learning journey.
+            Discover the teachers on Nigel who are ready to accompany children and parents in their learning journey.
           </p>
         </motion.div>
 
@@ -273,9 +232,7 @@ export const About = () => (
               <div className="w-10 h-10 bg-edulite-purple/10 rounded-xl flex items-center justify-center text-edulite-purple">
                 {v.icon}
               </div>
-              <span className="font-bold text-sm text-edulite-navy">
-                {v.label}
-              </span>
+              <span className="font-bold text-sm text-edulite-navy">{v.label}</span>
             </motion.div>
           ))}
         </div>
@@ -292,13 +249,10 @@ export const About = () => (
 
         <div className="flex-1 space-y-5 relative z-10">
           <h2 className="text-4xl md:text-5xl font-bold text-white">
-            Get Started with
-            <br />
-            Nigel Junior Today!
+            Get Started with<br />Nigel Junior Today!
           </h2>
           <p className="text-white/50 max-w-md">
-            The fun push to encourage visitors to try the app and make learning
-            more enjoyable for children.
+            The fun push to encourage visitors to try the app and make learning more enjoyable for children.
           </p>
           <button className="bg-white text-edulite-navy font-bold px-10 py-4 rounded-full flex items-center gap-2 text-sm hover:bg-edulite-purple hover:text-white transition-colors">
             Get Started

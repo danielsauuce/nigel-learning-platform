@@ -19,24 +19,12 @@ export const TeachersSection = () => (
     {/* Decorative swirls */}
     <div className="absolute top-8 right-12 text-edulite-purple/15">
       <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-        <path
-          d="M5 35 Q 20 5, 35 20"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          fill="none"
-        />
+        <path d="M5 35 Q 20 5, 35 20" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none" />
       </svg>
     </div>
     <div className="absolute bottom-8 left-12 text-edulite-purple/15">
       <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
-        <path
-          d="M5 25 Q 15 5, 25 15"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          fill="none"
-        />
+        <path d="M5 25 Q 15 5, 25 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none" />
       </svg>
     </div>
 
@@ -46,8 +34,7 @@ export const TeachersSection = () => (
           Meet our teachers
         </h2>
         <p className="text-edulite-gray max-w-lg mx-auto text-sm">
-          Discover the teachers on Nigel who are ready to accompany children and
-          parents in their learning journey.
+          Discover the teachers on Nigel who are ready to accompany children and parents in their learning journey.
         </p>
       </motion.div>
 

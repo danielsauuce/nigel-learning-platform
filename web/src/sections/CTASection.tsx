@@ -16,13 +16,10 @@ export const CTASection = () => (
 
       <div className="flex-1 space-y-6 relative z-10">
         <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight">
-          Get Started with
-          <br />
-          Nigel Junior Today!
+          Get Started with<br />Nigel Junior Today!
         </h2>
         <p className="text-white/50 max-w-md">
-          The final push to encourage visitors to try the app and make learning
-          more enjoyable for children.
+          The final push to encourage visitors to try the app and make learning more enjoyable for children.
         </p>
         <button className="bg-white text-edulite-navy font-bold px-10 py-4 rounded-full flex items-center gap-2 text-sm hover:bg-edulite-purple hover:text-white transition-colors">
           Get Started

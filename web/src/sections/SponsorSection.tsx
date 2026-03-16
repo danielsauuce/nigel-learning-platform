@@ -18,8 +18,7 @@ export const SponsorSection = () => (
           Beyond Encryption
         </h2>
         <p className="text-gray-500 max-w-md mt-2">
-          Proud sponsor of Nigel Junior — helping build financial literacy for
-          the next generation with trusted data security.
+          Proud sponsor of Nigel Junior — helping build financial literacy for the next generation with trusted data security.
         </p>
       </div>
     </motion.div>
