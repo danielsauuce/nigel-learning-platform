@@ -13,7 +13,6 @@ import {
   Award,
   TrendingUp,
 } from 'lucide-react'
-import { NigelMascot } from '../components/mobile/NigelMascot'
 import { NigelBrandIconWhite } from '../components/ui/Logo'
 import { HeroScreen } from '../components/mobile/HeroScreen'
 import { DashboardScreen } from '../components/mobile/DashboardScreen'
