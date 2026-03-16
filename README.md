@@ -89,14 +89,12 @@ The simulator is the core interactive experience. Students work through four sta
 
 ```bash
 # Clone the repository
-git clone https://github.com/danielsauuce/nigel-learning-platform.git
-cd nigel-learning-platform
+git clone https://github.com/your-username/nigel-financial-literacy.git
+cd nigel-financial-literacy
 
-# Install workspace dependencies
+# Install frontend dependencies and start
+cd frontend
 npm install
-
-# Start mobile app (Expo)
-cd mobile
 npx expo start
 ```
 
@@ -128,8 +126,8 @@ This project adheres to strict ring-fencing requirements to ensure the student e
 
 **Beyond Encryption**
 
-Project Sponsor: Marketing Team
-Contact: [marketing@beyondencryption.com](mailto:marketing@beyondencryption.com)
+Project Sponsor: Emily Plummer — Marketing Director
+Contact: [emily.plummer@beyondencryption.com](mailto:emily.plummer@beyondencryption.com)
 
 > *Nigel: Converting fragmented information into proactive, money-saving actions.*
 
