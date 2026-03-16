@@ -3,7 +3,7 @@
 > nigel-financial-literacy-frontend@1.0.0 lint
 > eslint .
 
-[1G[0K(node:40294) ESLintIgnoreWarning: The ".eslintignore" file is no longer supported. Switch to using the "ignores" property in "eslint.config.js": https://eslint.org/docs/latest/use/configure/migration-guide#ignoring-files
+[1G[0K(node:55400) ESLintIgnoreWarning: The ".eslintignore" file is no longer supported. Switch to using the "ignores" property in "eslint.config.js": https://eslint.org/docs/latest/use/configure/migration-guide#ignoring-files
 (Use `node --trace-warnings ...` to show where the warning was created)
 [0m[0m
 [0m[4m/Users/6adeyd77/Nigel-Frontend/mobile/app/(auth)/_layout.tsx[24m[0m
