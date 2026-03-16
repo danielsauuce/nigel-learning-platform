@@ -8,6 +8,7 @@
       "outputs": ["dist/**"]
     },
     "lint": {},
-    "format": {}
+    "format": {},
+    "format:check": {}
   }
 }
