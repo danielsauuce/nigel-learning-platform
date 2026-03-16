@@ -1,0 +1,156 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@custom-variant dark (&:is(.dark *));
+
+/* ══════════════════════════════════════════════════════════════
+   EDULITE LIGHT THEME
+   Soft pastel educational design:
+   • Primary: #B9A7F8 (soft purple)
+   • Navy:    #22223B (text & buttons)
+   • Peach:   #F9D6D0 • Pink: #F7B6B6 • Gold: #F7E6B6
+   • Background: #F8F6FB  Card: #FFFFFF
+   ══════════════════════════════════════════════════════════════ */
+:root {
+  --background: 248 246 251;
+  --foreground: 34 34 59;
+
+  --card: 255 255 255;
+  --card-foreground: 34 34 59;
+
+  --popover: 255 255 255;
+  --popover-foreground: 34 34 59;
+
+  --primary: 185 167 248;
+  --primary-foreground: 255 255 255;
+
+  --secondary: 212 200 255;
+  --secondary-foreground: 34 34 59;
+
+  --accent: 247 230 182;
+  --accent-foreground: 34 34 59;
+
+  --muted: 243 240 255;
+  --muted-foreground: 108 108 128;
+
+  --success: 76 175 80;
+  --warning: 255 183 77;
+  --destructive: 239 68 68;
+  --destructive-foreground: 255 255 255;
+  --info: 100 181 246;
+
+  --border: 232 228 240;
+  --input: 232 228 240;
+  --ring: 185 167 248;
+
+  --radius: 0.75rem;
+
+  --chart-1: 185 167 248;
+  --chart-2: 247 182 182;
+  --chart-3: 76 175 80;
+  --chart-4: 247 230 182;
+  --chart-5: 100 181 246;
+
+  --gradient-start: 185 167 248;
+  --gradient-mid: 201 188 255;
+  --gradient-end: 212 200 255;
+
+  --gold: 247 230 182;
+  --gold-dark: 232 212 154;
+  --gold-darker: 212 188 122;
+  --gold-deep: 192 166 96;
+
+  --student: 185 167 248;
+  --student-dark: 142 124 255;
+
+  --teacher: 185 167 248;
+  --teacher-dark: 142 124 255;
+  --teacher-darker: 108 92 231;
+
+  --pink: 247 182 182;
+  --pink-light: 252 218 218;
+  --pink-dark: 232 153 153;
+
+  --green-light: 139 195 74;
+  --green-mid: 76 175 80;
+  --green-leaf: 102 187 106;
+
+  --sand: 247 230 182;
+  --sand-dark: 232 212 154;
+
+  --brown: 141 110 99;
+  --brown-dark: 109 76 65;
+
+  --skin: 255 211 182;
+  --skin-dark: 240 184 152;
+  --skin-blush: 247 182 182;
+
+  --navy: 34 34 59;
+
+  --peach: 249 214 208;
+  --peach-light: 253 232 228;
+  --peach-dark: 240 184 174;
+
+  --streak: 247 182 182;
+  --balance: 247 230 182;
+  --rank: 185 167 248;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   EDULITE DARK THEME
+   ══════════════════════════════════════════════════════════════ */
+.dark {
+  --background: 26 26 46;
+  --foreground: 248 246 251;
+
+  --card: 42 42 64;
+  --card-foreground: 248 246 251;
+
+  --popover: 42 42 64;
+  --popover-foreground: 248 246 251;
+
+  --primary: 185 167 248;
+  --primary-foreground: 255 255 255;
+
+  --secondary: 142 124 255;
+  --secondary-foreground: 255 255 255;
+
+  --accent: 247 230 182;
+  --accent-foreground: 34 34 59;
+
+  --muted: 42 42 64;
+  --muted-foreground: 160 160 184;
+
+  --success: 56 142 60;
+  --warning: 255 167 38;
+  --destructive: 220 38 38;
+  --destructive-foreground: 255 255 255;
+  --info: 66 165 245;
+
+  --border: 58 58 85;
+  --input: 58 58 85;
+  --ring: 185 167 248;
+
+  --chart-1: 142 124 255;
+  --chart-2: 232 153 153;
+  --chart-3: 56 142 60;
+  --chart-4: 232 212 154;
+  --chart-5: 66 165 245;
+
+  --gradient-start: 155 138 224;
+  --gradient-mid: 185 167 248;
+  --gradient-end: 212 200 255;
+
+  --streak: 232 153 153;
+  --balance: 232 212 154;
+  --rank: 142 124 255;
+
+  --teacher-dark: 142 124 255;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+}
