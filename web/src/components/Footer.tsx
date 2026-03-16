@@ -65,11 +65,17 @@ export const Footer = () => (
               {section.links.map((link) => (
                 <li key={link.label}>
                   {link.href.startsWith('/') ? (
-                    <Link to={link.href} className="hover:text-edulite-purple transition-colors">
+                    <Link
+                      to={link.href}
+                      className="hover:text-edulite-purple transition-colors"
+                    >
                       {link.label}
                     </Link>
                   ) : (
-                    <a href={link.href} className="hover:text-edulite-purple transition-colors">
+                    <a
+                      href={link.href}
+                      className="hover:text-edulite-purple transition-colors"
+                    >
                       {link.label}
                     </a>
                   )}
@@ -86,8 +92,12 @@ export const Footer = () => (
           Copyright 2026 Nigel Junior — Powered by Beyond Encryption
         </p>
         <div className="flex gap-10 text-edulite-gray text-xs font-bold">
-          <a href="#" className="hover:text-edulite-purple transition-colors">Privacy Policy</a>
-          <a href="#" className="hover:text-edulite-purple transition-colors">Terms of Service</a>
+          <a href="#" className="hover:text-edulite-purple transition-colors">
+            Privacy Policy
+          </a>
+          <a href="#" className="hover:text-edulite-purple transition-colors">
+            Terms of Service
+          </a>
         </div>
       </div>
     </div>

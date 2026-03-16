@@ -40,7 +40,8 @@ export const Features = () => (
           </span>
 
           <h1 className="text-5xl md:text-6xl font-bold text-edulite-navy leading-tight mb-6">
-            Very friendly user<br />
+            Very friendly user
+            <br />
             <span className="text-edulite-purple">interface</span>
           </h1>
 
@@ -73,7 +74,12 @@ export const Features = () => (
           <motion.div
             className="hidden sm:block mt-16"
             animate={{ y: [0, -6, 0] }}
-            transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: 'easeInOut',
+              delay: 1,
+            }}
           >
             <div className="transform scale-[0.85] origin-top">
               <DashboardScreen />
@@ -89,10 +95,14 @@ export const Features = () => (
           className="max-w-md space-y-6"
         >
           <h2 className="text-3xl font-bold text-edulite-navy">
-            Designed for kids,<br />loved by parents
+            Designed for kids,
+            <br />
+            loved by parents
           </h2>
           <p className="text-edulite-gray leading-relaxed">
-            The Nigel app mirrors a real financial world in a playful way — kids learn to budget, save, and earn through interactive lessons and challenges.
+            The Nigel app mirrors a real financial world in a playful way — kids
+            learn to budget, save, and earn through interactive lessons and
+            challenges.
           </p>
           <div className="flex gap-3">
             <button className="bg-edulite-purple text-white font-bold px-6 py-3 rounded-full text-sm hover:bg-edulite-navy transition-colors">
@@ -109,7 +119,10 @@ export const Features = () => (
     {/* ── WHAT WE OFFER — navy section ── */}
     <section className="py-24 px-6 bg-edulite-navy rounded-[4rem] mx-4">
       <div className="max-w-7xl mx-auto">
-        <motion.div {...fadeUp} className="flex items-center justify-between mb-16">
+        <motion.div
+          {...fadeUp}
+          className="flex items-center justify-between mb-16"
+        >
           <h2 className="text-4xl md:text-5xl font-bold text-white">
             What we offer
           </h2>
@@ -151,7 +164,9 @@ export const Features = () => (
                 f.highlight ? 'bg-edulite-purple' : 'bg-white/5'
               } p-10 rounded-3xl space-y-5`}
             >
-              <div className={`w-14 h-14 ${f.accent} flex items-center justify-center rounded-2xl text-white`}>
+              <div
+                className={`w-14 h-14 ${f.accent} flex items-center justify-center rounded-2xl text-white`}
+              >
                 {f.icon}
               </div>
               <h3 className="text-xl font-bold text-white">{f.title}</h3>
@@ -170,21 +185,67 @@ export const Features = () => (
             Everything your child needs
           </h2>
           <p className="text-edulite-gray max-w-xl mx-auto">
-            A comprehensive toolkit for building financial confidence from an early age.
+            A comprehensive toolkit for building financial confidence from an
+            early age.
           </p>
         </motion.div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {[
-            { icon: <Smartphone className="w-5 h-5" />, title: 'Mobile-First', desc: 'Beautiful app experience optimized for kids on any device.', color: 'bg-edulite-purple/10 text-edulite-purple' },
-            { icon: <BarChart3 className="w-5 h-5" />, title: 'Progress Tracking', desc: 'Parents and teachers can monitor learning progress in real-time.', color: 'bg-edulite-pink/15 text-edulite-navy' },
-            { icon: <Shield className="w-5 h-5" />, title: 'Safe & Secure', desc: 'Powered by Beyond Encryption for the highest data security.', color: 'bg-edulite-yellow/20 text-edulite-navy' },
-            { icon: <Users className="w-5 h-5" />, title: 'Family Sharing', desc: 'Connect the whole family and learn together.', color: 'bg-edulite-peach/30 text-edulite-navy' },
-            { icon: <Target className="w-5 h-5" />, title: 'Budget Simulator', desc: 'Hands-on practice allocating income with the 50/30/20 rule.', color: 'bg-edulite-purple/10 text-edulite-purple' },
-            { icon: <Zap className="w-5 h-5" />, title: 'Daily Challenges', desc: 'Fresh financial puzzles every day to keep kids engaged.', color: 'bg-edulite-pink/15 text-edulite-navy' },
-            { icon: <Award className="w-5 h-5" />, title: 'Achievements', desc: 'Badges and rewards that celebrate financial milestones.', color: 'bg-edulite-yellow/20 text-edulite-navy' },
-            { icon: <TrendingUp className="w-5 h-5" />, title: 'XP & Streaks', desc: 'Gamified progression system that motivates consistent learning.', color: 'bg-edulite-peach/30 text-edulite-navy' },
-            { icon: <BookOpen className="w-5 h-5" />, title: 'Bite-Sized Lessons', desc: 'Short, focused lessons on saving, budgeting, and earning.', color: 'bg-edulite-purple/10 text-edulite-purple' },
+            {
+              icon: <Smartphone className="w-5 h-5" />,
+              title: 'Mobile-First',
+              desc: 'Beautiful app experience optimized for kids on any device.',
+              color: 'bg-edulite-purple/10 text-edulite-purple',
+            },
+            {
+              icon: <BarChart3 className="w-5 h-5" />,
+              title: 'Progress Tracking',
+              desc: 'Parents and teachers can monitor learning progress in real-time.',
+              color: 'bg-edulite-pink/15 text-edulite-navy',
+            },
+            {
+              icon: <Shield className="w-5 h-5" />,
+              title: 'Safe & Secure',
+              desc: 'Powered by Beyond Encryption for the highest data security.',
+              color: 'bg-edulite-yellow/20 text-edulite-navy',
+            },
+            {
+              icon: <Users className="w-5 h-5" />,
+              title: 'Family Sharing',
+              desc: 'Connect the whole family and learn together.',
+              color: 'bg-edulite-peach/30 text-edulite-navy',
+            },
+            {
+              icon: <Target className="w-5 h-5" />,
+              title: 'Budget Simulator',
+              desc: 'Hands-on practice allocating income with the 50/30/20 rule.',
+              color: 'bg-edulite-purple/10 text-edulite-purple',
+            },
+            {
+              icon: <Zap className="w-5 h-5" />,
+              title: 'Daily Challenges',
+              desc: 'Fresh financial puzzles every day to keep kids engaged.',
+              color: 'bg-edulite-pink/15 text-edulite-navy',
+            },
+            {
+              icon: <Award className="w-5 h-5" />,
+              title: 'Achievements',
+              desc: 'Badges and rewards that celebrate financial milestones.',
+              color: 'bg-edulite-yellow/20 text-edulite-navy',
+            },
+            {
+              icon: <TrendingUp className="w-5 h-5" />,
+              title: 'XP & Streaks',
+              desc: 'Gamified progression system that motivates consistent learning.',
+              color: 'bg-edulite-peach/30 text-edulite-navy',
+            },
+            {
+              icon: <BookOpen className="w-5 h-5" />,
+              title: 'Bite-Sized Lessons',
+              desc: 'Short, focused lessons on saving, budgeting, and earning.',
+              color: 'bg-edulite-purple/10 text-edulite-purple',
+            },
           ].map((item, i) => (
             <motion.div
               key={item.title}
@@ -194,12 +255,18 @@ export const Features = () => (
               transition={{ duration: 0.4, delay: i * 0.06 }}
               className="bg-white rounded-2xl p-6 flex gap-4 items-start shadow-sm border border-gray-50 hover:shadow-md transition-shadow"
             >
-              <div className={`w-11 h-11 ${item.color} rounded-xl flex items-center justify-center flex-shrink-0`}>
+              <div
+                className={`w-11 h-11 ${item.color} rounded-xl flex items-center justify-center flex-shrink-0`}
+              >
                 {item.icon}
               </div>
               <div>
-                <h4 className="font-bold text-edulite-navy text-sm">{item.title}</h4>
-                <p className="text-edulite-gray text-xs mt-1 leading-relaxed">{item.desc}</p>
+                <h4 className="font-bold text-edulite-navy text-sm">
+                  {item.title}
+                </h4>
+                <p className="text-edulite-gray text-xs mt-1 leading-relaxed">
+                  {item.desc}
+                </p>
               </div>
             </motion.div>
           ))}
@@ -218,7 +285,8 @@ export const Features = () => (
             Download the app now
           </h2>
           <p className="text-white/60 max-w-md">
-            Nigel is an interactive learning app. Start your child's financial literacy journey today.
+            Nigel is an interactive learning app. Start your child's financial
+            literacy journey today.
           </p>
           <button className="bg-white text-edulite-navy font-bold px-8 py-3.5 rounded-full text-sm hover:bg-edulite-purple hover:text-white transition-colors">
             Download Now

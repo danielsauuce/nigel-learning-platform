@@ -43,8 +43,19 @@ export const HeroSection = () => (
           into{' '}
           <span className="text-edulite-purple relative">
             fun!
-            <svg className="absolute -bottom-2 left-0 w-full" height="8" viewBox="0 0 100 8" preserveAspectRatio="none">
-              <path d="M0 4 Q 12.5 0, 25 4 T 50 4 T 75 4 T 100 4" stroke="#B9A7F8" strokeWidth="2" fill="none" opacity="0.5" />
+            <svg
+              className="absolute -bottom-2 left-0 w-full"
+              height="8"
+              viewBox="0 0 100 8"
+              preserveAspectRatio="none"
+            >
+              <path
+                d="M0 4 Q 12.5 0, 25 4 T 50 4 T 75 4 T 100 4"
+                stroke="#B9A7F8"
+                strokeWidth="2"
+                fill="none"
+                opacity="0.5"
+              />
             </svg>
           </span>
         </h1>
@@ -65,8 +76,21 @@ export const HeroSection = () => (
         {/* Decorative arrow */}
         <div className="text-edulite-purple/30">
           <svg width="30" height="20" viewBox="0 0 30 20" fill="none">
-            <path d="M2 18 Q 8 2, 20 6 T 28 2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" fill="none" />
-            <path d="M25 0 L28 2 L24 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+            <path
+              d="M2 18 Q 8 2, 20 6 T 28 2"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              fill="none"
+            />
+            <path
+              d="M25 0 L28 2 L24 4"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              fill="none"
+            />
           </svg>
         </div>
 
@@ -77,8 +101,16 @@ export const HeroSection = () => (
             Children have learned a lot with our method
           </p>
           <div className="flex -space-x-2 ml-4">
-            {['bg-edulite-purple', 'bg-edulite-pink', 'bg-edulite-peach', 'bg-edulite-yellow'].map((c, i) => (
-              <div key={i} className={`w-8 h-8 ${c} rounded-full border-2 border-white`} />
+            {[
+              'bg-edulite-purple',
+              'bg-edulite-pink',
+              'bg-edulite-peach',
+              'bg-edulite-yellow',
+            ].map((c, i) => (
+              <div
+                key={i}
+                className={`w-8 h-8 ${c} rounded-full border-2 border-white`}
+              />
             ))}
           </div>
         </div>
@@ -110,7 +142,12 @@ export const HeroSection = () => (
         >
           <motion.div
             animate={{ y: [0, -8, 0] }}
-            transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: 'easeInOut',
+              delay: 1,
+            }}
           >
             <DashboardScreen />
           </motion.div>
