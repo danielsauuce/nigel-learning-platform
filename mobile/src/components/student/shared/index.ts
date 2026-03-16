@@ -1,1 +1,0 @@
-export { MascotCelebration } from './MascotCelebration';
