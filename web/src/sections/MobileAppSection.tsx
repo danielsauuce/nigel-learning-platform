@@ -1,7 +1,5 @@
 import { motion } from 'motion/react'
-import { Download } from 'lucide-react'
 import { DashboardScreen } from '../components/mobile/DashboardScreen'
-import { NigelMascot } from '../components/mobile/NigelMascot'
 import { NigelBrandIconWhite } from '../components/ui/Logo'
 
 const fadeUp = {
