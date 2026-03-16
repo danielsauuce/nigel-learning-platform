@@ -5,6 +5,7 @@ import { Footer } from './components/Footer'
 import { Home } from './pages/Home'
 import { Features } from './pages/Features'
 import { About } from './pages/About'
+import { Login } from './pages/Login'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -15,20 +16,24 @@ function ScrollToTop() {
 }
 
 export default function App() {
+  const location = useLocation()
+  const isLoginPage = location.pathname === '/login'
+
   return (
     <div className="min-h-screen bg-white">
       <ScrollToTop />
-      <Navbar />
+      {!isLoginPage && <Navbar />}
 
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/features" element={<Features />} />
           <Route path="/about" element={<About />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </main>
 
-      <Footer />
+      {!isLoginPage && <Footer />}
 
       <style>
         {`
