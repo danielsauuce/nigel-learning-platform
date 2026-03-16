@@ -1,5 +1,5 @@
 import { Logo } from './ui/Logo'
-import { Link } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 export const Navbar = () => (
   <nav className="fixed top-0 left-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
