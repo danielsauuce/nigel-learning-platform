@@ -1,41 +1,41 @@
-import { motion } from "motion/react";
-import { useParams, useNavigate, Link } from "react-router-dom";
-import { Mail, Lock, ArrowLeft, GraduationCap, UserCircle } from "lucide-react";
-import { useState } from "react";
-import type { FormEvent } from "react";
-import { useAuth } from "../../context/AuthContext";
+import { motion } from 'motion/react'
+import { useParams, useNavigate, Link } from 'react-router-dom'
+import { Mail, Lock, ArrowLeft, GraduationCap, UserCircle } from 'lucide-react'
+import { useState } from 'react'
+import type { FormEvent } from 'react'
+import { useAuth } from '../../context/AuthContext'
 
 export const LoginForm = () => {
-  const { role } = useParams<{ role: string }>();
-  const navigate = useNavigate();
-  const auth = useAuth();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const { role } = useParams<{ role: string }>()
+  const navigate = useNavigate()
+  const auth = useAuth()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
 
-  const isTeacher = role === "teacher";
+  const isTeacher = role === 'teacher'
 
   const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
+    e.preventDefault()
+    setIsLoading(true)
     // Set role in AuthContext (mirrors mobile AuthContext.setRole)
-    auth.setRole(isTeacher ? "teacher" : "student");
+    auth.setRole(isTeacher ? 'teacher' : 'student')
     setTimeout(() => {
-      setIsLoading(false);
+      setIsLoading(false)
       if (isTeacher) {
-        navigate("/teacher-dashboard");
+        navigate('/teacher-dashboard')
       } else {
-        navigate("/student-dashboard");
+        navigate('/student-dashboard')
       }
-    }, 1500);
-  };
+    }, 1500)
+  }
 
   return (
     <div className="min-h-screen bg-white flex flex-col md:flex-row">
       {/* Left Side - Visual */}
       <div
         className={`hidden md:flex flex-1 ${
-          isTeacher ? "bg-[#22223B]" : "bg-[#B9A7F8]"
+          isTeacher ? 'bg-[#22223B]' : 'bg-[#B9A7F8]'
         } items-center justify-center p-20 relative overflow-hidden`}
       >
         <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
@@ -57,13 +57,13 @@ export const LoginForm = () => {
           </div>
           <h2 className="text-5xl font-bold text-white leading-tight">
             {isTeacher
-              ? "Empower the next generation"
-              : "Unlock your full potential"}
+              ? 'Empower the next generation'
+              : 'Unlock your full potential'}
           </h2>
           <p className="text-white/70 text-lg max-w-md mx-auto font-medium">
             {isTeacher
-              ? "Access your dashboard to manage curriculum and engage with students effectively."
-              : "Dive back into your personalized learning path and continue your adventure."}
+              ? 'Access your dashboard to manage curriculum and engage with students effectively.'
+              : 'Dive back into your personalized learning path and continue your adventure.'}
           </p>
         </motion.div>
       </div>
@@ -81,7 +81,7 @@ export const LoginForm = () => {
         <div className="max-w-md w-full mx-auto space-y-10">
           <div className="space-y-2">
             <h1 className="text-4xl font-bold text-[#22223B]">
-              {isTeacher ? "Teacher Login" : "Student Login"}
+              {isTeacher ? 'Teacher Login' : 'Student Login'}
             </h1>
             <p className="text-gray-500 font-medium">
               Enter your credentials to access your account
@@ -111,7 +111,10 @@ export const LoginForm = () => {
                 <label className="text-sm font-bold text-[#22223B] block">
                   Password
                 </label>
-                <button type="button" className="text-xs font-bold text-[#B9A7F8]">
+                <button
+                  type="button"
+                  className="text-xs font-bold text-[#B9A7F8]"
+                >
                   Forgot password?
                 </button>
               </div>
@@ -131,25 +134,27 @@ export const LoginForm = () => {
             <button
               disabled={isLoading}
               className={`w-full ${
-                isTeacher ? "bg-[#22223B]" : "bg-[#B9A7F8]"
+                isTeacher ? 'bg-[#22223B]' : 'bg-[#B9A7F8]'
               } text-white font-bold py-5 rounded-2xl shadow-xl hover:opacity-90 transition-all flex items-center justify-center gap-3`}
             >
               {isLoading ? (
                 <div className="w-6 h-6 border-4 border-white/30 border-t-white rounded-full animate-spin" />
               ) : (
-                "Sign In"
+                'Sign In'
               )}
             </button>
           </form>
 
           <div className="text-center">
             <p className="text-gray-500 font-medium">
-              Don&apos;t have an account?{" "}
-              <button className="text-[#B9A7F8] font-bold">Create account</button>
+              Don&apos;t have an account?{' '}
+              <button className="text-[#B9A7F8] font-bold">
+                Create account
+              </button>
             </p>
           </div>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
