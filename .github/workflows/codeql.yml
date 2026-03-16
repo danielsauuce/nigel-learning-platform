@@ -2,9 +2,9 @@ name: CodeQL Advanced
 
 on:
   push:
-    branches: ["v0"]
+    branches: ["v0", "main"]
   pull_request:
-    branches: ["v0"]
+    branches: ["v0", "main"]
   schedule:
     - cron: "42 11 * * 6" # Weekly scan
 
