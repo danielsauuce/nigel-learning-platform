@@ -21,6 +21,7 @@ export default {
           bg: '#F8F6FB',
           pink: '#F7B6B6',
           yellow: '#F7E6B6',
+          brand: '#E91E8C',
         },
       },
     },
