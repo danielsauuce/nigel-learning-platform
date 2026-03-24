@@ -29,7 +29,13 @@ export function ThemeToggle({ variant = 'pill' }: ThemeToggleProps) {
         }}
       >
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 14 }}>
-          <Text style={{ fontSize: 20 }}>{isDark ? '🌙' : '☀️'}</Text>
+          <View style={{ width: 24, height: 24, alignItems: 'center', justifyContent: 'center' }}>
+            {isDark ? (
+              <Moon size={20} color="#B9A7F8" strokeWidth={2} />
+            ) : (
+              <Sun size={20} color="#F59E0B" strokeWidth={2} />
+            )}
+          </View>
           <View>
             <Text
               style={{

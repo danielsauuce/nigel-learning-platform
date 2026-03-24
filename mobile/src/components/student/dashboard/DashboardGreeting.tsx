@@ -64,12 +64,12 @@ export function DashboardGreeting({
               width: 48,
               height: 48,
               borderRadius: 16,
-              backgroundColor: '#22223B',
+              backgroundColor: c.card,
               alignItems: 'center',
               justifyContent: 'center',
               ...Platform.select({
                 ios: {
-                  shadowColor: '#22223B',
+                  shadowColor: '#000',
                   shadowOffset: { width: 0, height: 4 },
                   shadowOpacity: 0.15,
                   shadowRadius: 8,

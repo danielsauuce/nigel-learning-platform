@@ -4,15 +4,39 @@ import { MotiView } from 'moti';
 import { useRouter } from 'expo-router';
 import { ScreenWrapper, GradientButton, TextButton } from '@/components/ui';
 import { MascotCelebration } from '@/components/student/shared';
-import { Award, BarChart2, PiggyBank, Zap, Home, Gamepad2, AlertTriangle, Trophy } from 'lucide-react-native';
+import {
+  Award,
+  BarChart2,
+  PiggyBank,
+  Zap,
+  Home,
+  Gamepad2,
+  AlertTriangle,
+  Trophy,
+} from 'lucide-react-native';
 import { ResultsScoreCard } from './ResultsScoreCard';
 import { ResultsBreakdown } from './ResultsBreakdown';
 import { ResultsFeedbackList, type FeedbackItem } from './ResultsFeedbackList';
 
 const STATS = [
-  { key: 'budget', icon: <BarChart2 size={20} color="#B9A7F8" strokeWidth={2} />, label: 'Budget', value: '74%' },
-  { key: 'savings', icon: <PiggyBank size={20} color="#E91E63" strokeWidth={2} />, label: 'Saved', value: '£440' },
-  { key: 'xp', icon: <Zap size={20} color="#F59E0B" strokeWidth={2} />, label: 'XP', value: '+250' },
+  {
+    key: 'budget',
+    icon: <BarChart2 size={20} color="#B9A7F8" strokeWidth={2} />,
+    label: 'Budget',
+    value: '74%',
+  },
+  {
+    key: 'savings',
+    icon: <PiggyBank size={20} color="#E91E63" strokeWidth={2} />,
+    label: 'Saved',
+    value: '£440',
+  },
+  {
+    key: 'xp',
+    icon: <Zap size={20} color="#F59E0B" strokeWidth={2} />,
+    label: 'XP',
+    value: '+250',
+  },
 ];
 
 const FEEDBACK: FeedbackItem[] = [
