@@ -12,7 +12,6 @@ import {
   MessageSquare,
   Send,
   Clock,
-  ChevronRight,
   Heart,
   X,
   Coins,
@@ -295,7 +294,7 @@ export function ParentSummaryScreen() {
                       value: `${STUDENT.missionsCompleted}/${STUDENT.missionsTotal}`,
                     },
                     {
-                      icon: <TrendingUp size={14} color={c.success} strokeWidth={2} />,
+                      icon: <TrendingUp size={14} color={colors.success} strokeWidth={2} />,
                       label: 'Simulation Grade',
                       value: STUDENT.simGrade,
                     },
@@ -478,7 +477,7 @@ export function ParentSummaryScreen() {
               transition={{ type: 'spring', damping: 14, stiffness: 120 }}
             >
               <View className="items-center gap-1 rounded-xl border border-success/15 bg-success/10 p-4">
-                <CheckCircle size={28} color="rgb(34, 197, 94)" strokeWidth={2} />
+                <CheckCircle size={28} color={colors.success} strokeWidth={2} />
                 <Text className="font-poppins-semibold text-sm text-success">Thank you!</Text>
                 <Text className="font-poppins-regular text-xs text-muted-foreground">
                   Your feedback has been sent anonymously.

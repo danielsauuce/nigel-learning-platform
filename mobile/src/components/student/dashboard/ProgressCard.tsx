@@ -39,7 +39,7 @@ export function ProgressCard({
           padding: 20,
           ...Platform.select({
             ios: {
-              shadowColor: '#B9A7F8',
+              shadowColor: c.primary,
               shadowOffset: { width: 0, height: 4 },
               shadowOpacity: 0.08,
               shadowRadius: 12,
@@ -73,7 +73,7 @@ export function ProgressCard({
           style={{
             height: 10,
             borderRadius: 5,
-            backgroundColor: theme === 'dark' ? c.muted : '#F3F0FF',
+            backgroundColor: theme === 'dark' ? c.muted : `${c.primary}18`,
             overflow: 'hidden',
             marginBottom: 12,
           }}

@@ -17,6 +17,7 @@ export function EditProfileScreen() {
   const [username, setUsername] = useState('sarah_learns');
   const [age, setAge] = useState('12');
   const [school, setSchool] = useState('Riverside Academy');
+  const [selectedMascot, setSelectedMascot] = useState('piggy');
 
   const inputStyle = {
     backgroundColor: theme === 'dark' ? c.card : '#F8F6FB',
@@ -178,24 +179,31 @@ export function EditProfileScreen() {
               { key: 'flame', icon: <Flame size={24} color="#F97316" strokeWidth={1.5} /> },
               { key: 'star', icon: <Star size={24} color="#B9A7F8" strokeWidth={1.5} /> },
               { key: 'light', icon: <Lightbulb size={24} color="#F59E0B" strokeWidth={1.5} /> },
-            ].map((option, i) => (
-              <TouchableOpacity
-                key={option.key}
-                style={{
-                  width: 56,
-                  height: 56,
-                  borderRadius: 16,
-                  backgroundColor:
-                    i === 0 ? `${c.primary}25` : theme === 'dark' ? c.card : c.background,
-                  borderWidth: i === 0 ? 2 : 1,
-                  borderColor: i === 0 ? c.primary : c.border,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
-                {option.icon}
-              </TouchableOpacity>
-            ))}
+            ].map((option) => {
+              const selected = option.key === selectedMascot;
+              return (
+                <TouchableOpacity
+                  key={option.key}
+                  onPress={() => setSelectedMascot(option.key)}
+                  style={{
+                    width: 56,
+                    height: 56,
+                    borderRadius: 16,
+                    backgroundColor: selected
+                      ? `${c.primary}25`
+                      : theme === 'dark'
+                        ? c.card
+                        : c.background,
+                    borderWidth: selected ? 2 : 1,
+                    borderColor: selected ? c.primary : c.border,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  {option.icon}
+                </TouchableOpacity>
+              );
+            })}
           </View>
         </View>
       </ScrollView>

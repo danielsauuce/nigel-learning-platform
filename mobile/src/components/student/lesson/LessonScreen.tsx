@@ -46,7 +46,7 @@ function generateSteps(lessonTitle: string): LessonStep[] {
         'Imagine you receive £20 for your birthday. You could spend it all on sweets, save half and spend half, or save it all for something bigger. Each choice has different outcomes!',
     },
     {
-      icon: <CheckCircle size={36} color="rgb(34, 197, 94)" strokeWidth={1.5} />,
+      icon: <CheckCircle size={36} color="#22C55E" strokeWidth={1.5} />,
       title: 'What You Learned',
       content: `Great job! You now understand the basics of ${lessonTitle.toLowerCase()}. Remember: small smart choices today lead to big results tomorrow. Keep going!`,
       tip: 'Review this lesson anytime from your learning path.',
