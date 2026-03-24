@@ -1,11 +1,12 @@
 import React, { useCallback, useRef, useState } from 'react';
 import { LayoutChangeEvent, PanResponder, Platform, Text, View } from 'react-native';
 import { MotiView } from 'moti';
+import { AlertTriangle, Lightbulb } from 'lucide-react-native';
 
 export interface BudgetCategory {
   key: string;
   label: string;
-  emoji: string;
+  icon: React.ReactNode;
   color: string;
   min: number;
   max: number;
@@ -98,7 +99,7 @@ export function BudgetSlider({ category, onChange, index, takeHome }: BudgetSlid
               className="h-10 w-10 items-center justify-center rounded-xl"
               style={{ backgroundColor: `${category.color}18` }}
             >
-              <Text className="text-lg">{category.emoji}</Text>
+              {category.icon}
             </View>
             <View>
               <Text className="font-poppins-semibold text-sm text-foreground">
@@ -184,7 +185,11 @@ export function BudgetSlider({ category, onChange, index, takeHome }: BudgetSlid
                 isOverRecommended ? 'bg-warning/10' : 'bg-info/10'
               }`}
             >
-              <Text className="text-xs">{isOverRecommended ? '⚠️' : '💡'}</Text>
+              {isOverRecommended ? (
+                <AlertTriangle size={13} color="rgb(245, 158, 11)" strokeWidth={2} />
+              ) : (
+                <Lightbulb size={13} color="rgb(59, 130, 246)" strokeWidth={2} />
+              )}
               <Text
                 className={`flex-1 font-poppins-medium text-[11px] ${
                   isOverRecommended ? 'text-warning' : 'text-info'

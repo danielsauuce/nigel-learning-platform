@@ -12,6 +12,17 @@ import {
   ShieldCheck,
   Settings,
   ChevronRight,
+  Flame,
+  Coins,
+  BarChart2,
+  Briefcase,
+  Trophy,
+  Star,
+  Lightbulb,
+  BookOpen,
+  Timer,
+  Sparkles,
+  Users,
 } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { NigelBrandIcon } from '../components/ui/Logo'
@@ -92,13 +103,14 @@ export const StudentDashboard = () => {
             <h1
               className={`text-4xl font-black mt-4 ${dark ? 'text-white' : 'text-[#22223B]'}`}
             >
-              Hey, Sarah! 👋
+              Hey, Sarah!
             </h1>
             <p
-              className={`font-medium ${dark ? 'text-gray-400' : 'text-gray-500'}`}
+              className={`font-medium flex items-center gap-1.5 ${dark ? 'text-gray-400' : 'text-gray-500'}`}
             >
               Level {learning.level} · {learning.xp} XP · {learning.streak} day
-              streak 🔥
+              streak
+              <Flame className="w-4 h-4 text-orange-500" />
             </p>
           </div>
           <div className="flex items-center gap-4">
@@ -155,8 +167,12 @@ export const StudentDashboard = () => {
                     {DAILY_CHALLENGE.desc}
                   </p>
                   <div className="flex items-center gap-4 text-white/40 text-xs font-medium">
-                    <span>⏱ {DAILY_CHALLENGE.time}</span>
-                    <span>✨ {DAILY_CHALLENGE.xp}</span>
+                    <span className="flex items-center gap-1">
+                      <Timer className="w-3 h-3" /> {DAILY_CHALLENGE.time}
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <Sparkles className="w-3 h-3" /> {DAILY_CHALLENGE.xp}
+                    </span>
                   </div>
                 </div>
                 <button
@@ -173,17 +189,17 @@ export const StudentDashboard = () => {
               {[
                 {
                   name: 'Saving',
-                  emoji: '💰',
+                  icon: <Coins className="w-4 h-4 text-[#B9A7F8]" />,
                   bg: dark ? 'bg-[#2A2A40]' : 'bg-[#F3F0FF]',
                 },
                 {
                   name: 'Budgets',
-                  emoji: '📊',
+                  icon: <BarChart2 className="w-4 h-4 text-orange-500" />,
                   bg: dark ? 'bg-[#2A2A40]' : 'bg-[#FDE8E4]',
                 },
                 {
                   name: 'Earning',
-                  emoji: '💼',
+                  icon: <Briefcase className="w-4 h-4 text-amber-500" />,
                   bg: dark ? 'bg-[#2A2A40]' : 'bg-[#FFF8E8]',
                 },
               ].map((cat) => (
@@ -191,7 +207,7 @@ export const StudentDashboard = () => {
                   key={cat.name}
                   className={`flex items-center gap-2 px-5 py-2.5 rounded-full ${cat.bg} ${dark ? 'text-gray-300' : 'text-gray-500'} text-sm font-medium`}
                 >
-                  <span>{cat.emoji}</span> {cat.name}
+                  {cat.icon} {cat.name}
                 </button>
               ))}
             </div>
@@ -311,7 +327,7 @@ export const StudentDashboard = () => {
             <div
               className={`p-6 rounded-[2rem] flex items-start gap-4 ${dark ? 'bg-[#2A2A40]' : 'bg-[#FDE8E4]'}`}
             >
-              <span className="text-2xl">💡</span>
+              <Lightbulb className="w-6 h-6 text-orange-500 shrink-0" />
               <div>
                 <h4
                   className={`font-black text-sm mb-1 ${dark ? 'text-white' : 'text-[#22223B]'}`}
@@ -344,19 +360,19 @@ export const StudentDashboard = () => {
                   {
                     label: 'Streak',
                     value: `${learning.streak}d`,
-                    emoji: '🔥',
+                    icon: <Flame className="w-5 h-5 text-orange-400" />,
                     bg: dark ? 'bg-[#1A1A2E]' : 'bg-[#FDE8E4]',
                   },
                   {
                     label: 'Coins',
                     value: `${learning.xp}`,
-                    emoji: '💰',
+                    icon: <Coins className="w-5 h-5 text-amber-400" />,
                     bg: dark ? 'bg-[#1A1A2E]' : 'bg-[#FFF8E8]',
                   },
                   {
                     label: 'Lessons Done',
                     value: `${learning.completedLessons.size}`,
-                    emoji: '📚',
+                    icon: <BookOpen className="w-5 h-5 text-[#B9A7F8]" />,
                     bg: dark ? 'bg-[#1A1A2E]' : 'bg-[#F3F0FF]',
                   },
                 ].map((stat) => (
@@ -365,7 +381,7 @@ export const StudentDashboard = () => {
                     className={`flex items-center justify-between p-4 rounded-2xl ${stat.bg}`}
                   >
                     <div className="flex items-center gap-3">
-                      <span className="text-xl">{stat.emoji}</span>
+                      {stat.icon}
                       <span
                         className={`font-bold text-sm ${dark ? 'text-white' : 'text-[#22223B]'}`}
                       >
@@ -438,19 +454,31 @@ export const StudentDashboard = () => {
               </h2>
               <div className="grid grid-cols-4 gap-3">
                 {[
-                  { emoji: '🔥', label: 'Early Bird' },
-                  { emoji: '💰', label: 'Saver' },
-                  { emoji: '🏆', label: 'Champion' },
-                  { emoji: '⭐', label: 'Goal Setter' },
+                  {
+                    icon: <Flame className="w-6 h-6 text-orange-500" />,
+                    label: 'Early Bird',
+                  },
+                  {
+                    icon: <Coins className="w-6 h-6 text-amber-400" />,
+                    label: 'Saver',
+                  },
+                  {
+                    icon: <Trophy className="w-6 h-6 text-amber-500" />,
+                    label: 'Champion',
+                  },
+                  {
+                    icon: <Star className="w-6 h-6 text-[#B9A7F8]" />,
+                    label: 'Goal Setter',
+                  },
                 ].map((a) => (
                   <div
                     key={a.label}
                     className="flex flex-col items-center gap-1.5"
                   >
                     <div
-                      className={`w-14 h-14 rounded-2xl flex items-center justify-center text-xl ${dark ? 'bg-[#1A1A2E]' : 'bg-gray-50'}`}
+                      className={`w-14 h-14 rounded-2xl flex items-center justify-center ${dark ? 'bg-[#1A1A2E]' : 'bg-gray-50'}`}
                     >
-                      {a.emoji}
+                      {a.icon}
                     </div>
                     <span className="text-[9px] font-bold text-gray-400 text-center">
                       {a.label}
@@ -465,9 +493,9 @@ export const StudentDashboard = () => {
               className={`p-8 rounded-[3rem] shadow-sm border ${dark ? 'bg-[#2A2A40] border-[#3A3A55]' : 'bg-white border-gray-100'}`}
             >
               <h2
-                className={`text-xl font-black mb-4 ${dark ? 'text-white' : 'text-[#22223B]'}`}
+                className={`text-xl font-black mb-4 flex items-center gap-2 ${dark ? 'text-white' : 'text-[#22223B]'}`}
               >
-                👨‍👩‍👧 Family Sharing
+                <Users className="w-5 h-5" /> Family Sharing
               </h2>
               <p
                 className={`text-sm font-medium mb-6 ${dark ? 'text-gray-400' : 'text-gray-500'}`}

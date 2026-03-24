@@ -4,21 +4,21 @@ import { MotiView } from 'moti';
 import { useRouter } from 'expo-router';
 import { ScreenWrapper, GradientButton } from '@/components/ui';
 import { Mascot } from '@/svg/illustrations';
-import { ChevronLeft, Eye, EyeOff, Shield, Clock, CheckSquare } from 'lucide-react-native';
+import { ChevronLeft, Eye, EyeOff, Shield, Clock, CheckSquare, BarChart2, Trophy, Flame, Star, Lock, MessageCircle, ShieldCheck, Check } from 'lucide-react-native';
 import { useTheme } from '@/context';
 import { colors } from '@/constants/colors';
 
 const SHARED_ITEMS = [
-  { key: 'progress', emoji: '📊', label: 'Learning progress & completion %' },
-  { key: 'badges', emoji: '🏆', label: 'Badges and achievements earned' },
-  { key: 'streak', emoji: '🔥', label: 'Current streak & activity' },
-  { key: 'score', emoji: '⭐', label: 'Quiz scores & simulation grades' },
+  { key: 'progress', icon: <BarChart2 size={16} color="#B9A7F8" strokeWidth={2} />, label: 'Learning progress & completion %' },
+  { key: 'badges', icon: <Trophy size={16} color="#F59E0B" strokeWidth={2} />, label: 'Badges and achievements earned' },
+  { key: 'streak', icon: <Flame size={16} color="#F97316" strokeWidth={2} />, label: 'Current streak & activity' },
+  { key: 'score', icon: <Star size={16} color="#B9A7F8" strokeWidth={2} />, label: 'Quiz scores & simulation grades' },
 ];
 
 const NOT_SHARED_ITEMS = [
-  { key: 'answers', emoji: '🔒', label: 'Your individual quiz answers' },
-  { key: 'chat', emoji: '💬', label: 'Messages with teachers or classmates' },
-  { key: 'personal', emoji: '🛡️', label: 'Personal settings or preferences' },
+  { key: 'answers', icon: <Lock size={16} color="#9CA3AF" strokeWidth={2} />, label: 'Your individual quiz answers' },
+  { key: 'chat', icon: <MessageCircle size={16} color="#9CA3AF" strokeWidth={2} />, label: 'Messages with teachers or classmates' },
+  { key: 'personal', icon: <ShieldCheck size={16} color="#9CA3AF" strokeWidth={2} />, label: 'Personal settings or preferences' },
 ];
 
 export function ConsentScreen() {
@@ -115,11 +115,11 @@ export function ConsentScreen() {
                 }}
               >
                 <View className="flex-row items-center gap-3">
-                  <Text className="text-base">{item.emoji}</Text>
+                  <View className="items-center justify-center">{item.icon}</View>
                   <Text className="flex-1 font-poppins-medium text-sm text-foreground">
                     {item.label}
                   </Text>
-                  <Text className="text-xs text-success">✓</Text>
+                  <Check size={12} color="rgb(34, 197, 94)" strokeWidth={2.5} />
                 </View>
               </MotiView>
             ))}
@@ -151,7 +151,7 @@ export function ConsentScreen() {
                 }}
               >
                 <View className="flex-row items-center gap-3">
-                  <Text className="text-base">{item.emoji}</Text>
+                  <View className="items-center justify-center">{item.icon}</View>
                   <Text className="flex-1 font-poppins-medium text-sm text-muted-foreground">
                     {item.label}
                   </Text>

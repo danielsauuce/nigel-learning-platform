@@ -7,6 +7,9 @@ import {
   CheckCircle2,
   XCircle,
   Trophy,
+  Flame,
+  Timer,
+  Lightbulb,
 } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { useTheme } from '../context/ThemeContext'
@@ -164,21 +167,25 @@ export const DailyChallenge = () => {
               {
                 label: 'Correct answers',
                 value: `+${score * 20} XP`,
-                emoji: '✅',
+                icon: <CheckCircle2 className="w-4 h-4 text-emerald-500" />,
               },
               {
                 label: 'Time bonus',
                 value: timer > 0 ? '+10 XP' : '+0 XP',
-                emoji: '⏱️',
+                icon: <Timer className="w-4 h-4 text-[#B9A7F8]" />,
               },
-              { label: 'Total earned', value: `+${xpEarned} XP`, emoji: '⚡' },
+              {
+                label: 'Total earned',
+                value: `+${xpEarned} XP`,
+                icon: <Zap className="w-4 h-4 text-amber-500" />,
+              },
             ].map((item) => (
               <div
                 key={item.label}
                 className="flex items-center justify-between"
               >
                 <div className="flex items-center gap-2">
-                  <span>{item.emoji}</span>
+                  {item.icon}
                   <span
                     className={`font-medium text-sm ${dark ? 'text-gray-300' : 'text-[#22223B]'}`}
                   >
@@ -194,7 +201,7 @@ export const DailyChallenge = () => {
           <div
             className={`flex items-center gap-3 p-4 rounded-2xl border ${dark ? 'bg-amber-500/10 border-amber-500/20' : 'bg-amber-50 border-amber-100'}`}
           >
-            <span className="text-lg">🔥</span>
+            <Flame className="w-5 h-5 text-orange-500 shrink-0" />
             <div className="text-left flex-1">
               <p
                 className={`font-bold text-sm ${dark ? 'text-white' : 'text-[#22223B]'}`}
@@ -393,8 +400,14 @@ export const DailyChallenge = () => {
                   <p
                     className={`text-sm font-bold ${quizCorrect || inputCorrect ? 'text-emerald-700 dark:text-emerald-400' : 'text-rose-700 dark:text-rose-400'}`}
                   >
-                    {quizCorrect || inputCorrect ? '✅ ' : '💡 '}
-                    {current.explanation}
+                      <span className="inline-flex items-center gap-1.5">
+                      {quizCorrect || inputCorrect ? (
+                        <CheckCircle2 className="w-4 h-4 inline shrink-0" />
+                      ) : (
+                        <Lightbulb className="w-4 h-4 inline shrink-0" />
+                      )}
+                      {current.explanation}
+                    </span>
                   </p>
                 </motion.div>
               )}

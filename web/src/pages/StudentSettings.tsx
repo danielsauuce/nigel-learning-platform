@@ -1,4 +1,15 @@
-import { ArrowLeft, Moon, Sun } from 'lucide-react'
+import {
+  ArrowLeft,
+  Moon,
+  Sun,
+  User,
+  Lock,
+  Bell,
+  Palette,
+  HelpCircle,
+  MessageCircle,
+  LogOut,
+} from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { useTheme } from '../context/ThemeContext'
 import { useAuth } from '../context/AuthContext'
@@ -10,13 +21,13 @@ const SETTINGS_SECTIONS = [
     items: [
       {
         key: 'profile',
-        icon: '👤',
+        icon: <User className="w-5 h-5" />,
         label: 'Edit Profile',
         subtitle: 'Name, avatar, and preferences',
       },
       {
         key: 'privacy',
-        icon: '🔒',
+        icon: <Lock className="w-5 h-5" />,
         label: 'Privacy & Data',
         subtitle: 'Control your data and sharing',
       },
@@ -27,13 +38,13 @@ const SETTINGS_SECTIONS = [
     items: [
       {
         key: 'notifications',
-        icon: '🔔',
+        icon: <Bell className="w-5 h-5" />,
         label: 'Notifications',
         subtitle: 'Reminders and alerts',
       },
       {
         key: 'appearance',
-        icon: '🎨',
+        icon: <Palette className="w-5 h-5" />,
         label: 'Appearance',
         subtitle: 'Theme and display settings',
       },
@@ -44,13 +55,13 @@ const SETTINGS_SECTIONS = [
     items: [
       {
         key: 'help',
-        icon: '❓',
+        icon: <HelpCircle className="w-5 h-5" />,
         label: 'Help & Support',
         subtitle: 'FAQs and contact us',
       },
       {
         key: 'feedback',
-        icon: '💬',
+        icon: <MessageCircle className="w-5 h-5" />,
         label: 'Send Feedback',
         subtitle: 'Help us improve',
       },
@@ -61,7 +72,7 @@ const SETTINGS_SECTIONS = [
     items: [
       {
         key: 'logout',
-        icon: '🚪',
+        icon: <LogOut className="w-5 h-5" />,
         label: 'Log Out',
         subtitle: 'Sign out of your account',
       },
@@ -165,7 +176,13 @@ export const StudentSettings = () => {
                   onClick={() => handlePress(item.key)}
                   className={`w-full flex items-center gap-4 p-5 text-left transition-colors ${i < section.items.length - 1 ? (dark ? 'border-b border-[#3A3A55]' : 'border-b border-gray-50') : ''} ${item.key === 'logout' ? '' : dark ? 'hover:bg-[#1A1A2E]' : 'hover:bg-gray-50'}`}
                 >
-                  <span className="text-xl">{item.icon}</span>
+                  <span
+                    className={
+                      item.key === 'logout' ? 'text-rose-500' : 'text-gray-400'
+                    }
+                  >
+                    {item.icon}
+                  </span>
                   <div className="flex-1">
                     <p
                       className={`font-bold text-sm ${item.key === 'logout' ? 'text-rose-500' : dark ? 'text-white' : 'text-[#22223B]'}`}

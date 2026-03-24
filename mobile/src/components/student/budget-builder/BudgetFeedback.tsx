@@ -13,7 +13,6 @@ interface BudgetFeedbackProps {
 const FEEDBACK: Record<
   FeedbackState,
   {
-    emoji: string;
     title: string;
     message: string;
     bgClass: string;
@@ -23,7 +22,6 @@ const FEEDBACK: Record<
   }
 > = {
   empty: {
-    emoji: '🎯',
     title: 'Ready to budget?',
     message: 'Drag the sliders to allocate your take-home pay across categories.',
     bgClass: 'bg-muted/30',
@@ -32,7 +30,6 @@ const FEEDBACK: Record<
     iconColor: 'rgb(107, 114, 128)',
   },
   building: {
-    emoji: '🔨',
     title: 'Looking good!',
     message: "You're building your budget. Try to use all your income wisely.",
     bgClass: 'bg-primary/5',
@@ -41,7 +38,6 @@ const FEEDBACK: Record<
     iconColor: '#B9A7F8',
   },
   balanced: {
-    emoji: '🎉',
     title: 'Budget balanced!',
     message: "Amazing work! You've allocated all your income. Now let's see how it plays out!",
     bgClass: 'bg-success/8',
@@ -50,7 +46,6 @@ const FEEDBACK: Record<
     iconColor: 'rgb(34, 197, 94)',
   },
   over: {
-    emoji: '😬',
     title: "You're over budget!",
     message: "You're spending more than you earn. Reduce some categories to balance it.",
     bgClass: 'bg-destructive/8',
@@ -59,7 +54,6 @@ const FEEDBACK: Record<
     iconColor: 'rgb(239, 68, 68)',
   },
   savings_low: {
-    emoji: '🐷',
     title: 'No savings?',
     message:
       "You haven't saved anything! Even £50 a month adds up over time. Try the 50/30/20 rule.",
@@ -83,7 +77,7 @@ export function BudgetFeedback({ state, savingsAmount }: BudgetFeedbackProps) {
     >
       <View className={`mx-6 mb-4 mt-2 flex-row gap-3 rounded-2xl p-4 ${fb.bgClass}`}>
         <View className="h-10 w-10 items-center justify-center rounded-xl bg-card">
-          <Text className="text-xl">{fb.emoji}</Text>
+          <Icon size={20} color={fb.iconColor} strokeWidth={2} />
         </View>
         <View className="flex-1">
           <Text className={`mb-0.5 font-poppins-bold text-sm ${fb.textClass}`}>{fb.title}</Text>

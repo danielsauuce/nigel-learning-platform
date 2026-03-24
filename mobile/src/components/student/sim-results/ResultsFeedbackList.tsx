@@ -1,10 +1,11 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 import { MotiView } from 'moti';
+import { CheckCircle, AlertTriangle, XCircle } from 'lucide-react-native';
 
 export interface FeedbackItem {
   key: string;
-  emoji: string;
+  icon: React.ReactNode;
   category: string;
   message: string;
   type: 'good' | 'warning' | 'bad';
@@ -28,7 +29,14 @@ export function ResultsFeedbackList({ items }: ResultsFeedbackListProps) {
                 ? 'bg-warning/6 border-warning/15'
                 : 'bg-destructive/6 border-destructive/15';
 
-          const icon = item.type === 'good' ? '✅' : item.type === 'warning' ? '⚠️' : '❌';
+          const StatusIcon =
+            item.type === 'good'
+              ? CheckCircle
+              : item.type === 'warning'
+                ? AlertTriangle
+                : XCircle;
+          const statusColor =
+            item.type === 'good' ? '#22C55E' : item.type === 'warning' ? '#F59E0B' : '#EF4444';
 
           return (
             <MotiView
@@ -38,13 +46,13 @@ export function ResultsFeedbackList({ items }: ResultsFeedbackListProps) {
               transition={{ type: 'spring', damping: 16, stiffness: 130, delay: 800 + index * 70 }}
             >
               <View className={`flex-row gap-3 rounded-xl border p-3.5 ${bgClass}`}>
-                <Text className="mt-0.5 text-base">{item.emoji}</Text>
+                <View className="mt-0.5">{item.icon}</View>
                 <View className="flex-1">
                   <View className="mb-0.5 flex-row items-center gap-1.5">
                     <Text className="font-poppins-semibold text-sm text-foreground">
                       {item.category}
                     </Text>
-                    <Text className="text-xs">{icon}</Text>
+                    <StatusIcon size={12} color={statusColor} strokeWidth={2.5} />
                   </View>
                   <Text className="font-poppins-regular text-xs leading-4 text-muted-foreground">
                     {item.message}
