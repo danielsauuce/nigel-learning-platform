@@ -198,7 +198,7 @@ export const StudentSettings = () => {
         ))}
 
         <p className="text-center text-[10px] text-gray-400 font-bold uppercase tracking-widest mt-8">
-          Nigel Education App v1.0.0 · Made with 💜 for Learners
+          Nigel Education App v1.0.0 · Made with love for Learners
         </p>
       </div>
     </div>

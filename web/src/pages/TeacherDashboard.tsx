@@ -11,7 +11,16 @@ import {
   Plus,
   Gamepad2,
   Settings,
+  FileText,
+  Target,
+  Trophy,
 } from 'lucide-react'
+
+const ACTIVITY_ICON_MAP: Record<string, JSX.Element> = {
+  'file-text': <FileText className="w-5 h-5 text-purple-400" />,
+  target: <Target className="w-5 h-5 text-blue-400" />,
+  trophy: <Trophy className="w-5 h-5 text-amber-400" />,
+}
 import { TeacherSidebar } from '../components/TeacherSidebar'
 import { ThemeToggle } from '../components/ui/ThemeToggle'
 import { useTheme } from '../context/ThemeContext'
@@ -58,7 +67,7 @@ export const TeacherDashboard = () => {
             <h1
               className={`text-3xl font-bold ${dark ? 'text-white' : 'text-[#22223B]'}`}
             >
-              Hello, Teacher Yukari! 🍎
+              Hello, Teacher Yukari!
             </h1>
             <p className={dark ? 'text-gray-400' : 'text-gray-500'}>
               {activeCount} of {STUDENTS.length} students active today.
@@ -147,9 +156,9 @@ export const TeacherDashboard = () => {
                 >
                   <div className="flex items-center gap-6">
                     <div
-                      className={`w-12 h-12 rounded-2xl flex items-center justify-center text-xl ${dark ? 'bg-[#1A1A2E]' : 'bg-gray-50'}`}
+                      className={`w-12 h-12 rounded-2xl flex items-center justify-center ${dark ? 'bg-[#1A1A2E]' : 'bg-gray-50'}`}
                     >
-                      {act.icon}
+                      {ACTIVITY_ICON_MAP[act.icon]}
                     </div>
                     <div>
                       <h4
