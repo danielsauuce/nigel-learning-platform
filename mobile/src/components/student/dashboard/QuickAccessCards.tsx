@@ -1,7 +1,6 @@
 import React from 'react';
 import { Platform, Text, TouchableOpacity, View } from 'react-native';
 import { MotiView } from 'moti';
-import React from 'react';
 import { Map, Wallet } from 'lucide-react-native';
 import { colors } from '@/constants/colors';
 import { useTheme } from '@/context';
