@@ -1,10 +1,16 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import { Clock } from 'lucide-react-native';
+import { Clock, FileText, Target, Trophy } from 'lucide-react-native';
 import { MotiView } from 'moti';
 import { useTheme } from '@/context';
 import { colors } from '@/constants/colors';
 import { RECENT_ACTIVITY } from './data/activity';
+
+const ACTIVITY_ICON_MAP: Record<string, React.ReactNode> = {
+  'file-text': <FileText size={16} color="#B9A7F8" strokeWidth={2} />,
+  target: <Target size={16} color="#60A5FA" strokeWidth={2} />,
+  trophy: <Trophy size={16} color="#F59E0B" strokeWidth={2} />,
+};
 
 export function RecentActivity() {
   const { theme } = useTheme();
@@ -46,7 +52,7 @@ export function RecentActivity() {
             >
               {/* Icon */}
               <View className="mt-0.5 h-8 w-8 items-center justify-center rounded-full bg-muted/50">
-                <Text className="text-sm">{item.icon}</Text>
+                {ACTIVITY_ICON_MAP[item.icon]}
               </View>
 
               {/* Content */}
