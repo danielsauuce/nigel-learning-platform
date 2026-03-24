@@ -108,21 +108,25 @@ const BADGES = [
 
 const RECENT_ACTIVITY = [
   {
+    key: 'lesson',
     icon: <CheckCircle size={16} color="#10B981" strokeWidth={2} />,
     text: 'Completed "Where to Keep Your Money" lesson',
     time: 'Today',
   },
   {
+    key: 'quiz',
     icon: <Target size={16} color="#B9A7F8" strokeWidth={2} />,
     text: 'Scored 94% on Savings Quiz',
     time: 'Today',
   },
   {
+    key: 'simulator',
     icon: <Coins size={16} color="#F7E6B6" strokeWidth={2} />,
     text: 'Finished Budget Simulator with B grade',
     time: 'Yesterday',
   },
   {
+    key: 'island',
     icon: <Map size={16} color="#10B981" strokeWidth={2} />,
     text: 'Unlocked Smart Spending island',
     time: '3 days ago',
@@ -131,16 +135,19 @@ const RECENT_ACTIVITY = [
 
 const CONVERSATION_STARTERS = [
   {
+    key: 'saving',
     icon: <MessageCircle size={16} color="#B9A7F8" strokeWidth={2} />,
     prompt: 'Ask about saving',
     detail: '"What did you learn about where to keep money safely?"',
   },
   {
+    key: 'budgeting',
     icon: <ShoppingCart size={16} color="#B9A7F8" strokeWidth={2} />,
     prompt: 'Discuss budgeting',
     detail: '"Can you show me how you built a budget in the simulator?"',
   },
   {
+    key: 'progress',
     icon: <Target size={16} color="#B9A7F8" strokeWidth={2} />,
     prompt: 'Celebrate progress',
     detail: '"I saw you completed 12 missions — which one was your favourite?"',
@@ -372,7 +379,7 @@ export function ParentSummaryScreen() {
           <View className="overflow-hidden rounded-2xl border border-border bg-card">
             {RECENT_ACTIVITY.map((item, index) => (
               <MotiView
-                key={index}
+                key={item.key}
                 from={{ opacity: 0, translateX: -8 }}
                 animate={{ opacity: 1, translateX: 0 }}
                 transition={{
@@ -421,7 +428,7 @@ export function ParentSummaryScreen() {
           <View className="gap-2">
             {CONVERSATION_STARTERS.map((starter, index) => (
               <MotiView
-                key={index}
+                key={starter.key}
                 from={{ opacity: 0, translateX: -8 }}
                 animate={{ opacity: 1, translateX: 0 }}
                 transition={{
