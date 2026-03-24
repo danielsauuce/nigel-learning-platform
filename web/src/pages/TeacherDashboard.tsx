@@ -1,3 +1,4 @@
+import React from 'react'
 import { motion } from 'motion/react'
 import { useNavigate } from 'react-router-dom'
 import {
@@ -16,7 +17,7 @@ import {
   Trophy,
 } from 'lucide-react'
 
-const ACTIVITY_ICON_MAP: Record<string, JSX.Element> = {
+const ACTIVITY_ICON_MAP: Record<string, React.ReactElement> = {
   'file-text': <FileText className="w-5 h-5 text-purple-400" />,
   target: <Target className="w-5 h-5 text-blue-400" />,
   trophy: <Trophy className="w-5 h-5 text-amber-400" />,
