@@ -1,12 +1,13 @@
 import React from 'react';
 import { Platform, Text, TouchableOpacity, View } from 'react-native';
 import { MotiView } from 'moti';
+import { Check } from 'lucide-react-native';
 import { colors } from '@/constants/colors';
 import { useTheme } from '@/context';
 
 interface JobRoleCardProps {
   title: string;
-  emoji: string;
+  icon: React.ReactNode;
   salary: string;
   description: string;
   bg: string;
@@ -16,7 +17,7 @@ interface JobRoleCardProps {
 
 export function JobRoleCard({
   title,
-  emoji,
+  icon,
   salary,
   description,
   bg,
@@ -63,7 +64,7 @@ export function JobRoleCard({
             justifyContent: 'center',
           }}
         >
-          <Text style={{ fontSize: 24 }}>{emoji}</Text>
+          {icon}
         </View>
         <View style={{ flex: 1 }}>
           <Text style={{ fontFamily: 'Poppins_700Bold', fontSize: 16, color: c.foreground }}>
@@ -107,7 +108,7 @@ export function JobRoleCard({
               justifyContent: 'center',
             }}
           >
-            <Text style={{ color: '#fff', fontSize: 12, fontFamily: 'Poppins_700Bold' }}>✓</Text>
+            <Check size={13} color="#fff" strokeWidth={3} />
           </MotiView>
         )}
       </MotiView>

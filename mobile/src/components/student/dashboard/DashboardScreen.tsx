@@ -7,6 +7,22 @@ import { useTheme } from '@/context';
 import { colors } from '@/constants/colors';
 import { MascotWaving } from '@/svg/illustrations';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
+import {
+  GraduationCap,
+  Coins,
+  BarChart2,
+  Briefcase,
+  Flame,
+  Medal,
+  Trophy,
+  Star,
+  Lightbulb,
+  Landmark,
+  CreditCard,
+  Zap,
+  Timer,
+  Sparkles,
+} from 'lucide-react-native';
 
 export function DashboardScreen() {
   const insets = useSafeAreaInsets();
@@ -79,7 +95,7 @@ export function DashboardScreen() {
                   justifyContent: 'center',
                 }}
               >
-                <Text style={{ fontSize: 20 }}>👩‍🎓</Text>
+                <GraduationCap size={22} color="#B9A7F8" strokeWidth={2} />
               </View>
             </View>
           </MotiView>
@@ -152,9 +168,21 @@ export function DashboardScreen() {
             style={{ flexDirection: 'row', gap: 12, marginTop: 24 }}
           >
             {[
-              { name: 'Saving', emoji: '💰', bg: '#F3F0FF' },
-              { name: 'Budgets', emoji: '📊', bg: '#FDE8E4' },
-              { name: 'Earning', emoji: '💼', bg: '#FFF8E8' },
+              {
+                name: 'Saving',
+                icon: <Coins size={15} color="#B9A7F8" strokeWidth={2} />,
+                bg: '#F3F0FF',
+              },
+              {
+                name: 'Budgets',
+                icon: <BarChart2 size={15} color="#F97316" strokeWidth={2} />,
+                bg: '#FDE8E4',
+              },
+              {
+                name: 'Earning',
+                icon: <Briefcase size={15} color="#F59E0B" strokeWidth={2} />,
+                bg: '#FFF8E8',
+              },
             ].map((cat, i) => (
               <MotiView
                 key={cat.name}
@@ -174,7 +202,7 @@ export function DashboardScreen() {
                     backgroundColor: theme === 'dark' ? c.muted : cat.bg,
                   }}
                 >
-                  <Text style={{ fontSize: 15 }}>{cat.emoji}</Text>
+                  {cat.icon}
                   <Text
                     style={{
                       fontFamily: 'Poppins_500Medium',
@@ -253,7 +281,7 @@ export function DashboardScreen() {
                   Saving{'\n'}basics
                 </Text>
                 <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
-                  <Text style={{ fontSize: 40 }}>🏦</Text>
+                  <Landmark size={40} color="#B9A7F8" strokeWidth={1.5} />
                 </View>
               </TouchableOpacity>
             </MotiView>
@@ -286,7 +314,7 @@ export function DashboardScreen() {
                   Budget{'\n'}simulator
                 </Text>
                 <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
-                  <Text style={{ fontSize: 38 }}>💳</Text>
+                  <CreditCard size={38} color="#B9A7F8" strokeWidth={1.5} />
                 </View>
               </TouchableOpacity>
             </MotiView>
@@ -300,9 +328,24 @@ export function DashboardScreen() {
             style={{ flexDirection: 'row', gap: 12, marginTop: 24 }}
           >
             {[
-              { emoji: '🔥', value: '12d', label: 'Streak', bg: '#FDE8E4' },
-              { emoji: '💰', value: '450', label: 'Coins', bg: '#FFF8E8' },
-              { emoji: '🏅', value: '#4', label: 'Rank', bg: '#F3F0FF' },
+              {
+                icon: <Flame size={18} color="#F7B6B6" strokeWidth={2} />,
+                value: '12d',
+                label: 'Streak',
+                bg: '#FDE8E4',
+              },
+              {
+                icon: <Coins size={18} color="#F7E6B6" strokeWidth={2} />,
+                value: '450',
+                label: 'Coins',
+                bg: '#FFF8E8',
+              },
+              {
+                icon: <Medal size={18} color="#B9A7F8" strokeWidth={2} />,
+                value: '#4',
+                label: 'Rank',
+                bg: '#F3F0FF',
+              },
             ].map((stat) => (
               <View
                 key={stat.label}
@@ -323,7 +366,7 @@ export function DashboardScreen() {
                   }),
                 }}
               >
-                <Text style={{ fontSize: 18, marginBottom: 4 }}>{stat.emoji}</Text>
+                <View style={{ marginBottom: 4 }}>{stat.icon}</View>
                 <Text style={{ fontFamily: 'Poppins_700Bold', fontSize: 17, color: c.foreground }}>
                   {stat.value}
                 </Text>
@@ -363,7 +406,7 @@ export function DashboardScreen() {
             }}
           >
             <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8, marginBottom: 10 }}>
-              <Text style={{ fontSize: 14 }}>⚡</Text>
+              <Zap size={14} color="#F7E6B6" strokeWidth={2} />
               <Text
                 style={{
                   fontFamily: 'Poppins_700Bold',
@@ -406,7 +449,7 @@ export function DashboardScreen() {
             >
               <View style={{ flexDirection: 'row', gap: 12 }}>
                 <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
-                  <Text style={{ fontSize: 12 }}>⏱</Text>
+                  <Timer size={12} color="rgba(255,255,255,0.45)" strokeWidth={2} />
                   <Text
                     style={{
                       fontFamily: 'Poppins_500Medium',
@@ -418,7 +461,7 @@ export function DashboardScreen() {
                   </Text>
                 </View>
                 <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
-                  <Text style={{ fontSize: 12 }}>✨</Text>
+                  <Sparkles size={12} color="rgba(255,255,255,0.45)" strokeWidth={2} />
                   <Text
                     style={{
                       fontFamily: 'Poppins_500Medium',
@@ -473,10 +516,10 @@ export function DashboardScreen() {
             </View>
             <View style={{ flexDirection: 'row', gap: 12 }}>
               {[
-                { emoji: '🔥', label: 'Early Bird' },
-                { emoji: '💰', label: 'Saver' },
-                { emoji: '🏆', label: 'Champion' },
-                { emoji: '⭐', label: 'Goal Setter' },
+                { icon: <Flame size={22} color="#F97316" strokeWidth={2} />, label: 'Early Bird' },
+                { icon: <Coins size={22} color="#F7E6B6" strokeWidth={2} />, label: 'Saver' },
+                { icon: <Trophy size={22} color="#F59E0B" strokeWidth={2} />, label: 'Champion' },
+                { icon: <Star size={22} color="#B9A7F8" strokeWidth={2} />, label: 'Goal Setter' },
               ].map((badge) => (
                 <View
                   key={badge.label}
@@ -498,7 +541,7 @@ export function DashboardScreen() {
                     }),
                   }}
                 >
-                  <Text style={{ fontSize: 22, marginBottom: 4 }}>{badge.emoji}</Text>
+                  <View style={{ marginBottom: 4 }}>{badge.icon}</View>
                   <Text
                     style={{
                       fontFamily: 'Poppins_500Medium',
@@ -530,7 +573,7 @@ export function DashboardScreen() {
               gap: 12,
             }}
           >
-            <Text style={{ fontSize: 20 }}>💡</Text>
+            <Lightbulb size={20} color="#F97316" strokeWidth={2} />
             <View style={{ flex: 1 }}>
               <Text
                 style={{

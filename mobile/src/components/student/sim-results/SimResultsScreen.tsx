@@ -4,28 +4,28 @@ import { MotiView } from 'moti';
 import { useRouter } from 'expo-router';
 import { ScreenWrapper, GradientButton, TextButton } from '@/components/ui';
 import { MascotCelebration } from '@/components/student/shared';
-import { Award } from 'lucide-react-native';
+import { Award, BarChart2, PiggyBank, Zap, Home, Gamepad2, AlertTriangle, Trophy } from 'lucide-react-native';
 import { ResultsScoreCard } from './ResultsScoreCard';
 import { ResultsBreakdown } from './ResultsBreakdown';
 import { ResultsFeedbackList, type FeedbackItem } from './ResultsFeedbackList';
 
 const STATS = [
-  { key: 'budget', emoji: '📊', label: 'Budget', value: '74%' },
-  { key: 'savings', emoji: '🐷', label: 'Saved', value: '£440' },
-  { key: 'xp', emoji: '⚡', label: 'XP', value: '+250' },
+  { key: 'budget', icon: <BarChart2 size={20} color="#B9A7F8" strokeWidth={2} />, label: 'Budget', value: '74%' },
+  { key: 'savings', icon: <PiggyBank size={20} color="#E91E63" strokeWidth={2} />, label: 'Saved', value: '£440' },
+  { key: 'xp', icon: <Zap size={20} color="#F59E0B" strokeWidth={2} />, label: 'XP', value: '+250' },
 ];
 
 const FEEDBACK: FeedbackItem[] = [
   {
     key: 'rent',
-    emoji: '🏠',
+    icon: <Home size={18} color="#B9A7F8" strokeWidth={2} />,
     category: 'Rent & Bills',
     message: 'Nicely within the recommended range. You kept housing costs under control!',
     type: 'good',
   },
   {
     key: 'savings',
-    emoji: '🐷',
+    icon: <PiggyBank size={18} color="#E91E63" strokeWidth={2} />,
     category: 'Savings',
     message:
       "Great job putting money aside! You saved 20% of your income — that's the 50/30/20 rule in action.",
@@ -33,14 +33,14 @@ const FEEDBACK: FeedbackItem[] = [
   },
   {
     key: 'fun',
-    emoji: '🎮',
+    icon: <Gamepad2 size={18} color="#FF9800" strokeWidth={2} />,
     category: 'Fun & Social',
     message: 'You went a bit over the suggested amount. Try trimming £30 next month.',
     type: 'warning',
   },
   {
     key: 'emergency',
-    emoji: '🎒',
+    icon: <AlertTriangle size={18} color="#9C27B0" strokeWidth={2} />,
     category: 'Emergency Fund',
     message:
       'The life event caught you off guard! Building a bigger emergency buffer would help next time.',
@@ -104,7 +104,7 @@ export function SimResultsScreen() {
         >
           <View className="flex-row items-center gap-3.5 rounded-2xl border border-primary/15 bg-primary/5 p-4">
             <View className="h-12 w-12 items-center justify-center rounded-xl bg-primary/10">
-              <Text className="text-2xl">🏆</Text>
+              <Trophy size={24} color="#F59E0B" strokeWidth={2} />
             </View>
             <View className="flex-1">
               <Text className="mb-0.5 font-poppins-bold text-xs uppercase tracking-wider text-primary">

@@ -1,13 +1,14 @@
 import React from 'react';
 import { Platform, Text, View } from 'react-native';
 import { MotiView } from 'moti';
+import { Lightbulb } from 'lucide-react-native';
 import { MascotSad, MascotWaving } from '@/svg/illustrations';
 
 export type EventType = 'expense' | 'windfall';
 
 export interface LifeEvent {
   key: string;
-  emoji: string;
+  icon: React.ReactNode;
   title: string;
   description: string;
   amount: number;
@@ -54,7 +55,7 @@ export function LifeEventReveal({ event }: LifeEventRevealProps) {
             android: { elevation: 4 },
           })}
         >
-          <Text className="mb-3 text-center text-4xl">{event.emoji}</Text>
+          <View className="mb-3 items-center">{event.icon}</View>
           <Text className="mb-2 text-center font-fredoka text-xl text-foreground">
             {event.title}
           </Text>
@@ -88,7 +89,7 @@ export function LifeEventReveal({ event }: LifeEventRevealProps) {
         transition={{ type: 'spring', damping: 16, stiffness: 120, delay: 800 }}
       >
         <View className="mx-1 mt-4 flex-row gap-3 rounded-2xl border border-primary/20 bg-primary/5 p-4">
-          <Text className="text-sm">💡</Text>
+          <Lightbulb size={16} color="#B9A7F8" strokeWidth={2} />
           <Text className="flex-1 font-poppins-regular text-xs leading-5 text-muted-foreground">
             {event.tip}
           </Text>

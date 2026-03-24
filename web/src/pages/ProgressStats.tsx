@@ -1,4 +1,4 @@
-import { ArrowLeft } from 'lucide-react'
+import { ArrowLeft, Flame, Star, Map, CheckCircle2, Lock } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { useLearning } from '../context/LearningContext'
 import { useTheme } from '../context/ThemeContext'
@@ -85,15 +85,27 @@ export const ProgressStats = () => {
         {/* Quick stats row */}
         <div className="grid grid-cols-3 gap-4 mb-8">
           {[
-            { emoji: '🔥', label: 'Day Streak', value: `${learning.streak}` },
-            { emoji: '⭐', label: 'XP Earned', value: `${learning.xp}` },
-            { emoji: '🏝️', label: 'Paths Done', value: `${pathsCompleted}/5` },
+            {
+              icon: <Flame className="w-6 h-6 text-orange-500" />,
+              label: 'Day Streak',
+              value: `${learning.streak}`,
+            },
+            {
+              icon: <Star className="w-6 h-6 text-[#B9A7F8]" />,
+              label: 'XP Earned',
+              value: `${learning.xp}`,
+            },
+            {
+              icon: <Map className="w-6 h-6 text-emerald-500" />,
+              label: 'Paths Done',
+              value: `${pathsCompleted}/5`,
+            },
           ].map((s) => (
             <div
               key={s.label}
               className={`p-5 rounded-2xl border text-center ${dark ? 'bg-[#2A2A40] border-[#3A3A55]' : 'bg-white border-gray-100'}`}
             >
-              <span className="text-2xl block mb-2">{s.emoji}</span>
+              <div className="flex justify-center mb-2">{s.icon}</div>
               <span
                 className={`text-xl font-black block ${dark ? 'text-white' : 'text-[#22223B]'}`}
               >
@@ -136,18 +148,18 @@ export const ProgressStats = () => {
                     >
                       {path.title}
                     </span>
-                    <span
-                      className="font-bold text-xs"
-                      style={{
-                        color: status === 'mastered' ? '#4CAF50' : path.color,
-                      }}
-                    >
-                      {status === 'mastered'
-                        ? '✅'
-                        : status === 'locked'
-                          ? '🔒'
-                          : `${pPercent}%`}
-                    </span>
+                    {status === 'mastered' ? (
+                      <CheckCircle2 className="w-4 h-4 text-emerald-500" />
+                    ) : status === 'locked' ? (
+                      <Lock className="w-4 h-4 text-gray-400" />
+                    ) : (
+                      <span
+                        className="font-bold text-xs"
+                        style={{ color: path.color }}
+                      >
+                        {pPercent}%
+                      </span>
+                    )}
                   </div>
                   <div
                     className={`h-1.5 rounded-full overflow-hidden ${dark ? 'bg-[#3A3A55]' : 'bg-gray-100'}`}
@@ -191,8 +203,8 @@ export const ProgressStats = () => {
                   {badge.title}
                 </span>
                 {earned && (
-                  <span className="text-[9px] text-emerald-500 font-bold">
-                    Earned ✅
+                  <span className="flex items-center justify-center gap-1 text-[9px] text-emerald-500 font-bold">
+                    <CheckCircle2 className="w-3 h-3" /> Earned
                   </span>
                 )}
               </div>

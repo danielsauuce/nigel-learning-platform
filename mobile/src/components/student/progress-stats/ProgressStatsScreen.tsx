@@ -2,7 +2,16 @@ import React from 'react';
 import { Platform, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { MotiView } from 'moti';
 import { useRouter } from 'expo-router';
-import { ChevronLeft, Flame, Star, Trophy, Target } from 'lucide-react-native';
+import {
+  ChevronLeft,
+  Flame,
+  Star,
+  Trophy,
+  Target,
+  Map,
+  CheckCircle,
+  Lock,
+} from 'lucide-react-native';
 import { ScreenWrapper } from '@/components/ui';
 import { Mascot, MascotCelebrating, MascotWaving } from '@/svg/illustrations';
 import { colors } from '@/constants/colors';
@@ -10,13 +19,13 @@ import { useTheme, useLearning } from '@/context';
 import { LEARNING_PATHS, BADGES } from '@/constants/learning-paths';
 
 function StatCard({
-  emoji,
+  icon,
   label,
   value,
   color,
   delay,
 }: {
-  emoji: string;
+  icon: React.ReactNode;
   label: string;
   value: string;
   color: string;
@@ -50,7 +59,7 @@ function StatCard({
           }),
         }}
       >
-        <Text style={{ fontSize: 24, marginBottom: 6 }}>{emoji}</Text>
+        <View style={{ marginBottom: 6 }}>{icon}</View>
         <Text style={{ fontFamily: 'Poppins_700Bold', fontSize: 20, color }}>{value}</Text>
         <Text
           style={{
@@ -187,21 +196,21 @@ export function ProgressStatsScreen() {
         {/* Quick stats */}
         <View style={{ flexDirection: 'row', gap: 10, paddingHorizontal: 24, marginBottom: 24 }}>
           <StatCard
-            emoji="🔥"
+            icon={<Flame size={24} color="#FF9800" strokeWidth={2} />}
             label="Day Streak"
             value={`${learning.streak}`}
             color="#FF9800"
             delay={200}
           />
           <StatCard
-            emoji="⭐"
+            icon={<Star size={24} color="#B9A7F8" strokeWidth={2} />}
             label="XP Earned"
             value={`${learning.xp}`}
             color="#B9A7F8"
             delay={260}
           />
           <StatCard
-            emoji="🏝️"
+            icon={<Map size={24} color="#4CAF50" strokeWidth={2} />}
             label="Paths Done"
             value={`${pathsCompleted}/5`}
             color="#4CAF50"
@@ -276,15 +285,21 @@ export function ProgressStatsScreen() {
                       >
                         {path.title}
                       </Text>
-                      <Text
-                        style={{
-                          fontFamily: 'Poppins_600SemiBold',
-                          fontSize: 12,
-                          color: status === 'mastered' ? '#4CAF50' : path.color,
-                        }}
-                      >
-                        {status === 'mastered' ? '✅' : status === 'locked' ? '🔒' : `${pPercent}%`}
-                      </Text>
+                      {status === 'mastered' ? (
+                        <CheckCircle size={16} color="#4CAF50" strokeWidth={2} />
+                      ) : status === 'locked' ? (
+                        <Lock size={16} color={path.color} strokeWidth={2} />
+                      ) : (
+                        <Text
+                          style={{
+                            fontFamily: 'Poppins_600SemiBold',
+                            fontSize: 12,
+                            color: path.color,
+                          }}
+                        >
+                          {pPercent}%
+                        </Text>
+                      )}
                     </View>
                     <View
                       style={{
@@ -374,16 +389,20 @@ export function ProgressStatsScreen() {
                       {badge.title}
                     </Text>
                     {earned && (
-                      <Text
-                        style={{
-                          fontFamily: 'Poppins_400Regular',
-                          fontSize: 9,
-                          color: '#4CAF50',
-                          marginTop: 2,
-                        }}
+                      <View
+                        style={{ flexDirection: 'row', alignItems: 'center', gap: 3, marginTop: 2 }}
                       >
-                        Earned ✅
-                      </Text>
+                        <CheckCircle size={10} color="#4CAF50" strokeWidth={2.5} />
+                        <Text
+                          style={{
+                            fontFamily: 'Poppins_400Regular',
+                            fontSize: 9,
+                            color: '#4CAF50',
+                          }}
+                        >
+                          Earned
+                        </Text>
+                      </View>
                     )}
                   </View>
                 </MotiView>

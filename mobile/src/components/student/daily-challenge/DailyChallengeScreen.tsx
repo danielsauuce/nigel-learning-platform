@@ -5,7 +5,7 @@ import { useRouter } from 'expo-router';
 import { ScreenWrapper, GradientButton } from '@/components/ui';
 import { MascotCelebration } from '@/components/student/shared';
 import { MascotWaving, MascotThinking } from '@/svg/illustrations';
-import { ChevronLeft, Clock, Zap, CheckCircle, XCircle, Trophy } from 'lucide-react-native';
+import { ChevronLeft, Clock, Zap, CheckCircle, XCircle, Trophy, Flame, Timer, Lightbulb } from 'lucide-react-native';
 import { useTheme } from '@/context';
 import { colors } from '@/constants/colors';
 
@@ -160,13 +160,13 @@ export function DailyChallengeScreen() {
             {/* XP breakdown */}
             <View className="mb-4 w-full gap-3 rounded-2xl border border-border bg-card p-4">
               {[
-                { label: 'Correct answers', value: `+${score * 20} XP`, emoji: '✅' },
-                { label: 'Time bonus', value: timer > 0 ? '+10 XP' : '+0 XP', emoji: '⏱️' },
-                { label: 'Total earned', value: `+${xpEarned} XP`, emoji: '⚡' },
+                { label: 'Correct answers', value: `+${score * 20} XP`, icon: <CheckCircle size={16} color="rgb(34, 197, 94)" strokeWidth={2} /> },
+                { label: 'Time bonus', value: timer > 0 ? '+10 XP' : '+0 XP', icon: <Timer size={16} color="#B9A7F8" strokeWidth={2} /> },
+                { label: 'Total earned', value: `+${xpEarned} XP`, icon: <Zap size={16} color="#F59E0B" strokeWidth={2} /> },
               ].map((item) => (
                 <View key={item.label} className="flex-row items-center justify-between">
                   <View className="flex-row items-center gap-2">
-                    <Text className="text-sm">{item.emoji}</Text>
+                    {item.icon}
                     <Text className="font-poppins-medium text-sm text-foreground">
                       {item.label}
                     </Text>
@@ -178,7 +178,7 @@ export function DailyChallengeScreen() {
 
             {/* Streak */}
             <View className="w-full flex-row items-center gap-2.5 rounded-xl border border-warning/15 bg-warning/10 px-4 py-3">
-              <Text className="text-lg">🔥</Text>
+              <Flame size={20} color="#F97316" strokeWidth={2} />
               <View className="flex-1">
                 <Text className="font-poppins-semibold text-sm text-foreground">
                   13-day streak!
@@ -405,13 +405,13 @@ export function DailyChallengeScreen() {
                       : 'border-destructive/15 bg-destructive/10'
                   }`}
                 >
-                  <Text className="text-base">
-                    {(current.type === 'quiz' && selectedKey === current.correctKey) ||
-                    (current.type === 'input' &&
-                      inputValue.replace(/[£,\s]/g, '') === current.correctAnswer)
-                      ? '✅'
-                      : '💡'}
-                  </Text>
+                  {(current.type === 'quiz' && selectedKey === current.correctKey) ||
+                  (current.type === 'input' &&
+                    inputValue.replace(/[£,\s]/g, '') === current.correctAnswer) ? (
+                    <CheckCircle size={16} color="rgb(34, 197, 94)" strokeWidth={2} />
+                  ) : (
+                    <Lightbulb size={16} color="#B9A7F8" strokeWidth={2} />
+                  )}
                   <Text className="flex-1 font-poppins-regular text-xs leading-4 text-muted-foreground">
                     {current.explanation}
                   </Text>

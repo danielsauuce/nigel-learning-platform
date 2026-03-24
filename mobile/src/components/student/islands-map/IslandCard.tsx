@@ -22,15 +22,16 @@ interface IslandCardProps {
 }
 
 const STATUS_CONFIG = {
-  mastered: { bg: '#E8F5E9', accent: '#4CAF50', icon: CheckCircle, emoji: '✅' },
-  active: { bg: '#F3F0FF', accent: '#B9A7F8', icon: PlayCircle, emoji: '🏝️' },
-  locked: { bg: '#F8F6FB', accent: '#E8E4F0', icon: Lock, emoji: '🔒' },
+  mastered: { bg: '#E8F5E9', accent: '#4CAF50', icon: CheckCircle },
+  active: { bg: '#F3F0FF', accent: '#B9A7F8', icon: PlayCircle },
+  locked: { bg: '#F8F6FB', accent: '#E8E4F0', icon: Lock },
 };
 
 export function IslandCard({ island, index, onPress }: IslandCardProps) {
   const { theme } = useTheme();
   const c = colors[theme];
   const config = STATUS_CONFIG[island.status];
+  const StatusIcon = config.icon;
   const progress =
     island.totalLessons > 0 ? Math.round((island.lessonsCompleted / island.totalLessons) * 100) : 0;
 
@@ -72,7 +73,7 @@ export function IslandCard({ island, index, onPress }: IslandCardProps) {
               justifyContent: 'center',
             }}
           >
-            <Text style={{ fontSize: 24 }}>{config.emoji}</Text>
+            <StatusIcon size={24} color={config.accent} strokeWidth={2} />
           </View>
 
           <View style={{ flex: 1 }}>

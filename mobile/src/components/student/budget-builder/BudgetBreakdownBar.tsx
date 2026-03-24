@@ -60,7 +60,7 @@ export function BudgetBreakdownBar({ categories, takeHome }: BudgetBreakdownBarP
               >
                 <View className="h-2 w-2 rounded-full" style={{ backgroundColor: cat.color }} />
                 <Text className="font-poppins-medium text-[10px] text-muted-foreground">
-                  {cat.emoji} £{cat.value}
+                  £{cat.value}
                 </Text>
               </View>
             ))}

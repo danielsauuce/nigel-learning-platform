@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import { MotiView } from 'moti';
 import { Mascot } from '@/svg/illustrations';
+import { Flame, Gem } from 'lucide-react-native';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import { colors } from '@/constants/colors';
 import { useTheme } from '@/context';
@@ -67,7 +68,7 @@ export function IslandMapHeader({ name, level, streak, gems }: IslandMapHeaderPr
             borderRadius: 12,
           }}
         >
-          <Text style={{ fontSize: 12 }}>🔥</Text>
+          <Flame size={12} color="#F97316" strokeWidth={2} />
           <Text
             style={{
               fontFamily: 'Poppins_600SemiBold',
@@ -89,7 +90,7 @@ export function IslandMapHeader({ name, level, streak, gems }: IslandMapHeaderPr
             borderRadius: 12,
           }}
         >
-          <Text style={{ fontSize: 12 }}>💎</Text>
+          <Gem size={12} color="#F59E0B" strokeWidth={2} />
           <Text
             style={{
               fontFamily: 'Poppins_600SemiBold',

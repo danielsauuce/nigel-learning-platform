@@ -10,7 +10,17 @@ import {
   MascotSad,
   MascotWaving,
 } from '@/svg/illustrations';
-import { ChevronLeft, RotateCcw } from 'lucide-react-native';
+import {
+  ChevronLeft,
+  RotateCcw,
+  Home,
+  ShoppingCart,
+  Bus,
+  Gamepad2,
+  PiggyBank,
+  AlertTriangle,
+  Lock,
+} from 'lucide-react-native';
 import { colors } from '@/constants/colors';
 import { useTheme } from '@/context';
 
@@ -19,7 +29,7 @@ const TAKE_HOME = 2195;
 interface BudgetCategory {
   key: string;
   label: string;
-  emoji: string;
+  icon: React.ReactNode;
   color: string;
   max: number;
   step: number;
@@ -33,7 +43,7 @@ function createCategories(): BudgetCategory[] {
     {
       key: 'rent',
       label: 'Rent & Bills',
-      emoji: '🏠',
+      icon: <Home size={20} color="#B9A7F8" strokeWidth={2} />,
       color: '#B9A7F8',
       max: 1200,
       step: 25,
@@ -44,7 +54,7 @@ function createCategories(): BudgetCategory[] {
     {
       key: 'food',
       label: 'Food & Groceries',
-      emoji: '🛒',
+      icon: <ShoppingCart size={20} color="#4CAF50" strokeWidth={2} />,
       color: '#4CAF50',
       max: 600,
       step: 10,
@@ -55,7 +65,7 @@ function createCategories(): BudgetCategory[] {
     {
       key: 'transport',
       label: 'Transport',
-      emoji: '🚌',
+      icon: <Bus size={20} color="#2196F3" strokeWidth={2} />,
       color: '#2196F3',
       max: 400,
       step: 10,
@@ -66,7 +76,7 @@ function createCategories(): BudgetCategory[] {
     {
       key: 'fun',
       label: 'Fun & Social',
-      emoji: '🎮',
+      icon: <Gamepad2 size={20} color="#FF9800" strokeWidth={2} />,
       color: '#FF9800',
       max: 500,
       step: 10,
@@ -77,7 +87,7 @@ function createCategories(): BudgetCategory[] {
     {
       key: 'savings',
       label: 'Savings',
-      emoji: '🐷',
+      icon: <PiggyBank size={20} color="#E91E63" strokeWidth={2} />,
       color: '#E91E63',
       max: 800,
       step: 25,
@@ -88,7 +98,7 @@ function createCategories(): BudgetCategory[] {
     {
       key: 'other',
       label: 'Emergency',
-      emoji: '🚨',
+      icon: <AlertTriangle size={20} color="#9C27B0" strokeWidth={2} />,
       color: '#9C27B0',
       max: 400,
       step: 10,
@@ -427,7 +437,7 @@ export function BudgetBuilderScreen() {
                         justifyContent: 'center',
                       }}
                     >
-                      <Text style={{ fontSize: 20 }}>{cat.emoji}</Text>
+                      {cat.icon}
                     </View>
                     <View>
                       <Text
@@ -542,15 +552,18 @@ export function BudgetBuilderScreen() {
                     <View
                       style={{ width: 8, height: 8, borderRadius: 4, backgroundColor: cat.color }}
                     />
-                    <Text
-                      style={{
-                        fontFamily: 'Poppins_400Regular',
-                        fontSize: 11,
-                        color: c.mutedForeground,
-                      }}
-                    >
-                      {cat.emoji} {Math.round((cat.value / TAKE_HOME) * 100)}%
-                    </Text>
+                    <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
+                      {cat.icon}
+                      <Text
+                        style={{
+                          fontFamily: 'Poppins_400Regular',
+                          fontSize: 11,
+                          color: c.mutedForeground,
+                        }}
+                      >
+                        {Math.round((cat.value / TAKE_HOME) * 100)}%
+                      </Text>
+                    </View>
                   </View>
                 ))}
             </View>
@@ -561,7 +574,7 @@ export function BudgetBuilderScreen() {
       {/* Footer */}
       <View style={{ paddingHorizontal: 20, paddingTop: 8 }}>
         <GradientButton
-          label="Lock In Budget 🔒"
+          label="Lock In Budget"
           variant="primary"
           onPress={() => router.push('/(student)/life-event' as any)}
           disabled={totalAllocated === 0 || remaining < 0}
