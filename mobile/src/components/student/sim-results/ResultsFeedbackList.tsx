@@ -30,11 +30,7 @@ export function ResultsFeedbackList({ items }: ResultsFeedbackListProps) {
                 : 'bg-destructive/6 border-destructive/15';
 
           const StatusIcon =
-            item.type === 'good'
-              ? CheckCircle
-              : item.type === 'warning'
-                ? AlertTriangle
-                : XCircle;
+            item.type === 'good' ? CheckCircle : item.type === 'warning' ? AlertTriangle : XCircle;
           const statusColor =
             item.type === 'good' ? '#22C55E' : item.type === 'warning' ? '#F59E0B' : '#EF4444';
 

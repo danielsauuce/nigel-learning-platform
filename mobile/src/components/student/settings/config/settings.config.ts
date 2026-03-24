@@ -4,13 +4,13 @@ export const SETTINGS_SECTIONS = [
     items: [
       {
         key: 'profile',
-        icon: '👤',
+        icon: 'user',
         label: 'Edit Profile',
         subtitle: 'Name, avatar, and preferences',
       },
       {
         key: 'privacy',
-        icon: '🔒',
+        icon: 'lock',
         label: 'Privacy & Data',
         subtitle: 'Control your data and sharing',
       },
@@ -21,13 +21,13 @@ export const SETTINGS_SECTIONS = [
     items: [
       {
         key: 'notifications',
-        icon: '🔔',
+        icon: 'bell',
         label: 'Notifications',
         subtitle: 'Reminders and alerts',
       },
       {
         key: 'appearance',
-        icon: '🎨',
+        icon: 'palette',
         label: 'Appearance',
         subtitle: 'Theme and display settings',
       },
@@ -38,13 +38,13 @@ export const SETTINGS_SECTIONS = [
     items: [
       {
         key: 'help',
-        icon: '❓',
+        icon: 'help',
         label: 'Help & Support',
         subtitle: 'FAQs and contact us',
       },
       {
         key: 'feedback',
-        icon: '💬',
+        icon: 'feedback',
         label: 'Send Feedback',
         subtitle: 'Help us improve',
       },
@@ -55,7 +55,7 @@ export const SETTINGS_SECTIONS = [
     items: [
       {
         key: 'logout',
-        icon: '🚪',
+        icon: 'logout',
         label: 'Log Out',
         subtitle: 'Sign out of your account',
       },

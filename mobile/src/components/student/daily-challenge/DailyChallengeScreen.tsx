@@ -5,7 +5,17 @@ import { useRouter } from 'expo-router';
 import { ScreenWrapper, GradientButton } from '@/components/ui';
 import { MascotCelebration } from '@/components/student/shared';
 import { MascotWaving, MascotThinking } from '@/svg/illustrations';
-import { ChevronLeft, Clock, Zap, CheckCircle, XCircle, Trophy, Flame, Timer, Lightbulb } from 'lucide-react-native';
+import {
+  ChevronLeft,
+  Clock,
+  Zap,
+  CheckCircle,
+  XCircle,
+  Trophy,
+  Flame,
+  Timer,
+  Lightbulb,
+} from 'lucide-react-native';
 import { useTheme } from '@/context';
 import { colors } from '@/constants/colors';
 
@@ -160,9 +170,21 @@ export function DailyChallengeScreen() {
             {/* XP breakdown */}
             <View className="mb-4 w-full gap-3 rounded-2xl border border-border bg-card p-4">
               {[
-                { label: 'Correct answers', value: `+${score * 20} XP`, icon: <CheckCircle size={16} color="rgb(34, 197, 94)" strokeWidth={2} /> },
-                { label: 'Time bonus', value: timer > 0 ? '+10 XP' : '+0 XP', icon: <Timer size={16} color="#B9A7F8" strokeWidth={2} /> },
-                { label: 'Total earned', value: `+${xpEarned} XP`, icon: <Zap size={16} color="#F59E0B" strokeWidth={2} /> },
+                {
+                  label: 'Correct answers',
+                  value: `+${score * 20} XP`,
+                  icon: <CheckCircle size={16} color="rgb(34, 197, 94)" strokeWidth={2} />,
+                },
+                {
+                  label: 'Time bonus',
+                  value: timer > 0 ? '+10 XP' : '+0 XP',
+                  icon: <Timer size={16} color="#B9A7F8" strokeWidth={2} />,
+                },
+                {
+                  label: 'Total earned',
+                  value: `+${xpEarned} XP`,
+                  icon: <Zap size={16} color="#F59E0B" strokeWidth={2} />,
+                },
               ].map((item) => (
                 <View key={item.label} className="flex-row items-center justify-between">
                   <View className="flex-row items-center gap-2">

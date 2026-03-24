@@ -41,7 +41,7 @@ export function IslandMapScreen() {
   const nextPathToComplete = LEARNING_PATHS.find((p) => !learning.isPathCompleted(p.key));
   const milestoneDesc = nextPathToComplete
     ? `Complete ${nextPathToComplete.title} to earn the next badge!`
-    : "You've completed all learning paths! 🎉";
+    : "You've completed all learning paths!";
 
   return (
     <ScreenWrapper topPadding={16} showDecoration={false}>
