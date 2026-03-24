@@ -11,12 +11,37 @@ import {
   Map,
   CheckCircle,
   Lock,
+  Baby,
+  PiggyBank,
+  ShoppingCart,
+  Briefcase,
+  CreditCard,
+  Rocket,
+  BarChart2,
+  Brain,
+  Crown,
+  Users,
 } from 'lucide-react-native';
 import { ScreenWrapper } from '@/components/ui';
 import { Mascot, MascotCelebrating, MascotWaving } from '@/svg/illustrations';
 import { colors } from '@/constants/colors';
 import { useTheme, useLearning } from '@/context';
 import { LEARNING_PATHS, BADGES } from '@/constants/learning-paths';
+
+const BADGE_ICON_MAP: Record<string, React.ReactNode> = {
+  first_lesson: <Baby size={28} color="#B9A7F8" strokeWidth={1.5} />,
+  saving_basics: <PiggyBank size={28} color="#F97316" strokeWidth={1.5} />,
+  smart_spender: <ShoppingCart size={28} color="#10B981" strokeWidth={1.5} />,
+  earner: <Briefcase size={28} color="#F59E0B" strokeWidth={1.5} />,
+  debt_wise: <CreditCard size={28} color="#EF4444" strokeWidth={1.5} />,
+  investor: <Rocket size={28} color="#6366F1" strokeWidth={1.5} />,
+  streak_7: <Flame size={28} color="#F97316" strokeWidth={1.5} />,
+  streak_30: <Trophy size={28} color="#F59E0B" strokeWidth={1.5} />,
+  budget_pro: <BarChart2 size={28} color="#B9A7F8" strokeWidth={1.5} />,
+  quiz_ace: <Brain size={28} color="#10B981" strokeWidth={1.5} />,
+  money_master: <Crown size={28} color="#F59E0B" strokeWidth={1.5} />,
+  family_hero: <Users size={28} color="#B9A7F8" strokeWidth={1.5} />,
+};
 
 function StatCard({
   icon,
@@ -147,7 +172,7 @@ export function ProgressStatsScreen() {
               style={{
                 fontFamily: 'Fredoka_700Bold',
                 fontSize: 36,
-                color: '#B9A7F8',
+                color: c.primary,
                 marginTop: 12,
               }}
             >
@@ -177,7 +202,7 @@ export function ProgressStatsScreen() {
                 from={{ width: '0%' as any }}
                 animate={{ width: `${overallPercent}%` as any }}
                 transition={{ type: 'timing', duration: 800, delay: 300 }}
-                style={{ height: 10, borderRadius: 5, backgroundColor: '#B9A7F8' }}
+                style={{ height: 10, borderRadius: 5, backgroundColor: c.primary }}
               />
             </View>
             <Text
@@ -266,7 +291,7 @@ export function ProgressStatsScreen() {
                       justifyContent: 'center',
                     }}
                   >
-                    <Text style={{ fontSize: 22 }}>{path.emoji}</Text>
+                    <Star size={22} color={path.color} strokeWidth={1.5} />
                   </View>
                   <View style={{ flex: 1 }}>
                     <View
@@ -377,7 +402,11 @@ export function ProgressStatsScreen() {
                       opacity: earned ? 1 : 0.45,
                     }}
                   >
-                    <Text style={{ fontSize: 28, marginBottom: 6 }}>{badge.emoji}</Text>
+                    <View style={{ marginBottom: 6 }}>
+                      {BADGE_ICON_MAP[badge.id] ?? (
+                        <Star size={28} color="#B9A7F8" strokeWidth={1.5} />
+                      )}
+                    </View>
                     <Text
                       style={{
                         fontFamily: 'Poppins_600SemiBold',

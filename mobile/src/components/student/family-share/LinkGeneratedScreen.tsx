@@ -22,6 +22,16 @@ import { colors } from '@/constants/colors';
 
 const MOCK_LINK = 'nigel.app/family/a7x9k2m';
 
+const PREVIEW_ITEMS = [
+  { icon: <BarChart2 size={16} color="#B9A7F8" strokeWidth={2} />, text: '68% overall progress' },
+  { icon: <Trophy size={16} color="#F59E0B" strokeWidth={2} />, text: '4 badges earned' },
+  { icon: <Flame size={16} color="#F97316" strokeWidth={2} />, text: '12-day learning streak' },
+  {
+    icon: <Star size={16} color="#B9A7F8" strokeWidth={2} />,
+    text: 'Budget simulation: B grade',
+  },
+];
+
 export function LinkGeneratedScreen() {
   const router = useRouter();
   const { theme } = useTheme();
@@ -178,24 +188,7 @@ export function LinkGeneratedScreen() {
             What your family will see
           </Text>
           <View className="gap-3 rounded-2xl border border-border bg-card p-4">
-            {[
-              {
-                icon: <BarChart2 size={16} color="#B9A7F8" strokeWidth={2} />,
-                text: '68% overall progress',
-              },
-              {
-                icon: <Trophy size={16} color="#F59E0B" strokeWidth={2} />,
-                text: '4 badges earned',
-              },
-              {
-                icon: <Flame size={16} color="#F97316" strokeWidth={2} />,
-                text: '12-day learning streak',
-              },
-              {
-                icon: <Star size={16} color="#B9A7F8" strokeWidth={2} />,
-                text: 'Budget simulation: B grade',
-              },
-            ].map((item, index) => (
+            {PREVIEW_ITEMS.map((item, index) => (
               <MotiView
                 key={item.text}
                 from={{ opacity: 0, translateX: -8 }}

@@ -5,6 +5,8 @@ import { Trophy } from 'lucide-react-native';
 import { colors } from '@/constants/colors';
 import { useTheme } from '@/context';
 
+const AMBER = '#F59E0B';
+
 interface MilestoneBannerProps {
   title: string;
   description: string;
@@ -32,7 +34,7 @@ export function MilestoneBanner({ title, description, progress }: MilestoneBanne
         }}
       >
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8, marginBottom: 8 }}>
-          <Trophy size={18} color="#F59E0B" strokeWidth={2} />
+          <Trophy size={18} color={AMBER} strokeWidth={2} />
           <Text
             style={{
               fontFamily: 'Poppins_700Bold',
