@@ -24,6 +24,12 @@ import {
   Sparkles,
 } from 'lucide-react-native';
 
+const CATEGORY_CHIPS = [
+  { name: 'Saving', icon: <Coins size={15} color="#B9A7F8" strokeWidth={2} />, bg: '#F3F0FF' },
+  { name: 'Budgets', icon: <BarChart2 size={15} color="#F97316" strokeWidth={2} />, bg: '#FDE8E4' },
+  { name: 'Earning', icon: <Briefcase size={15} color="#F59E0B" strokeWidth={2} />, bg: '#FFF8E8' },
+];
+
 export function DashboardScreen() {
   const insets = useSafeAreaInsets();
   const { theme } = useTheme();
@@ -167,23 +173,7 @@ export function DashboardScreen() {
             transition={{ type: 'spring', damping: 16, stiffness: 120, delay: 200 }}
             style={{ flexDirection: 'row', gap: 12, marginTop: 24 }}
           >
-            {[
-              {
-                name: 'Saving',
-                icon: <Coins size={15} color="#B9A7F8" strokeWidth={2} />,
-                bg: '#F3F0FF',
-              },
-              {
-                name: 'Budgets',
-                icon: <BarChart2 size={15} color="#F97316" strokeWidth={2} />,
-                bg: '#FDE8E4',
-              },
-              {
-                name: 'Earning',
-                icon: <Briefcase size={15} color="#F59E0B" strokeWidth={2} />,
-                bg: '#FFF8E8',
-              },
-            ].map((cat, i) => (
+            {CATEGORY_CHIPS.map((cat, i) => (
               <MotiView
                 key={cat.name}
                 from={{ opacity: 0, scale: 0.9 }}
@@ -281,7 +271,7 @@ export function DashboardScreen() {
                   Saving{'\n'}basics
                 </Text>
                 <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
-                  <Landmark size={40} color="#B9A7F8" strokeWidth={1.5} />
+                  <Landmark size={40} color="#B9A7F8" strokeWidth={2} />
                 </View>
               </TouchableOpacity>
             </MotiView>

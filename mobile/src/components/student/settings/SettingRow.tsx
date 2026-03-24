@@ -9,6 +9,7 @@ import {
   HelpCircle,
   MessageCircle,
   LogOut,
+  Settings,
 } from 'lucide-react-native';
 import { colors } from '@/constants/colors';
 import { useTheme } from '@/context';
@@ -37,7 +38,7 @@ interface SettingRowProps {
 export function SettingRow({ icon, label, subtitle, onPress, isDestructive }: SettingRowProps) {
   const { theme } = useTheme();
   const c = colors[theme];
-  const IconComponent = ICON_MAP[icon];
+  const IconComponent = ICON_MAP[icon] ?? Settings;
 
   return (
     <TouchableOpacity
@@ -63,13 +64,11 @@ export function SettingRow({ icon, label, subtitle, onPress, isDestructive }: Se
           justifyContent: 'center',
         }}
       >
-        {IconComponent && (
-          <IconComponent
-            size={17}
-            color={isDestructive ? c.destructive : c.primary}
-            strokeWidth={2}
-          />
-        )}
+        <IconComponent
+          size={17}
+          color={isDestructive ? c.destructive : c.primary}
+          strokeWidth={2}
+        />
       </View>
       <View style={{ flex: 1 }}>
         <Text

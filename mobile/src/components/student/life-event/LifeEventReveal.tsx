@@ -4,6 +4,8 @@ import { MotiView } from 'moti';
 import { Lightbulb } from 'lucide-react-native';
 import { MascotSad, MascotWaving } from '@/svg/illustrations';
 
+const PRIMARY_PURPLE = '#B9A7F8';
+
 export type EventType = 'expense' | 'windfall';
 
 export interface LifeEvent {
@@ -89,7 +91,7 @@ export function LifeEventReveal({ event }: LifeEventRevealProps) {
         transition={{ type: 'spring', damping: 16, stiffness: 120, delay: 800 }}
       >
         <View className="mx-1 mt-4 flex-row gap-3 rounded-2xl border border-primary/20 bg-primary/5 p-4">
-          <Lightbulb size={16} color="#B9A7F8" strokeWidth={2} />
+          <Lightbulb size={16} color={PRIMARY_PURPLE} strokeWidth={2} />
           <Text className="flex-1 font-poppins-regular text-xs leading-5 text-muted-foreground">
             {event.tip}
           </Text>
