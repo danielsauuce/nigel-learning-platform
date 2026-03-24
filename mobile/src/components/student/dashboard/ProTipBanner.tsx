@@ -2,6 +2,7 @@ import React from 'react';
 import { Platform, Text, View } from 'react-native';
 import { MotiView } from 'moti';
 import { Mascot } from '@/svg/illustrations';
+import { Lightbulb } from 'lucide-react-native';
 import { colors } from '@/constants/colors';
 import { useTheme } from '@/context';
 
@@ -18,7 +19,7 @@ export function ProTipBanner() {
     >
       <View
         style={{
-          backgroundColor: theme === 'dark' ? '#2A2540' : '#FDE8E4',
+          backgroundColor: theme === 'dark' ? c.card : '#FDE8E4',
           borderRadius: 20,
           padding: 16,
           flexDirection: 'row',
@@ -49,7 +50,7 @@ export function ProTipBanner() {
               marginBottom: 3,
             }}
           >
-            💡 Pro Tip
+            Pro Tip
           </Text>
           <Text
             style={{

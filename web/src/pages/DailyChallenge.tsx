@@ -400,7 +400,7 @@ export const DailyChallenge = () => {
                   <p
                     className={`text-sm font-bold ${quizCorrect || inputCorrect ? 'text-emerald-700 dark:text-emerald-400' : 'text-rose-700 dark:text-rose-400'}`}
                   >
-                      <span className="inline-flex items-center gap-1.5">
+                    <span className="inline-flex items-center gap-1.5">
                       {quizCorrect || inputCorrect ? (
                         <CheckCircle2 className="w-4 h-4 inline shrink-0" />
                       ) : (

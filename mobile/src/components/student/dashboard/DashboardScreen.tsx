@@ -90,12 +90,12 @@ export function DashboardScreen() {
                   width: 44,
                   height: 44,
                   borderRadius: 14,
-                  backgroundColor: '#22223B',
+                  backgroundColor: c.card,
                   alignItems: 'center',
                   justifyContent: 'center',
                 }}
               >
-                <GraduationCap size={22} color="#B9A7F8" strokeWidth={2} />
+                <GraduationCap size={22} color={c.primary} strokeWidth={2} />
               </View>
             </View>
           </MotiView>
@@ -134,7 +134,7 @@ export function DashboardScreen() {
                   paddingHorizontal: 22,
                   paddingVertical: 10,
                   borderRadius: 22,
-                  backgroundColor: '#22223B',
+                  backgroundColor: c.foreground,
                   alignSelf: 'flex-start',
                 }}
               >
@@ -243,7 +243,7 @@ export function DashboardScreen() {
                 style={{
                   fontFamily: 'Poppins_500Medium',
                   fontSize: 14,
-                  color: '#B9A7F8',
+                  color: c.primary,
                 }}
               >
                 See more
@@ -275,7 +275,7 @@ export function DashboardScreen() {
                     fontFamily: 'Poppins_700Bold',
                     fontSize: 16,
                     lineHeight: 22,
-                    color: '#22223B',
+                    color: c.foreground,
                   }}
                 >
                   Saving{'\n'}basics
@@ -308,7 +308,7 @@ export function DashboardScreen() {
                     fontFamily: 'Poppins_700Bold',
                     fontSize: 16,
                     lineHeight: 22,
-                    color: '#22223B',
+                    color: c.foreground,
                   }}
                 >
                   Budget{'\n'}simulator
@@ -477,7 +477,7 @@ export function DashboardScreen() {
                 activeOpacity={0.85}
                 onPress={() => router.push('/(student)/daily-challenge' as any)}
                 style={{
-                  backgroundColor: '#B9A7F8',
+                  backgroundColor: c.primary,
                   paddingHorizontal: 22,
                   paddingVertical: 10,
                   borderRadius: 20,
@@ -509,7 +509,7 @@ export function DashboardScreen() {
                 Achievements
               </Text>
               <TouchableOpacity onPress={() => router.push('/(student)/progress-stats' as any)}>
-                <Text style={{ fontFamily: 'Poppins_500Medium', fontSize: 14, color: '#B9A7F8' }}>
+                <Text style={{ fontFamily: 'Poppins_500Medium', fontSize: 14, color: c.primary }}>
                   See more
                 </Text>
               </TouchableOpacity>
@@ -579,7 +579,7 @@ export function DashboardScreen() {
                 style={{
                   fontFamily: 'Poppins_700Bold',
                   fontSize: 14,
-                  color: '#22223B',
+                  color: c.foreground,
                   marginBottom: 4,
                 }}
               >
@@ -589,7 +589,7 @@ export function DashboardScreen() {
                 style={{
                   fontFamily: 'Poppins_400Regular',
                   fontSize: 12.5,
-                  color: '#6C6C80',
+                  color: c.mutedForeground,
                   lineHeight: 19,
                 }}
               >

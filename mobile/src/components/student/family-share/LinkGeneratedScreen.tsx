@@ -4,7 +4,19 @@ import { MotiView } from 'moti';
 import { useRouter } from 'expo-router';
 import { ScreenWrapper, GradientButton, TextButton } from '@/components/ui';
 import { MascotWaving } from '@/svg/illustrations';
-import { ChevronLeft, Copy, Check, Share2, Eye, Clock, Link2, BarChart2, Trophy, Flame, Star } from 'lucide-react-native';
+import {
+  ChevronLeft,
+  Copy,
+  Check,
+  Share2,
+  Eye,
+  Clock,
+  Link2,
+  BarChart2,
+  Trophy,
+  Flame,
+  Star,
+} from 'lucide-react-native';
 import { useTheme } from '@/context';
 import { colors } from '@/constants/colors';
 
@@ -167,10 +179,22 @@ export function LinkGeneratedScreen() {
           </Text>
           <View className="gap-3 rounded-2xl border border-border bg-card p-4">
             {[
-              { icon: <BarChart2 size={16} color="#B9A7F8" strokeWidth={2} />, text: '68% overall progress' },
-              { icon: <Trophy size={16} color="#F59E0B" strokeWidth={2} />, text: '4 badges earned' },
-              { icon: <Flame size={16} color="#F97316" strokeWidth={2} />, text: '12-day learning streak' },
-              { icon: <Star size={16} color="#B9A7F8" strokeWidth={2} />, text: 'Budget simulation: B grade' },
+              {
+                icon: <BarChart2 size={16} color="#B9A7F8" strokeWidth={2} />,
+                text: '68% overall progress',
+              },
+              {
+                icon: <Trophy size={16} color="#F59E0B" strokeWidth={2} />,
+                text: '4 badges earned',
+              },
+              {
+                icon: <Flame size={16} color="#F97316" strokeWidth={2} />,
+                text: '12-day learning streak',
+              },
+              {
+                icon: <Star size={16} color="#B9A7F8" strokeWidth={2} />,
+                text: 'Budget simulation: B grade',
+              },
             ].map((item, index) => (
               <MotiView
                 key={item.text}
