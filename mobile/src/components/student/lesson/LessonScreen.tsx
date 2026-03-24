@@ -5,7 +5,7 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import { ScreenWrapper, GradientButton } from '@/components/ui';
 import { Mascot, MascotThinking } from '@/svg/illustrations';
 import { MascotCelebration } from '@/components/student/shared';
-import { ChevronLeft, ChevronRight, BookOpen } from 'lucide-react-native';
+import { ChevronLeft, ChevronRight, BookOpen, Brain, Lightbulb, CheckCircle } from 'lucide-react-native';
 import { colors } from '@/constants/colors';
 import { useTheme, useLearning } from '@/context';
 import { LEARNING_PATHS } from '@/constants/learning-paths';
@@ -14,32 +14,32 @@ interface LessonStep {
   title: string;
   content: string;
   tip?: string;
-  emoji: string;
+  icon: React.ReactNode;
 }
 
 /** Generate lesson content based on the lesson title */
 function generateSteps(lessonTitle: string): LessonStep[] {
   return [
     {
-      emoji: '📖',
+      icon: <BookOpen size={36} color="#B9A7F8" strokeWidth={1.5} />,
       title: `Introduction to ${lessonTitle}`,
       content: `Welcome to "${lessonTitle}"! In this lesson, you'll learn important concepts that will help you make smarter decisions with money. Let's dive in!`,
       tip: "Take your time — there's no rush. Read each section carefully.",
     },
     {
-      emoji: '🧠',
+      icon: <Brain size={36} color="#B9A7F8" strokeWidth={1.5} />,
       title: 'Key Concepts',
       content: `Every financial decision involves thinking about what you need now versus what you might need later. Understanding this balance is a core part of ${lessonTitle.toLowerCase()}.`,
       tip: 'Try to think of examples from your own life as you read.',
     },
     {
-      emoji: '💡',
+      icon: <Lightbulb size={36} color="#F59E0B" strokeWidth={1.5} />,
       title: 'Real World Example',
       content:
         'Imagine you receive £20 for your birthday. You could spend it all on sweets, save half and spend half, or save it all for something bigger. Each choice has different outcomes!',
     },
     {
-      emoji: '✅',
+      icon: <CheckCircle size={36} color="rgb(34, 197, 94)" strokeWidth={1.5} />,
       title: 'What You Learned',
       content: `Great job! You now understand the basics of ${lessonTitle.toLowerCase()}. Remember: small smart choices today lead to big results tomorrow. Keep going!`,
       tip: 'Review this lesson anytime from your learning path.',
@@ -94,7 +94,7 @@ export function LessonScreen() {
               marginTop: 20,
             }}
           >
-            Lesson Complete! 🎉
+            Lesson Complete!
           </Text>
           <Text
             style={{
@@ -213,9 +213,9 @@ export function LessonScreen() {
               }),
             }}
           >
-            <Text style={{ fontSize: 36, textAlign: 'center', marginBottom: 12 }}>
-              {step.emoji}
-            </Text>
+            <View style={{ alignItems: 'center', marginBottom: 12 }}>
+              {step.icon}
+            </View>
             <Text
               style={{
                 fontFamily: 'Fredoka_700Bold',
@@ -312,7 +312,7 @@ export function LessonScreen() {
           }}
         >
           <GradientButton
-            label={isLastStep ? 'Complete Lesson ✅' : 'Continue'}
+            label={isLastStep ? 'Complete Lesson' : 'Continue'}
             variant="primary"
             onPress={handleNext}
             showArrow={!isLastStep}

@@ -2,6 +2,7 @@ import React from 'react';
 import { Platform, Text, View } from 'react-native';
 import { MotiView } from 'moti';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
+import { GraduationCap, Zap, Flame } from 'lucide-react-native';
 import { colors } from '@/constants/colors';
 import { useTheme } from '@/context';
 
@@ -77,7 +78,7 @@ export function DashboardGreeting({
               }),
             }}
           >
-            <Text style={{ fontSize: 20 }}>👩‍🎓</Text>
+            <GraduationCap size={22} color="#B9A7F8" strokeWidth={2} />
           </View>
         </View>
       </View>
@@ -95,7 +96,7 @@ export function DashboardGreeting({
             borderRadius: 14,
           }}
         >
-          <Text style={{ fontSize: 14 }}>⚡</Text>
+          <Zap size={14} color="#B9A7F8" strokeWidth={2} />
           <Text
             style={{
               fontFamily: 'Poppins_600SemiBold',
@@ -117,7 +118,7 @@ export function DashboardGreeting({
             borderRadius: 14,
           }}
         >
-          <Text style={{ fontSize: 14 }}>🔥</Text>
+          <Flame size={14} color="#F97316" strokeWidth={2} />
           <Text
             style={{
               fontFamily: 'Poppins_600SemiBold',

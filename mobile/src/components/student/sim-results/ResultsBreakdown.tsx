@@ -1,10 +1,11 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import { MotiView } from 'moti';
+import { Text } from 'react-native';
 
 interface StatPill {
   key: string;
-  emoji: string;
+  icon: React.ReactNode;
   label: string;
   value: string;
 }
@@ -25,7 +26,7 @@ export function ResultsBreakdown({ stats }: ResultsBreakdownProps) {
           className="flex-1"
         >
           <View className="items-center rounded-2xl border border-border bg-card py-3.5">
-            <Text className="mb-1 text-lg">{stat.emoji}</Text>
+            <View className="mb-1">{stat.icon}</View>
             <Text className="mb-1 font-poppins-semibold text-xs uppercase tracking-wider text-muted-foreground">
               {stat.label}
             </Text>

@@ -5,7 +5,7 @@ import { useRouter } from 'expo-router';
 import { ScreenWrapper, GradientButton } from '@/components/ui';
 import { MascotCelebration } from '@/components/student/shared';
 import { MascotSad, MascotThinking } from '@/svg/illustrations';
-import { ChevronLeft, CheckCircle, XCircle } from 'lucide-react-native';
+import { ChevronLeft, CheckCircle, XCircle, Lightbulb } from 'lucide-react-native';
 import { useTheme } from '@/context';
 import { colors } from '@/constants/colors';
 
@@ -328,7 +328,11 @@ export function QuizScreen() {
                     : 'border-destructive/15 bg-destructive/10'
                 }`}
               >
-                <Text className="text-base">{isCorrect ? '✅' : '💡'}</Text>
+                {isCorrect ? (
+                  <CheckCircle size={16} color="rgb(34, 197, 94)" strokeWidth={2} />
+                ) : (
+                  <Lightbulb size={16} color="#B9A7F8" strokeWidth={2} />
+                )}
                 <Text className="flex-1 font-poppins-regular text-xs leading-4 text-muted-foreground">
                   {question.explanation}
                 </Text>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 import { MotiView } from 'moti';
+import { Trophy } from 'lucide-react-native';
 import { colors } from '@/constants/colors';
 import { useTheme } from '@/context';
 
@@ -31,7 +32,7 @@ export function MilestoneBanner({ title, description, progress }: MilestoneBanne
         }}
       >
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8, marginBottom: 8 }}>
-          <Text style={{ fontSize: 18 }}>🏆</Text>
+          <Trophy size={18} color="#F59E0B" strokeWidth={2} />
           <Text
             style={{
               fontFamily: 'Poppins_700Bold',

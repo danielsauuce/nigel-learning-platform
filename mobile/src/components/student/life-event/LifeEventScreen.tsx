@@ -3,13 +3,22 @@ import { ScrollView, Text, View } from 'react-native';
 import { MotiView } from 'moti';
 import { useRouter } from 'expo-router';
 import { ScreenWrapper, GradientButton } from '@/components/ui';
-import { Zap } from 'lucide-react-native';
+import {
+  Zap,
+  Smartphone,
+  Bike,
+  Cake,
+  Plane,
+  Briefcase,
+  PawPrint,
+  Dice6,
+} from 'lucide-react-native';
 import { LifeEventReveal, type LifeEvent } from './LifeEventReveal';
 
 const LIFE_EVENTS: LifeEvent[] = [
   {
     key: 'phone_repair',
-    emoji: '📱',
+    icon: <Smartphone size={40} color="#6366F1" strokeWidth={1.5} />,
     title: 'Cracked Phone Screen!',
     description:
       'You dropped your phone on the way to school. The repair costs £120 — do you have enough saved?',
@@ -19,7 +28,7 @@ const LIFE_EVENTS: LifeEvent[] = [
   },
   {
     key: 'bike_stolen',
-    emoji: '🚲',
+    icon: <Bike size={40} color="#EF4444" strokeWidth={1.5} />,
     title: 'Bike Got Stolen!',
     description:
       'Your bike was taken from outside the shop. A replacement will cost £200. Time to dip into savings.',
@@ -29,7 +38,7 @@ const LIFE_EVENTS: LifeEvent[] = [
   },
   {
     key: 'birthday_money',
-    emoji: '🎂',
+    icon: <Cake size={40} color="#10B981" strokeWidth={1.5} />,
     title: 'Birthday Cash!',
     description:
       'Happy birthday! Your grandparents sent you £75. What will you do — spend it or save it?',
@@ -39,7 +48,7 @@ const LIFE_EVENTS: LifeEvent[] = [
   },
   {
     key: 'school_trip',
-    emoji: '✈️',
+    icon: <Plane size={40} color="#F59E0B" strokeWidth={1.5} />,
     title: 'School Trip Announced!',
     description:
       "There's an amazing school trip to Paris next term. The deposit is £150 and it's due in 2 weeks.",
@@ -49,7 +58,7 @@ const LIFE_EVENTS: LifeEvent[] = [
   },
   {
     key: 'side_hustle',
-    emoji: '💼',
+    icon: <Briefcase size={40} color="#10B981" strokeWidth={1.5} />,
     title: 'Side Hustle Paid Off!',
     description: 'Your weekend car-washing business earned you an extra £95 this month. Nice work!',
     amount: 95,
@@ -58,7 +67,7 @@ const LIFE_EVENTS: LifeEvent[] = [
   },
   {
     key: 'pet_vet',
-    emoji: '🐕',
+    icon: <PawPrint size={40} color="#EF4444" strokeWidth={1.5} />,
     title: 'Pet Needs the Vet!',
     description: "Your dog isn't feeling well and needs a vet visit. The bill comes to £85.",
     amount: 85,
@@ -128,8 +137,9 @@ export function LifeEventScreen() {
                   repeatReverse: false,
                   delay: 500,
                 }}
+                style={{ marginBottom: 16 }}
               >
-                <Text className="mb-4 text-6xl">🎲</Text>
+                <Dice6 size={60} color="#B9A7F8" strokeWidth={1.5} />
               </MotiView>
               <Text className="mb-1 font-poppins-semibold text-base text-foreground">
                 What will happen?
@@ -153,7 +163,7 @@ export function LifeEventScreen() {
         <View className="px-6 pt-2">
           {!revealed ? (
             <GradientButton
-              label="Roll the Dice 🎲"
+              label="Roll the Dice"
               variant="purple"
               onPress={handleReveal}
               showArrow={false}
