@@ -8,7 +8,6 @@ import {
   ChevronLeft,
   Eye,
   EyeOff,
-  Shield,
   Clock,
   CheckSquare,
   BarChart2,
@@ -162,7 +161,7 @@ export function ConsentScreen() {
                   <Text className="flex-1 font-poppins-medium text-sm text-foreground">
                     {item.label}
                   </Text>
-                  <Check size={12} color="rgb(34, 197, 94)" strokeWidth={2.5} />
+                  <Check size={12} color={colors.success} strokeWidth={2.5} />
                 </View>
               </MotiView>
             ))}
