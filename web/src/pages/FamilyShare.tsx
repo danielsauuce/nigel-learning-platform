@@ -16,6 +16,16 @@ import {
   Target,
   Heart,
   Send,
+  BarChart2,
+  Trophy,
+  Flame,
+  Star,
+  Lock,
+  MessageCircle,
+  ShieldCheck,
+  ShoppingCart,
+  CheckCircle2,
+  PartyPopper,
 } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { useTheme } from '../context/ThemeContext'
@@ -23,32 +33,60 @@ import { useLearning } from '../context/LearningContext'
 
 /** Mirrors mobile ConsentScreen data */
 const SHARED_ITEMS = [
-  { key: 'progress', emoji: '📊', label: 'Learning progress & completion %' },
-  { key: 'badges', emoji: '🏆', label: 'Badges and achievements earned' },
-  { key: 'streak', emoji: '🔥', label: 'Current streak & activity' },
-  { key: 'score', emoji: '⭐', label: 'Quiz scores & simulation grades' },
+  {
+    key: 'progress',
+    icon: <BarChart2 className="w-4 h-4 text-[#B9A7F8]" />,
+    label: 'Learning progress & completion %',
+  },
+  {
+    key: 'badges',
+    icon: <Trophy className="w-4 h-4 text-amber-500" />,
+    label: 'Badges and achievements earned',
+  },
+  {
+    key: 'streak',
+    icon: <Flame className="w-4 h-4 text-orange-500" />,
+    label: 'Current streak & activity',
+  },
+  {
+    key: 'score',
+    icon: <Star className="w-4 h-4 text-[#B9A7F8]" />,
+    label: 'Quiz scores & simulation grades',
+  },
 ]
 const NOT_SHARED_ITEMS = [
-  { key: 'answers', emoji: '🔒', label: 'Your individual quiz answers' },
-  { key: 'chat', emoji: '💬', label: 'Messages with teachers or classmates' },
-  { key: 'personal', emoji: '🛡️', label: 'Personal settings or preferences' },
+  {
+    key: 'answers',
+    icon: <Lock className="w-4 h-4 text-gray-400" />,
+    label: 'Your individual quiz answers',
+  },
+  {
+    key: 'chat',
+    icon: <MessageCircle className="w-4 h-4 text-gray-400" />,
+    label: 'Messages with teachers or classmates',
+  },
+  {
+    key: 'personal',
+    icon: <ShieldCheck className="w-4 h-4 text-gray-400" />,
+    label: 'Personal settings or preferences',
+  },
 ]
 
 const MOCK_LINK = 'nigel.app/family/a7x9k2m'
 
 const CONVERSATION_STARTERS = [
   {
-    emoji: '💬',
+    icon: <MessageCircle className="w-4 h-4 text-[#B9A7F8]" />,
     prompt: 'Ask about saving',
     detail: '"What did you learn about where to keep money safely?"',
   },
   {
-    emoji: '🛒',
+    icon: <ShoppingCart className="w-4 h-4 text-[#B9A7F8]" />,
     prompt: 'Discuss budgeting',
     detail: '"Can you show me how you built a budget in the simulator?"',
   },
   {
-    emoji: '🎯',
+    icon: <Target className="w-4 h-4 text-[#B9A7F8]" />,
     prompt: 'Celebrate progress',
     detail: '"I saw you completed 12 missions — which one was your favourite?"',
   },
@@ -119,7 +157,9 @@ export const FamilyShare = () => {
               className="space-y-6"
             >
               <div className="text-center space-y-3">
-                <div className="text-5xl">🛡️</div>
+                <div className="flex justify-center">
+                  <Shield className="w-12 h-12 text-[#B9A7F8]" />
+                </div>
                 <h2
                   className={`text-2xl font-black ${dark ? 'text-white' : 'text-[#22223B]'}`}
                 >
@@ -148,7 +188,7 @@ export const FamilyShare = () => {
                 >
                   {SHARED_ITEMS.map((item) => (
                     <div key={item.key} className="flex items-center gap-3">
-                      <span>{item.emoji}</span>
+                      {item.icon}
                       <span
                         className={`flex-1 text-sm font-medium ${dark ? 'text-gray-300' : 'text-[#22223B]'}`}
                       >
@@ -173,7 +213,7 @@ export const FamilyShare = () => {
                 <div className={`p-5 rounded-2xl border space-y-3 ${cardCls}`}>
                   {NOT_SHARED_ITEMS.map((item) => (
                     <div key={item.key} className="flex items-center gap-3">
-                      <span>{item.emoji}</span>
+                      {item.icon}
                       <span className="flex-1 text-sm font-medium text-gray-400">
                         {item.label}
                       </span>
@@ -231,7 +271,9 @@ export const FamilyShare = () => {
               className="space-y-6"
             >
               <div className="text-center space-y-3">
-                <div className="text-5xl">🎉</div>
+                <div className="flex justify-center">
+                  <PartyPopper className="w-12 h-12 text-[#B9A7F8]" />
+                </div>
                 <h2
                   className={`text-2xl font-black ${dark ? 'text-white' : 'text-[#22223B]'}`}
                 >
@@ -297,21 +339,24 @@ export const FamilyShare = () => {
                 <div className={`p-5 rounded-2xl border space-y-3 ${cardCls}`}>
                   {[
                     {
-                      emoji: '📊',
+                      icon: <BarChart2 className="w-4 h-4 text-[#B9A7F8]" />,
                       text: `${overallProgress}% overall progress`,
                     },
                     {
-                      emoji: '🏆',
+                      icon: <Trophy className="w-4 h-4 text-amber-500" />,
                       text: `${learning.earnedBadges.size} badges earned`,
                     },
                     {
-                      emoji: '🔥',
+                      icon: <Flame className="w-4 h-4 text-orange-500" />,
                       text: `${learning.streak}-day learning streak`,
                     },
-                    { emoji: '⭐', text: 'Budget simulation: B grade' },
+                    {
+                      icon: <Star className="w-4 h-4 text-[#B9A7F8]" />,
+                      text: 'Budget simulation: B grade',
+                    },
                   ].map((item) => (
                     <div key={item.text} className="flex items-center gap-3">
-                      <span>{item.emoji}</span>
+                      {item.icon}
                       <span
                         className={`text-sm font-medium ${dark ? 'text-gray-300' : 'text-[#22223B]'}`}
                       >
@@ -380,7 +425,9 @@ export const FamilyShare = () => {
                     Sarah's Progress
                   </h3>
                   <p className="text-xs text-gray-400">
-                    Level {learning.level} · 🔥 {learning.streak}-day streak
+                    Level {learning.level} ·{' '}
+                    <Flame className="w-3 h-3 inline text-orange-500" />{' '}
+                    {learning.streak}-day streak
                   </p>
                 </div>
                 <div className="p-6 flex items-center gap-6">
@@ -473,7 +520,7 @@ export const FamilyShare = () => {
                       className={`p-4 rounded-2xl ${dark ? 'bg-[#B9A7F8]/5 border border-[#B9A7F8]/10' : 'bg-[#B9A7F8]/5 border border-[#B9A7F8]/10'}`}
                     >
                       <div className="flex items-center gap-2 mb-1">
-                        <span className="text-sm">{s.emoji}</span>
+                        {s.icon}
                         <span className="font-bold text-xs text-[#B9A7F8]">
                           {s.prompt}
                         </span>
@@ -502,7 +549,7 @@ export const FamilyShare = () => {
                   <div
                     className={`p-6 rounded-2xl border text-center ${dark ? 'bg-emerald-500/10 border-emerald-500/20' : 'bg-emerald-50 border-emerald-100'}`}
                   >
-                    <span className="text-2xl block mb-2">✅</span>
+                    <CheckCircle2 className="w-8 h-8 text-emerald-500 mx-auto mb-2" />
                     <p className="font-bold text-emerald-600 text-sm">
                       Thank you!
                     </p>

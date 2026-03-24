@@ -1,6 +1,7 @@
 import React from 'react';
 import { Platform, Text, TouchableOpacity, View } from 'react-native';
 import { MotiView } from 'moti';
+import React from 'react';
 import { Map, Wallet } from 'lucide-react-native';
 import { colors } from '@/constants/colors';
 import { useTheme } from '@/context';
@@ -18,14 +19,14 @@ export function QuickAccessCards({ onMapPress, onSimulatorPress }: QuickAccessCa
     {
       title: 'Islands Map',
       subtitle: 'Continue learning',
-      emoji: '🗺️',
+      icon: <Map size={28} color="#E8735A" strokeWidth={2} />,
       bg: '#F9D6D0',
       onPress: onMapPress,
     },
     {
       title: 'Budget Sim',
       subtitle: 'Practice budgeting',
-      emoji: '💳',
+      icon: <Wallet size={28} color="#B9A7F8" strokeWidth={2} />,
       bg: '#F3F0FF',
       onPress: onSimulatorPress,
     },
@@ -61,7 +62,7 @@ export function QuickAccessCards({ onMapPress, onSimulatorPress }: QuickAccessCa
               }),
             }}
           >
-            <Text style={{ fontSize: 28, marginBottom: 8 }}>{card.emoji}</Text>
+            <View style={{ marginBottom: 8 }}>{card.icon}</View>
             <View>
               <Text
                 style={{

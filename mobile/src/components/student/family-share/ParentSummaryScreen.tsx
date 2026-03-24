@@ -15,6 +15,12 @@ import {
   ChevronRight,
   Heart,
   X,
+  Coins,
+  BarChart2,
+  Map,
+  CheckCircle,
+  MessageCircle,
+  ShoppingCart,
 } from 'lucide-react-native';
 import { useTheme } from '@/context';
 import { colors } from '@/constants/colors';
@@ -74,32 +80,68 @@ const STUDENT = {
 };
 
 const BADGES = [
-  { key: 'saver', emoji: '💰', label: 'Smart Saver', date: '2 days ago' },
-  { key: 'streak', emoji: '🔥', label: 'Week Warrior', date: '5 days ago' },
-  { key: 'budget', emoji: '📊', label: 'Budget Pro', date: '1 week ago' },
-  { key: 'island', emoji: '🏝️', label: 'Island Explorer', date: '2 weeks ago' },
+  {
+    key: 'saver',
+    icon: <Coins size={22} color="#F7E6B6" strokeWidth={2} />,
+    label: 'Smart Saver',
+    date: '2 days ago',
+  },
+  {
+    key: 'streak',
+    icon: <Flame size={22} color="#F97316" strokeWidth={2} />,
+    label: 'Week Warrior',
+    date: '5 days ago',
+  },
+  {
+    key: 'budget',
+    icon: <BarChart2 size={22} color="#B9A7F8" strokeWidth={2} />,
+    label: 'Budget Pro',
+    date: '1 week ago',
+  },
+  {
+    key: 'island',
+    icon: <Map size={22} color="#10B981" strokeWidth={2} />,
+    label: 'Island Explorer',
+    date: '2 weeks ago',
+  },
 ];
 
 const RECENT_ACTIVITY = [
-  { emoji: '✅', text: 'Completed "Where to Keep Your Money" lesson', time: 'Today' },
-  { emoji: '🎯', text: 'Scored 94% on Savings Quiz', time: 'Today' },
-  { emoji: '💰', text: 'Finished Budget Simulator with B grade', time: 'Yesterday' },
-  { emoji: '🏝️', text: 'Unlocked Smart Spending island', time: '3 days ago' },
+  {
+    icon: <CheckCircle size={16} color="#10B981" strokeWidth={2} />,
+    text: 'Completed "Where to Keep Your Money" lesson',
+    time: 'Today',
+  },
+  {
+    icon: <Target size={16} color="#B9A7F8" strokeWidth={2} />,
+    text: 'Scored 94% on Savings Quiz',
+    time: 'Today',
+  },
+  {
+    icon: <Coins size={16} color="#F7E6B6" strokeWidth={2} />,
+    text: 'Finished Budget Simulator with B grade',
+    time: 'Yesterday',
+  },
+  {
+    icon: <Map size={16} color="#10B981" strokeWidth={2} />,
+    text: 'Unlocked Smart Spending island',
+    time: '3 days ago',
+  },
 ];
 
 const CONVERSATION_STARTERS = [
   {
-    emoji: '💬',
+    icon: <MessageCircle size={16} color="#B9A7F8" strokeWidth={2} />,
     prompt: 'Ask about saving',
     detail: '"What did you learn about where to keep money safely?"',
   },
   {
-    emoji: '🛒',
+    icon: <ShoppingCart size={16} color="#B9A7F8" strokeWidth={2} />,
     prompt: 'Discuss budgeting',
     detail: '"Can you show me how you built a budget in the simulator?"',
   },
   {
-    emoji: '🎯',
+    icon: <Target size={16} color="#B9A7F8" strokeWidth={2} />,
     prompt: 'Celebrate progress',
     detail: '"I saw you completed 12 missions — which one was your favourite?"',
   },
@@ -301,7 +343,7 @@ export function ParentSummaryScreen() {
                 }}
               >
                 <View className="flex-row items-center gap-3 rounded-xl border border-border bg-card px-3.5 py-3">
-                  <Text className="text-2xl">{badge.emoji}</Text>
+                  <View className="h-8 w-8 items-center justify-center">{badge.icon}</View>
                   <View className="flex-1">
                     <Text className="font-poppins-semibold text-sm text-foreground">
                       {badge.label}
@@ -345,7 +387,7 @@ export function ParentSummaryScreen() {
                     index < RECENT_ACTIVITY.length - 1 ? 'border-b border-border' : ''
                   }`}
                 >
-                  <Text className="text-base">{item.emoji}</Text>
+                  <View className="items-center justify-center">{item.icon}</View>
                   <View className="flex-1">
                     <Text className="font-poppins-medium text-xs leading-4 text-foreground">
                       {item.text}
@@ -391,7 +433,7 @@ export function ParentSummaryScreen() {
               >
                 <View className="rounded-xl border border-primary/10 bg-primary/5 p-3.5">
                   <View className="mb-1 flex-row items-center gap-2">
-                    <Text className="text-sm">{starter.emoji}</Text>
+                    <View className="items-center justify-center">{starter.icon}</View>
                     <Text className="font-poppins-semibold text-xs text-primary">
                       {starter.prompt}
                     </Text>
@@ -429,7 +471,7 @@ export function ParentSummaryScreen() {
               transition={{ type: 'spring', damping: 14, stiffness: 120 }}
             >
               <View className="items-center gap-1 rounded-xl border border-success/15 bg-success/10 p-4">
-                <Text className="text-2xl">✅</Text>
+                <CheckCircle size={28} color="rgb(34, 197, 94)" strokeWidth={2} />
                 <Text className="font-poppins-semibold text-sm text-success">Thank you!</Text>
                 <Text className="font-poppins-regular text-xs text-muted-foreground">
                   Your feedback has been sent anonymously.

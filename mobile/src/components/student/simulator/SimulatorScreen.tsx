@@ -3,6 +3,7 @@ import { ScrollView, Text, View, Platform } from 'react-native';
 import { MotiView } from 'moti';
 import { useRouter } from 'expo-router';
 import { ScreenWrapper, GradientButton } from '@/components/ui';
+import { GraduationCap, Laptop, Hospital, Palette, Briefcase } from 'lucide-react-native';
 import { colors } from '@/constants/colors';
 import { useTheme } from '@/context';
 import { SimulatorHeader } from './SimulatorHeader';
@@ -12,7 +13,7 @@ import { JobRoleCard } from './JobRoleCard';
 interface JobRole {
   key: string;
   title: string;
-  emoji: string;
+  icon: React.ReactNode;
   salary: string;
   description: string;
   bg: string;
@@ -22,7 +23,7 @@ const JOBS: JobRole[] = [
   {
     key: 'teacher',
     title: 'Teacher',
-    emoji: '👩‍🏫',
+    icon: <GraduationCap size={24} color="#B9A7F8" strokeWidth={2} />,
     salary: '£28,000',
     description: 'Educate and inspire students',
     bg: '#F3F0FF',
@@ -30,7 +31,7 @@ const JOBS: JobRole[] = [
   {
     key: 'developer',
     title: 'Developer',
-    emoji: '💻',
+    icon: <Laptop size={24} color="#F97316" strokeWidth={2} />,
     salary: '£38,000',
     description: 'Build websites and apps',
     bg: '#FDE8E4',
@@ -38,7 +39,7 @@ const JOBS: JobRole[] = [
   {
     key: 'nurse',
     title: 'Nurse',
-    emoji: '🏥',
+    icon: <Hospital size={24} color="#F59E0B" strokeWidth={2} />,
     salary: '£30,000',
     description: 'Care for patients in hospitals',
     bg: '#FFF8E8',
@@ -46,7 +47,7 @@ const JOBS: JobRole[] = [
   {
     key: 'designer',
     title: 'Designer',
-    emoji: '🎨',
+    icon: <Palette size={24} color="#B9A7F8" strokeWidth={2} />,
     salary: '£32,000',
     description: 'Create visual experiences',
     bg: '#F3F0FF',
@@ -79,7 +80,7 @@ export function SimulatorScreen() {
           transition={{ type: 'spring', damping: 16, stiffness: 120, delay: 80 }}
           style={{ marginBottom: 24, alignItems: 'center' }}
         >
-          <Text style={{ fontSize: 48, marginBottom: 12 }}>💼</Text>
+          <Briefcase size={48} color="#B9A7F8" strokeWidth={1.5} style={{ marginBottom: 12 }} />
           <Text
             style={{
               fontFamily: 'Poppins_700Bold',
@@ -113,7 +114,7 @@ export function SimulatorScreen() {
           >
             <JobRoleCard
               title={job.title}
-              emoji={job.emoji}
+              icon={job.icon}
               salary={job.salary}
               description={job.description}
               bg={job.bg}
