@@ -139,7 +139,7 @@ export const BudgetSimulator = () => {
                   <CheckCircle2 className="w-10 h-10" />
                 </div>
                 <h2 className="text-3xl font-black text-[#22223B]">
-                  You Got Paid! 🎉
+                  You Got Paid!
                 </h2>
                 <p className="text-gray-400 font-medium">
                   Your monthly take-home pay as a {job?.title}

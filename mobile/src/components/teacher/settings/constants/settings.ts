@@ -73,4 +73,4 @@ export const SUPPORT_SETTINGS: SettingItem[] = [
 ];
 
 export const APP_VERSION = 'Nigel Education App v1.0.0 (Build 101)';
-export const APP_TAGLINE = 'MADE WITH 💜 FOR EDUCATORS';
+export const APP_TAGLINE = 'MADE WITH LOVE FOR EDUCATORS';

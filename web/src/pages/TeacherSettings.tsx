@@ -309,7 +309,8 @@ export const TeacherSettings = () => {
           </div>
 
           <p className="text-center text-[10px] text-gray-400 font-bold uppercase tracking-widest mt-12">
-            Nigel Education App v1.0.0 (Build 101) · Made with 💜 for Educators
+            Nigel Education App v1.0.0 (Build 101) · Made with love for
+            Educators
           </p>
         </div>
       </div>

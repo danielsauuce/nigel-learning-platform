@@ -1,4 +1,57 @@
+import {
+  GraduationCap,
+  Coins,
+  BarChart2,
+  Briefcase,
+  Landmark,
+  CreditCard,
+  Flame,
+  Award,
+  Zap,
+  Timer,
+  Sparkles,
+  Trophy,
+  Star,
+} from 'lucide-react'
 import { NigelMascotWaving } from './NigelMascot'
+
+const CATEGORY_CHIPS = [
+  { name: 'Saving', icon: <Coins className="w-2 h-2" />, bg: 'bg-purple-50' },
+  { name: 'Budgets', icon: <BarChart2 className="w-2 h-2" />, bg: 'bg-red-50' },
+  {
+    name: 'Earning',
+    icon: <Briefcase className="w-2 h-2" />,
+    bg: 'bg-yellow-50',
+  },
+]
+
+const QUICK_STATS = [
+  {
+    icon: <Flame className="w-2.5 h-2.5 text-red-400" />,
+    value: '12d',
+    label: 'Streak',
+    bg: 'bg-red-50',
+  },
+  {
+    icon: <Coins className="w-2.5 h-2.5 text-yellow-500" />,
+    value: '450',
+    label: 'Coins',
+    bg: 'bg-yellow-50',
+  },
+  {
+    icon: <Award className="w-2.5 h-2.5 text-purple-400" />,
+    value: '#4',
+    label: 'Rank',
+    bg: 'bg-purple-50',
+  },
+]
+
+const ACHIEVEMENTS = [
+  { icon: <Flame className="w-3 h-3 text-orange-400" />, label: 'Early Bird' },
+  { icon: <Coins className="w-3 h-3 text-yellow-500" />, label: 'Saver' },
+  { icon: <Trophy className="w-3 h-3 text-amber-400" />, label: 'Champion' },
+  { icon: <Star className="w-3 h-3 text-purple-400" />, label: 'Goal Setter' },
+]
 
 /** Matches the actual mobile DashboardScreen.tsx layout exactly */
 export const DashboardScreen = () => (
@@ -30,7 +83,7 @@ export const DashboardScreen = () => (
         </div>
         {/* Avatar */}
         <div className="w-7 h-7 bg-edulite-navy rounded-[10px] flex items-center justify-center">
-          <span className="text-[10px]">👩‍🎓</span>
+          <GraduationCap className="w-3.5 h-3.5 text-edulite-purple" />
         </div>
       </div>
     </div>
@@ -54,16 +107,12 @@ export const DashboardScreen = () => (
 
     {/* Category chips — Saving, Budgets, Earning */}
     <div className="flex gap-1.5">
-      {[
-        { name: 'Saving', emoji: '💰', bg: 'bg-purple-50' },
-        { name: 'Budgets', emoji: '📊', bg: 'bg-red-50' },
-        { name: 'Earning', emoji: '💼', bg: 'bg-yellow-50' },
-      ].map((cat) => (
+      {CATEGORY_CHIPS.map((cat) => (
         <span
           key={cat.name}
           className={`${cat.bg} text-[8px] font-semibold px-2.5 py-1 rounded-full text-gray-500 flex items-center gap-1`}
         >
-          <span className="text-[8px]">{cat.emoji}</span>
+          {cat.icon}
           {cat.name}
         </span>
       ))}
@@ -84,7 +133,7 @@ export const DashboardScreen = () => (
             <br />
             basics
           </span>
-          <span className="text-lg self-center">🏦</span>
+          <Landmark className="w-5 h-5 self-center text-edulite-purple" />
         </div>
         <div className="bg-purple-100 rounded-2xl p-3 h-[72px] flex flex-col justify-between">
           <span className="text-[8px] font-bold text-edulite-navy leading-tight">
@@ -92,23 +141,19 @@ export const DashboardScreen = () => (
             <br />
             simulator
           </span>
-          <span className="text-lg self-center">💳</span>
+          <CreditCard className="w-5 h-5 self-center text-edulite-purple" />
         </div>
       </div>
     </div>
 
     {/* Quick stats row */}
     <div className="flex gap-2">
-      {[
-        { emoji: '🔥', value: '12d', label: 'Streak', bg: 'bg-red-50' },
-        { emoji: '💰', value: '450', label: 'Coins', bg: 'bg-yellow-50' },
-        { emoji: '🏅', value: '#4', label: 'Rank', bg: 'bg-purple-50' },
-      ].map((stat) => (
+      {QUICK_STATS.map((stat) => (
         <div
           key={stat.label}
-          className={`flex-1 ${stat.bg} rounded-xl py-2 text-center`}
+          className={`flex-1 ${stat.bg} rounded-xl py-2 text-center flex flex-col items-center`}
         >
-          <span className="text-[10px] block">{stat.emoji}</span>
+          <span className="block mb-0.5">{stat.icon}</span>
           <span className="text-[10px] font-bold text-edulite-navy block">
             {stat.value}
           </span>
@@ -120,7 +165,7 @@ export const DashboardScreen = () => (
     {/* Daily Challenge dark card */}
     <div className="bg-edulite-navy rounded-2xl p-3">
       <div className="flex items-center gap-1 mb-1">
-        <span className="text-[8px]">⚡</span>
+        <Zap className="w-2.5 h-2.5 text-edulite-yellow" />
         <span className="text-[7px] font-bold text-edulite-yellow tracking-wider uppercase">
           Daily Challenge
         </span>
@@ -134,10 +179,10 @@ export const DashboardScreen = () => (
       <div className="flex items-center justify-between">
         <div className="flex gap-2">
           <span className="text-[7px] text-white/40 flex items-center gap-0.5">
-            ⏱ 5 Mins
+            <Timer className="w-2 h-2" /> 5 Mins
           </span>
           <span className="text-[7px] text-white/40 flex items-center gap-0.5">
-            ✨ 50 XP
+            <Sparkles className="w-2 h-2" /> 50 XP
           </span>
         </div>
         <button className="bg-edulite-purple text-white text-[8px] font-bold px-3 py-1 rounded-full">
@@ -157,17 +202,12 @@ export const DashboardScreen = () => (
         </span>
       </div>
       <div className="flex gap-1.5">
-        {[
-          { emoji: '🔥', label: 'Early Bird' },
-          { emoji: '💰', label: 'Saver' },
-          { emoji: '🏆', label: 'Champion' },
-          { emoji: '⭐', label: 'Goal Setter' },
-        ].map((b) => (
+        {ACHIEVEMENTS.map((b) => (
           <div
             key={b.label}
-            className="flex-1 bg-gray-50 rounded-xl py-1.5 text-center"
+            className="flex-1 bg-gray-50 rounded-xl py-1.5 flex flex-col items-center"
           >
-            <span className="text-xs block">{b.emoji}</span>
+            <span className="block mb-0.5">{b.icon}</span>
             <span className="text-[6px] text-gray-400 block mt-0.5">
               {b.label}
             </span>
