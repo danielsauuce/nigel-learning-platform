@@ -5,7 +5,14 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import { ScreenWrapper, GradientButton } from '@/components/ui';
 import { Mascot, MascotThinking } from '@/svg/illustrations';
 import { MascotCelebration } from '@/components/student/shared';
-import { ChevronLeft, ChevronRight, BookOpen, Brain, Lightbulb, CheckCircle } from 'lucide-react-native';
+import {
+  ChevronLeft,
+  ChevronRight,
+  BookOpen,
+  Brain,
+  Lightbulb,
+  CheckCircle,
+} from 'lucide-react-native';
 import { colors } from '@/constants/colors';
 import { useTheme, useLearning } from '@/context';
 import { LEARNING_PATHS } from '@/constants/learning-paths';
@@ -213,9 +220,7 @@ export function LessonScreen() {
               }),
             }}
           >
-            <View style={{ alignItems: 'center', marginBottom: 12 }}>
-              {step.icon}
-            </View>
+            <View style={{ alignItems: 'center', marginBottom: 12 }}>{step.icon}</View>
             <Text
               style={{
                 fontFamily: 'Fredoka_700Bold',

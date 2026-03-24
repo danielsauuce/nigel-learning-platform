@@ -85,7 +85,7 @@ export function ProgressCard({
             style={{
               height: '100%',
               borderRadius: 5,
-              backgroundColor: '#B9A7F8',
+              backgroundColor: c.primary,
             }}
           />
         </View>
@@ -104,7 +104,7 @@ export function ProgressCard({
             style={{
               fontFamily: 'Poppins_700Bold',
               fontSize: 14,
-              color: '#B9A7F8',
+              color: c.primary,
             }}
           >
             {completion}%

@@ -4,21 +4,64 @@ import { MotiView } from 'moti';
 import { useRouter } from 'expo-router';
 import { ScreenWrapper, GradientButton } from '@/components/ui';
 import { Mascot } from '@/svg/illustrations';
-import { ChevronLeft, Eye, EyeOff, Shield, Clock, CheckSquare, BarChart2, Trophy, Flame, Star, Lock, MessageCircle, ShieldCheck, Check } from 'lucide-react-native';
+import {
+  ChevronLeft,
+  Eye,
+  EyeOff,
+  Shield,
+  Clock,
+  CheckSquare,
+  BarChart2,
+  Trophy,
+  Flame,
+  Star,
+  Lock,
+  MessageCircle,
+  ShieldCheck,
+  Check,
+} from 'lucide-react-native';
 import { useTheme } from '@/context';
 import { colors } from '@/constants/colors';
 
 const SHARED_ITEMS = [
-  { key: 'progress', icon: <BarChart2 size={16} color="#B9A7F8" strokeWidth={2} />, label: 'Learning progress & completion %' },
-  { key: 'badges', icon: <Trophy size={16} color="#F59E0B" strokeWidth={2} />, label: 'Badges and achievements earned' },
-  { key: 'streak', icon: <Flame size={16} color="#F97316" strokeWidth={2} />, label: 'Current streak & activity' },
-  { key: 'score', icon: <Star size={16} color="#B9A7F8" strokeWidth={2} />, label: 'Quiz scores & simulation grades' },
+  {
+    key: 'progress',
+    icon: <BarChart2 size={16} color="#B9A7F8" strokeWidth={2} />,
+    label: 'Learning progress & completion %',
+  },
+  {
+    key: 'badges',
+    icon: <Trophy size={16} color="#F59E0B" strokeWidth={2} />,
+    label: 'Badges and achievements earned',
+  },
+  {
+    key: 'streak',
+    icon: <Flame size={16} color="#F97316" strokeWidth={2} />,
+    label: 'Current streak & activity',
+  },
+  {
+    key: 'score',
+    icon: <Star size={16} color="#B9A7F8" strokeWidth={2} />,
+    label: 'Quiz scores & simulation grades',
+  },
 ];
 
 const NOT_SHARED_ITEMS = [
-  { key: 'answers', icon: <Lock size={16} color="#9CA3AF" strokeWidth={2} />, label: 'Your individual quiz answers' },
-  { key: 'chat', icon: <MessageCircle size={16} color="#9CA3AF" strokeWidth={2} />, label: 'Messages with teachers or classmates' },
-  { key: 'personal', icon: <ShieldCheck size={16} color="#9CA3AF" strokeWidth={2} />, label: 'Personal settings or preferences' },
+  {
+    key: 'answers',
+    icon: <Lock size={16} color="#9CA3AF" strokeWidth={2} />,
+    label: 'Your individual quiz answers',
+  },
+  {
+    key: 'chat',
+    icon: <MessageCircle size={16} color="#9CA3AF" strokeWidth={2} />,
+    label: 'Messages with teachers or classmates',
+  },
+  {
+    key: 'personal',
+    icon: <ShieldCheck size={16} color="#9CA3AF" strokeWidth={2} />,
+    label: 'Personal settings or preferences',
+  },
 ];
 
 export function ConsentScreen() {

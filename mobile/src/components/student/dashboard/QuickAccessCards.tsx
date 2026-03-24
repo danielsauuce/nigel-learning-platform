@@ -67,7 +67,7 @@ export function QuickAccessCards({ onMapPress, onSimulatorPress }: QuickAccessCa
                 style={{
                   fontFamily: 'Poppins_700Bold',
                   fontSize: 15,
-                  color: '#22223B',
+                  color: c.foreground,
                 }}
               >
                 {card.title}
@@ -76,7 +76,7 @@ export function QuickAccessCards({ onMapPress, onSimulatorPress }: QuickAccessCa
                 style={{
                   fontFamily: 'Poppins_400Regular',
                   fontSize: 12,
-                  color: '#6C6C80',
+                  color: c.mutedForeground,
                   marginTop: 2,
                 }}
               >
