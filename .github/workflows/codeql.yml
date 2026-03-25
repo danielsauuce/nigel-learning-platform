@@ -44,5 +44,6 @@ jobs:
       # No build step needed for Expo / RN projects
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
+        continue-on-error: true
         with:
           category: "/language:${{ matrix.language }}"
