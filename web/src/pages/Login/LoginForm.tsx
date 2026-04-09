@@ -1,9 +1,37 @@
-import { motion } from 'motion/react'
+import { useState } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import { Mail, Lock, ArrowLeft, GraduationCap, UserCircle } from 'lucide-react'
-import { useState } from 'react'
-import type { FormEvent } from 'react'
+import type { FormEvent, ChangeEvent, ReactNode } from 'react'
 import { useAuth } from '../../context/AuthContext'
+import { AuthPanel } from '../../components/ui/AuthPanel'
+import { InputField } from '../../components/ui/InputField'
+import { LoadingButton } from '../../components/ui/LoadingButton'
+
+const authHeroData = {
+  teacher: {
+    title: 'Empower the next generation',
+    description:
+      'Access your dashboard to manage curriculum and engage with students effectively.',
+    icon: <GraduationCap className="w-16 h-16 text-white" />,
+  },
+  student: {
+    title: 'Unlock your full potential',
+    description:
+      'Dive back into your personalized learning path and continue your adventure.',
+    icon: <UserCircle className="w-16 h-16 text-white" />,
+  },
+}
+
+type FieldConfig = {
+  name: 'email' | 'password'
+  label: string
+  type: string
+  placeholder: string
+  icon: ReactNode
+  value: string
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void
+  trailing?: ReactNode
+}
 
 export const LoginForm = () => {
   const { role } = useParams<{ role: string }>()
@@ -14,61 +42,54 @@ export const LoginForm = () => {
   const [isLoading, setIsLoading] = useState(false)
 
   const isTeacher = role === 'teacher'
+  const hero = isTeacher ? authHeroData.teacher : authHeroData.student
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault()
+  const fields: FieldConfig[] = [
+    {
+      name: 'email',
+      label: 'Email Address',
+      type: 'email',
+      placeholder: 'name@example.com',
+      icon: <Mail className="w-5 h-5" />,
+      value: email,
+      onChange: (event) => setEmail(event.target.value),
+    },
+    {
+      name: 'password',
+      label: 'Password',
+      type: 'password',
+      placeholder: '••••••••',
+      icon: <Lock className="w-5 h-5" />,
+      value: password,
+      onChange: (event) => setPassword(event.target.value),
+      trailing: (
+        <button type="button" className="text-xs font-bold text-[#B9A7F8]">
+          Forgot password?
+        </button>
+      ),
+    },
+  ]
+
+  const handleSubmit = (event: FormEvent) => {
+    event.preventDefault()
     setIsLoading(true)
-    // Set role in AuthContext (mirrors mobile AuthContext.setRole)
     auth.setRole(isTeacher ? 'teacher' : 'student')
+
     setTimeout(() => {
       setIsLoading(false)
-      if (isTeacher) {
-        navigate('/teacher-dashboard')
-      } else {
-        navigate('/student-dashboard')
-      }
+      navigate(isTeacher ? '/teacher-dashboard' : '/student-dashboard')
     }, 1500)
   }
 
   return (
     <div className="min-h-screen bg-white flex flex-col md:flex-row">
-      {/* Left Side - Visual */}
-      <div
-        className={`hidden md:flex flex-1 ${
-          isTeacher ? 'bg-[#22223B]' : 'bg-[#B9A7F8]'
-        } items-center justify-center p-20 relative overflow-hidden`}
-      >
-        <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
-          <div className="absolute top-10 left-10 w-64 h-64 border-4 border-white rounded-full" />
-          <div className="absolute bottom-20 right-20 w-96 h-96 border-4 border-white rounded-[4rem] rotate-12" />
-        </div>
+      <AuthPanel
+        isTeacher={isTeacher}
+        title={hero.title}
+        description={hero.description}
+        icon={hero.icon}
+      />
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="text-center space-y-8 relative z-10"
-        >
-          <div className="w-32 h-32 bg-white/20 rounded-[2.5rem] flex items-center justify-center mx-auto backdrop-blur-md">
-            {isTeacher ? (
-              <GraduationCap className="w-16 h-16 text-white" />
-            ) : (
-              <UserCircle className="w-16 h-16 text-white" />
-            )}
-          </div>
-          <h2 className="text-5xl font-bold text-white leading-tight">
-            {isTeacher
-              ? 'Empower the next generation'
-              : 'Unlock your full potential'}
-          </h2>
-          <p className="text-white/70 text-lg max-w-md mx-auto font-medium">
-            {isTeacher
-              ? 'Access your dashboard to manage curriculum and engage with students effectively.'
-              : 'Dive back into your personalized learning path and continue your adventure.'}
-          </p>
-        </motion.div>
-      </div>
-
-      {/* Right Side - Form */}
       <div className="flex-1 flex flex-col justify-center px-8 md:px-20 py-20 relative">
         <Link
           to="/login"
@@ -89,60 +110,26 @@ export const LoginForm = () => {
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="space-y-2">
-              <label className="text-sm font-bold text-[#22223B] block">
-                Email Address
-              </label>
-              <div className="relative">
-                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                <input
-                  type="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="name@example.com"
-                  className="w-full bg-gray-50 border-2 border-transparent focus:border-[#B9A7F8] focus:bg-white rounded-2xl py-4 pl-12 pr-4 outline-none transition-all font-medium"
-                />
-              </div>
-            </div>
+            {fields.map((field) => (
+              <InputField
+                key={field.name}
+                name={field.name}
+                label={field.label}
+                type={field.type}
+                placeholder={field.placeholder}
+                icon={field.icon}
+                value={field.value}
+                onChange={field.onChange}
+                trailing={field.trailing}
+              />
+            ))}
 
-            <div className="space-y-2">
-              <div className="flex justify-between items-center">
-                <label className="text-sm font-bold text-[#22223B] block">
-                  Password
-                </label>
-                <button
-                  type="button"
-                  className="text-xs font-bold text-[#B9A7F8]"
-                >
-                  Forgot password?
-                </button>
-              </div>
-              <div className="relative">
-                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                <input
-                  type="password"
-                  required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="••••••••"
-                  className="w-full bg-gray-50 border-2 border-transparent focus:border-[#B9A7F8] focus:bg-white rounded-2xl py-4 pl-12 pr-4 outline-none transition-all font-medium"
-                />
-              </div>
-            </div>
-
-            <button
-              disabled={isLoading}
-              className={`w-full ${
-                isTeacher ? 'bg-[#22223B]' : 'bg-[#B9A7F8]'
-              } text-white font-bold py-5 rounded-2xl shadow-xl hover:opacity-90 transition-all flex items-center justify-center gap-3`}
+            <LoadingButton
+              variant={isTeacher ? 'teacher' : 'student'}
+              isLoading={isLoading}
             >
-              {isLoading ? (
-                <div className="w-6 h-6 border-4 border-white/30 border-t-white rounded-full animate-spin" />
-              ) : (
-                'Sign In'
-              )}
-            </button>
+              Sign In
+            </LoadingButton>
           </form>
 
           <div className="text-center">
