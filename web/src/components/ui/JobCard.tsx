@@ -1,5 +1,3 @@
-import type { ReactNode } from 'react'
-
 type JobCardProps = {
   emoji: string
   title: string
