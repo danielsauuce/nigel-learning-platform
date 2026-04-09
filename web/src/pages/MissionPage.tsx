@@ -1,17 +1,14 @@
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'motion/react'
-import {
-  ArrowLeft,
-  CheckCircle2,
-  ChevronRight,
-  Lightbulb,
-  Trophy,
-  Gamepad2,
-  HelpCircle,
-} from 'lucide-react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { AnimatePresence, motion } from 'motion/react'
+import { useParams } from 'react-router-dom'
 import { LEARNING_PATHS } from '../data/learning-paths'
 import { useLearning } from '../context/LearningContext'
+import { MissionHeader } from '../components/ui/MissionHeader'
+import { LessonProgress } from '../components/ui/LessonProgress'
+import { LessonResults } from '../components/ui/LessonResults'
+import { LockedLesson } from '../components/ui/LockedLesson'
+import { LessonSlide } from '../components/ui/LessonSlide'
+import { QuizQuestion } from '../components/ui/QuizQuestion'
 
 /**
  * Lesson content per path — each lesson has a slide + quiz question.
@@ -177,7 +174,6 @@ const LESSON_CONTENT: Record<
 
 export const MissionPage = () => {
   const { id } = useParams()
-  const navigate = useNavigate()
   const learning = useLearning()
 
   const [currentLessonIdx, setCurrentLessonIdx] = useState(0)
@@ -241,182 +237,56 @@ export const MissionPage = () => {
   return (
     <div className="min-h-screen bg-[#F8F9FE] p-6 md:p-10">
       <div className="max-w-3xl mx-auto">
-        <header className="flex items-center justify-between mb-10">
-          <button
-            onClick={() => navigate('/student-dashboard')}
-            className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm text-gray-400 hover:text-[#22223B] transition-colors"
-          >
-            <ArrowLeft className="w-6 h-6" />
-          </button>
-          <div className="text-center">
-            <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
-              Learning Path
-            </p>
-            <h1 className="text-xl font-black text-[#22223B]">
-              {path.emoji} {path.title}
-            </h1>
-          </div>
-          <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm text-[#B9A7F8]">
-            <Gamepad2 className="w-6 h-6" />
-          </div>
-        </header>
+        <MissionHeader emoji={path.emoji} title={path.title} />
 
-        {/* Progress bar */}
-        <div className="flex gap-2 mb-8">
-          {lessons.map((l, i) => (
-            <div
-              key={l.id}
-              className={`h-2 flex-1 rounded-full transition-all ${learning.completedLessons.has(l.id) ? 'bg-[#B9A7F8]' : i === currentLessonIdx ? 'bg-[#B9A7F8]/40' : 'bg-gray-200'}`}
-            />
-          ))}
-        </div>
+        <LessonProgress
+          lessons={lessons}
+          completedLessons={learning.completedLessons}
+          currentLessonIdx={currentLessonIdx}
+        />
 
         <AnimatePresence mode="wait">
           {showResults ? (
-            <motion.div
-              key="results"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="bg-white p-16 rounded-[4rem] shadow-sm border border-gray-100 text-center space-y-8"
-            >
-              <div className="w-24 h-24 bg-amber-100 rounded-[2.5rem] flex items-center justify-center text-amber-500 mx-auto">
-                <Trophy className="w-12 h-12" />
-              </div>
-              <div className="space-y-2">
-                <h2 className="text-3xl font-black text-[#22223B]">
-                  Path Complete!
-                </h2>
-                <p className="text-gray-500 font-medium text-lg">
-                  You scored {score} / {completedInSession} and earned +
-                  {completedInSession * 25} XP
-                </p>
-              </div>
-              <div className="bg-emerald-50 p-6 rounded-3xl border border-emerald-100 inline-block">
-                <p className="text-emerald-600 font-black text-xl">
-                  +{completedInSession * 25} XP
-                </p>
-                <p className="text-emerald-500/60 text-[10px] font-bold uppercase tracking-widest">
-                  Experience Earned
-                </p>
-              </div>
-              <div className="pt-6">
-                <button
-                  onClick={() => navigate('/student-dashboard')}
-                  className="bg-[#22223B] text-white font-black px-12 py-5 rounded-3xl shadow-xl hover:scale-105 transition-transform"
-                >
-                  Back to Dashboard
-                </button>
-              </div>
-            </motion.div>
+            <LessonResults
+              score={score}
+              completedInSession={completedInSession}
+            />
           ) : !showQuiz ? (
-            <motion.div
-              key="slide"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              className="bg-white p-10 md:p-16 rounded-[4rem] shadow-sm border border-gray-100 space-y-8"
-            >
-              {isLessonLocked ? (
-                <div className="text-center py-10 space-y-4">
-                  <div className="w-16 h-16 bg-gray-100 rounded-2xl flex items-center justify-center mx-auto">
-                    <HelpCircle className="w-8 h-8 text-gray-300" />
-                  </div>
-                  <h2 className="text-2xl font-black text-gray-400">Locked</h2>
-                  <p className="text-gray-400">
-                    Complete the previous lesson to unlock this one.
-                  </p>
-                </div>
-              ) : (
-                <>
-                  <div className="space-y-4">
-                    <div className="w-12 h-12 bg-[#B9A7F8]/10 rounded-2xl flex items-center justify-center text-[#B9A7F8]">
-                      <Lightbulb className="w-6 h-6" />
-                    </div>
-                    <h2 className="text-3xl font-black text-[#22223B]">
-                      {currentLesson?.emoji}{' '}
-                      {content?.slide.title ?? currentLesson?.title}
-                    </h2>
-                    <p className="text-gray-500 text-lg font-medium leading-relaxed">
-                      {content?.slide.content ??
-                        'Lesson content coming soon...'}
-                    </p>
-                  </div>
-                  <div className="pt-10 flex items-center justify-between">
-                    <p className="text-sm font-bold text-gray-400">
-                      Lesson {currentLessonIdx + 1} of {lessons.length}
-                    </p>
-                    <button
-                      onClick={handleNextSlide}
-                      className="bg-[#22223B] text-white font-black px-8 py-4 rounded-2xl flex items-center gap-2 hover:scale-105 transition-transform"
-                    >
-                      {content?.quiz ? 'Take Quiz' : 'Complete'}{' '}
-                      <ChevronRight className="w-5 h-5" />
-                    </button>
-                  </div>
-                </>
-              )}
-            </motion.div>
+            isLessonLocked ? (
+              <motion.div
+                key="slide"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                className="bg-white p-10 md:p-16 rounded-[4rem] shadow-sm border border-gray-100 space-y-8"
+              >
+                <LockedLesson />
+              </motion.div>
+            ) : (
+              <LessonSlide
+                emoji={currentLesson?.emoji}
+                title={content?.slide.title ?? currentLesson?.title ?? ''}
+                content={
+                  content?.slide.content ?? 'Lesson content coming soon...'
+                }
+                lessonNumber={currentLessonIdx + 1}
+                totalLessons={lessons.length}
+                hasQuiz={!!content?.quiz}
+                onNext={handleNextSlide}
+              />
+            )
           ) : content?.quiz ? (
-            <motion.div
-              key="quiz"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="bg-white p-10 md:p-16 rounded-[4rem] shadow-sm border border-gray-100 space-y-8"
-            >
-              <div className="space-y-2">
-                <p className="text-xs font-bold text-[#B9A7F8] uppercase tracking-widest">
-                  Quiz
-                </p>
-                <h2 className="text-2xl font-black text-[#22223B]">
-                  {content.quiz.text}
-                </h2>
-              </div>
-              <div className="space-y-4">
-                {content.quiz.options.map((option, i) => (
-                  <button
-                    key={i}
-                    disabled={selectedOption !== null}
-                    onClick={() => handleAnswer(i)}
-                    className={`w-full p-6 rounded-3xl border-2 text-left font-bold transition-all flex items-center justify-between ${
-                      selectedOption === i
-                        ? isCorrect
-                          ? 'bg-emerald-50 border-emerald-500 text-emerald-700'
-                          : 'bg-rose-50 border-rose-500 text-rose-700'
-                        : selectedOption !== null && i === content.quiz.correct
-                          ? 'bg-emerald-50 border-emerald-500 text-emerald-700'
-                          : 'bg-gray-50 border-transparent hover:border-gray-200 text-[#22223B]'
-                    }`}
-                  >
-                    {option}
-                    {selectedOption === i &&
-                      (isCorrect ? (
-                        <CheckCircle2 className="w-5 h-5" />
-                      ) : (
-                        <HelpCircle className="w-5 h-5" />
-                      ))}
-                  </button>
-                ))}
-              </div>
-              {selectedOption !== null && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className={`p-6 rounded-3xl ${isCorrect ? 'bg-emerald-50 text-emerald-700' : 'bg-rose-50 text-rose-700'}`}
-                >
-                  <p className="text-sm font-bold">
-                    {content.quiz.explanation}
-                  </p>
-                  <button
-                    onClick={handleLessonComplete}
-                    className="mt-4 w-full bg-white font-black py-4 rounded-2xl shadow-sm"
-                  >
-                    {currentLessonIdx === lessons.length - 1
-                      ? 'Finish Path'
-                      : 'Next Lesson'}
-                  </button>
-                </motion.div>
-              )}
-            </motion.div>
+            <QuizQuestion
+              question={content.quiz.text}
+              options={content.quiz.options}
+              correct={content.quiz.correct}
+              explanation={content.quiz.explanation}
+              selectedOption={selectedOption}
+              isCorrect={isCorrect}
+              onAnswer={handleAnswer}
+              onComplete={handleLessonComplete}
+              isLastLesson={currentLessonIdx === lessons.length - 1}
+            />
           ) : null}
         </AnimatePresence>
       </div>
