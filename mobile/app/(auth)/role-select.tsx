@@ -24,6 +24,7 @@ const ROLES: { key: RoleType; title: string; subtitle: string; accent: string }[
   },
 ];
 
+
 export default function RoleSelectRoute() {
   const router = useRouter();
   const { setRole } = useAuth();
