@@ -55,11 +55,7 @@ import { LessonSlide } from '../LessonSlide'
 import { LinkStep } from '../LinkStep'
 import { LoadingButton } from '../LoadingButton'
 import { LockedLesson } from '../LockedLesson'
-import {
-  Logo,
-  NigelBrandIcon,
-  NigelBrandIconWhite,
-} from '../Logo'
+import { Logo, NigelBrandIcon, NigelBrandIconWhite } from '../Logo'
 import { MetaBadges } from '../MetaBadges'
 import { MissionCard } from '../MissionCard'
 import { MissionHeader } from '../MissionHeader'
@@ -176,7 +172,11 @@ const testCases: Record<string, CaseRunner> = {
     const onEmail = vi.fn()
     const onMore = vi.fn()
     renderWithProviders(
-      <ActionButtons onEmail={onEmail} onMore={onMore} className="opacity-100" />
+      <ActionButtons
+        onEmail={onEmail}
+        onMore={onMore}
+        className="opacity-100"
+      />
     )
     const buttons = screen.getAllByRole('button')
     await userEvent.click(buttons[0])
@@ -224,7 +224,9 @@ const testCases: Record<string, CaseRunner> = {
   AppShowcase: () => {
     renderWithProviders(<AppShowcase />)
     expect(screen.getByText(/designed for kids/i)).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: /download app/i })).toBeInTheDocument()
+    expect(
+      screen.getByRole('button', { name: /download app/i })
+    ).toBeInTheDocument()
   },
   AuthPanel: () => {
     renderWithProviders(
@@ -252,15 +254,17 @@ const testCases: Record<string, CaseRunner> = {
     const onChange = vi.fn()
     renderWithProviders(
       <BudgetSlider
-        category={{
-          key: 'food',
-          label: 'Food',
-          emoji: '🍎',
-          value: 120,
-          recommended: 100,
-          max: 300,
-          step: 10,
-        } as never}
+        category={
+          {
+            key: 'food',
+            label: 'Food',
+            emoji: '🍎',
+            value: 120,
+            recommended: 100,
+            max: 300,
+            step: 10,
+          } as never
+        }
         onChange={onChange}
       />
     )
@@ -283,9 +287,16 @@ const testCases: Record<string, CaseRunner> = {
   },
   CategoryChip: () => {
     renderWithProviders(
-      <CategoryChip name="Budgeting" icon={icon()} bgClass="bg-gray-100" dark={false} />
+      <CategoryChip
+        name="Budgeting"
+        icon={icon()}
+        bgClass="bg-gray-100"
+        dark={false}
+      />
     )
-    expect(screen.getByRole('button', { name: /budgeting/i })).toBeInTheDocument()
+    expect(
+      screen.getByRole('button', { name: /budgeting/i })
+    ).toBeInTheDocument()
   },
   ChallengeExplanation: () => {
     renderWithProviders(
@@ -327,7 +338,9 @@ const testCases: Record<string, CaseRunner> = {
   },
   ChallengeNextButton: async () => {
     const onNext = vi.fn()
-    renderWithProviders(<ChallengeNextButton onNext={onNext} isLastStep={false} />)
+    renderWithProviders(
+      <ChallengeNextButton onNext={onNext} isLastStep={false} />
+    )
     await userEvent.click(screen.getByRole('button', { name: /next/i }))
     expect(onNext).toHaveBeenCalledOnce()
   },
@@ -398,7 +411,9 @@ const testCases: Record<string, CaseRunner> = {
       />
     )
     await userEvent.click(screen.getByRole('button', { name: /i understand/i }))
-    await userEvent.click(screen.getByRole('button', { name: /generate link/i }))
+    await userEvent.click(
+      screen.getByRole('button', { name: /generate link/i })
+    )
     expect(onAgreeChange).toHaveBeenCalledWith(false)
     expect(onContinue).toHaveBeenCalledOnce()
   },
@@ -424,7 +439,9 @@ const testCases: Record<string, CaseRunner> = {
   ContentTypeSelector: async () => {
     const onSelect = vi.fn()
     renderWithProviders(<ContentTypeSelector onSelect={onSelect} />)
-    await userEvent.click(screen.getByRole('button', { name: /interactive lesson/i }))
+    await userEvent.click(
+      screen.getByRole('button', { name: /interactive lesson/i })
+    )
     expect(onSelect).toHaveBeenCalledWith('lesson')
   },
   ConversationStarter: () => {
@@ -525,7 +542,9 @@ const testCases: Record<string, CaseRunner> = {
   FamilyShareCard: async () => {
     const onShare = vi.fn()
     renderWithProviders(<FamilyShareCard onShare={onShare} dark={false} />)
-    await userEvent.click(screen.getByRole('button', { name: /share progress/i }))
+    await userEvent.click(
+      screen.getByRole('button', { name: /share progress/i })
+    )
     expect(onShare).toHaveBeenCalledOnce()
   },
   FamilyShareHeader: async () => {
@@ -536,7 +555,12 @@ const testCases: Record<string, CaseRunner> = {
   },
   FamilyStatCard: () => {
     renderWithProviders(
-      <FamilyStatCard icon={icon()} label="Missions" value="12/20" dark={false} />
+      <FamilyStatCard
+        icon={icon()}
+        label="Missions"
+        value="12/20"
+        dark={false}
+      />
     )
     expect(screen.getByText('Missions')).toBeInTheDocument()
   },
@@ -584,7 +608,9 @@ const testCases: Record<string, CaseRunner> = {
       />
     )
     await userEvent.type(screen.getByRole('textbox'), '!')
-    await userEvent.click(screen.getByRole('button', { name: /send anonymously/i }))
+    await userEvent.click(
+      screen.getByRole('button', { name: /send anonymously/i })
+    )
     expect(onFeedbackChange).toHaveBeenCalled()
     expect(onSendFeedback).toHaveBeenCalledOnce()
   },
@@ -685,7 +711,9 @@ const testCases: Record<string, CaseRunner> = {
   },
   LessonResults: async () => {
     renderWithProviders(<LessonResults score={4} completedInSession={5} />)
-    await userEvent.click(screen.getByRole('button', { name: /back to dashboard/i }))
+    await userEvent.click(
+      screen.getByRole('button', { name: /back to dashboard/i })
+    )
     expect(navigateMock).toHaveBeenCalledWith('/student-dashboard')
   },
   LessonSlide: async () => {
@@ -722,7 +750,9 @@ const testCases: Record<string, CaseRunner> = {
       />
     )
     await userEvent.click(screen.getByRole('button', { name: /copy/i }))
-    await userEvent.click(screen.getByRole('button', { name: /preview what they'll see/i }))
+    await userEvent.click(
+      screen.getByRole('button', { name: /preview what they'll see/i })
+    )
     await userEvent.click(screen.getByRole('button', { name: /^done$/i }))
     expect(onCopy).toHaveBeenCalledOnce()
     expect(onPreview).toHaveBeenCalledOnce()
@@ -734,7 +764,9 @@ const testCases: Record<string, CaseRunner> = {
         Save changes
       </LoadingButton>
     )
-    expect(screen.getByRole('button', { name: /save changes/i })).toBeInTheDocument()
+    expect(
+      screen.getByRole('button', { name: /save changes/i })
+    ).toBeInTheDocument()
   },
   LockedLesson: () => {
     renderWithProviders(<LockedLesson />)
@@ -750,11 +782,16 @@ const testCases: Record<string, CaseRunner> = {
         <NigelBrandIconWhite />
       </>
     )
-    expect(screen.getByRole('link', { name: /nigel/i })).toHaveAttribute('href', '/')
+    expect(screen.getByRole('link', { name: /nigel/i })).toHaveAttribute(
+      'href',
+      '/'
+    )
     expect(screen.getAllByAltText('Nigel').length).toBeGreaterThan(0)
   },
   MetaBadges: () => {
-    renderWithProviders(<MetaBadges timeLimit={10} questionCount={3} totalPoints={30} />)
+    renderWithProviders(
+      <MetaBadges timeLimit={10} questionCount={3} totalPoints={30} />
+    )
     expect(screen.getByText('10 min')).toBeInTheDocument()
   },
   MissionCard: async () => {
@@ -773,7 +810,9 @@ const testCases: Record<string, CaseRunner> = {
         onAction={onAction}
       />
     )
-    await userEvent.click(screen.getByRole('button', { name: /start mission/i }))
+    await userEvent.click(
+      screen.getByRole('button', { name: /start mission/i })
+    )
     expect(onAction).toHaveBeenCalledWith('m1')
   },
   MissionHeader: async () => {
@@ -816,15 +855,19 @@ const testCases: Record<string, CaseRunner> = {
   PayslipCard: async () => {
     const onContinue = vi.fn()
     renderWithProviders(
-      <PayslipCard jobTitle="Engineer" takeHome={2500} onContinue={onContinue} />
+      <PayslipCard
+        jobTitle="Engineer"
+        takeHome={2500}
+        onContinue={onContinue}
+      />
     )
-    await userEvent.click(screen.getByRole('button', { name: /start budgeting/i }))
+    await userEvent.click(
+      screen.getByRole('button', { name: /start budgeting/i })
+    )
     expect(onContinue).toHaveBeenCalledOnce()
   },
   PersonCard: () => {
-    renderWithProviders(
-      <PersonCard name="Nigel" role="Guide" icon={icon()} />
-    )
+    renderWithProviders(<PersonCard name="Nigel" role="Guide" icon={icon()} />)
     expect(screen.getByText('Nigel')).toBeInTheDocument()
   },
   PreviewStep: async () => {
@@ -838,7 +881,11 @@ const testCases: Record<string, CaseRunner> = {
         level={3}
         streak={5}
         conversationStarters={[
-          { icon: icon(), prompt: 'Talk about saving', detail: 'What was fun?' },
+          {
+            icon: icon(),
+            prompt: 'Talk about saving',
+            detail: 'What was fun?',
+          },
         ]}
         feedback="Great work"
         onFeedbackChange={onFeedbackChange}
@@ -849,7 +896,9 @@ const testCases: Record<string, CaseRunner> = {
       />
     )
     expect(screen.getByText(/family progress summary/i)).toBeInTheDocument()
-    await userEvent.click(screen.getByRole('button', { name: /send anonymously/i }))
+    await userEvent.click(
+      screen.getByRole('button', { name: /send anonymously/i })
+    )
     await userEvent.click(screen.getByRole('button', { name: /back to link/i }))
     expect(onSendFeedback).toHaveBeenCalledOnce()
     expect(onBack).toHaveBeenCalledOnce()
@@ -864,7 +913,9 @@ const testCases: Record<string, CaseRunner> = {
   },
   ProgressHeader: async () => {
     const onBack = vi.fn()
-    renderWithProviders(<ProgressHeader title="Progress" onBack={onBack} dark />)
+    renderWithProviders(
+      <ProgressHeader title="Progress" onBack={onBack} dark />
+    )
     await userEvent.click(screen.getByRole('button'))
     expect(onBack).toHaveBeenCalledOnce()
   },
@@ -1011,7 +1062,9 @@ const testCases: Record<string, CaseRunner> = {
       />
     )
     await userEvent.click(screen.getByRole('button', { name: /try again/i }))
-    await userEvent.click(screen.getByRole('button', { name: /back to dashboard/i }))
+    await userEvent.click(
+      screen.getByRole('button', { name: /back to dashboard/i })
+    )
     expect(onTryAgain).toHaveBeenCalledOnce()
     expect(onBackToDashboard).toHaveBeenCalledOnce()
   },
@@ -1043,7 +1096,9 @@ const testCases: Record<string, CaseRunner> = {
   },
   SettingsHeader: async () => {
     const onBack = vi.fn()
-    renderWithProviders(<SettingsHeader title="Settings" dark={false} onBack={onBack} />)
+    renderWithProviders(
+      <SettingsHeader title="Settings" dark={false} onBack={onBack} />
+    )
     await userEvent.click(screen.getByRole('button'))
     expect(onBack).toHaveBeenCalledOnce()
   },
@@ -1068,7 +1123,12 @@ const testCases: Record<string, CaseRunner> = {
       <SettingsSection
         title="General"
         items={[
-          { key: 'profile', icon: icon(), label: 'Profile', subtitle: 'Update details' },
+          {
+            key: 'profile',
+            icon: icon(),
+            label: 'Profile',
+            subtitle: 'Update details',
+          },
         ]}
         dark={false}
         onItemPress={onItemPress}
@@ -1114,7 +1174,9 @@ const testCases: Record<string, CaseRunner> = {
   SimulatorTeaser: async () => {
     const onEnter = vi.fn()
     renderWithProviders(<SimulatorTeaser onEnter={onEnter} />)
-    await userEvent.click(screen.getByRole('button', { name: /enter simulator/i }))
+    await userEvent.click(
+      screen.getByRole('button', { name: /enter simulator/i })
+    )
     expect(onEnter).toHaveBeenCalledOnce()
   },
   StatCard: () => {
@@ -1158,7 +1220,12 @@ const testCases: Record<string, CaseRunner> = {
     const onEmail = vi.fn()
     const onMore = vi.fn()
     renderTableRow(
-      <StudentRow student={sampleStudent} index={0} onEmail={onEmail} onMore={onMore} />
+      <StudentRow
+        student={sampleStudent}
+        index={0}
+        onEmail={onEmail}
+        onMore={onMore}
+      />
     )
     const buttons = screen.getAllByRole('button')
     await userEvent.click(buttons[0])
@@ -1183,7 +1250,9 @@ const testCases: Record<string, CaseRunner> = {
       />
     )
     await userEvent.click(screen.getAllByRole('button')[0])
-    await userEvent.click(screen.getByRole('button', { name: /export report/i }))
+    await userEvent.click(
+      screen.getByRole('button', { name: /export report/i })
+    )
     expect(onBack).toHaveBeenCalledOnce()
     expect(onExport).toHaveBeenCalledOnce()
   },
@@ -1202,7 +1271,9 @@ const testCases: Record<string, CaseRunner> = {
       />
     )
     await userEvent.click(screen.getByRole('button', { name: /student view/i }))
-    await userEvent.click(screen.getByRole('button', { name: /create content/i }))
+    await userEvent.click(
+      screen.getByRole('button', { name: /create content/i })
+    )
     await userEvent.click(screen.getAllByRole('button').at(-1) as HTMLElement)
     expect(onStudentView).toHaveBeenCalledOnce()
     expect(onCreateContent).toHaveBeenCalledOnce()
@@ -1222,9 +1293,13 @@ const testCases: Record<string, CaseRunner> = {
         inviteCode="ABC123"
       />
     )
-    await userEvent.click(screen.getByRole('button', { name: /i consent to share my data/i }))
+    await userEvent.click(
+      screen.getByRole('button', { name: /i consent to share my data/i })
+    )
     await userEvent.click(screen.getAllByRole('button')[1])
-    await userEvent.click(screen.getByRole('button', { name: /send invite link/i }))
+    await userEvent.click(
+      screen.getByRole('button', { name: /send invite link/i })
+    )
     expect(onToggleConsent).toHaveBeenCalledOnce()
     expect(onCopy).toHaveBeenCalledOnce()
     expect(onShare).toHaveBeenCalledOnce()
@@ -1235,7 +1310,12 @@ const testCases: Record<string, CaseRunner> = {
       <TeacherNotificationsCard
         dark={false}
         preferences={[
-          { id: 'alerts', label: 'Alerts', desc: 'Daily updates', enabled: true },
+          {
+            id: 'alerts',
+            label: 'Alerts',
+            desc: 'Daily updates',
+            enabled: true,
+          },
         ]}
         onToggle={onToggle}
       />
@@ -1267,20 +1347,27 @@ const testCases: Record<string, CaseRunner> = {
       />
     )
     await userEvent.type(screen.getByPlaceholderText(/••••••••/i), '!')
-    await userEvent.click(screen.getByRole('button', { name: /update password/i }))
+    await userEvent.click(
+      screen.getByRole('button', { name: /update password/i })
+    )
     expect(onChange).toHaveBeenCalled()
     expect(onSubmit).toHaveBeenCalledOnce()
   },
   ThemeModeCard: async () => {
     const onToggle = vi.fn()
-    renderWithProviders(<ThemeModeCard dark={false} isOn={false} onToggle={onToggle} />)
+    renderWithProviders(
+      <ThemeModeCard dark={false} isOn={false} onToggle={onToggle} />
+    )
     await userEvent.click(screen.getByRole('button', { name: /dark mode/i }))
     expect(onToggle).toHaveBeenCalledOnce()
   },
   ThemeToggle: async () => {
     renderWithProviders(<ThemeToggle className="extra-class" />)
     await userEvent.click(screen.getByRole('button', { name: /light/i }))
-    expect(screen.getByRole('button')).toHaveAttribute('title', expect.stringMatching(/switch to/i))
+    expect(screen.getByRole('button')).toHaveAttribute(
+      'title',
+      expect.stringMatching(/switch to/i)
+    )
   },
   TimeLimitSelector: async () => {
     const onTimeChange = vi.fn()
@@ -1292,7 +1379,13 @@ const testCases: Record<string, CaseRunner> = {
   },
   TopPerformerCard: () => {
     renderWithProviders(
-      <TopPerformerCard rank={1} name="Sarah" missions={12} avg={94} dark={false} />
+      <TopPerformerCard
+        rank={1}
+        name="Sarah"
+        missions={12}
+        avg={94}
+        dark={false}
+      />
     )
     expect(screen.getByText('Sarah')).toBeInTheDocument()
   },

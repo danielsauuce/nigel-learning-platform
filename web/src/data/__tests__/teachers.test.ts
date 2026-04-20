@@ -1,9 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import {
-  RECENT_ACTIVITY,
-  STUDENTS,
-  TEACHER_STATS,
-} from '../teachers'
+import { RECENT_ACTIVITY, STUDENTS, TEACHER_STATS } from '../teachers'
 
 describe('teachers data', () => {
   it('defines unique students with valid dashboard-facing fields', () => {

@@ -1,3 +1,3 @@
-import { runComponentCase } from "./componentTestUtils"
+import { runComponentCase } from './componentTestUtils'
 
-runComponentCase("DetailedFeatureCard")
+runComponentCase('DetailedFeatureCard')
