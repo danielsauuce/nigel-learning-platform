@@ -99,7 +99,12 @@ const fallbackFn = jest.fn();
 
 const createMagicItem = (key: string) => {
   if (key.includes('option')) {
-    return { key: 'option-1', title: 'Option title', subtitle: 'Option subtitle', iconName: 'wallet' };
+    return {
+      key: 'option-1',
+      title: 'Option title',
+      subtitle: 'Option subtitle',
+      iconName: 'wallet',
+    };
   }
 
   return {
@@ -136,13 +141,19 @@ const createMagicArray = (key: string) => {
 
 const inferValue = (key: string): unknown => {
   if (key === 'children') return sampleChildren;
-  if (/^on[A-Z]|^set[A-Z]|toggle|press|change|select|remove|skip|next|back|preview|details/i.test(key)) {
+  if (
+    /^on[A-Z]|^set[A-Z]|toggle|press|change|select|remove|skip|next|back|preview|details/i.test(key)
+  ) {
     return fallbackFn;
   }
   if (/^(is|has|show|visible|checked|disabled|danger|active|consent)/i.test(key)) {
     return true;
   }
-  if (/current|total|step|index|progress|score|rank|streak|level|gems|balance|completion|missionsDone|totalMissions|takeHome|allocated|grossPay|salary|age|delay/i.test(key)) {
+  if (
+    /current|total|step|index|progress|score|rank|streak|level|gems|balance|completion|missionsDone|totalMissions|takeHome|allocated|grossPay|salary|age|delay/i.test(
+      key,
+    )
+  ) {
     return 3;
   }
   if (/studentId/i.test(key)) return 'NGL-001';
@@ -161,7 +172,8 @@ const inferValue = (key: string): unknown => {
   if (key === 'category') return sampleBudgetCategory;
   if (key === 'answer') return sampleQuizAnswer;
   if (key === 'question') return sampleQuizQuestion;
-  if (/categories|lines|segments|stats|items|badges|options/i.test(key)) return createMagicArray(key);
+  if (/categories|lines|segments|stats|items|badges|options/i.test(key))
+    return createMagicArray(key);
   if (/name/i.test(key)) return 'Alex';
   if (/title|label|subtitle|description|placeholder|text|value|jobTitle/i.test(key)) {
     return 'Sample text';
