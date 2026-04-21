@@ -390,6 +390,8 @@ export function DashboardScreen() {
               borderRadius: 22,
               padding: 20,
               marginTop: 20,
+              borderWidth: 1,
+              borderColor: isDark ? '#B9A7F840' : 'transparent',
               ...Platform.select({
                 ios: {
                   shadowColor: '#22223B',
