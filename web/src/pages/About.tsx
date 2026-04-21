@@ -7,52 +7,28 @@ import {
   Users,
   Globe,
   Award,
-  ArrowRight,
+  Zap,
+  Mail,
+  Linkedin,
 } from 'lucide-react'
 import { NigelMascot } from '../components/mobile/NigelMascot'
-import { SectionHeader } from '../components/ui/SectionHeader'
-import { StatCard } from '../components/ui/StatCard'
-import { FeatureCard } from '../components/ui/FeatureCard'
 import { PersonCard } from '../components/ui/PersonCard'
-import { CtaBanner } from '../components/ui/CtaBanner'
 
-const fadeUp = {
-  initial: { opacity: 0, y: 30 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true },
-  transition: { duration: 0.6 },
-}
-
-const trustTags = ['Data Security', 'Privacy First', 'Trusted by Businesses']
-
-const stats = [
-  { num: '320k+', label: 'Children learning' },
-  { num: '50+', label: 'Interactive lessons' },
-  { num: '98%', label: 'Parent satisfaction' },
-  { num: '15+', label: 'Countries reached' },
-]
-
-const missionValues = [
+const missionItems = [
   {
-    icon: <Target className="w-6 h-6" />,
-    title: 'Financial Literacy',
-    desc: 'Teaching kids real-world money skills through interactive lessons and simulations.',
-    accentClass: 'bg-edulite-purple/10 text-edulite-purple',
-    textClass: 'text-edulite-navy',
+    icon: <Target className="w-8 h-8 text-[#B9A7F8]" />,
+    title: 'The Project Goal',
+    desc: 'To help secondary school students (ages 11–16) develop practical financial literacy skills through interactive content and simulations.',
   },
   {
-    icon: <BookOpen className="w-6 h-6" />,
-    title: 'Fun-First Learning',
-    desc: 'Every lesson is a game. Every achievement is a celebration. Learning should feel like play.',
-    accentClass: 'bg-edulite-pink/20 text-edulite-navy',
-    textClass: 'text-edulite-navy',
+    icon: <Zap className="w-8 h-8 text-[#F7B6B6]" />,
+    title: 'Smart Data',
+    desc: "Leveraging the power of Nigel's smart data capabilities to simplify complex financial concepts like budgeting, interest, and debt.",
   },
   {
-    icon: <Users className="w-6 h-6" />,
-    title: 'Family Together',
-    desc: 'Parents and teachers stay connected with progress tracking and shared goals.',
-    accentClass: 'bg-edulite-yellow/20 text-edulite-navy',
-    textClass: 'text-edulite-navy',
+    icon: <Globe className="w-8 h-8 text-[#FFD93D]" />,
+    title: 'Curriculum Ready',
+    desc: "Supporting Nigel's long-term vision of becoming curriculum-ready by 2028, ensuring every student leaves school with real-world money skills.",
   },
 ]
 
@@ -70,212 +46,203 @@ const valueItems = [
 ]
 
 export const About = () => (
-  <>
-    {/* ── HERO ── */}
-    <section className="pt-32 pb-20 px-6 relative overflow-hidden">
-      <div className="absolute top-24 left-10 w-72 h-72 bg-edulite-purple/8 rounded-full blur-3xl" />
-      <div className="absolute bottom-10 right-10 w-56 h-56 bg-edulite-pink/8 rounded-full blur-3xl" />
+  <div className="pt-32 pb-20 px-6">
+    <div className="max-w-7xl mx-auto">
+      {/* ── HERO: Beyond Encryption sponsor ── */}
+      <div className="grid lg:grid-cols-2 gap-16 items-center mb-32">
+        <motion.div
+          initial={{ opacity: 0, x: -30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }}
+          className="space-y-8"
+        >
+          <div className="inline-flex items-center gap-2 bg-[#B9A7F8]/10 px-4 py-2 rounded-full">
+            <Shield className="w-4 h-4 text-[#B9A7F8]" />
+            <span className="text-[#B9A7F8] text-xs font-bold uppercase tracking-wider">
+              Our Sponsor
+            </span>
+          </div>
 
-      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center relative z-10">
-        <motion.div {...fadeUp} className="space-y-8">
-          <span className="inline-flex items-center gap-2 bg-edulite-purple/10 px-4 py-2 rounded-full text-xs font-bold text-edulite-purple">
-            <Heart className="w-3.5 h-3.5" />
-            Our Story
-          </span>
-
-          <h1 className="text-5xl md:text-6xl font-bold text-edulite-navy leading-tight">
-            Building financial
-            <br />
-            <span className="text-edulite-purple">confidence</span> in kids
+          <h1 className="text-5xl md:text-7xl font-bold text-[#22223B] leading-tight tracking-tight">
+            Powered by <span className="text-[#B9A7F8]">Nigel</span> by Beyond
+            Encryption
           </h1>
 
-          <p className="text-edulite-gray text-lg leading-relaxed max-w-lg">
-            Nigel Junior is on a mission to make financial literacy fun,
-            engaging, and accessible for every child — powered by the trusted
-            team at Beyond Encryption.
+          <p className="text-gray-600 text-lg leading-relaxed font-medium">
+            Nigel is an award-winning, consent-based Smart Data agent that
+            securely turns digital and paper admin into interoperable data. By
+            converting fragmented information into proactive, money-saving
+            actions, Nigel helps consumers cut costs and protect vulnerable
+            households.
           </p>
+
+          {/* Emily Plummer card */}
+          <div className="flex flex-col sm:flex-row gap-8 pt-4">
+            <div className="flex items-center gap-4 bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
+              <div className="w-16 h-16 bg-[#B9A7F8]/15 rounded-full flex items-center justify-center flex-shrink-0">
+                <Users className="w-8 h-8 text-[#B9A7F8]/60" />
+              </div>
+              <div>
+                <h4 className="font-bold text-[#22223B]">Emily Plummer</h4>
+                <p className="text-gray-500 text-xs font-bold">
+                  Marketing Director
+                </p>
+                <div className="flex gap-2 mt-1">
+                  <a
+                    href="mailto:emily.plummer@beyondencryption.com"
+                    className="text-[#B9A7F8] hover:text-[#22223B] transition-colors"
+                  >
+                    <Mail className="w-4 h-4" />
+                  </a>
+                  <a
+                    href="#"
+                    className="text-[#B9A7F8] hover:text-[#22223B] transition-colors"
+                  >
+                    <Linkedin className="w-4 h-4" />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="flex justify-center"
+          initial={{ opacity: 0, x: 30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }}
+          className="relative"
         >
-          <div className="relative">
-            <div className="absolute -inset-6 bg-edulite-purple/10 rounded-full blur-2xl" />
-            <div className="relative bg-edulite-purple/10 rounded-[3rem] p-12 flex items-center justify-center">
-              <NigelMascot size={180} />
-            </div>
+          <div className="aspect-square bg-[#F7B6B6] rounded-[4rem] rotate-3 absolute inset-0 -z-10" />
+          <div className="bg-[#B9A7F8]/10 rounded-[4rem] p-16 flex items-center justify-center">
+            <NigelMascot size={220} />
           </div>
         </motion.div>
       </div>
-    </section>
 
-    {/* ── BEYOND ENCRYPTION ── */}
-    <section className="py-20 px-6">
-      <motion.div
-        {...fadeUp}
-        className="max-w-7xl mx-auto bg-edulite-navy rounded-[3rem] p-12 md:p-16"
-      >
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div className="space-y-6">
-            <div className="flex items-center gap-3">
-              <div className="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center">
-                <Shield className="w-7 h-7 text-white" />
-              </div>
-              <div>
-                <p className="text-white/50 text-xs font-semibold uppercase tracking-wider">
-                  Powered by
-                </p>
-                <h2 className="text-2xl font-bold text-white">
-                  Beyond Encryption
-                </h2>
-              </div>
+      {/* ── THREE MISSION CARDS ── */}
+      <div className="grid md:grid-cols-3 gap-12 mb-32">
+        {missionItems.map((item, i) => (
+          <motion.div
+            key={item.title}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: i * 0.1, duration: 0.5 }}
+            className="space-y-6 text-center"
+          >
+            <div className="w-20 h-20 bg-gray-50 rounded-3xl flex items-center justify-center mx-auto shadow-sm">
+              {item.icon}
             </div>
-
-            <p className="text-white/70 leading-relaxed">
-              Nigel Junior is proudly developed by Beyond Encryption — a leading
-              provider of secure digital communication solutions. With years of
-              experience protecting sensitive data, we bring that same
-              commitment to safety and quality to children's education.
+            <h3 className="text-2xl font-bold text-[#22223B]">{item.title}</h3>
+            <p className="text-gray-600 font-medium leading-relaxed">
+              {item.desc}
             </p>
+          </motion.div>
+        ))}
+      </div>
 
-            <div className="flex flex-wrap gap-4 pt-2">
-              {trustTags.map((tag) => (
-                <span
-                  key={tag}
-                  className="bg-white/10 text-white/80 text-xs font-semibold px-4 py-2 rounded-full"
-                >
-                  {tag}
-                </span>
-              ))}
+      {/* ── VALUES STRIP ── */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-32">
+        {valueItems.map((item, i) => (
+          <motion.div
+            key={item.label}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: i * 0.1 }}
+            className="bg-gray-50 rounded-2xl p-6 flex items-center gap-4"
+          >
+            <div className="w-10 h-10 bg-[#B9A7F8]/10 rounded-xl flex items-center justify-center text-[#B9A7F8]">
+              {item.icon}
             </div>
+            <span className="font-bold text-sm text-[#22223B]">
+              {item.label}
+            </span>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* ── MEET THE TEACHERS ── */}
+      <section className="py-24 px-6 bg-[#B9A7F8]/10 rounded-[4rem] mb-32 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto text-center space-y-12 relative z-10">
+          <div className="space-y-4">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-full"
+            >
+              <BookOpen className="w-4 h-4 text-[#B9A7F8]" />
+              <span className="text-[#22223B] text-xs font-bold uppercase tracking-wider">
+                Our Team
+              </span>
+            </motion.div>
+            <h2 className="text-4xl md:text-5xl font-bold text-[#22223B] tracking-tight">
+              Meet our teachers
+            </h2>
+            <p className="text-gray-500 max-w-2xl mx-auto font-medium">
+              Discover the teachers on Nigel who are ready to accompany children
+              and parents in their learning journey.
+            </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
-            {stats.map((stat, i) => (
-              <StatCard
-                key={stat.label}
-                num={stat.num}
-                label={stat.label}
-                delay={i * 0.1}
+          <div className="grid sm:grid-cols-3 gap-12">
+            {teachers.map((teacher, i) => (
+              <PersonCard
+                key={teacher.role}
+                name={teacher.name}
+                role={teacher.role}
+                icon={
+                  <div className="w-24 h-24 bg-[#B9A7F8]/15 rounded-full flex items-center justify-center">
+                    <Users className="w-10 h-10 text-[#B9A7F8]/40" />
+                  </div>
+                }
+                delay={i * 0.15}
               />
             ))}
           </div>
         </div>
-      </motion.div>
-    </section>
+      </section>
 
-    {/* ── MISSION & VALUES ── */}
-    <section className="py-20 px-6 bg-edulite-bg rounded-[4rem] mx-4">
-      <div className="max-w-7xl mx-auto">
-        <SectionHeader
-          title="Our Mission"
-          subtitle="We believe every child deserves the tools to understand money, make smart choices, and build a confident financial future."
-        />
-
-        <div className="grid md:grid-cols-3 gap-8">
-          {missionValues.map((value, i) => (
-            <FeatureCard
-              key={value.title}
-              icon={value.icon}
-              title={value.title}
-              description={value.desc}
-              accentClass={value.accentClass}
-              textClass={value.textClass}
-              delay={i * 0.15}
-            />
-          ))}
-        </div>
-      </div>
-    </section>
-
-    {/* ── MEET THE TEACHERS ── */}
-    <section className="py-24 px-6 bg-edulite-purple/10 rounded-[4rem] mx-4 mt-8 relative overflow-hidden">
-      {/* Decorative elements */}
-      <div className="absolute top-8 right-12 text-edulite-purple/15">
-        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-          <path
-            d="M5 35 Q 20 5, 35 20"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            fill="none"
-          />
-        </svg>
-      </div>
-      <div className="absolute bottom-8 left-12 text-edulite-purple/15">
-        <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
-          <path
-            d="M5 25 Q 15 5, 25 15"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            fill="none"
-          />
-        </svg>
-      </div>
-
-      <div className="max-w-7xl mx-auto text-center space-y-12 relative z-10">
-        <SectionHeader
-          title="Meet our teachers"
-          subtitle="Discover the teachers on Nigel who are ready to accompany children and parents in their learning journey."
-        />
-
-        <div className="grid sm:grid-cols-3 gap-12">
-          {teachers.map((teacher, i) => (
-            <PersonCard
-              key={teacher.role}
-              name={teacher.name}
-              role={teacher.role}
-              icon={
-                <div className="w-24 h-24 bg-edulite-purple/15 rounded-full flex items-center justify-center">
-                  <Users className="w-10 h-10 text-edulite-purple/40" />
-                </div>
-              }
-              delay={i * 0.15}
-            />
-          ))}
-        </div>
-      </div>
-    </section>
-
-    {/* ── VALUES STRIP ── */}
-    <section className="py-20 px-6">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {valueItems.map((item, i) => (
-            <motion.div
-              key={item.label}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.1 }}
-              className="bg-edulite-bg rounded-2xl p-6 flex items-center gap-4"
+      {/* ── ABOUT BEYOND ENCRYPTION DARK BANNER ── */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="bg-[#22223B] rounded-[4rem] p-12 md:p-24 text-center text-white relative overflow-hidden"
+      >
+        <div className="absolute top-0 right-0 w-64 h-64 bg-[#B9A7F8] rounded-full -mr-20 -mt-20 blur-[80px] opacity-20" />
+        <div className="relative z-10">
+          <h2 className="text-4xl md:text-5xl font-bold mb-8">
+            About Beyond Encryption
+          </h2>
+          <p className="text-gray-300 max-w-3xl mx-auto text-lg mb-12 font-medium">
+            Beyond Encryption is a world leader in secure communications and
+            data management. Through Nigel, they are committed to supporting UK
+            priorities on inclusion, fairer markets, and Net Zero by empowering
+            consumers with their own data.
+          </p>
+          <div className="flex flex-wrap justify-center gap-6">
+            <a
+              href="https://www.beyondencryption.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 bg-[#B9A7F8] text-white font-bold px-8 py-4 rounded-full shadow-lg shadow-[#B9A7F8]/20 hover:bg-[#a090e8] transition-colors"
             >
-              <div className="w-10 h-10 bg-edulite-purple/10 rounded-xl flex items-center justify-center text-edulite-purple">
-                {item.icon}
-              </div>
-              <span className="font-bold text-sm text-edulite-navy">
-                {item.label}
-              </span>
-            </motion.div>
-          ))}
+              Visit Beyond Encryption
+            </a>
+            <a
+              href="https://www.beyondencryption.com/nigel"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 bg-white/10 text-white font-bold px-8 py-4 rounded-full border border-white/10 backdrop-blur-md hover:bg-white/20 transition-colors"
+            >
+              Learn more about Nigel
+            </a>
+          </div>
         </div>
-      </div>
-    </section>
-
-    {/* ── GET STARTED CTA ── */}
-    <section className="py-20 px-6">
-      <CtaBanner
-        title="Get Started with Nigel Junior Today!"
-        description="The fun push to encourage visitors to try the app and make learning more enjoyable for children."
-        buttonLabel="Get Started"
-        buttonIcon={<ArrowRight className="w-4 h-4" />}
-        mascot={<NigelMascot size={120} animate={false} />}
-      />
-    </section>
-  </>
+      </motion.div>
+    </div>
+  </div>
 )

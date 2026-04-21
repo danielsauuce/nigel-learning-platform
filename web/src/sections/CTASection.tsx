@@ -1,6 +1,5 @@
 import { motion } from 'motion/react'
-import { ArrowRight } from 'lucide-react'
-import { NigelMascot } from '../components/mobile/NigelMascot'
+import { Megaphone } from 'lucide-react'
 
 export const CTASection = () => (
   <section className="py-24 px-6">
@@ -9,34 +8,35 @@ export const CTASection = () => (
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6 }}
-      className="max-w-7xl mx-auto bg-edulite-navy rounded-[4rem] p-12 md:p-20 flex flex-col md:flex-row items-center gap-12 relative overflow-hidden"
+      className="max-w-7xl mx-auto bg-[#B9A7F8]/20 rounded-[4rem] p-12 md:p-24 flex flex-col md:flex-row items-center gap-16 relative overflow-hidden"
     >
-      {/* Decorative blob */}
-      <div className="absolute top-0 right-0 w-64 h-64 bg-edulite-purple/10 rounded-full blur-3xl" />
-
-      <div className="flex-1 space-y-6 relative z-10">
-        <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight">
-          Get Started with
-          <br />
-          Nigel Junior Today!
+      <div className="space-y-10 flex-1">
+        <h2 className="text-5xl md:text-7xl font-bold text-[#22223B] leading-[0.9] tracking-tighter">
+          Get Started with <br /> Nigel Junior!
         </h2>
-        <p className="text-white/50 max-w-md">
-          The final push to encourage visitors to try the app and make learning
-          more enjoyable for children.
+        <p className="text-[#22223B]/60 text-lg max-w-md font-medium">
+          Join the mission to empower the next generation with the financial
+          skills they need to thrive in a digital world.
         </p>
-        <button className="bg-white text-edulite-navy font-bold px-10 py-4 rounded-full flex items-center gap-2 text-sm hover:bg-edulite-purple hover:text-white transition-colors">
+        <button className="bg-[#22223B] text-white font-bold px-12 py-5 rounded-full shadow-2xl hover:bg-[#B9A7F8] transition-colors">
           Get Started
-          <ArrowRight className="w-4 h-4" />
         </button>
       </div>
 
-      <motion.div
-        className="relative z-10"
-        animate={{ y: [0, -8, 0] }}
-        transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-      >
-        <NigelMascot size={120} animate={false} />
-      </motion.div>
+      <div className="flex-1 relative">
+        <div className="w-full aspect-square bg-white/50 rounded-full blur-3xl absolute inset-0 -z-10" />
+        <div className="relative">
+          <img
+            src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=600&h=600"
+            alt="Happy child learning"
+            className="w-full h-auto rounded-[4rem] shadow-2xl"
+            referrerPolicy="no-referrer"
+          />
+          <div className="absolute -top-10 -left-10 w-24 h-24 bg-[#FFD93D] rounded-full flex items-center justify-center shadow-xl">
+            <Megaphone className="w-10 h-10 text-[#22223B] -rotate-12" />
+          </div>
+        </div>
+      </div>
     </motion.div>
   </section>
 )
