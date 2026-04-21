@@ -50,7 +50,7 @@ export function IslandCard({ island, index, onPress }: IslandCardProps) {
           padding: 20,
           borderWidth: island.status === 'active' ? 2 : 1,
           borderColor:
-            island.status === 'active' ? '#B9A7F8' : theme === 'dark' ? c.border : 'transparent',
+            island.status === 'active' ? '#B9A7F8' : theme === 'dark' ? c.border : '#E8E4F0',
           opacity: island.status === 'locked' ? 0.6 : 1,
           ...Platform.select({
             ios: {
