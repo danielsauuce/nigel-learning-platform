@@ -8,7 +8,6 @@ import { colors } from '@/constants/colors';
 import { MascotWaving } from '@/svg/illustrations';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import {
-  GraduationCap,
   Coins,
   BarChart2,
   Briefcase,
@@ -93,18 +92,31 @@ export function DashboardScreen() {
 
             <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
               <ThemeToggle variant="pill" />
-              <View
+              <TouchableOpacity
+                activeOpacity={0.8}
+                onPress={() => router.push('/(student)/edit-profile' as any)}
                 style={{
                   width: 44,
                   height: 44,
-                  borderRadius: 14,
-                  backgroundColor: c.card,
+                  borderRadius: 22,
+                  backgroundColor: '#B9A7F8',
                   alignItems: 'center',
                   justifyContent: 'center',
+                  borderWidth: 2,
+                  borderColor: isDark ? '#3A3A55' : '#E8E4F0',
                 }}
               >
-                <GraduationCap size={22} color={c.primary} strokeWidth={2} />
-              </View>
+                <Text
+                  style={{
+                    fontFamily: 'Poppins_700Bold',
+                    fontSize: 15,
+                    color: '#FFFFFF',
+                    lineHeight: 19,
+                  }}
+                >
+                  SH
+                </Text>
+              </TouchableOpacity>
             </View>
           </MotiView>
 
