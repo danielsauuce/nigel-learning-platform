@@ -62,7 +62,7 @@ export function GradientButton({
         };
       case 'navy':
         return {
-          bgColor: '#22223B',
+          bgColor: theme === 'dark' ? '#4A4A6A' : '#22223B',
           textColor: '#FFFFFF',
           shadowColor: '#22223B',
         };
