@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useCallback, useEffect } from 'react';
+import { Appearance } from 'react-native';
 import { useColorScheme } from 'nativewind';
 
 type ThemeMode = 'light' | 'dark';
@@ -17,21 +18,32 @@ const ThemeContext = createContext<ThemeContextValue>({
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const { setColorScheme } = useColorScheme();
-  const [theme, setThemeState] = useState<ThemeMode>('light');
+  const [theme, setThemeState] = useState<ThemeMode>(() =>
+    Appearance.getColorScheme() === 'dark' ? 'dark' : 'light',
+  );
 
-  const setTheme = (mode: ThemeMode) => {
-    setThemeState(mode);
-    setColorScheme(mode);
-  };
+  const setTheme = useCallback(
+    (mode: ThemeMode) => {
+      setThemeState(mode);
+      setColorScheme(mode);
+    },
+    [setColorScheme],
+  );
 
   const toggle = useCallback(() => {
-    const newTheme = theme === 'light' ? 'dark' : 'light';
-    setTheme(newTheme);
-  }, [theme]);
+    setTheme(theme === 'light' ? 'dark' : 'light');
+  }, [theme, setTheme]);
 
   useEffect(() => {
     setColorScheme(theme);
-  }, [theme]);
+  }, [theme, setColorScheme]);
+
+  useEffect(() => {
+    const sub = Appearance.addChangeListener(({ colorScheme }) => {
+      setTheme(colorScheme === 'dark' ? 'dark' : 'light');
+    });
+    return () => sub.remove();
+  }, [setTheme]);
 
   return (
     <ThemeContext.Provider value={{ theme, toggle, setTheme }}>{children}</ThemeContext.Provider>
