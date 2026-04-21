@@ -61,7 +61,6 @@ export function SettingsScreen() {
               Settings
             </Text>
           </View>
-          <ThemeToggle variant="pill" />
         </MotiView>
 
         {/* Dark Mode Toggle */}
