@@ -114,6 +114,8 @@ export function ThemeToggle({ variant = 'pill' }: ThemeToggleProps) {
         height: 40,
         borderRadius: 14,
         backgroundColor: isDark ? '#2A2A40' : '#F3F0FF',
+        borderWidth: 1,
+        borderColor: isDark ? '#3A3A55' : '#E8E4F0',
         alignItems: 'center',
         justifyContent: 'center',
         ...Platform.select({
