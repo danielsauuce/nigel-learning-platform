@@ -25,8 +25,8 @@ export default function WelcomeRoute() {
     }
   }).current;
 
-  const goToRoleSelect = useCallback(() => {
-    router.replace('/(auth)/role-select' as any);
+  const goToPersonalization = useCallback(() => {
+    router.replace('/(auth)/personalization' as any);
   }, [router]);
 
   const handleNext = useCallback(() => {
@@ -36,9 +36,9 @@ export default function WelcomeRoute() {
         animated: true,
       });
     } else {
-      goToRoleSelect();
+      goToPersonalization();
     }
-  }, [activeIndex, goToRoleSelect]);
+  }, [activeIndex, goToPersonalization]);
 
   const isLastSlide = activeIndex === ONBOARDING_SLIDES.length - 1;
 
@@ -101,7 +101,7 @@ export default function WelcomeRoute() {
             activeIndex={activeIndex}
             isLastSlide={isLastSlide}
             onNext={handleNext}
-            onSkip={goToRoleSelect}
+            onSkip={goToPersonalization}
           />
         </View>
       </MotiView>

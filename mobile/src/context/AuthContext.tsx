@@ -1,6 +1,6 @@
 import React, { createContext, useCallback, useContext, useState } from 'react';
 
-type Role = 'student' | 'teacher' | null;
+type Role = 'student' | null;
 
 interface AuthContextValue {
   role: Role;
