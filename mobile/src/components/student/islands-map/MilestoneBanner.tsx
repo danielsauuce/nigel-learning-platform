@@ -30,7 +30,7 @@ export function MilestoneBanner({ title, description, progress }: MilestoneBanne
           borderRadius: 20,
           padding: 18,
           borderWidth: 1,
-          borderColor: '#F7E6B640',
+          borderColor: theme === 'dark' ? c.border : '#F7E6B640',
         }}
       >
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8, marginBottom: 8 }}>
@@ -60,7 +60,7 @@ export function MilestoneBanner({ title, description, progress }: MilestoneBanne
           style={{
             height: 8,
             borderRadius: 4,
-            backgroundColor: '#F7E6B640',
+            backgroundColor: theme === 'dark' ? c.muted : '#F7E6B640',
             overflow: 'hidden',
           }}
         >

@@ -66,6 +66,8 @@ export function IslandMapHeader({ name, level, streak, gems }: IslandMapHeaderPr
             paddingHorizontal: 10,
             paddingVertical: 5,
             borderRadius: 12,
+            borderWidth: 1,
+            borderColor: theme === 'dark' ? c.border : 'transparent',
           }}
         >
           <Flame size={12} color="#F97316" strokeWidth={2} />
@@ -88,6 +90,8 @@ export function IslandMapHeader({ name, level, streak, gems }: IslandMapHeaderPr
             paddingHorizontal: 10,
             paddingVertical: 5,
             borderRadius: 12,
+            borderWidth: 1,
+            borderColor: theme === 'dark' ? c.border : 'transparent',
           }}
         >
           <Gem size={12} color="#F59E0B" strokeWidth={2} />

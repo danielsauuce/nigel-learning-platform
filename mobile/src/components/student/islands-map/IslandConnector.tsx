@@ -30,7 +30,7 @@ export function IslandConnector({ index, isCompleted }: IslandConnectorProps) {
           width: 3,
           height: 20,
           borderRadius: 1.5,
-          backgroundColor: isCompleted ? '#4CAF50' : '#E8E4F0',
+          backgroundColor: isCompleted ? '#4CAF50' : c.border,
         }}
       />
     </MotiView>
