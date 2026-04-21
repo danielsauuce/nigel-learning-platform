@@ -133,7 +133,7 @@ export function ConsentScreen() {
             <Text className="font-poppins-bold text-sm text-foreground">What they'll see</Text>
           </View>
           <View
-            className="gap-3 rounded-2xl border border-success/15 bg-success/5 p-4"
+            className="gap-3 rounded-2xl border border-success/20 bg-success/5 p-4 dark:border-success/30 dark:bg-success/10"
             style={Platform.select({
               ios: {
                 shadowColor: 'rgb(34, 197, 94)',
@@ -210,7 +210,7 @@ export function ConsentScreen() {
           transition={{ type: 'spring', damping: 16, stiffness: 120, delay: 600 }}
           className="mx-6 mb-5"
         >
-          <View className="bg-warning/8 flex-row gap-2.5 rounded-xl border border-warning/20 p-3">
+          <View className="bg-warning/8 flex-row gap-2.5 rounded-xl border border-warning/20 p-3 dark:border-warning/30 dark:bg-warning/15">
             <Clock size={16} color="rgb(245, 158, 11)" strokeWidth={2} />
             <Text className="flex-1 font-poppins-regular text-xs leading-4 text-muted-foreground">
               The link will expire after 7 days. You can revoke access at any time from Settings.
