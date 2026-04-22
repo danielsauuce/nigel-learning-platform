@@ -83,8 +83,8 @@ export function LessonPassedScreen() {
               gap: 14,
               borderRadius: 20,
               borderWidth: 1,
-              borderColor: theme === 'dark' ? '#2A2A4020' : '#E8E4F0',
-              backgroundColor: c.card,
+              borderColor: theme === 'dark' ? c.border : '#E8E4F0',
+              backgroundColor: theme === 'dark' ? c.card : '#FFFFFF',
               padding: 16,
               ...Platform.select({
                 ios: {
@@ -102,7 +102,7 @@ export function LessonPassedScreen() {
                 width: 48,
                 height: 48,
                 borderRadius: 14,
-                backgroundColor: '#FFF8E8',
+                backgroundColor: theme === 'dark' ? c.muted : '#FFF8E8',
                 alignItems: 'center',
                 justifyContent: 'center',
               }}
@@ -176,8 +176,8 @@ export function LessonPassedScreen() {
                   alignItems: 'center',
                   borderRadius: 18,
                   borderWidth: 1,
-                  borderColor: theme === 'dark' ? '#2A2A4020' : '#E8E4F0',
-                  backgroundColor: c.card,
+                  borderColor: theme === 'dark' ? c.border : '#E8E4F0',
+                  backgroundColor: theme === 'dark' ? c.card : '#FFFFFF',
                   paddingVertical: 16,
                 }}
               >

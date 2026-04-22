@@ -27,7 +27,7 @@ export const ONBOARDING_SLIDES = [
 ] as const;
 
 export type SlideIcon = (typeof ONBOARDING_SLIDES)[number]['icon'];
-export type RoleType = 'student' | 'teacher';
+export type RoleType = 'student';
 
 // Student Personalization
 export interface PersonalizationOption {

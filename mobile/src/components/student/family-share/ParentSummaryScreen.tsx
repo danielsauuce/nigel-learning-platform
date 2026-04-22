@@ -30,10 +30,12 @@ function ProgressRing({
   percent,
   size = 100,
   strokeWidth = 10,
+  trackColor = 'rgb(229, 231, 235)',
 }: {
   percent: number;
   size?: number;
   strokeWidth?: number;
+  trackColor?: string;
 }) {
   const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
@@ -45,10 +47,9 @@ function ProgressRing({
         cx={size / 2}
         cy={size / 2}
         r={radius}
-        stroke="rgb(229, 231, 235)"
+        stroke={trackColor}
         strokeWidth={strokeWidth}
         fill="none"
-        opacity={0.25}
       />
       <Circle
         cx={size / 2}
@@ -217,7 +218,7 @@ export function ParentSummaryScreen() {
           transition={{ type: 'spring', damping: 16, stiffness: 130, delay: 50 }}
           className="mx-6 mb-4"
         >
-          <View className="bg-warning/8 flex-row items-center gap-2 rounded-lg border border-warning/15 px-3 py-2">
+          <View className="bg-warning/8 flex-row items-center gap-2 rounded-lg border border-warning/15 px-3 py-2 dark:border-warning/30 dark:bg-warning/15">
             <Clock size={12} color="rgb(245, 158, 11)" strokeWidth={2} />
             <Text className="font-poppins-regular text-[11px] text-muted-foreground">
               This link expires in 6 days · Read-only
@@ -245,7 +246,7 @@ export function ParentSummaryScreen() {
             })}
           >
             {/* Purple gradient header strip */}
-            <View className="bg-primary/8 items-center px-5 pb-4 pt-5">
+            <View className="bg-primary/8 items-center px-5 pb-4 pt-5 dark:bg-primary/15">
               <View
                 className="w-18 h-18 mb-2 items-center justify-center rounded-full bg-primary/15"
                 style={{ width: 72, height: 72 }}
@@ -274,7 +275,12 @@ export function ParentSummaryScreen() {
               <View className="flex-row items-center gap-5">
                 {/* Ring */}
                 <View className="items-center justify-center">
-                  <ProgressRing percent={STUDENT.overallProgress} size={90} strokeWidth={9} />
+                  <ProgressRing
+                    percent={STUDENT.overallProgress}
+                    size={90}
+                    strokeWidth={9}
+                    trackColor={theme === 'dark' ? '#3A3A55' : 'rgb(229, 231, 235)'}
+                  />
                   <View className="absolute items-center">
                     <Text className="font-fredoka text-xl text-foreground">
                       {STUDENT.overallProgress}%
@@ -437,7 +443,7 @@ export function ParentSummaryScreen() {
                   delay: 700 + index * 60,
                 }}
               >
-                <View className="rounded-xl border border-primary/10 bg-primary/5 p-3.5">
+                <View className="rounded-xl border border-primary/10 bg-primary/5 p-3.5 dark:border-primary/20 dark:bg-primary/15">
                   <View className="mb-1 flex-row items-center gap-2">
                     <View className="items-center justify-center">{starter.icon}</View>
                     <Text className="font-poppins-semibold text-xs text-primary">

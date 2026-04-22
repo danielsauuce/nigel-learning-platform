@@ -14,7 +14,13 @@
     "format:check": "turbo run format:check"
   },
   "devDependencies": {
+    "@xmldom/xmldom": "^0.9.10",
     "concurrently": "^9.2.1",
+    "node-forge": "^1.4.0",
     "turbo": "^2.0.0"
+  },
+  "overrides": {
+    "node-forge": "1.4.0",
+    "@xmldom/xmldom": "0.9.10"
   }
 }

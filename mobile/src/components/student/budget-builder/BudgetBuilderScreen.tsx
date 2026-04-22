@@ -285,16 +285,26 @@ export function BudgetBuilderScreen() {
               padding: 16,
               borderRadius: 20,
               backgroundColor:
-                mood === 'sad'
-                  ? '#FDE8E8'
-                  : mood === 'celebrate'
-                    ? '#E8F5E9'
-                    : theme === 'dark'
-                      ? c.card
+                theme === 'dark'
+                  ? c.card
+                  : mood === 'sad'
+                    ? '#FDE8E8'
+                    : mood === 'celebrate'
+                      ? '#E8F5E9'
                       : '#F3F0FF',
               borderWidth: 1.5,
               borderColor:
-                mood === 'sad' ? '#F4A0A0' : mood === 'celebrate' ? '#A5D6A7' : '#B9A7F830',
+                mood === 'sad'
+                  ? theme === 'dark'
+                    ? '#EF444455'
+                    : '#F4A0A0'
+                  : mood === 'celebrate'
+                    ? theme === 'dark'
+                      ? '#4CAF5055'
+                      : '#A5D6A7'
+                    : theme === 'dark'
+                      ? c.border
+                      : '#B9A7F830',
             }}
           >
             {mascot}

@@ -2,12 +2,94 @@ import React from 'react';
 import { Platform, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { MotiView } from 'moti';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { ChevronLeft, CheckCircle, Lock, PlayCircle } from 'lucide-react-native';
-import { ScreenWrapper, GradientButton } from '@/components/ui';
+import {
+  ChevronLeft,
+  CheckCircle,
+  Lock,
+  PlayCircle,
+  PiggyBank,
+  ShoppingCart,
+  Briefcase,
+  CreditCard,
+  TrendingUp,
+  DollarSign,
+  Landmark,
+  Target,
+  Scale,
+  AlertTriangle,
+  Award,
+  Tag,
+  List,
+  XCircle,
+  Shield,
+  Percent,
+  Banknote,
+  Star,
+  FileText,
+  Building2,
+  Users,
+  BarChart2,
+  ShieldAlert,
+  Leaf,
+  Zap,
+  Activity,
+  CalendarDays,
+  type LucideIcon,
+} from 'lucide-react-native';
+import { ScreenWrapper } from '@/components/ui';
 import { MascotThinking, MascotCelebrating } from '@/svg/illustrations';
 import { colors } from '@/constants/colors';
 import { useTheme, useLearning } from '@/context';
 import { LEARNING_PATHS } from '@/constants/learning-paths';
+
+const PATH_ICONS: Record<string, LucideIcon> = {
+  saving_basics: PiggyBank,
+  smart_spending: ShoppingCart,
+  earning_income: Briefcase,
+  borrowing_debt: CreditCard,
+  investing_future: TrendingUp,
+};
+
+const LESSON_ICONS: Record<string, LucideIcon> = {
+  // Saving Basics
+  sb1: DollarSign,
+  sb2: Landmark,
+  sb3: PiggyBank,
+  sb4: Target,
+  sb5: Scale,
+  sb6: AlertTriangle,
+  sb7: TrendingUp,
+  sb8: Award,
+  // Smart Spending
+  ss1: Scale,
+  ss2: Tag,
+  ss3: List,
+  ss4: XCircle,
+  ss5: Shield,
+  ss6: Percent,
+  ss7: Award,
+  // Earning Income
+  ei1: Banknote,
+  ei2: Briefcase,
+  ei3: Star,
+  ei4: FileText,
+  ei5: Building2,
+  ei6: Award,
+  // Borrowing & Debt
+  bd1: Users,
+  bd2: BarChart2,
+  bd3: CreditCard,
+  bd4: Scale,
+  bd5: ShieldAlert,
+  bd6: Award,
+  // Investing & Future
+  if1: Leaf,
+  if2: TrendingUp,
+  if3: Zap,
+  if4: Activity,
+  if5: CalendarDays,
+  if6: Award,
+};
 
 export function IslandLandingScreen() {
   const { theme } = useTheme();
@@ -20,6 +102,8 @@ export function IslandLandingScreen() {
   const { completed, total } = learning.getPathProgress(path.key);
   const isCompleted = learning.isPathCompleted(path.key);
   const percent = total > 0 ? Math.round((completed / total) * 100) : 0;
+
+  const PathIcon = PATH_ICONS[path.key] ?? PiggyBank;
 
   return (
     <ScreenWrapper topPadding={12} showDecoration={false}>
@@ -56,7 +140,7 @@ export function IslandLandingScreen() {
           </View>
         </MotiView>
 
-        {/* Hero card with mascot */}
+        {/* Hero card */}
         <MotiView
           from={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -74,17 +158,28 @@ export function IslandLandingScreen() {
             }}
           >
             {isCompleted ? <MascotCelebrating size={90} /> : <MascotThinking size={80} />}
-            <Text
+
+            <View
               style={{
-                fontFamily: 'Fredoka_700Bold',
-                fontSize: 28,
-                color: c.foreground,
+                flexDirection: 'row',
+                alignItems: 'center',
+                gap: 10,
                 marginTop: 12,
-                textAlign: 'center',
               }}
             >
-              {path.emoji} {path.title}
-            </Text>
+              <PathIcon size={26} color={path.color} strokeWidth={2} />
+              <Text
+                style={{
+                  fontFamily: 'Fredoka_700Bold',
+                  fontSize: 28,
+                  color: c.foreground,
+                  textAlign: 'center',
+                }}
+              >
+                {path.title}
+              </Text>
+            </View>
+
             <Text
               style={{
                 fontFamily: 'Poppins_400Regular',
@@ -138,6 +233,7 @@ export function IslandLandingScreen() {
             const isDone = learning.completedLessons.has(lesson.id);
             const isUnlocked = learning.isLessonUnlocked(lesson.id);
             const isCurrent = !isDone && isUnlocked;
+            const LessonIcon = LESSON_ICONS[lesson.id] ?? DollarSign;
 
             return (
               <MotiView
@@ -204,7 +300,7 @@ export function IslandLandingScreen() {
                     ) : !isUnlocked ? (
                       <Lock size={16} color="#A0A0B8" strokeWidth={2} />
                     ) : (
-                      <Text style={{ fontSize: 18 }}>{lesson.emoji}</Text>
+                      <LessonIcon size={18} color={path.color} strokeWidth={2} />
                     )}
                   </View>
 
@@ -226,7 +322,7 @@ export function IslandLandingScreen() {
                         marginTop: 1,
                       }}
                     >
-                      {isDone ? 'Completed ✅' : isCurrent ? 'Start this lesson →' : 'Locked'}
+                      {isDone ? 'Completed' : isCurrent ? 'Start this lesson →' : 'Locked'}
                     </Text>
                   </View>
 

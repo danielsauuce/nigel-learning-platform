@@ -48,8 +48,9 @@ export function IslandCard({ island, index, onPress }: IslandCardProps) {
           backgroundColor: theme === 'dark' ? c.card : config.bg,
           borderRadius: 22,
           padding: 20,
-          borderWidth: island.status === 'active' ? 2 : 0,
-          borderColor: island.status === 'active' ? '#B9A7F8' : 'transparent',
+          borderWidth: island.status === 'active' ? 2 : 1,
+          borderColor:
+            island.status === 'active' ? '#B9A7F8' : theme === 'dark' ? c.border : '#E8E4F0',
           opacity: island.status === 'locked' ? 0.6 : 1,
           ...Platform.select({
             ios: {

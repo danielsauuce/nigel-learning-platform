@@ -8,7 +8,6 @@ import { colors } from '@/constants/colors';
 import { MascotWaving } from '@/svg/illustrations';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import {
-  GraduationCap,
   Coins,
   BarChart2,
   Briefcase,
@@ -35,11 +34,13 @@ export function DashboardScreen() {
   const { theme } = useTheme();
   const c = colors[theme];
   const router = useRouter();
+  const isDark = theme === 'dark';
+  const cardBorderClass = isDark ? 'border border-[#3A3A55]' : 'border border-transparent';
 
   return (
     <View style={{ flex: 1, backgroundColor: c.card }}>
       <StatusBar
-        barStyle={theme === 'dark' ? 'light-content' : 'dark-content'}
+        barStyle={isDark ? 'light-content' : 'dark-content'}
         translucent
         backgroundColor="transparent"
       />
@@ -55,7 +56,7 @@ export function DashboardScreen() {
           showsVerticalScrollIndicator={false}
           bounces
         >
-          {/* ── Greeting row with mascot ── */}
+          {/* ── Greeting row ── */}
           <MotiView
             from={{ opacity: 0, translateY: -10 }}
             animate={{ opacity: 1, translateY: 0 }}
@@ -91,28 +92,42 @@ export function DashboardScreen() {
 
             <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
               <ThemeToggle variant="pill" />
-              <View
+              <TouchableOpacity
+                activeOpacity={0.8}
+                onPress={() => router.push('/(student)/edit-profile' as any)}
                 style={{
                   width: 44,
                   height: 44,
-                  borderRadius: 14,
-                  backgroundColor: c.card,
+                  borderRadius: 22,
+                  backgroundColor: '#B9A7F8',
                   alignItems: 'center',
                   justifyContent: 'center',
+                  borderWidth: 2,
+                  borderColor: isDark ? '#3A3A55' : '#E8E4F0',
                 }}
               >
-                <GraduationCap size={22} color={c.primary} strokeWidth={2} />
-              </View>
+                <Text
+                  style={{
+                    fontFamily: 'Poppins_700Bold',
+                    fontSize: 15,
+                    color: '#FFFFFF',
+                    lineHeight: 19,
+                  }}
+                >
+                  SH
+                </Text>
+              </TouchableOpacity>
             </View>
           </MotiView>
 
-          {/* ── Featured lesson card with Mascot ── */}
+          {/* ── Featured lesson card ── */}
           <MotiView
             from={{ opacity: 0, translateY: 12 }}
             animate={{ opacity: 1, translateY: 0 }}
             transition={{ type: 'spring', damping: 16, stiffness: 120, delay: 100 }}
+            className={cardBorderClass}
             style={{
-              backgroundColor: theme === 'dark' ? c.muted : '#F8F6FB',
+              backgroundColor: isDark ? c.muted : '#F8F6FB',
               borderRadius: 22,
               padding: 22,
               marginTop: 22,
@@ -140,7 +155,7 @@ export function DashboardScreen() {
                   paddingHorizontal: 22,
                   paddingVertical: 10,
                   borderRadius: 22,
-                  backgroundColor: c.foreground,
+                  backgroundColor: c.primary,
                   alignSelf: 'flex-start',
                 }}
               >
@@ -148,7 +163,7 @@ export function DashboardScreen() {
                   style={{
                     fontFamily: 'Poppins_600SemiBold',
                     fontSize: 14,
-                    color: '#FFFFFF',
+                    color: '#22223B',
                   }}
                 >
                   Join now
@@ -156,7 +171,6 @@ export function DashboardScreen() {
               </TouchableOpacity>
             </View>
 
-            {/* Mascot waving instead of emoji */}
             <MotiView
               from={{ translateY: 0 }}
               animate={{ translateY: -6 }}
@@ -182,6 +196,7 @@ export function DashboardScreen() {
               >
                 <TouchableOpacity
                   activeOpacity={0.8}
+                  className={cardBorderClass}
                   style={{
                     flexDirection: 'row',
                     alignItems: 'center',
@@ -189,7 +204,7 @@ export function DashboardScreen() {
                     paddingHorizontal: 16,
                     paddingVertical: 10,
                     borderRadius: 22,
-                    backgroundColor: theme === 'dark' ? c.muted : cat.bg,
+                    backgroundColor: isDark ? c.muted : cat.bg,
                   }}
                 >
                   {cat.icon}
@@ -241,7 +256,7 @@ export function DashboardScreen() {
             </TouchableOpacity>
           </MotiView>
 
-          {/* ── Two course cards side by side ── */}
+          {/* ── Two course cards ── */}
           <View style={{ flexDirection: 'row', gap: 16, marginTop: 16 }}>
             <MotiView
               from={{ opacity: 0, scale: 0.92 }}
@@ -252,8 +267,9 @@ export function DashboardScreen() {
               <TouchableOpacity
                 activeOpacity={0.85}
                 onPress={() => router.push('/(student)/island-landing' as any)}
+                className={cardBorderClass}
                 style={{
-                  backgroundColor: theme === 'dark' ? c.muted : '#F9D6D0',
+                  backgroundColor: isDark ? c.muted : '#F9D6D0',
                   borderRadius: 22,
                   padding: 16,
                   height: 180,
@@ -285,8 +301,9 @@ export function DashboardScreen() {
               <TouchableOpacity
                 activeOpacity={0.85}
                 onPress={() => router.push('/(student)/simulator' as any)}
+                className={cardBorderClass}
                 style={{
-                  backgroundColor: theme === 'dark' ? c.muted : '#E8E0FF',
+                  backgroundColor: isDark ? c.muted : '#E8E0FF',
                   borderRadius: 22,
                   padding: 16,
                   height: 180,
@@ -339,9 +356,10 @@ export function DashboardScreen() {
             ].map((stat) => (
               <View
                 key={stat.label}
+                className={cardBorderClass}
                 style={{
                   flex: 1,
-                  backgroundColor: theme === 'dark' ? c.muted : stat.bg,
+                  backgroundColor: isDark ? c.muted : stat.bg,
                   borderRadius: 18,
                   paddingVertical: 14,
                   alignItems: 'center',
@@ -384,6 +402,8 @@ export function DashboardScreen() {
               borderRadius: 22,
               padding: 20,
               marginTop: 20,
+              borderWidth: 1,
+              borderColor: isDark ? '#B9A7F840' : 'transparent',
               ...Platform.select({
                 ios: {
                   shadowColor: '#22223B',
@@ -473,7 +493,7 @@ export function DashboardScreen() {
                   borderRadius: 20,
                 }}
               >
-                <Text style={{ fontFamily: 'Poppins_700Bold', fontSize: 13, color: '#FFFFFF' }}>
+                <Text style={{ fontFamily: 'Poppins_700Bold', fontSize: 13, color: '#22223B' }}>
                   Start
                 </Text>
               </TouchableOpacity>
@@ -513,10 +533,11 @@ export function DashboardScreen() {
               ].map((badge) => (
                 <View
                   key={badge.label}
+                  className={cardBorderClass}
                   style={{
                     flex: 1,
                     alignItems: 'center',
-                    backgroundColor: theme === 'dark' ? c.muted : c.card,
+                    backgroundColor: isDark ? c.muted : c.card,
                     borderRadius: 18,
                     paddingVertical: 14,
                     paddingHorizontal: 4,
@@ -553,8 +574,9 @@ export function DashboardScreen() {
             from={{ opacity: 0, translateY: 12 }}
             animate={{ opacity: 1, translateY: 0 }}
             transition={{ type: 'spring', damping: 16, stiffness: 120, delay: 900 }}
+            className={cardBorderClass}
             style={{
-              backgroundColor: theme === 'dark' ? c.muted : '#FDE8E4',
+              backgroundColor: isDark ? c.muted : '#FDE8E4',
               borderRadius: 18,
               padding: 18,
               marginTop: 20,

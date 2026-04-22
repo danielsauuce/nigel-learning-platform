@@ -266,6 +266,8 @@ export function LessonScreen() {
               borderRadius: 16,
               padding: 16,
               alignItems: 'flex-start',
+              borderWidth: 1,
+              borderColor: theme === 'dark' ? c.border : 'transparent',
             }}
           >
             <Mascot size={36} />
